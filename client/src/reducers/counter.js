@@ -1,4 +1,4 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions';
+import { TEST } from '../actions';
 
 const initialState = {
   name: 'The Counter',
@@ -7,15 +7,9 @@ const initialState = {
 
 const counter = (state = initialState, action = {}) => {
   switch (action.type) {
-    case INCREMENT_COUNTER:
+    case TEST:
       return {
         ...state,
-        value: state.value + 1,
-      };
-    case DECREMENT_COUNTER:
-      return {
-        ...state,
-        value: state.value - 1,
       };
     default:
       return state;

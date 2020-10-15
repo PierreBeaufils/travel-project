@@ -1,4 +1,3 @@
-// == Import : npm
 import { createStore, compose, applyMiddleware } from 'redux';
 
 // == Import : local
@@ -18,7 +17,6 @@ const enhancers = composeEnhancers(
 // == Store
 const store = createStore(
   rootReducer,
-  // preloadedState,
   enhancers,
 );
 
