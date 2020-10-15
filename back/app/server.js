@@ -12,7 +12,7 @@ app.use(express.json());
 app.use('/v1', router);
 
 app.launch = () => {
-    app.listen(port, () => console.log(`Running on http://localhost:${port}`));
+    app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
 };
 
 module.exports = app;
