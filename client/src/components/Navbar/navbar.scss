@@ -1,15 +1,14 @@
 nav {
   position: absolute;
-  //display: flex;
-  //justify-content: space-between;
   height: 10vh;
   width: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: transparent;
   z-index: 99;
 }
 
 .navbar {
   max-width: 1200px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -17,6 +16,7 @@ nav {
 
 .logo {
   display: flex;
+  align-self: center;
   align-items: center;
   margin-left: 2rem;
 
@@ -26,7 +26,7 @@ nav {
 
   &-title {
     margin-left: 0.5rem;
-    color: white;
+    color: #fff;
     font-size: 1.1rem;
     font-weight: 700;
   }
