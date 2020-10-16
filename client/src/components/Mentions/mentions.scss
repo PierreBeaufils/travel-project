@@ -4,3 +4,9 @@
   border: 1px solid rgb(121, 121, 121);
   padding: 1rem;
 }
+
+@media screen and (max-width: 1200px) {
+  .mentions-legales {
+    margin: 5rem 1rem;
+  }
+}
