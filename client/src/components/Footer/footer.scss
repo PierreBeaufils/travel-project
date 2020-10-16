@@ -1,3 +1,13 @@
 footer {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-color: rgba(37, 37, 37, 0.8);
+  color: #fff;
+  padding: 1.2rem;
 
+  & .footer-link {
+    margin: 1rem;
+  }
 }
