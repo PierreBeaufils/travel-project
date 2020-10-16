@@ -1,13 +1,12 @@
-// == Import npm
 import React from 'react';
-
-// == Import
 import './styles.css';
+
+import Navbar from 'src/components/Navbar';
 
 // == Composant
 const App = () => (
   <div className="app">
-    O'Voyage
+    <Navbar />
   </div>
 );
 
