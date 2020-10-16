@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 const express = require('express');
 
@@ -14,5 +16,11 @@ app.use('/v1', router);
 app.launch = () => {
     app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
 };
+
+// toutes les promesses qu'on n'entoure pas d'un try/catch seront automatiquement stoppées ici si elles sont rejetées
+process.on('unhandledRejection', (err) => {
+    console.log('Interception d\'un rejet de promesse');
+    console.error(err);
+});
 
 module.exports = app;
