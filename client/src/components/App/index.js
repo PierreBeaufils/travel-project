@@ -36,6 +36,6 @@ const App = () => (
     <Footer />
   </div>
 );
-// ceci n'a rien a faire ici
+// ceci n'a rien a  ici
 
 export default App;
