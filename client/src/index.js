@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import App from 'src/components/RegisterForm';
+import App from 'src/components/LoginForm';
+//import App from 'src/components/RegisterForm';
 import store from 'src/store';
 
 const rootReactElement = (
