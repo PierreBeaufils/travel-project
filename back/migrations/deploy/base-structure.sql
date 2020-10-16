@@ -3,82 +3,104 @@
 BEGIN;
 
 CREATE TABLE "travel" (
-    "id" INT GENERATED ALWAYS AS IDENTITY,
-    "title" TEXT ,
-    "owner" INT FOREIGN KEY,
-    "destination" TEXT,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "title" TEXT NOT NULL,
+    "destination" TEXT NOT NULL,
     "departure_date" TIMESTAMP,
     "return_date" TIMESTAMP,
-    "price"  NUMERIC DEFAULT 0
+    "price"  NUMERIC DEFAULT 0,
+    CHECK (return_date > departure_date)
 );
 
 CREATE TABLE "task" (
-    "id" INT GENERATED ALWAYS AS IDENTITY,
-    "name" TEXT ,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "name" TEXT NOT NULL,
     "description" TEXT,
-    "deadline" TIMESTAMPTZ
+    "deadline" TIMESTAMP,
+    "status" BOOLEAN default false,
+    "travel_id" INT NOT NULL references travel(id)
 );
 
 CREATE TABLE "traveler" (
-    "id" GENERATED ALWAYS AS IDENTITY,
-    "first_name" TEXT,
-    "last_name" TEXT,
-    "role" TEXT,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    "first_name" TEXT NOT NULL,
+    "last_name" TEXT NOT NULL,
+    "role" TEXT default 'traveler',
     "gender" TEXT,
     "dob" DATE,
-    "adress" TEXT,
+    "adress" TEXT default 'unknown',
     "zipcode" TEXT,
     "city" TEXT,
     "phone" TEXT,
-    "email" TEXT,
-    "email_check" BOOLEAN,
-    "password" TEXT,
+    "email" TEXT NOT NULL,
+    "email_check" BOOLEAN default false,
+    "password" TEXT NOT NULL,
     "passport_number" TEXT,
     "expiration_date" DATE,
-    -- Foreign key constraint references travel
+    "travel_id" INT NOT NULL references travel(id),
+    CHECK (phone  ~ '^(0|\+33|\+59[0-6])[1-9]([-. ]?[0-9]{2}){4}$'),
+    CHECK (email  ~ '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+    -- Here we are checking the format of the phone number with a regex
 );
 
+ALTER TABLE "travel"
+ADD "owner" INT NOT NULL REFERENCES traveler(id);
+
 CREATE TABLE "activity" (
-    "id" INT GENERATED ALWAYS AS IDENTITY,
-    "name" TEXT,
+    "id" INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY,
+    "name" TEXT NOT NULL,
     "topic" TEXT,
     "place" TEXT,
     "duration" INTERVAL,
     "description" TEXT,
-    "date" TIMESTAMPTZ,
-    "unit_price" NUMERIC,
-    "quantity" INT
+    "date" TIMESTAMP,
+    "unit_price" NUMERIC DEFAULT 0,
+    "quantity" INT NOT NULL,
+    "travel_id" INT NOT NULL references travel(id),
+    CHECK (unit_price > 0)
 );
 
 CREATE TABLE "transport" (
-    "id" INT GENERATED ALWAYS AS IDENTITY,
-    "type" TEXT,
+    "id" INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY,
+    "type" TEXT NOT NULL,
     "company" TEXT,
-    "from" TEXT,
-    "to" TEXT,
-    "departure_date" TIMESTAMP,
-    "arrival_date" TIMESTAMP,
+    "from" TEXT NOT NULL,
+    "to" TEXT NOT NULL,
+    "departure_date" TIMESTAMP NOT NULL,
+    "arrival_date" TIMESTAMP ,
     -- CONSTRAINT arrival > departure date
     "reservation_ref" TEXT,
-    "unit_price" NUMERIC,
-    "quantity" INT,
-    "memo" TEXT
+    "unit_price" NUMERIC default 0,
+    "quantity" INT NOT NULL,
+    "memo" TEXT,
+    "travel_id" INT NOT NULL references travel(id),
+    CHECK (arrival_date > departure_date),
+    CHECK (unit_price > 0)
 
 );
 
 CREATE TABLE "accomodation" (
-    "id" INT GENERATED ALWAYS AS IDENTITY,
+    "id" INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY,
     "adress" TEXT,
-    "city" TEXT,
+    "city" TEXT NOT NULL,
     "coordinate" POINT,
     "information" TEXT,
-    "availability" INT NOT NULL,
+    "availability" INT,
     "arrival_date" TIMESTAMP,
     "departure_date" TIMESTAMP,
-    "unit_price" NUMERIC,
-    "quantity" INT
+    "unit_price" NUMERIC default 0,
+    "quantity" INT,
+    "travel_id" INT NOT NULL references travel(id),
+    CHECK (unit_price > 0),
+    CHECK (departure_date > arrival_date)
     -- Chager latitude et longitude en coordinate et datatype point ?
     -- Voir structure des données géo renvoyé par l'API en front !
+);
+
+CREATE TABLE "travel_has_traveler" (
+    "travel_id" INT NOT NULL references travel(id),
+    "traveler_id" INT NOT NULL references traveler(id),
+    PRIMARY KEY ("travel_id","traveler_id")
 );
 
 
