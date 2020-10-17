@@ -9,6 +9,11 @@ const router = Router();
 
 router.get('/',mainController.test);
 
+router.get('/travelers', travelerController.allTravelers);
+router.get('/travelers/:id', travelerController.oneTraveler);
+router.post('/travelers', travelerController.newTraveler);
+
+
 // Formulaire de login : affichage et traitement
 router.get('/login', travelerController.loginForm);
 router.post('/login', travelerController.doLogin);
@@ -23,43 +28,43 @@ router.post('/profile', travelerController.modifyProfile);
 // page de contact (mail prérempli)
 router.post('/contact', travelerController.doContact);
 
-//cette route sera protégée par le middleware adminMW
-//Seuls les utilisateurs avec un rôle admin pourront y avoir accès
-router.get('/admin', adminMW, adminController.admin);
+// //cette route sera protégée par le middleware adminMW
+// //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
+// router.get('/admin', adminMW, adminController.admin);
 
-// Page dashboard
-router.get('/dashboard', Controller)
+// // Page dashboard
+// router.get('/dashboard', Controller)
 
-// Créer un voyage
-router.post('/create-travel', travelController)
+// // Créer un voyage
+// router.post('/create-travel', travelController)
 
-router.get('/travel/:id', travelController)
-router.post('/travel/:id', travelController)
-router.patch('/travel/:id', travelController)
-router.delete('/travel/:id', travelController)
+// router.get('/travel/:id', travelController)
+// router.post('/travel/:id', travelController)
+// router.patch('/travel/:id', travelController)
+// router.delete('/travel/:id', travelController)
 
-// infos liées à l'hébergement d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/accomodation', travelController)
-router.post('/travel/:id/accomodation', travelController)
-router.patch('/travel/:id/accomodation', travelController)
-router.delete('/travel/:id/accomodation', travelController)
+// // infos liées à l'hébergement d'un voyage : affichage, insertion, modification suppression 
+// router.get('/travel/:id/accomodation', travelController)
+// router.post('/travel/:id/accomodation', travelController)
+// router.patch('/travel/:id/accomodation', travelController)
+// router.delete('/travel/:id/accomodation', travelController)
 
-// infos liées aux activités d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/activity', travelController)
-router.post('/travel/:id/activity', travelController)
-router.patch('/travel/:id/activity', travelController)
-router.delete('/travel/:id/activity', travelController)
+// // infos liées aux activités d'un voyage : affichage, insertion, modification suppression 
+// router.get('/travel/:id/activity', travelController)
+// router.post('/travel/:id/activity', travelController)
+// router.patch('/travel/:id/activity', travelController)
+// router.delete('/travel/:id/activity', travelController)
 
-// infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/task', travelController)
-router.post('/travel/:id/task', travelController)
-router.patch('/travel/:id/task', travelController)
-router.delete('/travel/:id/task', travelController)
+// // infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
+// router.get('/travel/:id/task', travelController)
+// router.post('/travel/:id/task', travelController)
+// router.patch('/travel/:id/task', travelController)
+// router.delete('/travel/:id/task', travelController)
 
-// infos liées aux documents d'un voyage : affichage, insertion, modification suppression 
-router.post('/travel/:id/document', travelController)
-router.patch('/travel/:id/document', travelController)
-router.delete('/travel/:id/document', travelController)
+// // infos liées aux documents d'un voyage : affichage, insertion, modification suppression 
+// router.post('/travel/:id/document', travelController)
+// router.patch('/travel/:id/document', travelController)
+// router.delete('/travel/:id/document', travelController)
 
 // Routes optionnelles
 // '/travel/:id/activity/:id'
