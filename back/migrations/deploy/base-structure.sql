@@ -37,9 +37,8 @@ CREATE TABLE "traveler" (
     "password" TEXT NOT NULL,
     "passport_number" TEXT,
     "expiration_date" DATE,
-    "travel_id" INT NOT NULL references travel(id),
-    CHECK (phone  ~ '^(0|\+33|\+59[0-6])[1-9]([-. ]?[0-9]{2}){4}$'),
-    CHECK (email  ~ '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+    CHECK (phone  ~ '^(0|\+33|\+59[0-6])[1-9]([-. ]?[0-9]{2}){4}$')
+    -- CHECK (email  ~ '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
     -- Here we are checking the format of the phone number with a regex
 );
 
@@ -57,7 +56,7 @@ CREATE TABLE "activity" (
     "unit_price" NUMERIC DEFAULT 0,
     "quantity" INT NOT NULL,
     "travel_id" INT NOT NULL references travel(id),
-    CHECK (unit_price > 0)
+    CHECK (unit_price >= 0)
 );
 
 CREATE TABLE "transport" (
@@ -75,7 +74,7 @@ CREATE TABLE "transport" (
     "memo" TEXT,
     "travel_id" INT NOT NULL references travel(id),
     CHECK (arrival_date > departure_date),
-    CHECK (unit_price > 0)
+    CHECK (unit_price >= 0)
 
 );
 
@@ -91,10 +90,8 @@ CREATE TABLE "accomodation" (
     "unit_price" NUMERIC default 0,
     "quantity" INT,
     "travel_id" INT NOT NULL references travel(id),
-    CHECK (unit_price > 0),
+    CHECK (unit_price >= 0),
     CHECK (departure_date > arrival_date)
-    -- Chager latitude et longitude en coordinate et datatype point ?
-    -- Voir structure des données géo renvoyé par l'API en front !
 );
 
 CREATE TABLE "travel_has_traveler" (
