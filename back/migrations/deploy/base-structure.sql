@@ -50,6 +50,7 @@ CREATE TABLE "activity" (
     "name" TEXT NOT NULL,
     "topic" TEXT,
     "place" TEXT,
+    "coordinate" POINT,
     "duration" INTERVAL,
     "description" TEXT,
     "date" TIMESTAMP,
@@ -80,6 +81,7 @@ CREATE TABLE "transport" (
 
 CREATE TABLE "accomodation" (
     "id" INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY,
+    "name" TEXT,
     "adress" TEXT,
     "city" TEXT NOT NULL,
     "coordinate" POINT,
