@@ -1,3 +1,5 @@
+@use 'src/styles/vars' as v;
+
 .page {
   background-color: #fff;
 }
@@ -68,8 +70,8 @@
   z-index: 10;
   padding: 1rem;
   border-radius: 50px;
-  border: 1px solid #2B7AFD;
-  background-color: transparent;
+  border: none;
+  background-color: v.$primary-color;
   cursor: pointer;
   text-decoration: none;
   font-weight: 700;
@@ -79,7 +81,7 @@
 }
 
 .create:hover {
-  background-color: #2B7AFD;
+  background-color: darken(v.$primary-color, 10%);
   color: #fff;
 }
 
@@ -115,7 +117,7 @@
   &-description {
     min-width: 300px;
     max-width: 50%;
-    margin: 0 auto;
+    margin: auto;
     font-size: 1.5rem;
     text-align: center;
 
@@ -124,7 +126,6 @@
     }
   }
 }
-
 
 @media(max-width: 600px) {
   .title {
