@@ -44,33 +44,56 @@ const Homepage = () => {
         <button type="button" className="create">Planifier un voyage</button>
 
       </div>
+
       <div className="homepage-description">
-        <div className="homepage-card">
-          <div className="homepage-card-picture">
-            <img src={mapIcon} alt="map" />
-          </div>
-          <div className="homepage-card-description">
-            Choisissez la destination de vos rêves
-          </div>
-        </div>
 
-        <div className="homepage-card">
-          <div className="homepage-card-picture">
-            <img src={gpsIcon} alt="map" />
+        <section className="homepage-section">
+          <div className="homepage-card">
+            <div className="homepage-card-picture">
+              <img src={mapIcon} alt="map" />
+            </div>
+            <div className="homepage-card-description">
+              <h1>Facile à prendre en main</h1>
+              <p>Choisissez la destination de vos rêves</p>
+            </div>
           </div>
-          <div className="homepage-card-description">
-            Séléctionner les lieux à visiter et retrouver les depuis n'importe où sur la carte interactive
-          </div>
-        </div>
+        </section>
 
-        <div className="homepage-card">
-          <div className="homepage-card-picture">
-            <img src={luggageIcon} alt="map" />
+        <section className="homepage-section">
+          <div className="homepage-card">
+            <div className="homepage-card-picture">
+              <img src={gpsIcon} alt="map" />
+            </div>
+            <div className="homepage-card-description">
+              <h1>Facile à prendre en main</h1>
+              <p>Séléctionner les lieux à visiter et retrouver les depuis n'importe où sur la carte interactive</p>
+            </div>
           </div>
-          <div className="homepage-card-description">
-            Faites votre valise, tout est prêt !
+        </section>
+
+        <section className="homepage-section">
+          <div className="homepage-card">
+            <div className="homepage-card-picture">
+              <img src={luggageIcon} alt="map" />
+            </div>
+            <div className="homepage-card-description">
+              <h1>Facile à prendre en main</h1>
+              <p>Faites votre valise, tout est prêt !</p>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section className="homepage-section">
+          <div className="homepage-card">
+            <div className="homepage-card-picture">
+              <img src={luggageIcon} alt="map" />
+            </div>
+            <div className="homepage-card-description">
+              <h1>Facile à prendre en main</h1>
+              <p>Blablabla !</p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
