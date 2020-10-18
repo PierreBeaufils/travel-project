@@ -43,11 +43,15 @@ class Traveler {
             this.password,
             this.passport_number,
             this.expiration_date,            
-        ]);
+        ]);   
     }
 
     async delete() {
-
+        const travelerToDelete = await db.query (`
+        DELETE FROM traveler WHERE id=$1;
+        `, [
+            this.id
+        ]);
     }
 }
 

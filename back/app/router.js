@@ -12,6 +12,7 @@ router.get('/',mainController.test);
 router.get('/travelers', travelerController.allTravelers);
 router.get('/travelers/:id', travelerController.oneTraveler);
 router.post('/travelers', travelerController.newTraveler);
+router.delete('/travelers/:id', travelerController.deleteTraveler);
 
 
 // Formulaire de login : affichage et traitement
