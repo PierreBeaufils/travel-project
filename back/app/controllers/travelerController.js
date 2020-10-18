@@ -22,6 +22,20 @@ const travelerController = {
         res.json(newTraveler);
     },
 
+    deleteTraveler: async (req,res)=> {
+        const traveler = await Traveler.findOne(req.params.id);
+        console.log(traveler.id);
+        await traveler.delete();
+        res.json ('suppression effectuée');
+
+        // if (!traveler) {
+        //     res.json('voyageur introuvable');
+        // } else {
+        //     await traveler.delete();
+        //     res.json ('suppression effectuée');
+        // }
+    },
+
     loginForm: async(req, res) => {
 
     },
