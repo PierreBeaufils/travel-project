@@ -41,9 +41,9 @@ const Navbar = () => {
           <div className="line" style={{ transform: toggleMenu ? 'rotate(45deg) translate(-5px,-6px)' : null }} />
         </div>
         <ul className={toggleHamburger()}>
-          <Link to="contact"><li className={toggleFade()}>Contact</li></Link>
-          <Link to="connexion"><li className={toggleFade()}>Connexion</li></Link>
-          <Link to="inscription"><li className={toggleFade()}>Inscription</li></Link>
+          <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
+          <Link to="connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
+          <Link to="inscription"><li className={toggleFade()} onClick={handleToggle}>Inscription</li></Link>
         </ul>
       </div>
     </nav>
