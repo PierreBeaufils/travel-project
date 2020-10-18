@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.scss';
 import logo from 'src/assets/images/logo.png';
 
@@ -26,19 +27,23 @@ const Navbar = () => {
   return (
     <nav>
       <div className="navbar">
+
         <div className="logo">
           <img src={logo} alt="logo" className="logo-image" />
-          <p className="logo-title">O'Voyage</p>
+          <Link to="/">
+            <p className="logo-title">O'Voyage</p>
+          </Link>
         </div>
+
         <div className="hamburger" onClick={handleToggle}>
           <div className="line" style={{ transform: toggleMenu ? 'rotate(-45deg) translate(-5px,6px)' : null }} />
           <div className="line" style={toggleMenu ? { transform: 'translateX(100%)', opacity: '0' } : {}} />
           <div className="line" style={{ transform: toggleMenu ? 'rotate(45deg) translate(-5px,-6px)' : null }} />
         </div>
         <ul className={toggleHamburger()}>
-          <li className={toggleFade()}>Contact</li>
-          <li className={toggleFade()}>Connexion</li>
-          <li className={toggleFade()}>Inscription</li>
+          <Link to="contact"><li className={toggleFade()}>Contact</li></Link>
+          <Link to="connexion"><li className={toggleFade()}>Connexion</li></Link>
+          <Link to="inscription"><li className={toggleFade()}>Inscription</li></Link>
         </ul>
       </div>
     </nav>

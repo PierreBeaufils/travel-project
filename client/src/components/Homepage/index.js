@@ -13,6 +13,7 @@ const Homepage = () => {
     const title = document.querySelector('.title');
     const mountainThmb = document.querySelector('.mountain');
     const header = document.querySelector('.container');
+    const navbar = document.querySelector('nav');
 
     window.addEventListener('scroll', () => {
       const value = window.scrollY;
@@ -20,6 +21,7 @@ const Homepage = () => {
       const headerHeight = header.offsetHeight;
 
       mountainThmb.style.transform = `translateY(${value * 0.2}px)`;
+      navbar.style.transform = `translateY(${value * 0.2}px)`;
 
       title.style.transform = `translateY(${value * 0.3}px)`;
       title.style.opacity = (-scroll / (headerHeight / 2)) + 1;
