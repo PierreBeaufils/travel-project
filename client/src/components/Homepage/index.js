@@ -40,7 +40,7 @@ const Homepage = () => {
           <img src={lake} alt="lake" className="lake bg" />
         </div>
 
-        <div className="title">Globe Trotter.</div>
+        <div className="title">GlobeTrotter.</div>
         <button type="button" className="create">Planifier un voyage</button>
 
       </div>
