@@ -14,13 +14,16 @@ const LoginForm = () => {
 
   return (
     <div className="login-form">
+      <h2>Connexion</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Email</label>
-        <input name="email" ref={register({ required: true })} type="email" />
-        {errors.email && <span className="warning-text">Merci de remplir votre e-mail</span>}
-        <label>Mot de passe</label>
-        <input name="password" ref={register({ required: true })} type="password" />
-        {errors.password && <span className="warning-text">Merci de remplir le mot de passe</span>}
+        <label htmlFor="email">Email
+          <input name="email" ref={register({ required: true })} type="email" />
+          {errors.email && <span className="warning-text">Veuillez saisir votre email</span>}
+        </label>
+        <label htmlFor="password">Mot de passe
+          <input name="password" ref={register({ required: true })} type="password" />
+          {errors.password && <span className="warning-text">Veuillez saisir un mot de passe valide</span>}
+        </label>
 
         <input type="submit" />
       </form>

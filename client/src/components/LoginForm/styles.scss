@@ -1,65 +1,63 @@
 @use 'src/styles/vars' as v;
-.login-form {
-  margin: 10px;
-  display: block;
-    height: 100%;
-    padding-right: 20px;
-    padding-bottom: 50px;
-    padding-left: 20px;
-    border-radius: 8px;
-    box-shadow: 0 1px 10px 0 rgba(33,33,33,.1);
-    color: #212121;
-  max-width: 500px;
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-items: stretch;
-    max-width: 500px;
-  margin: 0 auto;
-  }
-  input {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid v.$border-color;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    padding: 0px 15px;
-    height: 36px;
-  }
-  label {
-    text-align: left;
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: black;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  button[type="submit"],
-input[type="submit"] {
-  background: v.$primary-color;
-  color: white;
-  border: none;
-  border-radius: 27px;
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 16px;
-  font-weight: 100;
-  height: 54px;
-  padding-left: 30px;
-    padding-right: 30px;
-}
-button[type="submit"]:hover,
-input[type="submit"]:hover {
-  background: v.$primary-color;
-  transition: opacity 0.15s ease-in 0s;
-  cursor: pointer;
 
+.login-form {
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 10px 0 rgba(33,33,33,.1);
+  color: v.$text-color;
+  max-width: 500px;
+
+    & h2 {
+      margin-top: 0;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    & form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    }
+
+    & input {
+      display: block;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid v.$border-color;
+      padding: 10px 15px;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      font-size: 14px;
+
+        &[type=submit] {
+          background-color: v.$primary-color;
+          color: #fff;
+          font-weight: 700;
+          border: none;
+          border-radius: 27px;
+          margin-top: 40px;
+          margin-bottom: 0;
+          padding: 17px;
+          font-size: 1.05rem;
+          transition: all 300ms ease;
+
+            &:hover {
+              background-color: darken(v.$primary-color, 10%);
+              cursor: pointer;
+            }
+        }
+    }
+
+    & label {
+      text-align: left;
+      display: block;
+      color: black;
+      font-size: 14px;
+      font-weight: 500;
+    }
 }
-}
+
 .warning-text {
   color: v.$danger-color;
 }

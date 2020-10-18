@@ -9,6 +9,7 @@ const RegisterForm = () => {
   const onSubmit = (data) => console.log(data);
   return (
     <div className="register-form">
+      <h2>Inscription</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input name="email" ref={register({ required: true })} type="email" />
@@ -18,7 +19,7 @@ const RegisterForm = () => {
         <input name="lastName" ref={register({ required: true })} />
         <label>Mot de passe</label>
         <input name="password" ref={register({ required: true })} type="password" />
-        <label>Vérification mot de passe</label>
+        <label>Retapez votre mot de passe</label>
         <input name="password" ref={register({ required: true })} type="password" />
         <label>Genre</label>
         <select name="gender" ref={register({ required: true })}>

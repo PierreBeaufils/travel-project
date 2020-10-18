@@ -2,20 +2,23 @@
 
 .contact {
   margin: 0 auto;
-  margin-top: 2rem;
-  padding: 1rem;
   text-align: center;
   max-width: 1200px;
 }
 
 .contact-form {
-  margin: 0 auto;
-  margin-bottom: 4rem;
+  margin: 4rem auto;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 1px 10px 0 rgba(33,33,33,.1);
   color: v.$text-color;
   max-width: 500px;
+
+  & h2 {
+      margin-top: 0;
+      margin-bottom: 3rem;
+      text-align: center;
+  }
 
   & form {
     display: flex;
