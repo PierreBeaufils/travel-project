@@ -27,10 +27,6 @@ const travelerController = {
 
         const travelerToEdit = new Traveler(traveler);
 
-        // travelerToEdit.update(req.body);
-        // await travelerToEdit.save();
-        // res.json(travelerToEdit)
-
         if (travelerToEdit) {
             travelerToEdit.update(req.body);
             await travelerToEdit.save();
