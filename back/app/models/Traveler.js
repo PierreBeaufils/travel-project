@@ -27,7 +27,8 @@ class Traveler {
         if (this.id) {
             const editedTraveler = await db.query (`
             UPDATE traveler SET
-            first_name = $1, last_name=$2, role=$3, gender=$4, dob=$5, adress=$6, zipcode=$7, city=$8, phone=$9, email=$10, email_check=$11, password=$12, passport_number=$13, expiration_date=$14`, [
+            first_name = $1, last_name=$2, role=$3, gender=$4, dob=$5, adress=$6, zipcode=$7, city=$8, phone=$9, email=$10, email_check=$11, password=$12, passport_number=$13, expiration_date=$14
+            WHERE id = $15`, [
                 this.first_name,
                 this.last_name,
                 this.role,
@@ -41,7 +42,8 @@ class Traveler {
                 this.email_check,
                 this.password,
                 this.passport_number,
-                this.expiration_date,            
+                this.expiration_date,
+                this.id            
             ]);
         } else {
             const insertedTraveler = await db.query (`
