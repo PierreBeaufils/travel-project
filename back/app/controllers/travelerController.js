@@ -22,6 +22,22 @@ const travelerController = {
         res.json(newTraveler);
     },
 
+    editTraveler: async (req, res) => {
+        const traveler = await Traveler.findOne(req.params.id);
+
+        const travelerToEdit = new Traveler(traveler);
+
+        // travelerToEdit.update(req.body);
+        // await travelerToEdit.save();
+        // res.json(travelerToEdit)
+
+        if (travelerToEdit) {
+            travelerToEdit.update(req.body);
+            await travelerToEdit.save();
+            res.json(travelerToEdit)
+        }
+    }, 
+
     deleteTraveler: async (req,res)=> {
         const traveler = await Traveler.findOne(req.params.id);
         // console.log(traveler.id);
