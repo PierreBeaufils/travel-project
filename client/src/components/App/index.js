@@ -11,6 +11,7 @@ import About from 'src/components/About';
 import LoginForm from 'src/components/LoginForm';
 import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
+import UserProfile from 'src/components/UserProfile';
 
 // == Composant
 const App = () => (
@@ -23,6 +24,7 @@ const App = () => (
       <Route path="/mentions-legales" component={Mentions} />
       <Route path="/contact" component={Contact} />
       <Route path="/a-propos" component={About} />
+      <Route path="/profil" component={UserProfile} />
       <Route component={NotFound} />
     </Switch>
     <Footer />
