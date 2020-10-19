@@ -24,49 +24,15 @@ const travelerController = {
 
     deleteTraveler: async (req,res)=> {
         const traveler = await Traveler.findOne(req.params.id);
-        console.log(traveler.id);
-        await traveler.delete();
-        res.json ('suppression effectuée');
-
-        // if (!traveler) {
-        //     res.json('voyageur introuvable');
-        // } else {
-        //     await traveler.delete();
-        //     res.json ('suppression effectuée');
-        // }
-    },
-
-    loginForm: async(req, res) => {
-
-    },
-
-    doLogin: async (req, res) => {
-
-    },
-    
-    signupForm: (req, res) => {
-
-    },
-
-    doSignup: async (req, res) => {
-
-    },
-
-    logout: (req, res) => {
-
-    },
-
-    profile: (req, res) => {
-        
-    },
-
-    modifyProfile: (req, res) => {
-
-    },
-
-    doContact: (req, res) => {
-
-    }
+        // console.log(traveler.id);
+        if (traveler) {
+            const travelerToDelete = new Traveler(traveler);
+            await travelerToDelete.delete();
+            res.json ('suppression effectuée');
+        } else {
+            res.json('Suppression impossible')
+        };
+    }    
 };
 
 module.exports = travelerController
