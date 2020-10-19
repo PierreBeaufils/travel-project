@@ -1,9 +1,9 @@
 const db = require('../database');
 const CoreModel = require ('./CoreModel');
 
-class Traveler extends CoreModel {
+class Task extends CoreModel {
 
-    static tableName = 'traveler';
+    static tableName = 'task';
 
     constructor (data) {
         super(data);
@@ -13,4 +13,4 @@ class Traveler extends CoreModel {
     }
 }
 
-module.exports = Traveler;
+module.exports = Task;

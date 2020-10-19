@@ -7,7 +7,9 @@ const { Router } = require('express');
 
 const router = Router();
 
-// router.get('/',mainController.test);
+router.post('/',mainController.test);
+
+router.patch('/',mainController.test);
 // router.get('/test1',mainController.test3);
 // router.get('/test2',mainController.test2);
 
@@ -61,7 +63,7 @@ router.get('/travel/:id/transport', travelController.showTransport) ;
 // infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
 // router.get('/travel/:id/task', travelController)
 // router.post('/travel/:id/task', travelController)
-// router.patch('/travel/:id/task', travelController)
+router.patch('/travel/task/:id', mainController.test);
 // router.delete('/travel/:id/task', travelController)
 
 // infos liées aux documents d'un voyage : affichage, insertion, modification suppression 

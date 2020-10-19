@@ -6,6 +6,7 @@ class Transport extends CoreModel {
         static tableName = 'transport';
 
     constructor (data) {
+        super(data);
         for (const prop in data){
             this[prop] = data[prop];
         }
@@ -13,13 +14,6 @@ class Transport extends CoreModel {
 
     
 
-    async save() {
-
-    }
-
-    async delete() {
-
-    }
 }
 
 module.exports = Transport;

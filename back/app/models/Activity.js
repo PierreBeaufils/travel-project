@@ -6,6 +6,7 @@ class Activity extends CoreModel {
         static tableName = 'activity';
 
     constructor (data) {
+        super(data);
         for (const prop in data){
             this[prop] = data[prop];
         }
@@ -13,13 +14,7 @@ class Activity extends CoreModel {
 
     
 
-    async save() {
-
-    }
-
-    async delete() {
-
-    }
+    
 }
 
 module.exports = Activity;
