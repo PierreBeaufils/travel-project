@@ -27,6 +27,16 @@ router.post('/profile', travelerController.modifyProfile);
 // page de contact (mail prérempli)
 router.post('/contact', travelerController.doContact);
 
+// router.get('/travel/id/travelers', travelerController.allTravelers);
+// Voir tout les travelers associé à un voyage
+
+// router.get('/travelers/:id', travelerController.oneTraveler);
+// Besoin ? pas sur !
+
+router.post('/travelers', travelerController.newTraveler);
+router.patch('/travelers/:id', travelerController.editTraveler);
+
+
 router.delete('/travelers/:id', travelerController.deleteTraveler);
 
 //cette route sera protégée par le middleware adminMW
@@ -63,7 +73,7 @@ router.get('/travel/:id/transport', travelController.showTransport) ;
 // infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
 // router.get('/travel/:id/task', travelController)
 // router.post('/travel/:id/task', travelController)
-router.patch('/travel/task/:id', mainController.test);
+router.patch('/travel:id/task/:id', mainController.test);
 // router.delete('/travel/:id/task', travelController)
 
 // infos liées aux documents d'un voyage : affichage, insertion, modification suppression 

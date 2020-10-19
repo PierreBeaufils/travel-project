@@ -1,1 +1,35 @@
 GET http://localhost:3000/v1/
+###
+PATCH http://localhost:3000/v1/
+content-type: application/json
+
+{
+        "name": "chateau du roi",
+        "adress": "028 Hovde Junction",
+        "city": "Hayama",
+        "coordinate": "(38.1483676,39.1483676)",
+        "arrival_date": "2020-05-13 14:23:08", 
+        "departure_date": "2020-12-03 00:04:24",
+        "unit_price": 58.05,
+        "quantity": 7,
+        "travel_id": 15
+    }
+
+
+###
+
+PATCH http://localhost:3000/v1/travelers/5
+content-type: application/json
+
+{
+    "first_name": "Bruno",
+    "last_name": "Sosin",
+    "gender": "Male",
+    "dob": "01/01/1969",
+    "adress": "Cross-group static moderator",
+    "zipcode": 9820,
+    "city": "Uzhhorod",
+    "phone": "+594694090422",
+    "email": "cmcmeekin0@photobucket.com",
+    "password": "npLYoji"
+}

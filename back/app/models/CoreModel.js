@@ -40,6 +40,23 @@ class CoreModel {
         return component.rows;
     }
 
+    static async findOneTravelComponent(travelId,componentId){
+        if (travelId) {
+            const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 id = $2 ;`, [travelId ,componentId]);
+            return component.rows[0];
+        }
+        else {
+        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE id = $1 ;`, [componentId]);
+        return component.rows[0];
+    }
+    }
+
+    update(data){
+        for(const prop in data){
+            this[prop] = data[prop];
+        }
+    }
+
     async saveAllTravelComponent(){
         const fieldNames = [];
         const fieldIndex = [];
@@ -62,7 +79,7 @@ class CoreModel {
 
         if (this.id) {
             fieldValues.push(this.id);
-            
+            console.log(fieldValues);
             await db.query(`
             UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1}
             ;`
