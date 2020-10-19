@@ -3,23 +3,33 @@ const Traveler = require('../models/Traveler')
 const travelerController = {
 
     allTravelers: async (req,res) => {
-        const travelers = await Traveler.findAll();
+        const travelers = await Traveler.findAllTravelComponent();
         res.json(travelers);
     },
 
-    oneTraveler: async (req,res) => {
-        const traveler = await Traveler.findOne(req.params.id)
-        if (traveler) {
-            res.json(traveler);
-        } else {
-            res.status(404).json('Ce voyageur n\'existe pas')
-        }
-    },
+    // oneTraveler: async (req,res) => {
+    //     const traveler = await Traveler.findOneTravelComponent(req.params.id)
+    //     if (traveler) {
+    //         res.json(traveler);
+    //     } else {
+    //         res.status(404).json('Ce voyageur n\'existe pas')
+    //     }
+    // },
+
+    // Besoin ???? Pour qui et pour quoi ?
 
     newTraveler: async (req,res)=> {
         const newTraveler = new Traveler(req.body);
-        await newTraveler.save();
+        await newTraveler.saveAllTravelComponent();
         res.json(newTraveler);
+    },
+
+    editTraveler: async (req,res) => {
+        
+        const traveler = await Traveler.findOneTravelComponent(null ,req.params.id);
+        const travelerToEdit = new Traveler(traveler);
+        travelerToEdit.update(req.body);
+        travelerToEdit.saveAllTravelComponent();
     },
 
     deleteTraveler: async (req,res)=> {

@@ -11,6 +11,10 @@ class Traveler extends CoreModel {
             this[prop] = data[prop];
         }
     }
+
+    
 }
+
+
 
 module.exports = Traveler;
