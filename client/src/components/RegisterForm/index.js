@@ -9,7 +9,7 @@ const RegisterForm = () => {
   const onSubmit = (data) => console.log(data);
   return (
     <div className="register">
-      <div className="register-form">
+      <div className="main-form">
         <h2>Inscription</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Email</label>
