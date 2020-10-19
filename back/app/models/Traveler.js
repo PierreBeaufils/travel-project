@@ -27,7 +27,7 @@ class Traveler {
         const insertedTraveler = await db.query (`
         INSERT INTO traveler (first_name, last_name, role, gender, dob, adress, zipcode, city, phone, email, email_check, password, passport_number, expiration_date)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
-        RETURNING id;
+        RETURNING traveler.id;
         `, [
             this.first_name,
             this.last_name,
@@ -43,7 +43,9 @@ class Traveler {
             this.password,
             this.passport_number,
             this.expiration_date,            
-        ]);   
+        ]);
+
+        console.log(insertedTraveler.rowCount)
     }
 
     async delete() {

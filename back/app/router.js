@@ -2,6 +2,7 @@
  const travelerController = require('./controllers/travelerController');
  const adminController = require('./controllers/adminController');
  const travelController = require('./controllers/travelController');
+ const loginController = require ('./controllers/loginController');
 
 const { Router } = require('express');
 
@@ -16,18 +17,18 @@ router.delete('/travelers/:id', travelerController.deleteTraveler);
 
 
 // Formulaire de login : affichage et traitement
-router.get('/login', travelerController.loginForm);
-router.post('/login', travelerController.doLogin);
+router.get('/login', loginController.loginForm);
+router.post('/login', loginController.doLogin);
 // Formulaire de signup : affichage et traitement
-router.get('/signup', travelerController.signupForm);
-router.post('/signup', travelerController.doSignup);
+router.get('/signup', loginController.signupForm);
+router.post('/signup', loginController.doSignup);
 // Déconnexion
-router.post('/logout', travelerController.logout);
+router.post('/logout', loginController.logout);
 // Infos persos de l'utilisateur : affichage et traitement
-router.get('/profile', travelerController.profile);
-router.post('/profile', travelerController.modifyProfile);
+router.get('/profile', loginController.profile);
+router.post('/profile', loginController.modifyProfile);
 // page de contact (mail prérempli)
-router.post('/contact', travelerController.doContact);
+router.post('/contact', loginController.doContact);
 
 // //cette route sera protégée par le middleware adminMW
 // //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
