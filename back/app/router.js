@@ -13,6 +13,7 @@ router.get('/',mainController.test);
 router.get('/travelers', travelerController.allTravelers);
 router.get('/travelers/:id', travelerController.oneTraveler);
 router.post('/travelers', travelerController.newTraveler);
+router.patch('/travelers/:id', travelerController.editTraveler);
 router.delete('/travelers/:id', travelerController.deleteTraveler);
 
 
