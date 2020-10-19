@@ -17,6 +17,11 @@ class Traveler {
         return traveler.rows[0];        
     }
 
+    static async findByEmail(email) {
+        const user = await db.query ('SELECT * FROM traveler WHERE email=$1', [email]);
+        return user.rows[0];
+    }
+
     update(data){
         for(const prop in data){
             this[prop] = data[prop];
