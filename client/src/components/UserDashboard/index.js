@@ -12,7 +12,7 @@ const UserDashboard = () => {
       <div className="userdashboard-travels">
         <div className="userdashboard-travels-header">
           <h3>Mes voyages</h3>
-          <div className="create-travel--button">
+          <div className="create--button">
             <PlusCircle color="#fff" />
             <p>Créer un voyage</p>
           </div>
