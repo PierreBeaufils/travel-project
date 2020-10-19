@@ -8,6 +8,8 @@ const { Router } = require('express');
 const router = Router();
 
 router.get('/',mainController.test);
+router.get('/test1',mainController.test3);
+router.get('/test2',mainController.test2);
 
 // Formulaire de login : affichage et traitement
 router.get('/login', travelerController.loginForm);
