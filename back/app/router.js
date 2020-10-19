@@ -7,9 +7,9 @@ const { Router } = require('express');
 
 const router = Router();
 
-router.get('/',mainController.test);
-router.get('/test1',mainController.test3);
-router.get('/test2',mainController.test2);
+// router.get('/',mainController.test);
+// router.get('/test1',mainController.test3);
+// router.get('/test2',mainController.test2);
 
 // Formulaire de login : affichage et traitement
 router.get('/login', travelerController.loginForm);
@@ -43,16 +43,20 @@ router.delete('/travelers/:id', travelerController.deleteTraveler);
 // router.delete('/travel/:id', travelController)
 
 // infos liées à l'hébergement d'un voyage : affichage, insertion, modification suppression 
-// router.get('/travel/:id/accomodation', travelController)
+router.get('/travel/:id/accomodation', travelController.showAccomodations) ;
 // router.post('/travel/:id/accomodation', travelController)
 // router.patch('/travel/:id/accomodation', travelController)
 // router.delete('/travel/:id/accomodation', travelController)
 
 // infos liées aux activités d'un voyage : affichage, insertion, modification suppression 
-// router.get('/travel/:id/activity', travelController)
+router.get('/travel/:id/activity', travelController.showActivity) ;
 // router.post('/travel/:id/activity', travelController)
 // router.patch('/travel/:id/activity', travelController)
 // router.delete('/travel/:id/activity', travelController)
+
+// Info liés aux transport d'un voyage :
+router.get('/travel/:id/transport', travelController.showTransport) ;
+
 
 // infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
 // router.get('/travel/:id/task', travelController)
