@@ -13,6 +13,25 @@ import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
 
+const dataUserTest = {
+  firstname: 'Monprenom',
+  lastname: 'Monnomdefamille',
+  address: '1 Rue Demarue',
+  postcode: '0123456',
+  city: 'Maville',
+  phone: '+33123456789',
+  mail: 'monmail@monfai.fr',
+  documents: [{
+    docName: 'Le nom de mon document1',
+    docDate: 1603111990,
+    docLink: 'http://test1.fr',
+  }, {
+    docName: 'Le nom de mon document2',
+    docDate: 1503111990,
+    docLink: 'http://test2.fr',
+  }],
+
+};
 // == Composant
 const App = () => (
   <div className="app">
@@ -24,7 +43,12 @@ const App = () => (
       <Route path="/mentions-legales" component={Mentions} />
       <Route path="/contact" component={Contact} />
       <Route path="/a-propos" component={About} />
-      <Route path="/profil" component={UserProfile} />
+      <Route
+        path="/profil"
+        render={(props) => (
+          <UserProfile {...props} dataUser={dataUserTest} />
+        )}
+      />
       <Route component={NotFound} />
     </Switch>
     <Footer />

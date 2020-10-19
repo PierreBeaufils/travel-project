@@ -1,43 +1,39 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-// import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import Profile from './Profile';
+import TabsUserProfileMobile from './TabsUserProfileMobile';
+import Documents from './Documents';
 
 import './styles.scss';
 
-const UserProfile = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+const UserProfile = ({ dataUser }) => {
+  const isMobile = window.innerWidth <= 500;
+  if (isMobile) {
+    return (
+      <TabsUserProfileMobile dataUser={dataUser}/>
+    );
+  } else {
   return (
-    <div className="register">
-      <div className="main-form">
-        <h2>Compléter votre profil :</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Email</label>
-          <input name="email" ref={register({ required: true })} type="email" />
-          <label>Prénom</label>
-          <input name="firstName" ref={register({ required: true })} />
-          <label>Nom</label>
-          <input name="lastName" ref={register({ required: true })} />
-          <label>Mot de passe</label>
-          <input name="password" ref={register({ required: true })} type="password" />
-          <label>Retapez votre mot de passe</label>
-          <input name="password" ref={register({ required: true })} type="password" />
-          <label>Genre</label>
-          <select name="gender" ref={register({ required: true })}>
-            <option value="female">Femme</option>
-            <option value="male">Homme</option>
-            <option value="other">Autre</option>
-          </select>
-          <input type="submit" />
-        </form>
-      </div>
+    <div className="profil-main">
+    <Profile dataUser={dataUser}/>
+    <Documents dataUser={dataUser}/>
     </div>
   );
+          }
 };
 
-// LoginForm.propTypes = {
-
-// };
+UserProfile.propTypes = {
+  dataUser: PropTypes.shape({
+    firstname: PropTypes.string.isRequired,
+    lastname: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    postcode: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    mail: PropTypes.string.isRequired,
+    documents: PropTypes.array.isRequired,
+  }),
+};
 
 // LoginForm.defaultProps = {
 
