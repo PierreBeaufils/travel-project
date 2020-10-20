@@ -36,7 +36,7 @@ class CoreModel {
         console.log(this.tableName);
         console.log(travelId);
 
-        const component = await db.query(`SELECT * FROM ${this.constructor.tableName} WHERE travel_id = $1 ;`, [travelId]);
+        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
         return component.rows;
     }
 

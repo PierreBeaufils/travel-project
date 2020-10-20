@@ -48,7 +48,7 @@ router.delete('/travelers/:id', travelerController.deleteTraveler);
 // Créer un voyage
 router.post('/create-travel', travelController.createTravel);
 
-// router.get('/travel/:id', travelController) => Toutes les datas du voyage Voyageurs + Acco + Transp + activities 
+router.get('/travel/:id', travelController.showAllInfos) //Toutes les datas du voyage Voyageurs + Acco + Transp + activities 
 // router.post('/travel/:id', travelController) => Elle fait quoi ???
 router.patch('/travel/:id', travelController.editTravel);
 router.delete('/travel/:id', travelController.delete);
@@ -69,6 +69,8 @@ router.patch('/travel/:id/activity/:activityId', travelController.editActivity);
 router.get('/travel/:id/transport', travelController.showTransport) ;
 router.post('/travel/:id/transport', travelController.createTransport);
 router.patch('/travel/:id/transport/:transportId', travelController.editTransport);
+
+router.delete('/travel/:id/:entity/:entityId', travelController.deleteEntity);
 
 // infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
 // router.get('/travel/:id/task', travelController)

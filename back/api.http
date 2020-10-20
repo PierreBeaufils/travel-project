@@ -130,3 +130,7 @@ PATCH http://localhost:3000/v1/travel/1/transport/33
         "quantity": 7,
         "travel_id": 33
     }
+
+###
+    
+GET http://localhost:3000/v1/travel/15/
