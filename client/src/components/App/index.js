@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './styles.css';
 
-import Navbar from 'src/components/Navbar';
+import Navbar from 'src/containers/Navbar';
 import Footer from 'src/components/Footer';
 import Homepage from 'src/components/Homepage';
 import Mentions from 'src/components/Mentions';
@@ -65,7 +65,7 @@ const App = ({ loggedIn }) => (
 );
 
 App.propTypes = {
-  loggedIn: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 export default App;
