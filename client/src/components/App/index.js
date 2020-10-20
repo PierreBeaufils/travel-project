@@ -12,6 +12,8 @@ import LoginForm from 'src/components/LoginForm';
 import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import CreateTravelForm from 'src/components/CreateTravelForm';
+import UserDashboard from 'src/components/UserDashboard';
+import Travel from 'src/components/Travel';
 
 // == Composant
 const App = () => (
@@ -25,6 +27,8 @@ const App = () => (
       <Route path="/contact" component={Contact} />
       <Route path="/a-propos" component={About} />
       <Route path="/creer-un-voyage" component={CreateTravelForm} />
+      <Route path="/tableau-de-bord" component={UserDashboard} />
+      <Route path="/voyage/:id" component={Travel} />
       <Route component={NotFound} />
     </Switch>
     <Footer />
