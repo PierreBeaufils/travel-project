@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { PlusCircle, CheckSquare, Trash2 } from 'react-feather';
+import ModalDelete from './ModalDelete';
+import useModal from './useModal';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
 const CardAccommodation = () => {
   const test = 'test';
+  const {isShowing, toggle} = useModal();
 
   const handleAddThingCLick = (ClickedCategoryName) => { // gere le click sur bouton + d'ajouter une chose à la catégorie
     console.log('Click sur ajout d\'une chose à la categorie', ClickedCategoryName);
@@ -16,11 +19,17 @@ const CardAccommodation = () => {
     console.log('Click sur ajout', clickedCardId);
   };
   const handleDeleteCardCLick = (clickedCardId) => { // gere le click sur bouton supprimer d'une carte du stock
+  toggle();
     console.log('Click sur corbeille', clickedCardId);
   };
 
   return (
+    
     <div className="cards__container">
+    <ModalDelete
+      isShowing={isShowing}
+        hide={toggle}
+    />
       <div className="card">
         <div
           className="card__text"
