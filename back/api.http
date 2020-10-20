@@ -134,7 +134,8 @@ PATCH http://localhost:3000/v1/travel/1/transport/33
 ###
     
 GET http://localhost:3000/v1/travel/15/
-
+const travelToFind = await objectModel[0].findOneTravelComponent(req.params.id,req.params.entityId);
+        // console.log(travelToFind);
 ###
 
-DELETE http://localhost:3000/v1/travel/1/
+DELETE http://localhost:3000/v1/travel/1/transport/1
