@@ -7,33 +7,22 @@ const travelerController = {
         res.json(travelers);
     },
 
-    // oneTraveler: async (req,res) => {
-    //     const traveler = await Traveler.findOneTravelComponent(req.params.id)
-    //     if (traveler) {
-    //         res.json(traveler);
-    //     } else {
-    //         res.status(404).json('Ce voyageur n\'existe pas')
-    //     }
-    // },
-
-    // Besoin ???? Pour qui et pour quoi ?
-
     newTraveler: async (req,res)=> {
         const newTraveler = new Traveler(req.body);
         await newTraveler.saveAllTravelComponent();
         res.json(newTraveler);
     },
 
-    editTraveler: async (req,res) => {
-        
+    editTraveler: async (req,res) => {        
         const traveler = await Traveler.findOneTravelComponent(null ,req.params.id);
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
+        res.json(travelerToEdit);
     },
 
     deleteTraveler: async (req,res)=> {
-        const traveler = await Traveler.findOne(req.params.id);
+        const traveler = await Traveler.findOneTravelComponent(null,req.params.id);
         const travelerToDelete = new Traveler(traveler);
         await travelerToDelete.delete();
         res.json ('suppression effectuée');
@@ -44,6 +33,11 @@ const travelerController = {
         //     await traveler.delete();
         //     res.json ('suppression effectuée');
         // }
+    },
+
+    getOneTraveler: async (req, res) => {
+        const foundTraveler = await Traveler.findOneTravelComponent(null ,req.params.id);
+        res.json(foundTraveler);
     },
 
     loginForm: async(req, res) => {
@@ -64,10 +58,6 @@ const travelerController = {
 
     logout: (req, res) => {
 
-    },
-
-    profile: (req, res) => {
-        
     },
 
     modifyProfile: (req, res) => {

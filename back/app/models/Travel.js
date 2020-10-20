@@ -1,33 +1,16 @@
-consdb = require('../database');
+const db = require('../database');
+const CoreModel = require('../models/CoreModel');
 
-class Travel {
+class Travel extends CoreModel {
+    static tableName = 'travel';
     constructor (data) {
+        super(data);
         for (const prop in data){
             this[prop] = data[prop];
         }
     }
 
-    static async findOne(id) {
-
-    }
-
-    static async findAll(){
-
-    }
-
-    // update(data){
-    //     for(const prop in data){
-    //         this[prop] = data[prop];
-    //     }
-    // }
-
-    async save() {
-
-    }
-
-    async delete() {
-
-    }
+    
 }
 
-module.exports = Traveler;
+module.exports = Travel;
