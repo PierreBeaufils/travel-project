@@ -88,21 +88,23 @@ const travelController = {
 
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
-        entity = entity.charAt(0).toUpperCase() + entity.slice(1);
-        let entityToCompare = [];
-        console.log(objectModel[0].tableName);
-        for (let i = 0 ; i < objectModel.length ; i++) {
-            entityToCompare.push(objectModel[i].tableName.charAt(0).toUpperCase + objectModel[i].tableName.slice(1))
-        }
-        console.log(entityToCompare);
-        const index = Object.keys(objectModel).indexOf(entity);
-        console.log(index);
+        // entity = entity.charAt(0).toUpperCase() + entity.slice(1);
+        let entityToUse ;
         
-        const travelToFind = await objectModel[0].findOneTravelComponent(req.params.id,req.params.entityId);
-        console.log(travelToFind);
-        // const travelToDelete = new Travel(travelToFind);
-        // await travelToDelete.delete();
-        // res.json("suppresion effectuée");
+        for (let i = 0 ; i < objectModel.length ; i++) {
+            console.log(objectModel[i].tableName);
+            if (entity === objectModel[i].tableName)
+            {entityToUse = objectModel[i];
+        
+            }
+        }
+        console.log(entityToUse);
+        
+        const entityToFind = await entityToUse.findOneTravelComponent(req.params.id,req.params.entityId);
+        console.log(entityToFind);
+        const entityToDelete = new entityToUse(entityToFind);
+        await entityToDelete.delete();
+        res.json("suppresion effectuée");
     }
 };
 
