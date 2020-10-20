@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { PlusCircle, CheckSquare, Trash2 } from 'react-feather';
 // import PropTypes from 'prop-types';
@@ -20,7 +21,7 @@ const CardAccommodation = () => {
   };
 
   return (
-    <div className="cards__container">
+    <div className="card__container">
       <div className="card">
         <div
           className="card__text"
