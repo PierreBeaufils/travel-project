@@ -6,7 +6,7 @@ import CardActivity from './CardActivity';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
-const CategoryFrame = ({ categoryName, textButton }) => {
+const CategoryFrame = ({ categoryName, textButton, handleAddThing }) => {
   const test = 'test';
 
   const handleAddThingCLick = (ClickedCategoryName) => { // gere le click sur bouton + d'ajouter une chose à la catégorie
@@ -29,7 +29,7 @@ const CategoryFrame = ({ categoryName, textButton }) => {
         <h2>{categoryName}</h2>
         <div
           className="create--button"
-          onClick={() => handleAddThingCLick({ categoryName })}
+          onClick={() => handleAddThing()}
         >
           <PlusCircle
             color="#fff"

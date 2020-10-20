@@ -1,39 +1,46 @@
-import React, { useState }from 'react';
+import React from 'react';
 import { PlusCircle, CheckSquare, Trash2 } from 'react-feather';
 import ModalDelete from './ModalDelete';
+import ModalCardDescription from './ModalCardDescription';
 import useModal from './useModal';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
 const CardAccommodation = () => {
-  const test = 'test';
-  const {isShowing, toggle} = useModal();
+  const { isShowingModalDeleteCard, toggleModalDeleteCard } = useModal('ModalDeleteCard');
+  const { isShowingModalCardDescription, toggleModalCardDescription } = useModal('ModalCardDescription');
 
   const handleAddThingCLick = (ClickedCategoryName) => { // gere le click sur bouton + d'ajouter une chose à la catégorie
     console.log('Click sur ajout d\'une chose à la categorie', ClickedCategoryName);
   };
-  const handleTextCardCLick = (clickedCardId) => { // gere le click sur le texte d'une carte
-    console.log('Click sur le texte de la carte', clickedCardId);
+  const handleTextCardCLick = (targetID) => { // gere le click sur le texte d'une carte
+    console.log('Click sur le texte de la carte', targetID);
+    toggleModalCardDescription(targetID);
   };
   const handleAddCardCLick = (clickedCardId) => { // gere le click sur bouton + d'ajouter une carte à la selection
     console.log('Click sur ajout', clickedCardId);
   };
   const handleDeleteCardCLick = (clickedCardId) => { // gere le click sur bouton supprimer d'une carte du stock
-  toggle();
+    toggleModalDeleteCard();
     console.log('Click sur corbeille', clickedCardId);
   };
 
   return (
-    
+
     <div className="cards__container">
-    <ModalDelete
-      isShowing={isShowing}
-        hide={toggle}
-    />
+      <ModalDelete
+        isShowing={isShowingModalDeleteCard}
+        hide={toggleModalDeleteCard}
+      />
+      <ModalCardDescription
+        isShowing={isShowingModalCardDescription}
+        hide={toggleModalCardDescription}
+        data="jgjgjjjg"
+      />
       <div className="card">
         <div
           className="card__text"
-          onClick={() => handleTextCardCLick('1')}
+          onClick={() => handleTextCardCLick('ceci est ma target 1')}
         >
           <h3>Séjour à l'établisement Hotel machin</h3>
           <h4>Lieu Ville De machin</h4>
