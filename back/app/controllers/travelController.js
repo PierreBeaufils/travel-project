@@ -11,6 +11,16 @@ const travelController = {
         res.json(savedTravel);
         // Theme / destination / date départ / date de fin
     },
+    showAllInfos: async (req,res) => {
+        const travelId = req.params.id;
+        const travelinfos = {};
+        
+        travelinfos.accomodation = await Accommodation.findAllTravelComponent(travelId);
+        travelinfos.activity = await Activity.findAllTravelComponent(travelId);
+        travelinfos.transport = await Transport.findAllTravelComponent(travelId);
+        res.json(travelinfos);
+    },
+
     editTravel: async (req,res) => {
         const travelToEdit = await travel.findOneTravelComponent(null,req.params.id);
         const travelEdited = await new Travel(travelToEdit);
@@ -68,6 +78,14 @@ const travelController = {
     },
     
     delete: async (req,res) => {
+        const travelToFind = await Travel.findOneTravelComponent(null,req.params.id);
+        const travelToDelete = new Travel(travelToFind);
+        await travelToDelete.delete();
+        res.json("suppresion effectuée");
+    },
+
+    deleteEntity: async (req,res) => {
+        const entity = req.params.entity ;
         const travelToFind = await Travel.findOneTravelComponent(null,req.params.id);
         const travelToDelete = new Travel(travelToFind);
         await travelToDelete.delete();
