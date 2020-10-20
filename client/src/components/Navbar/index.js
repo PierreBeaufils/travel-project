@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './navbar.scss';
 import logo from 'src/assets/images/logo.png';
 
-const Navbar = () => {
+const Navbar = ({ loggedIn }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [fade, setFade] = useState(false);
 
@@ -24,6 +25,25 @@ const Navbar = () => {
     setFade(!fade);
   };
 
+  const links = () => {
+    if (!loggedIn) {
+      return (
+        <>
+          <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
+          <Link to="connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
+          <Link to="inscription"><li className={toggleFade()} onClick={handleToggle}>Inscription</li></Link>
+        </>
+      );
+    }
+    return (
+      <>
+        <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
+        <Link to="tableau-de-bord"><li className={toggleFade()} onClick={handleToggle}>Mon espace</li></Link>
+        <Link to="deconnexion"><li className={toggleFade()} onClick={handleToggle}>Déconnexion</li></Link>
+      </>
+    );
+  };
+
   return (
     <nav>
       <div className="navbar">
@@ -41,13 +61,19 @@ const Navbar = () => {
           <div className="line" style={{ transform: toggleMenu ? 'rotate(45deg) translate(-5px,-6px)' : null }} />
         </div>
         <ul className={toggleHamburger()}>
-          <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
-          <Link to="connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
-          <Link to="inscription"><li className={toggleFade()} onClick={handleToggle}>Inscription</li></Link>
+          {links()}
         </ul>
       </div>
     </nav>
   );
+};
+
+Navbar.defaultProps = {
+  loggedIn: false,
+};
+
+Navbar.propTypes = {
+  loggedIn: PropTypes.bool,
 };
 
 export default Navbar;

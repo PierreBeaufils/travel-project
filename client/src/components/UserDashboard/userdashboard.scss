@@ -3,6 +3,8 @@
 .userdashboard {
   margin: 0 auto;
   max-width: 1200px;
+  display: flex;
+  flex-flow: column wrap;
 
   & h2 {
     text-align: center;
@@ -79,6 +81,38 @@
         background-color: darken(v.$primary-color, 10%);
       }
     }
+  }
+}
+
+.user-card {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  margin-bottom: 6rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+
+  &-image {
+    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: 50%;
+    box-shadow: 0 1px 10px 0 rgba(33, 33, 33, 0.5);
+  }
+
+  &-name {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  &-email {
+    margin-bottom: 20px;
+  }
+
+  &-edit {
+    margin: auto;
   }
 }
 
