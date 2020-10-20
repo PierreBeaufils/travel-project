@@ -3,6 +3,8 @@ const Activity = require("../models/Activity");
 const Transport = require("../models/Transport");
 const Travel = require("../models/Travel");
 
+const objectModel = [Accommodation,Activity,Transport,Travel];
+
 
 const travelController = {
     createTravel: async (req,res) => {
@@ -85,11 +87,22 @@ const travelController = {
     },
 
     deleteEntity: async (req,res) => {
-        const entity = req.params.entity ;
-        const travelToFind = await Travel.findOneTravelComponent(null,req.params.id);
-        const travelToDelete = new Travel(travelToFind);
-        await travelToDelete.delete();
-        res.json("suppresion effectuée");
+        let entity = req.params.entity;
+        entity = entity.charAt(0).toUpperCase() + entity.slice(1);
+        let entityToCompare = [];
+        console.log(objectModel[0].tableName);
+        for (let i = 0 ; i < objectModel.length ; i++) {
+            entityToCompare.push(objectModel[i].tableName.charAt(0).toUpperCase + objectModel[i].tableName.slice(1))
+        }
+        console.log(entityToCompare);
+        const index = Object.keys(objectModel).indexOf(entity);
+        console.log(index);
+        
+        const travelToFind = await objectModel[0].findOneTravelComponent(req.params.id,req.params.entityId);
+        console.log(travelToFind);
+        // const travelToDelete = new Travel(travelToFind);
+        // await travelToDelete.delete();
+        // res.json("suppresion effectuée");
     }
 };
 
