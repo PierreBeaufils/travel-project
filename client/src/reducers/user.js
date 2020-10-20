@@ -18,6 +18,7 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         loggedIn: true,
+        infos: action.user,
       };
     default:
       return state;

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import './userdashboard.scss';
 import { PlusCircle } from 'react-feather';
+import ProfileCard from 'src/containers/ProfileCard';
 import TravelCard from './TravelCard';
-import ProfileCard from './ProfileCard';
 
 const UserDashboard = () => {
   const onSubmit = (data) => console.log(data);
