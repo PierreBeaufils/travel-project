@@ -36,17 +36,18 @@ class CoreModel {
         console.log(this.tableName);
         console.log(travelId);
 
-        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
+        const component = await db.query(`SELECT * FROM ${this.constructor.tableName} WHERE travel_id = $1 ;`, [travelId]);
         return component.rows;
     }
 
     static async findOneTravelComponent(travelId,componentId){
         if (travelId) {
-            const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 id = $2 ;`, [travelId ,componentId]);
+            console.log(`SELECT * FROM ${this.tableName} WHERE travel_id = ${travelId} id = ${componentId} ;`)
+            const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 AND id = $2 ;`, [travelId ,componentId]);
             return component.rows[0];
         }
         else {
-        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE id = $1 ;`, [componentId]);
+        const component = await db.query(`SELECT * FROM ${this.constructor.tableName} WHERE id = $1 ;`, [componentId]);
         return component.rows[0];
     }
     }
@@ -110,7 +111,8 @@ class CoreModel {
     }
 
     async delete() {
-
+        console.log(`DELETE FROM ${this.constructor.tableName} WHERE id = ${this.id} ;`)
+        await db.query(`DELETE FROM ${this.constructor.tableName} WHERE id = $1 ;`, [this.id]);
     }
 }
 
