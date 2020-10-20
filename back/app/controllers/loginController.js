@@ -2,16 +2,15 @@ const Traveler = require('../models/Traveler');
 const bcrypt = require ('bcrypt');
 
 const loginController = {
-    loginForm: async(req, res) => {
-
-    },
-
     doLogin: async (req, res) => {
         const user = await Traveler.findByEmail(req.body.email)
         if (!user){
             res.json('utilisateur introuvable');
         } else {
-            if (req.body.password !== user.password){
+
+            const validPwd = bcrypt.compareSync(req.body.password, user.password); 
+            
+            if (!validPwd){
                 res.json('le mot de passe est incorrect');                
             } else {
                 req.session.user = {
@@ -25,31 +24,38 @@ const loginController = {
                     req.cookie.expires = new Date (Date.now() + 60*60*24)
                 }
                 res.json(user);
-                res.redirect('/')
+                // res.redirect('/')
             }            
         }
-    },
-    
-    signupForm: (req, res) => {
-
     },
 
     doSignup: async (req, res) => {
         const user = await Traveler.findByEmail(req.body.email)
         if (user) {
-            res.json ('cet adresse email existe déjà');
+            res.json ('cette adresse email existe déjà');
         } else {
-            
-        }
+            if (req.body.password !== req.body.passwordConfirm) {
+                res.json('la confirmation du mot de passe est incorrecte');
+            } else {
+                const hashPwd = bcrypt.hashSync(req.body.password, 10);
 
+                const newUser = new Traveler({
+                    first_name: req.body.firstname,
+                    last_name: req.body.lastname,
+                    email: req.body.email,
+                    password: hashPwd,                     
+                });
+
+                await newUser.save();
+
+                res.json('signup réussi');
+            }            
+        }
     },
 
     logout: (req, res) => {
-
-    },
-
-    profile: (req, res) => {
-        
+        req.session.user = false;
+        res.redirect('/');
     },
 
     modifyProfile: (req, res) => {
