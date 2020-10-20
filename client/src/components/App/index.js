@@ -8,7 +8,7 @@ import Homepage from 'src/components/Homepage';
 import Mentions from 'src/components/Mentions';
 import Contact from 'src/components/Contact';
 import About from 'src/components/About';
-import LoginForm from 'src/components/LoginForm';
+import LoginForm from 'src/containers/LoginForm';
 import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
