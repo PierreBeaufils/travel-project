@@ -4,7 +4,11 @@ const initialState = {
   email: '',
   password: '',
   loggedIn: false,
-  infos: {},
+  infos: {
+    first_name: 'Patrick',
+    last_name: 'Abitbol',
+    email: 'email@email.fr',
+  },
 };
 
 const user = (state = initialState, action = {}) => {

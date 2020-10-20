@@ -14,7 +14,7 @@ import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
 import CreateTravelForm from 'src/components/CreateTravelForm';
-import UserDashboard from 'src/components/UserDashboard';
+import UserDashboard from 'src/containers/UserDashboard';
 import Travel from 'src/components/Travel';
 
 const dataUserTest = {
