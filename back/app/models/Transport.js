@@ -1,9 +1,9 @@
 const db = require('../database');
-const CoreModel = require ('./CoreModel');
+const CoreModel = require("./CoreModel");
 
-class Traveler extends CoreModel {
+class Transport extends CoreModel {
 
-    static tableName = 'traveler';
+        static tableName = 'transport';
 
     constructor (data) {
         super(data);
@@ -13,8 +13,7 @@ class Traveler extends CoreModel {
     }
 
     
+
 }
 
-
-
-module.exports = Traveler;
+module.exports = Transport;
