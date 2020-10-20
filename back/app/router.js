@@ -18,18 +18,16 @@ router.delete('/travelers/:id', travelerController.deleteTraveler);
 
 
 // Formulaire de login : affichage et traitement
-router.get('/login', loginController.loginForm);
 router.post('/login', loginController.doLogin);
 // Formulaire de signup : affichage et traitement
-router.get('/signup', loginController.signupForm);
 router.post('/signup', loginController.doSignup);
 // Déconnexion
-router.post('/logout', loginController.logout);
-// Infos persos de l'utilisateur : affichage et traitement
-router.get('/profile', loginController.profile);
-router.post('/profile', loginController.modifyProfile);
-// page de contact (mail prérempli)
-router.post('/contact', loginController.doContact);
+// router.post('/logout', loginController.logout);
+// // Infos persos de l'utilisateur : affichage et traitement
+// router.get('/profile', loginController.profile);
+// router.post('/profile', loginController.modifyProfile);
+// // page de contact (mail prérempli)
+// router.post('/contact', loginController.doContact);
 
 // //cette route sera protégée par le middleware adminMW
 // //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
