@@ -3,7 +3,7 @@ import { CHANGE_FIELD, SAVE_USER } from 'src/actions/user';
 const initialState = {
   email: '',
   password: '',
-  logged: false,
+  loggedIn: false,
   infos: {},
 };
 
@@ -17,7 +17,7 @@ const user = (state = initialState, action = {}) => {
     case SAVE_USER:
       return {
         ...state,
-        logged: true,
+        loggedIn: true,
       };
     default:
       return state;

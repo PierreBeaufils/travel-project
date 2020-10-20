@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './styles.css';
 
 import Navbar from 'src/components/Navbar';
@@ -36,12 +37,14 @@ const dataUserTest = {
 
 };
 // == Composant
-const App = () => (
+const App = ({ loggedIn }) => (
   <div className="app">
     <Navbar />
     <Switch>
       <Route path="/" exact component={Homepage} />
-      <Route path="/connexion" component={LoginForm} />
+      <Route path="/connexion" component={LoginForm}>
+        {loggedIn ? <Redirect to="/tableau-de-bord" /> : <LoginForm />}
+      </Route>
       <Route path="/inscription" component={RegisterForm} />
       <Route path="/mentions-legales" component={Mentions} />
       <Route path="/contact" component={Contact} />
@@ -60,5 +63,9 @@ const App = () => (
     <Footer />
   </div>
 );
+
+App.propTypes = {
+  loggedIn: PropTypes.func.isRequired,
+};
 
 export default App;
