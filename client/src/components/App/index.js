@@ -12,6 +12,9 @@ import LoginForm from 'src/components/LoginForm';
 import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
+import CreateTravelForm from 'src/components/CreateTravelForm';
+import UserDashboard from 'src/components/UserDashboard';
+import Travel from 'src/components/Travel';
 
 const dataUserTest = {
   firstname: 'Monprenom',
@@ -49,6 +52,9 @@ const App = () => (
           <UserProfile {...props} dataUser={dataUserTest} />
         )}
       />
+      <Route path="/creer-un-voyage" component={CreateTravelForm} />
+      <Route path="/tableau-de-bord" component={UserDashboard} />
+      <Route path="/voyage/:id" component={Travel} />
       <Route component={NotFound} />
     </Switch>
     <Footer />
