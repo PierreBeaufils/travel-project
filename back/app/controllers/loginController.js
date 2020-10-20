@@ -57,14 +57,6 @@ const loginController = {
         req.session.user = false;
         res.redirect('/');
     },
-
-    modifyProfile: (req, res) => {
-
-    },
-
-    doContact: (req, res) => {
-
-    }
 };
 
 module.exports = loginController;
