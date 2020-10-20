@@ -15,6 +15,7 @@ import UserProfile from 'src/components/UserProfile';
 import CreateTravelForm from 'src/components/CreateTravelForm';
 import UserDashboard from 'src/components/UserDashboard';
 import Travel from 'src/components/Travel';
+import ThingsEdit from 'src/components/ThingsEdit';
 
 const dataUserTest = {
   firstname: 'Monprenom',
@@ -55,6 +56,7 @@ const App = () => (
       <Route path="/creer-un-voyage" component={CreateTravelForm} />
       <Route path="/tableau-de-bord" component={UserDashboard} />
       <Route path="/voyage/:id" component={Travel} />
+      <Route path="/modifiervoyage/:id" component={ThingsEdit} />
       <Route component={NotFound} />
     </Switch>
     <Footer />
