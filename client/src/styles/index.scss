@@ -115,3 +115,13 @@ h3 {
 .warning-text {
   color: vars.$danger-color;
 }
+.tab-mobile {
+  background-color: vars.$primary-color;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  padding: 17px;
+  margin-bottom: 0;
+  transition: all 300ms ease;
+  font-size: 1.05rem;
+}
