@@ -1,1 +1,140 @@
 GET http://localhost:3000/v1/
+###
+
+GET http://localhost:3000/v1/travelers/5/
+# Attention !!!!!! La route GET Renvoie le mot de passe => la filtrer avec une view ?
+###
+POST http://localhost:3000/v1/travelers/
+content-type: application/json
+
+{
+    "first_name": "Jean Yves",
+    "last_name": "Lafesse",
+    "gender": "Male",
+    "dob": "01/01/1980",
+    "adress": "rue du pommier",
+    "zipcode": "97354",
+    "city": "Remire-montjoly",
+    "phone": "+594694090422",
+    "email": "cmcmeekin0@photobucket.com",
+    "password": "npLYoji"
+}
+###
+PATCH http://localhost:3000/v1/travelers/38
+content-type: application/json
+
+{
+    "first_name": "Monsieur Robert",
+    "last_name": "Kiyosaki",
+    "gender": "Male",
+    "dob": "01/01/1969",
+    "adress": "Cross-group static moderator",
+    "zipcode": 9820,
+    "city": "Uzhhorod",
+    "phone": "+594694090422",
+    "email": "cmcmeekin0@photobucket.com",
+    "password": "npLYoji"
+}
+### Doit on renvoyer les modifs en JSON après édition 
+### 
+DELETE http://localhost:3000/v1/travelers/38
+###
+PATCH http://localhost:3000/v1/
+content-type: application/json
+
+{
+        "name": "chateau du roi",
+        "adress": "028 Hovde Junction",
+        "city": "Hayama",
+        "coordinate": "(38.1483676,39.1483676)",
+        "arrival_date": "2020-05-13 14:23:08", 
+        "departure_date": "2020-12-03 00:04:24",
+        "unit_price": 58.05,
+        "quantity": 7,
+        "travel_id": 15
+    }
+
+
+###
+
+POST http://localhost:3000/v1/create-travel
+content-type: application/json
+
+{
+    "title": "Voyage à Singapour",
+    "destination": "Singapour",
+    "departure_date": "2020-06-21 20:17:03",
+    "return_date": "2020-08-30 22:38:58",
+    "owner": 22
+}
+
+### 
+PATCH http://localhost:3000/v1/travel/30/
+content-type: application/json
+
+{
+    "title": "Voyage à Cancun",
+    "destination": "Cancun",
+    "departure_date": "2020-06-21 20:17:03",
+    "return_date": "2020-08-30 22:38:58",
+    "owner": 22
+}
+###
+DELETE http://localhost:3000/v1/travel/30/
+
+### 
+
+PATCH http://localhost:3000/v1/travel/33/accomodation/34
+content-type: application/json
+
+{
+        "name": "berceau du roi",
+        "adress": "028 Hovde Junction",
+        "city": "Stockholm",
+        "coordinate": "(38.1483676,39.1483676)",
+        "arrival_date": "2020-05-13 14:23:08", 
+        "departure_date": "2020-12-03 00:04:24",
+        "unit_price": 58.05,
+        "quantity": 7,
+        "travel_id": 33
+    }
+
+###
+
+    PATCH http://localhost:3000/v1/travel/17/activity/2
+    content-type: application/json
+
+{
+        "name": "Grande roue",
+        "place": "028 Hovde Junction",
+        "topic": "Stockholm",
+        "coordinate": "(38.1483676,39.1483676)",
+        "date": "2020-05-13 14:23:08", 
+        "duration": "15 minutes",
+        "unit_price": 58.05,
+        "quantity": 7,
+        "travel_id": 33
+    }
+
+###
+
+PATCH http://localhost:3000/v1/travel/1/transport/33
+    content-type: application/json
+
+{
+        "type": "Bateau",
+        "from": "Paris",
+        "to": "Stockholm",
+        "departure_date": "(2020-05-13 14:23:08)",
+        "unit_price": 58.05,
+        "quantity": 7,
+        "travel_id": 33
+    }
+
+###
+    
+GET http://localhost:3000/v1/travel/15/
+
+###
+
+DELETE http://localhost:3000/v1/travel/1/

@@ -1,10 +1,8 @@
 const db = require('../database');
-const CoreModel = require ('./CoreModel');
+const CoreModel = require('../models/CoreModel');
 
-class Traveler extends CoreModel {
-
-    static tableName = 'traveler';
-
+class Travel extends CoreModel {
+    static tableName = 'travel';
     constructor (data) {
         super(data);
         for (const prop in data){
@@ -15,6 +13,4 @@ class Traveler extends CoreModel {
     
 }
 
-
-
-module.exports = Traveler;
+module.exports = Travel;
