@@ -1,12 +1,16 @@
 import { connect } from 'react-redux';
 import RegisterForm from 'src/components/RegisterForm';
-import { handleRegister } from 'src/actions/user';
+import { changeFieldValue, handleSignup } from 'src/actions/user';
 
-const mapStateToProps = null;
-
+const mapStateToProps = (state) => ({
+  fields: state.user.signup,
+});
 const mapDispatchToProps = (dispatch) => ({
-  handleRegister: (data) => {
-    dispatch(handleRegister(data));
+  changeFieldValue: (section, field, value) => {
+    dispatch(changeFieldValue(section, field, value));
+  },
+  handleSignup: () => {
+    dispatch(handleSignup());
   },
 });
 

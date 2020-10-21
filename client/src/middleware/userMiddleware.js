@@ -1,15 +1,17 @@
 /* eslint-disable no-case-declarations */
-import { HANDLE_REGISTER, HANDLE_LOGIN, saveUser } from 'src/actions/user';
+import { HANDLE_SIGNUP, HANDLE_LOGIN, LOGOUT, saveUser } from 'src/actions/user';
 
 import { baseURL } from 'src/config';
 import axios from 'axios';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
-    case HANDLE_REGISTER:
-      axios.post(`${baseURL}/signup`, action.data)
+    case HANDLE_SIGNUP:
+      const { signup } = store.getState().user;
+      console.log(signup);
+      axios.post(`${baseURL}/signup`, signup)
         .then((response) => {
-          store.dispatch(saveUser(response.data));
+          // store.dispatch(saveUser(response.data));
           console.log(response.data);
           next(action);
         })
@@ -18,12 +20,20 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       break;
     case HANDLE_LOGIN:
-      const state = store.getState();
-      const { email, password } = state.user;
-      axios.post(`${baseURL}/login`, { email, password }, { withCredentials: true })
+      const { login } = store.getState().user;
+      axios.post(`${baseURL}/login`, login, { withCredentials: true })
         .then((response) => {
           store.dispatch(saveUser(response.data));
-          console.log(response.data);
+          console.log('connexion réussie');
+          next(action);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+      break;
+    case LOGOUT:
+      axios.post(`${baseURL}/logout`, {}, { withCredentials: true })
+        .then(() => {
           next(action);
         })
         .catch((e) => {
