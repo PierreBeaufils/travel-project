@@ -1,4 +1,4 @@
-const Accommodation = require("../models/Accomodation");
+const Accommodation = require("../models/Accommodation");
 const Activity = require("../models/Activity");
 const Transport = require("../models/Transport");
 const Travel = require("../models/Travel");
@@ -29,12 +29,12 @@ const travelController = {
         travelEdited.update(req.body);
         res.json(await travelEdited.saveAllTravelComponent());
     },
-    showAccomodations: async (req, res) =>{
+    showAccommodations: async (req, res) =>{
         const travelId = req.params.id ;
-        const travelAccomodations = await Accommodation.findAllTravelComponent(travelId);
+        const travelAccommodations = await Accommodation.findAllTravelComponent(travelId);
         
-        if (travelAccomodations.length > 0) { 
-            res.json(travelAccomodations);
+        if (travelAccommodations.length > 0) { 
+            res.json(travelAccommodations);
         } else {
             res.json ('Cet hébergement n\'existe pas');
         };
@@ -60,7 +60,7 @@ const travelController = {
         };
     },
 
-    createAccomodation: async (req,res) => {
+    createAccommodation: async (req,res) => {
         const newAcco = new Accommodation(req.body);
         const savedAcco = await newAcco.saveAllTravelComponent();
         res.json("Ajout effectué");
@@ -75,7 +75,7 @@ const travelController = {
         const savedTransp = await newTransp.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
-    editAccomodation: async (req,res) => {
+    editAccommodation: async (req,res) => {
         const accoToEdit = await Accommodation.findOneTravelComponent(req.params.id,req.params.accoId);
         const accoEdited = await new Accommodation(accoToEdit);
         accoEdited.update(req.body);

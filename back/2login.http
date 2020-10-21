@@ -6,11 +6,11 @@ Content-Type : application/json
   "password": "0000"
 }
 ###
-POST http://localhost:3000/v1/signup
+POST http://localhost:3000/v1/login
 Content-Type : application/json
 
 {
-  "email": "test3@email.com",
+  "email": "test4@email.com",
   "lastname": "toto",
   "firstname": "titi",
   "password": "0000",

@@ -22,9 +22,9 @@ DELETE http://localhost:3000/v1/travel/3
 
 //////////////////////////////////// ROUTES DE TRAVEL VERS ACCOMODATION///////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/3/accomodation
+GET http://localhost:3000/v1/travel/3/accommodation
 ###
-POST http://localhost:3000/v1/travel/3/accomodation
+POST http://localhost:3000/v1/travel/3/accommodation
 Content-Type: application/json
 
 {
@@ -38,7 +38,7 @@ Content-Type: application/json
    "travel_id": "3"
 }
 ###
-PATCH http://localhost:3000/v1/travel/3/accomodation/32
+PATCH http://localhost:3000/v1/travel/3/accommodation/32
 Content-Type: application/json
 
 {
@@ -52,7 +52,7 @@ Content-Type: application/json
    "travel_id": "3"
 }
 ###
-DELETE http://localhost:3000/v1/travel/3/accomodation/32
+DELETE http://localhost:3000/v1/travel/3/accommodation/32
 ###
 
 /////////////////////////////////////// ROUTES DE TRAVEL VERS ACTIVITY//////////////////////////////////////////////
