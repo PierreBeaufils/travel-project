@@ -43,7 +43,7 @@ const CreateTravelForm = () => {
           <label htmlFor="startDate">Date de départ
             <input
               name="startDate"
-              ref={register({ required: true })}
+              ref={register()}
               type="date"
               value={startDate}
               min={todayDateISOString}
@@ -52,10 +52,10 @@ const CreateTravelForm = () => {
             />
             {errors.startDate && <span className="warning-text">Veuillez selectionner une date de départ</span>}
           </label>
-          <label htmlFor="finishDate">Date de fin
+          <label htmlFor="departure_date">Date de départ
             <input
-              name="finishDate"
-              ref={register({ required: true })}
+              name="departure_date"
+              ref={register()}
               type="date"
               min={addOneDay(startDate)}
               value={endDate}
