@@ -1,18 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
 import './userdashboard.scss';
 import { PlusCircle } from 'react-feather';
+import ProfileCard from 'src/components/UserDashboard/ProfileCard';
 import TravelCard from './TravelCard';
-import ProfileCard from './ProfileCard';
 
-const UserDashboard = () => {
-  const onSubmit = (data) => console.log(data);
+const UserDashboard = ({ user, travels }) => {
+  const travelsList = travels.map((travel) => (
+    <TravelCard key={travel.id} {...travel} />
+  ));
+
   return (
     <div className="userdashboard">
       <h2>Tableau de bord</h2>
       <div className="user-container">
-        <ProfileCard />
+        <ProfileCard user={user} />
       </div>
       <div className="userdashboard-travels">
         <div className="userdashboard-travels-header">
@@ -24,6 +28,7 @@ const UserDashboard = () => {
           </Link>
 
         </div>
+        {travelsList}
         <TravelCard />
         <TravelCard />
       </div>
@@ -31,12 +36,9 @@ const UserDashboard = () => {
   );
 };
 
-// LoginForm.propTypes = {
-
-// };
-
-// LoginForm.defaultProps = {
-
-// };
+UserDashboard.propTypes = {
+  user: PropTypes.object.isRequired,
+  travels: PropTypes.array.isRequired,
+};
 
 export default UserDashboard;

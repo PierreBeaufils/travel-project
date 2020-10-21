@@ -1,10 +1,13 @@
 import React from 'react';
-import { PlusCircle, CheckSquare, Trash2 } from 'react-feather';
+import {
+  Map, CheckSquare, Trash2, Calendar, Info,
+} from 'react-feather';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
-const CardTransport = () => {
+const CardTransport = (oneTransport) => {
   const test = 'test';
+  const transformDateISOtoString = (ISOdate) => new Date(ISOdate).toLocaleString('fr-FR', { timeZone: 'UTC' });
 
   const handleAddThingCLick = (ClickedCategoryName) => { // gere le click sur bouton + d'ajouter une chose à la catégorie
     console.log('Click sur ajout d\'une chose à la categorie', ClickedCategoryName);
@@ -20,16 +23,19 @@ const CardTransport = () => {
   };
 
   return (
-    <div className="cards__container">
+    <div className="card__container">
       <div className="card">
         <div
           className="card__text"
           onClick={() => handleTextCardCLick('1')}
         >
-          <h3>Séjour à l'établisement Hotel machin</h3>
-          <h4>Lieu Ville De machin</h4>
-          <h4>Du 01/01/2002 au 02/05/2020</h4>
-          <p>Mémo: feffzef efezffeezf ezfezf ezfezf ezfez fezfe fe f ezf ezfezf exsx</p>
+          <h3><Map size={32} className="travel-menu-logo" /> Trajet de {oneTransport.from} à {oneTransport.to}</h3>
+          <h4>Moyen de transport: {oneTransport.type}</h4>
+          <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneTransport.departure_date)} au
+            {transformDateISOtoString(oneTransport.arrival_date)}
+          </h4>
+
+          <p><Info color="#2B7AFD" size={15} /> {oneTransport.memo}</p>
         </div>
         <div className="card__footer">
           <CheckSquare

@@ -10,11 +10,11 @@ import Mentions from 'src/components/Mentions';
 import Contact from 'src/components/Contact';
 import About from 'src/components/About';
 import LoginForm from 'src/containers/LoginForm';
-import RegisterForm from 'src/components/RegisterForm';
+import RegisterForm from 'src/containers/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
-import CreateTravelForm from 'src/components/CreateTravelForm';
-import UserDashboard from 'src/components/UserDashboard';
+import TravelForm from 'src/containers/TravelForm';
+import UserDashboard from 'src/containers/UserDashboard';
 import Travel from 'src/components/Travel';
 import ThingsEdit from 'src/components/ThingsEdit';
 
@@ -43,10 +43,12 @@ const App = ({ loggedIn }) => (
     <Navbar />
     <Switch>
       <Route path="/" exact component={Homepage} />
-      <Route path="/connexion" component={LoginForm}>
+      <Route exact path="/connexion">
         {loggedIn ? <Redirect to="/tableau-de-bord" /> : <LoginForm />}
       </Route>
-      <Route path="/inscription" component={RegisterForm} />
+      <Route exact path="/inscription">
+        {loggedIn ? <Redirect to="/tableau-de-bord" /> : <RegisterForm />}
+      </Route>
       <Route path="/mentions-legales" component={Mentions} />
       <Route path="/contact" component={Contact} />
       <Route path="/a-propos" component={About} />
@@ -56,7 +58,7 @@ const App = ({ loggedIn }) => (
           <UserProfile {...props} dataUser={dataUserTest} />
         )}
       />
-      <Route path="/creer-un-voyage" component={CreateTravelForm} />
+      <Route path="/creer-un-voyage" component={TravelForm} />
       <Route path="/tableau-de-bord" component={UserDashboard} />
       <Route path="/voyage/:id" component={Travel} />
       <Route path="/modifiervoyage/:id" component={ThingsEdit} />
