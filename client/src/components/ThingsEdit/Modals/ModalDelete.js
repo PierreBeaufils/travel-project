@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 // import PropTypes from 'prop-types';
-import './styles.scss';
+import '.././styles.scss';
 
-const ModalAddTransport = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
+const ModalDelete = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
   <>
     <div className="modal-overlay" />
     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
@@ -14,9 +14,8 @@ const ModalAddTransport = ({ isShowing, hide }) => (isShowing ? ReactDOM.createP
           <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
             <span aria-hidden="true"><XSquare
               color="#FF7A32"
-            />
-            </span>
-
+            /></span>
+            
           </button>
         </div>
         <div className="modal_content">
@@ -24,7 +23,7 @@ const ModalAddTransport = ({ isShowing, hide }) => (isShowing ? ReactDOM.createP
             color="#FF7A32"
           />
           <p>
-            ICI MODALE AJOUT TRANSPORT
+            Confirmez vous la suppression ?
           </p>
           <div className="modal_buttons_container">
             <div
@@ -51,12 +50,12 @@ const ModalAddTransport = ({ isShowing, hide }) => (isShowing ? ReactDOM.createP
   </>, document.body,
 ) : null);
 
-// ModalAddAccomodation.propTypes = {
+// ModalDelete.propTypes = {
 
 // };
 
-// ModalAddAccomodation.defaultProps = {
+// ModalDelete.defaultProps = {
 
 // };
 
-export default ModalAddTransport;
+export default ModalDelete;

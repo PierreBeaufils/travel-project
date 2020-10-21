@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 // import PropTypes from 'prop-types';
-import './styles.scss';
+import '.././styles.scss';
 
-const ModalAddAccomodation = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
+const ModalAddTransport = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
   <>
     <div className="modal-overlay" />
     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
@@ -24,7 +24,7 @@ const ModalAddAccomodation = ({ isShowing, hide }) => (isShowing ? ReactDOM.crea
             color="#FF7A32"
           />
           <p>
-            ICI MODALE AJOUT HEBERGEMENT
+            ICI MODALE AJOUT TRANSPORT
           </p>
           <div className="modal_buttons_container">
             <div
@@ -59,4 +59,4 @@ const ModalAddAccomodation = ({ isShowing, hide }) => (isShowing ? ReactDOM.crea
 
 // };
 
-export default ModalAddAccomodation;
+export default ModalAddTransport;

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 // import PropTypes from 'prop-types';
-import './styles.scss';
+import '.././styles.scss';
 
-const ModalCardDescription = ({ isShowing, hide, data }) => (isShowing ? ReactDOM.createPortal(
+const ModalAddAccomodation = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
   <>
     <div className="modal-overlay" />
     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
@@ -24,7 +24,7 @@ const ModalCardDescription = ({ isShowing, hide, data }) => (isShowing ? ReactDO
             color="#FF7A32"
           />
           <p>
-            {data}
+            ICI MODALE AJOUT HEBERGEMENT
           </p>
           <div className="modal_buttons_container">
             <div
@@ -51,12 +51,12 @@ const ModalCardDescription = ({ isShowing, hide, data }) => (isShowing ? ReactDO
   </>, document.body,
 ) : null);
 
-// ModalDelete.propTypes = {
+// ModalAddAccomodation.propTypes = {
 
 // };
 
-// ModalDelete.defaultProps = {
+// ModalAddAccomodation.defaultProps = {
 
 // };
 
-export default ModalCardDescription;
+export default ModalAddAccomodation;

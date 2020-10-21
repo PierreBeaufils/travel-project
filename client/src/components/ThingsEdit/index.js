@@ -3,9 +3,9 @@ import { PlusCircle, CheckSquare, Trash2 } from 'react-feather';
 import CategoryFrame from './CategoryFrame';
 
 import useModal from './useModal';
-import ModalAddAccomodation from './ModalAddAccomodation';
-import ModalAddTransport from './ModalAddTransport';
-import ModalAddActivity from './ModalAddActivity';
+import ModalAddAccomodation from './Modals/ModalAddAccomodation';
+import ModalAddTransport from './Modals/ModalAddTransport';
+import ModalAddActivity from './Modals/ModalAddActivity';
 
 import data from './data.json';
 // import PropTypes from 'prop-types';

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 // import PropTypes from 'prop-types';
-import './styles.scss';
+import '.././styles.scss';
 
-const ModalDelete = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
+const ModalAddActivity = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
   <>
     <div className="modal-overlay" />
     <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
@@ -14,8 +14,9 @@ const ModalDelete = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
           <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
             <span aria-hidden="true"><XSquare
               color="#FF7A32"
-            /></span>
-            
+            />
+            </span>
+
           </button>
         </div>
         <div className="modal_content">
@@ -23,7 +24,7 @@ const ModalDelete = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
             color="#FF7A32"
           />
           <p>
-            Confirmez vous la suppression ?
+            ICI MODALE AJOUT ACTIVITES
           </p>
           <div className="modal_buttons_container">
             <div
@@ -50,12 +51,12 @@ const ModalDelete = ({ isShowing, hide }) => (isShowing ? ReactDOM.createPortal(
   </>, document.body,
 ) : null);
 
-// ModalDelete.propTypes = {
+// ModalAddAccomodation.propTypes = {
 
 // };
 
-// ModalDelete.defaultProps = {
+// ModalAddAccomodation.defaultProps = {
 
 // };
 
-export default ModalDelete;
+export default ModalAddActivity;

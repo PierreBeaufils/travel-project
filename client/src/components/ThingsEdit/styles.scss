@@ -100,11 +100,21 @@
   background-color: white;
 }
 .modal_content {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
+  &-main {
+    h4 {
+      padding: 1rem;
+    }
+    h3 {
+      align-self: center;
+    }
+    
+  }
+}
+.modal_content > h4 {
+  padding: 0.5rem;
 }
 .modal_buttons_container {
   display: flex;
