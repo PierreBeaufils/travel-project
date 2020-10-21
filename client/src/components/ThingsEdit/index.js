@@ -6,6 +6,8 @@ import useModal from './useModal';
 import ModalAddAccomodation from './ModalAddAccomodation';
 import ModalAddTransport from './ModalAddTransport';
 import ModalAddActivity from './ModalAddActivity';
+
+import data from './data.json';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
@@ -56,16 +58,19 @@ const ThingsEdit = () => {
         categoryName="Hébergement"
         textButton="Ajouter un hébergement"
         handleAddThing={handleAddAccommodationCLick}
+        data={data.accomodation}
       />
       <CategoryFrame
         categoryName="Transport"
         textButton="Ajouter un Transport"
         handleAddThing={handleAddTransportCLick}
+        data={data.transport}
       />
       <CategoryFrame
         categoryName="Activité"
         textButton="Ajouter une Activité"
         handleAddThing={handleAddActivityCLick}
+        data={data.activity}
       />
     </div>
   );
