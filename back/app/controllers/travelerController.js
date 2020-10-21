@@ -48,6 +48,10 @@ const travelerController = {
 
     },
     
+    doContact: async (req, res) => {
+
+    },
+
     signupForm: (req, res) => {
 
     },
@@ -58,15 +62,36 @@ const travelerController = {
 
     logout: (req, res) => {
 
-    },
+    // allTravelers: async (req,res) => {
+    //     const travelers = await Traveler.findAll();
+    //     res.json(travelers);
+    // },
 
-    modifyProfile: (req, res) => {
+    
 
-    },
+    // editTraveler: async (req, res) => {
+    //     const traveler = await Traveler.findOne(req.params.id);
 
-    doContact: (req, res) => {
+    //     const travelerToEdit = new Traveler(traveler);
 
-    }
-};
+    //     if (travelerToEdit) {
+    //         travelerToEdit.update(req.body);
+    //         await travelerToEdit.save();
+    //         res.json(travelerToEdit)
+    //     }
+    // }, 
+
+    // deleteTraveler: async (req,res)=> {
+    //     const traveler = await Traveler.findOne(req.params.id);
+    //     // console.log(traveler.id);
+    //     if (traveler) {
+    //         const travelerToDelete = new Traveler(traveler);
+    //         await travelerToDelete.delete();
+    //         res.json ('suppression effectuée');
+    //     } else {
+    //         res.json('Suppression impossible')
+    //     };
+    // }    
+} }
 
 module.exports = travelerController
