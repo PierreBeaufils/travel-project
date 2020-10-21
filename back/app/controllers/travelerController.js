@@ -37,7 +37,11 @@ const travelerController = {
 
     getOneTraveler: async (req, res) => {
         const foundTraveler = await Traveler.findOneTravelComponent(null ,req.params.id);
-        res.json(foundTraveler);
+        if (foundTraveler){
+            res.json(foundTraveler);
+        } else {
+            res.json('ce voyageur n\'existe pas') 
+        }
     },
 
 
