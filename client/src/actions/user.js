@@ -12,6 +12,7 @@ export const handleLogin = () => ({
   type: HANDLE_LOGIN,
 });
 
-export const saveUser = () => ({
+export const saveUser = (user) => ({
   type: SAVE_USER,
+  user,
 });
