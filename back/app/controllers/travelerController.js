@@ -40,27 +40,6 @@ const travelerController = {
         res.json(foundTraveler);
     },
 
-    loginForm: async(req, res) => {
-
-    },
-
-    doLogin: async (req, res) => {
-
-    },
-    
-    doContact: async (req, res) => {
-
-    },
-
-    signupForm: (req, res) => {
-
-    },
-
-    doSignup: async (req, res) => {
-
-    },
-
-    logout: (req, res) => {
 
     // allTravelers: async (req,res) => {
     //     const travelers = await Traveler.findAll();
@@ -92,6 +71,6 @@ const travelerController = {
     //         res.json('Suppression impossible')
     //     };
     // }    
-} }
+}
 
 module.exports = travelerController

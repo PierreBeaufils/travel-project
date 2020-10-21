@@ -47,7 +47,7 @@ class CoreModel {
             return component.rows[0];
         }
         else {
-        const component = await db.query(`SELECT * FROM ${this.constructor.tableName} WHERE id = $1 ;`, [componentId]);
+        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE id = $1 ;`, [componentId]);
         return component.rows[0];
     }
     }
@@ -82,7 +82,7 @@ class CoreModel {
             fieldValues.push(this.id);
             console.log(fieldValues);
             await db.query(`
-            UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1}
+            UPDATE ${this.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1}
             ;`
             , fieldValues);
         }
@@ -93,7 +93,7 @@ class CoreModel {
 
         else {
         await db.query(`
-            INSERT INTO ${this.constructor.tableName} (${fieldNames.join(", ")})
+            INSERT INTO ${this.tableName} (${fieldNames.join(", ")})
             VALUES (${fieldIndex.join(", ")})
             RETURNING id;`
             , fieldValues) ;}
