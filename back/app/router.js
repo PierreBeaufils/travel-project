@@ -26,12 +26,12 @@ router.post('/login', loginController.doLogin);
 // Formulaire de signup : affichage et traitement
 router.post('/signup', loginController.doSignup);
 // Déconnexion
-router.post('/logout', travelerController.logout);
+
 // Infos persos de l'utilisateur : affichage et traitement
 // router.get('/profile', travelerController.profile);
 // router.post('/profile', travelerController.modifyProfile);
 // page de contact (mail prérempli)
-router.post('/contact', travelerController.doContact);
+
 
 // router.get('/travel/id/travelers', travelerController.allTravelers);
 // Voir tout les travelers associé à un voyage
