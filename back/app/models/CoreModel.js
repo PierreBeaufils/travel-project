@@ -33,11 +33,13 @@ class CoreModel {
     // }
 
     static async findAllTravelComponent(travelId){
-        console.log(this.tableName);
-        console.log(travelId);
-
-        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
-        return component.rows;
+        if (travelId) {
+            const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
+            return component.rows;
+        } else {
+            const component = await db.query(`SELECT * FROM ${this.tableName} ORDER BY id ASC`);
+            return component.rows;
+        }
     }
 
     static async findOneTravelComponent(travelId,componentId){
@@ -82,21 +84,21 @@ class CoreModel {
             fieldValues.push(this.id);
             console.log(fieldValues);
             await db.query(`
-            UPDATE ${this.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1}
+            UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1}
             ;`
             , fieldValues);
         }
 
 
 
-        
+         
 
         else {
         await db.query(`
-            INSERT INTO ${this.tableName} (${fieldNames.join(", ")})
+            INSERT INTO ${this.constructor.tableName} (${fieldNames.join(", ")})
             VALUES (${fieldIndex.join(", ")})
             RETURNING id;`
-            , fieldValues) ;}
+            , fieldValues) ;} 
 
     }
 
