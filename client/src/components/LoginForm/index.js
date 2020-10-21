@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const LoginForm = ({ email, password, changeField, handleLogin }) => {
+const LoginForm = ({ email, password, changeFieldValue, handleLogin }) => {
   const handleChange = (event) => {
-    changeField(event.target.name, event.target.value);
+    changeFieldValue('login', event.target.name, event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -36,7 +36,7 @@ const LoginForm = ({ email, password, changeField, handleLogin }) => {
 LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  changeField: PropTypes.func.isRequired,
+  changeFieldValue: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
 };
 

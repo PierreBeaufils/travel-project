@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import UserDashboard from 'src/components/UserDashboard/';
 
 const mapStateToProps = (state) => ({
-  user: state.user.infos,
+  user: state.user.session,
   travels: state.travels.travels,
 });
 

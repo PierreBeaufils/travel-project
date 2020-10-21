@@ -16,7 +16,7 @@ const CategoryFrame = ({
 
     <div className="category-container">
       <div className="headerWithAddThingMenu">
-        <h2>{categoryName}</h2>
+        <h2>{categoryName}s</h2>
         <div
           className="create--button"
           onClick={() => handleAddThing()}

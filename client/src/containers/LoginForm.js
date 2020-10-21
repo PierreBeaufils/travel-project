@@ -3,13 +3,13 @@ import LoginForm from 'src/components/LoginForm';
 import { changeFieldValue, handleLogin } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
-  password: state.user.password,
+  email: state.user.login.email,
+  password: state.user.login.password,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeField: (name, value) => {
-    dispatch(changeFieldValue(name, value));
+  changeFieldValue: (section, field, value) => {
+    dispatch(changeFieldValue(section, field, value));
   },
   handleLogin: () => {
     dispatch(handleLogin());
