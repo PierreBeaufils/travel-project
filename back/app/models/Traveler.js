@@ -11,7 +11,10 @@ class Traveler extends CoreModel {
             this[prop] = data[prop];
         }
     }
-
+    static async findByEmail(email) {
+        const user = await db.query ('SELECT * FROM traveler WHERE email=$1', [email]);
+        return user.rows[0];
+    }
     
 }
 

@@ -3,8 +3,16 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const session = require('express-session');
+
 
 const app = express();
+app.use(session({
+    secret: 'keyboard cat',
+    resave:false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 const port = process.env.PORT || 5555;
 

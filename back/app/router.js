@@ -2,6 +2,7 @@
  const travelerController = require('./controllers/travelerController');
  const adminController = require('./controllers/adminController');
  const travelController = require('./controllers/travelController');
+ const loginController = require ('./controllers/loginController');
 
 const { Router } = require('express');
 
@@ -13,12 +14,17 @@ const router = Router();
 // router.get('/test1',mainController.test3);
 // router.get('/test2',mainController.test2);
 
+router.get('/travelers', travelerController.allTravelers);
+router.get('/travelers/:id', travelerController.getOneTraveler);
+router.post('/travelers', travelerController.newTraveler);
+router.patch('/travelers/:id', travelerController.editTraveler);
+router.delete('/travelers/:id', travelerController.deleteTraveler);
+
+
 // Formulaire de login : affichage et traitement
-router.get('/login', travelerController.loginForm);
-router.post('/login', travelerController.doLogin);
+router.post('/login', loginController.doLogin);
 // Formulaire de signup : affichage et traitement
-router.get('/signup', travelerController.signupForm);
-router.post('/signup', travelerController.doSignup);
+router.post('/signup', loginController.doSignup);
 // Déconnexion
 router.post('/logout', travelerController.logout);
 // Infos persos de l'utilisateur : affichage et traitement
