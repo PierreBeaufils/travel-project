@@ -13,8 +13,8 @@ import LoginForm from 'src/containers/LoginForm';
 import RegisterForm from 'src/components/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
-import CreateTravelForm from 'src/components/CreateTravelForm';
-import UserDashboard from 'src/components/UserDashboard';
+import TravelForm from 'src/containers/TravelForm';
+import UserDashboard from 'src/containers/UserDashboard';
 import Travel from 'src/components/Travel';
 import ThingsEdit from 'src/components/ThingsEdit';
 
@@ -56,7 +56,7 @@ const App = ({ loggedIn }) => (
           <UserProfile {...props} dataUser={dataUserTest} />
         )}
       />
-      <Route path="/creer-un-voyage" component={CreateTravelForm} />
+      <Route path="/creer-un-voyage" component={TravelForm} />
       <Route path="/tableau-de-bord" component={UserDashboard} />
       <Route path="/voyage/:id" component={Travel} />
       <Route path="/modifiervoyage/:id" component={ThingsEdit} />

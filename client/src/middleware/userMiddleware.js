@@ -7,11 +7,11 @@ import axios from 'axios';
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case HANDLE_LOGIN:
-      store.dispatch(saveUser());
-      /* Get the user state from the store and post request to the server
-      const state = store.getState();
-      const { email, password } = state.user;
-      axios.post(`${baseURL}/login`, { email, password }, { withCredentials: true })
+      // const state = store.getState();
+      // const { email, password } = state.user;
+      // axios.post(`${baseURL}/login`, { email, password }, { withCredentials: true })
+      console.log('action handlelogin');
+      axios.get(`${baseURL}/travelers/5`)
         .then((response) => {
           store.dispatch(saveUser(response.data));
           console.log(response.data);
@@ -20,7 +20,6 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((e) => {
           console.error(e);
         });
-        */
       break;
     default:
       next(action);
