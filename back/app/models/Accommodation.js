@@ -1,7 +1,7 @@
 const db = require('../database');
 const CoreModel = require("./CoreModel");
 
-class Accomodation extends CoreModel {
+class Accommodation extends CoreModel {
 
         static tableName = 'accommodation';
 
@@ -14,7 +14,7 @@ class Accomodation extends CoreModel {
 
     // static async findAllOfTravel(travelId){
     //     const accomodations = await db.query('SELECT * FROM accomodation WHERE travel_id = $1 ;', [travelId]);
-    //     return accomodations.rows;
+    //     return s.rows;
     // }
 
     // update(data){
@@ -27,7 +27,7 @@ class Accomodation extends CoreModel {
     // async save() {
     //     if (this.id) {
     //         await db.query (`
-    //         UPDATE accomodation SET
+    //         UPDATE  SET
     //         "name"=$1,"adress"=$2,"city"=$3,"coordinate"=$4,"information"=$5,"availability"=$6,"arrival_date"=$7,"departure_date"=$8,"unit_price"=$9,"quantity"=$10,"travel_id"=$11 WHERE id= $12 ;
     //         `, [
     //             this.name,
@@ -45,7 +45,7 @@ class Accomodation extends CoreModel {
     //         ]);
     //     } else {
     //         await db.query(`
-    //         INSERT INTO accomodation ("name","adress","city","coordinate","information","availability","arrival_date","departure_date","unit_price","quantity","travel_id")
+    //         INSERT INTO  ("name","adress","city","coordinate","information","availability","arrival_date","departure_date","unit_price","quantity","travel_id")
     //         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     //         RETURNING id;`
     //         , [
@@ -68,4 +68,4 @@ class Accomodation extends CoreModel {
     
 }
 
-module.exports = Accomodation;
+module.exports = Accommodation;

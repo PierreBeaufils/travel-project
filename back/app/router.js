@@ -52,10 +52,10 @@ router.patch('/travel/:id', travelController.editTravel);
 router.delete('/travel/:id', travelController.delete);
 
 // infos liées à l'hébergement d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/accomodation', travelController.showAccomodations) ;
-router.post('/travel/:id/accomodation', travelController.createAccomodation);
-router.patch('/travel/:id/accomodation/:accoId', travelController.editAccomodation);
-// router.delete('/travel/:id/accomodation', travelController)
+router.get('/travel/:id/accommodation', travelController.showAccommodations) ;
+router.post('/travel/:id/accommodation', travelController.createAccommodation);
+router.patch('/travel/:id/accommodation/:accoId', travelController.editAccommodation);
+// router.delete('/travel/:id/accommodation', travelController)
 
 // infos liées aux activités d'un voyage : affichage, insertion, modification suppression 
 router.get('/travel/:id/activity', travelController.showActivity) ;
@@ -84,6 +84,6 @@ router.delete('/travel/:id/:entity/:entityId', travelController.deleteEntity);
 // Routes optionnelles
 // '/travel/:id/activity/:id'
 // '/travel/:id/transport/:id'
-// '/travel/:id/accomodation/:id'
+// '/travel/:id/accommodation/:id'
 
 module.exports = router;
