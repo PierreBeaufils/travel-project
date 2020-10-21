@@ -1,9 +1,26 @@
-GET http://localhost:3000/v1/travel/3
+//////////////////////////////////////////// ROUTES DE TRAVEL ////////////////////////////////////////////////////
+GET http://localhost:3000/v1/travels
+###
+GET http://localhost:3000/v1/travel/34
+###
+POST http://localhost:3000/v1/create-travel
+Content-Type: application/json
+
+{
+    "title": "TEST 3", 
+    "destination": "Czech Republic", 
+    "departure_date": "2020-06-21 20:17:03", 
+    "return_date": "2020-08-30 22:38:58", 
+    "price": "220.47", 
+    "owner": "5"
+}
 ###
 PATCH  http://localhost:3000/v1/travel/3
 ###
 DELETE http://localhost:3000/v1/travel/3
 ###
+
+//////////////////////////////////// ROUTES DE TRAVEL VERS ACCOMODATION///////////////////////////////////////////
 
 GET http://localhost:3000/v1/travel/3/accomodation
 ###
@@ -35,40 +52,87 @@ Content-Type: application/json
    "travel_id": "3"
 }
 ###
-
-GET http://localhost:3000/v1/travel/3/activity
+DELETE http://localhost:3000/v1/travel/3/accomodation/32
 ###
-POST http://localhost:3000/v1/travel/3/activity
+
+/////////////////////////////////////// ROUTES DE TRAVEL VERS ACTIVITY//////////////////////////////////////////////
+
+GET http://localhost:3000/v1/travel/4/activity
+###
+POST http://localhost:3000/v1/travel/4/activity
 Content-Type: application/json
 
 {
+    "name": "Activité TEST",
+    "topic": "Services",
+    "place": "886 Surrey Lane",
+    "duration": "35 minute",
+    "description": "Operative composite productivity",
+    "date": "2020-11-16T10:58:36.000Z",
+    "unit_price": "85.99",
+    "quantity": 4,
+    "travel_id": 4
+}
+###
+PATCH http://localhost:3000/v1/travel/4/activity/33
+Content-Type: application/json
+
+{
+    "name": "Activité TEST",
+    "topic": "TEST",
+    "place": "886 Surrey Lane",
+    "duration": "35 minute",
+    "description": "Operative composite productivity",
+    "date": "2020-11-16T10:58:36.000Z",
+    "unit_price": "85.99",
+    "quantity": 4,
+    "travel_id": 4
+}
+###
+DELETE http://localhost:3000/v1/travel/4/activity/34
+###
+
+/////////////////////////////////////// ROUTES DE TRAVEL VERS TRANSPORT//////////////////////////////////////////////
+
+GET http://localhost:3000/v1/travel/1/transport
+###
+POST http://localhost:3000/v1/travel/1/transport
+Content-Type: application/json
+
+  {
     "type": "TEST",
-    "company": "Wikizz",
-    "from": "Matalam",
-    "to": "Néa Flogitá",
-    "departure_date": "2020-06-08T03:53:23.000Z",
-    "arrival_date": "2020-10-08T18:20:00.000Z",
-    "reservation_ref": "1461",
+    "company": "Agivu",
+    "from": "Boavista",
+    "to": "Falun",
+    "departure_date": "2020-03-08T09:09:44.000Z",
+    "arrival_date": "2020-05-14T16:56:15.000Z",
+    "reservation_ref": "2657",
     "unit_price": "0",
-    "quantity": 1,
-    "memo": "flexibility",
-    "travel_id": 3
-}
+    "quantity": 8,
+    "memo": "Reactive",
+    "travel_id": 1
+  }
 ###
-PATCH http://localhost:3000/v1/travel/3/activity/32
+PATCH http://localhost:3000/v1/travel/1/transport/31
 Content-Type: application/json
 
-{
-   "adress": "000 Hovde Junction",
-   "city": "Hayama",
-   "coordinate": "38.1483676,39.1483676",
-   "arrival_date": "2020-05-13 14:23:08",
-   "departure_date": "2020-12-03 00:04:24",
-   "unit_price": "58.05",
-   "quantity": "7",
-   "travel_id": "3"
-}
+  {
+    "type": "TEST PATCH 1",
+    "company": "Agivu",
+    "from": "Boavista",
+    "to": "Falun",
+    "departure_date": "2020-03-08T09:09:44.000Z",
+    "arrival_date": "2020-05-14T16:56:15.000Z",
+    "reservation_ref": "2657",
+    "unit_price": "0",
+    "quantity": 8,
+    "memo": "Reactive",
+    "travel_id": 1
+  }
+###
+DELETE http://localhost:3000/v1/travel/1/transport/31
 ###
 
-POST http://localhost:3000/v1/create-travel
-Content-Type: application/json
+////////////////////////////////////////// ROUTES DE TRAVEL VERS TASK////////////////////////////////////////////////
+
+
