@@ -4,6 +4,8 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const session = require('express-session');
+const multer = require('multer');
+const bodyParser = multer();
 
 
 const app = express();
@@ -28,6 +30,7 @@ next();
   
 
 app.use(express.json());
+app.use(bodyParser.none());
 app.use('/v1', router);
 
 app.launch = () => {
