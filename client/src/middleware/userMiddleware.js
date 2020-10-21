@@ -11,7 +11,7 @@ const userMiddleware = (store) => (next) => (action) => {
       // const { email, password } = state.user;
       // axios.post(`${baseURL}/login`, { email, password }, { withCredentials: true })
       console.log('action handlelogin');
-      axios.get(`${baseURL}/v1/travelers/5`)
+      axios.get(`${baseURL}/travelers/5`)
         .then((response) => {
           store.dispatch(saveUser(response.data));
           console.log(response.data);
