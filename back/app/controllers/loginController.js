@@ -3,6 +3,7 @@ const bcrypt = require ('bcrypt');
 
 const loginController = {
     doLogin: async (req, res) => {
+        console.log(req.body);
         const user = await Traveler.findByEmail(req.body.email)
         if (!user){
             res.json('utilisateur introuvable');
@@ -31,6 +32,7 @@ const loginController = {
     },
 
     doSignup: async (req, res) => {
+        console.log(req.body);
         const user = await Traveler.findByEmail(req.body.email)
         if (user) {
             res.json ('cette adresse email existe déjà');
