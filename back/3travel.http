@@ -1,0 +1,74 @@
+GET http://localhost:3000/v1/travel/3
+###
+PATCH  http://localhost:3000/v1/travel/3
+###
+DELETE http://localhost:3000/v1/travel/3
+###
+
+GET http://localhost:3000/v1/travel/3/accomodation
+###
+POST http://localhost:3000/v1/travel/3/accomodation
+Content-Type: application/json
+
+{
+   "adress": "028 Hovde Junction",
+   "city": "Hayama",
+   "coordinate": "38.1483676,39.1483676",
+   "arrival_date": "2020-05-13 14:23:08",
+   "departure_date": "2020-12-03 00:04:24",
+   "unit_price": "58.05",
+   "quantity": "7",
+   "travel_id": "3"
+}
+###
+PATCH http://localhost:3000/v1/travel/3/accomodation/32
+Content-Type: application/json
+
+{
+   "adress": "000 Hovde Junction",
+   "city": "Hayama",
+   "coordinate": "38.1483676,39.1483676",
+   "arrival_date": "2020-05-13 14:23:08",
+   "departure_date": "2020-12-03 00:04:24",
+   "unit_price": "58.05",
+   "quantity": "7",
+   "travel_id": "3"
+}
+###
+
+GET http://localhost:3000/v1/travel/3/activity
+###
+POST http://localhost:3000/v1/travel/3/activity
+Content-Type: application/json
+
+{
+    "type": "TEST",
+    "company": "Wikizz",
+    "from": "Matalam",
+    "to": "Néa Flogitá",
+    "departure_date": "2020-06-08T03:53:23.000Z",
+    "arrival_date": "2020-10-08T18:20:00.000Z",
+    "reservation_ref": "1461",
+    "unit_price": "0",
+    "quantity": 1,
+    "memo": "flexibility",
+    "travel_id": 3
+}
+###
+PATCH http://localhost:3000/v1/travel/3/activity/32
+Content-Type: application/json
+
+{
+   "adress": "000 Hovde Junction",
+   "city": "Hayama",
+   "coordinate": "38.1483676,39.1483676",
+   "arrival_date": "2020-05-13 14:23:08",
+   "departure_date": "2020-12-03 00:04:24",
+   "unit_price": "58.05",
+   "quantity": "7",
+   "travel_id": "3"
+}
+###
+
+POST http://localhost:3000/v1/create-travel
+Content-Type: application/json

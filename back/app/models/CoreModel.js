@@ -1,7 +1,6 @@
 const db = require('../database');
 
 class CoreModel {
-
     _id;
     // _travel_id
 
@@ -33,7 +32,7 @@ class CoreModel {
     // }
 
     static async findAllTravelComponent(travelId){
-        if (travelId) {
+        if (travelId) { 
             const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
             return component.rows;
         } else {
@@ -44,14 +43,16 @@ class CoreModel {
 
     static async findOneTravelComponent(travelId,componentId){
         if (travelId) {
-            console.log(`SELECT * FROM ${this.tableName} WHERE travel_id = ${travelId} id = ${componentId} ;`)
+            // console.log(`SELECT * FROM ${this.tableName} WHERE travel_id = ${travelId} id = ${componentId} ;`)
             const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 AND id = $2 ;`, [travelId ,componentId]);
-            return component.rows[0];
+
+            return component.rows[0]; 
         }
         else {
-        const component = await db.query(`SELECT * FROM ${this.tableName} WHERE id = $1 ;`, [componentId]);
-        return component.rows[0];
-    }
+            const component = await db.query(`SELECT * FROM ${this.tableName} WHERE id = $1 ;`, [componentId]);
+
+            return component.rows[0]; 
+        }
     }
 
     update(data){
@@ -60,45 +61,41 @@ class CoreModel {
         }
     }
 
-    async saveAllTravelComponent(){
+    async saveAllTravelComponent(){ 
         const fieldNames = [];
         const fieldIndex = [];
         const fieldValues = [];
         const fieldConcat = [];
 
-        let index = 1 ;
+        let index = 1 ; 
 
         for (let fieldName in this) {
             if (fieldName === "_id") {
                 continue;
             }
+            
             fieldNames.push(`"${fieldName}"`);
             fieldValues.push(this[fieldName]);
             fieldIndex.push("$" + index);
             fieldConcat.push(fieldNames[index-1] + " = " + fieldIndex[index-1]);
             index ++;
-        }
-        
+        };        
 
         if (this.id) {
             fieldValues.push(this.id);
-            console.log(fieldValues);
+            // console.log(fieldValues);
             await db.query(`
-            UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1}
-            ;`
+            UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1};`
             , fieldValues);
-        }
-
-
-
-         
+        }         
 
         else {
-        await db.query(`
+            await db.query(`
             INSERT INTO ${this.constructor.tableName} (${fieldNames.join(", ")})
             VALUES (${fieldIndex.join(", ")})
             RETURNING id;`
-            , fieldValues) ;} 
+            , fieldValues) ;
+        } 
 
     }
 
@@ -113,7 +110,7 @@ class CoreModel {
     }
 
     async delete() {
-        console.log(`DELETE FROM ${this.constructor.tableName} WHERE id = ${this.id} ;`)
+        // console.log(`DELETE FROM ${this.constructor.tableName} WHERE id = ${this.id} ;`)
         await db.query(`DELETE FROM ${this.constructor.tableName} WHERE id = $1 ;`, [this.id]);
     }
 }

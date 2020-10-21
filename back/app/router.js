@@ -15,10 +15,10 @@ const router = Router();
 // router.get('/test2',mainController.test2);
 
 router.get('/travelers', travelerController.allTravelers);
-router.get('/travelers/:id', travelerController.getOneTraveler);
-router.post('/travelers', travelerController.newTraveler);
-router.patch('/travelers/:id', travelerController.editTraveler);
-router.delete('/travelers/:id', travelerController.deleteTraveler);
+router.get('/traveler/:id', travelerController.getOneTraveler);
+router.post('/traveler', travelerController.newTraveler);
+router.patch('/traveler/:id', travelerController.editTraveler);
+router.delete('/traveler/:id', travelerController.deleteTraveler);
 
 
 // Formulaire de login : affichage et traitement
@@ -35,14 +35,6 @@ router.post('/signup', loginController.doSignup);
 
 // router.get('/travel/id/travelers', travelerController.allTravelers);
 // Voir tout les travelers associé à un voyage
-
-
-router.get("/travelers/:id", travelerController.getOneTraveler);
-router.post('/travelers', travelerController.newTraveler);
-router.patch('/travelers/:id', travelerController.editTraveler);
-
-
-router.delete('/travelers/:id', travelerController.deleteTraveler);
 
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès

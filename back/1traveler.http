@@ -1,13 +1,13 @@
 GET http://localhost:3000/v1/travelers
 ###
-GET http://localhost:3000/v1/travelers/43
+GET http://localhost:3000/v1/traveler/53
 ###
-POST http://localhost:3000/v1/travelers
+POST http://localhost:3000/v1/traveler
 Content-Type: application/json
-
+ 
 {
-  "first_name": "S",
-  "last_name": "B",
+  "first_name": "AAAA",
+  "last_name": "AAAAAAAAA",
   "role": "traveler",
   "gender": "male",
   "dob": "1967-12-31T23:00:00.000Z",
@@ -22,12 +22,12 @@ Content-Type: application/json
   "expiration_date": null
 }
 ###
-PATCH  http://localhost:3000/v1/travelers/43
+PATCH  http://localhost:3000/v1/traveler/55
 Content-Type: application/json
 
 {
-  "first_name": "S",
-  "last_name": "B",
+  "first_name": "BBBBBB",
+  "last_name": "BBBBBB",
   "role": "traveler",
   "gender": "male",
   "dob": "1967-12-31T23:00:00.000Z",
@@ -42,4 +42,4 @@ Content-Type: application/json
   "expiration_date": null
 }
 ###
-DELETE http://localhost:3000/v1/travelers/49
+DELETE http://localhost:3000/v1/traveler/55
