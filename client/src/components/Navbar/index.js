@@ -29,16 +29,16 @@ const Navbar = ({ loggedIn }) => {
     if (!loggedIn) {
       return (
         <>
-          <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
-          <Link to="connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
           <Link to="inscription"><li className={toggleFade()} onClick={handleToggle}>Inscription</li></Link>
+          <Link to="connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
+          <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
         </>
       );
     }
     return (
       <>
-        <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
         <Link to="tableau-de-bord"><li className={toggleFade()} onClick={handleToggle}>Mon espace</li></Link>
+        <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
         <Link to="deconnexion"><li className={toggleFade()} onClick={handleToggle}>Déconnexion</li></Link>
       </>
     );
