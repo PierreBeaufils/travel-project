@@ -49,7 +49,7 @@ const ModalCardDescription = ({
                 <h4><Home color="#2B7AFD" size={15} /> Société de transport: {oneThingData.company}</h4>
                 <h4><LogOut color="#2B7AFD" size={15} /> Date et heure de départ: {transformDateISOtoString(oneThingData.departure_date)}</h4>
                 <h4><LogIn color="#2B7AFD" size={15} /> Date et heure d'arrivée: {transformDateISOtoString(oneThingData.arrival_date)}</h4>
-                <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} USD</h4>
+                <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} EUR</h4>
                 {(oneThingData.reservation_ref != null) ? <h4><FileText color="#2B7AFD" size={15} /> Réference de reservation: {oneThingData.reservation_ref}</h4> : null }
                 <h4><Users color="#2B7AFD" size={15} /> Nombre de voyageurs prévu: {oneThingData.quantity}</h4>
                 {(oneThingData.memo != null) ? <h4><Info color="#2B7AFD" size={15} /> {oneThingData.memo}</h4> : null }
@@ -63,6 +63,7 @@ const ModalCardDescription = ({
                 <h4><Calendar color="#2B7AFD" size={15} /> Date et heure: {transformDateISOtoString(oneThingData.date)}</h4>
                 <h4><Clock color="#2B7AFD" size={15} /> Durée prévue: {oneThingData.duration.minutes} minutes</h4>
                 <h4><Users color="#2B7AFD" size={15} /> Nombre de participants prévu: {oneThingData.quantity}</h4>
+                <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} EUR</h4>
                 <h4><Info color="#2B7AFD" size={15} /> {oneThingData.description}</h4>
               </div>
             ) : null }
