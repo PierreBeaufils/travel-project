@@ -1,7 +1,7 @@
 //////////////////////////////////////////// ROUTES DE TRAVEL ////////////////////////////////////////////////////
 GET http://localhost:3000/v1/travels
 ###
-GET http://localhost:3000/v1/travel/34
+GET http://localhost:3000/v1/travel/15
 ###
 POST http://localhost:3000/v1/create-travel
 Content-Type: application/json

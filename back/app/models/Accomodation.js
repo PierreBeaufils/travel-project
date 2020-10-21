@@ -3,7 +3,7 @@ const CoreModel = require("./CoreModel");
 
 class Accomodation extends CoreModel {
 
-        static tableName = 'accomodation';
+        static tableName = 'accommodation';
 
     constructor (data) {
         super(data);

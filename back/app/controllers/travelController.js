@@ -16,8 +16,8 @@ const travelController = {
     showAllInfos: async (req,res) => {
         const travelId = req.params.id;
         const travelinfos = {};
-        
-        travelinfos.accomodation = await Accommodation.findAllTravelComponent(travelId);
+        travelinfos.infos = await Travel.findOneTravelComponent(null,travelId);
+        travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
         travelinfos.activity = await Activity.findAllTravelComponent(travelId);
         travelinfos.transport = await Transport.findAllTravelComponent(travelId);
         res.json(travelinfos);

@@ -79,7 +79,7 @@ CREATE TABLE "transport" (
 
 );
 
-CREATE TABLE "accomodation" (
+CREATE TABLE "accommodation" (
     "id" INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY,
     "name" TEXT,
     "adress" TEXT,
