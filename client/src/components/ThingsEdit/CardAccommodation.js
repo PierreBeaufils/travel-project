@@ -1,14 +1,20 @@
 import React from 'react';
-import { PlusCircle, CheckSquare, Trash2 } from 'react-feather';
+import { MapPin, CheckSquare, Trash2, Calendar, Info } from 'react-feather';
 import ModalDelete from './ModalDelete';
 import ModalCardDescription from './ModalCardDescription';
 import useModal from './useModal';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
-const CardAccommodation = () => {
+const CardAccommodation = (oneAccomodation) => {
   const { isShowingModalDeleteCard, toggleModalDeleteCard } = useModal('ModalDeleteCard');
   const { isShowingModalCardDescription, toggleModalCardDescription } = useModal('ModalCardDescription');
+
+  const todayDateISOString = new Date('2020-05-13T12:23:08.000Z').toLocaleString('fr-FR', { timeZone: 'UTC' }); // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
+
+  const transformDateISOtoString = (ISOdate) => {
+    return new Date(ISOdate).toLocaleString('fr-FR', { timeZone: 'UTC' });
+  };
 
   const handleAddThingCLick = (ClickedCategoryName) => { // gere le click sur bouton + d'ajouter une chose à la catégorie
     console.log('Click sur ajout d\'une chose à la categorie', ClickedCategoryName);
@@ -27,7 +33,7 @@ const CardAccommodation = () => {
 
   return (
 
-    <div className="cards__container">
+    <div className="card__container">
       <ModalDelete
         isShowing={isShowingModalDeleteCard}
         hide={toggleModalDeleteCard}
@@ -42,10 +48,11 @@ const CardAccommodation = () => {
           className="card__text"
           onClick={() => handleTextCardCLick('ceci est ma target 1')}
         >
-          <h3>Séjour à l'établisement Hotel machin</h3>
-          <h4>Lieu Ville De machin</h4>
-          <h4>Du 01/01/2002 au 02/05/2020</h4>
-          <p>Mémo: feffzef efezffeezf ezfezf ezfezf ezfez fezfe fe f ezf ezfezf exsx</p>
+          <h3>Séjour à l'établisement {oneAccomodation.name}</h3>
+          <h4><MapPin color="#2B7AFD" size={15} /> {oneAccomodation.adress} {oneAccomodation.city}</h4>
+          <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneAccomodation.arrival_date)} au
+           {transformDateISOtoString(oneAccomodation.departure_date)}</h4>
+          <p><Info color="#2B7AFD" size={15} /> Mémo: feffzef efezffeezf ezfezf ezfezf ezfez fezfe fe f ezf ezfezf exsx</p>
         </div>
         <div className="card__footer">
           <CheckSquare
