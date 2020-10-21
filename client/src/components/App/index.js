@@ -10,7 +10,7 @@ import Mentions from 'src/components/Mentions';
 import Contact from 'src/components/Contact';
 import About from 'src/components/About';
 import LoginForm from 'src/containers/LoginForm';
-import RegisterForm from 'src/components/RegisterForm';
+import RegisterForm from 'src/containers/RegisterForm';
 import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
 import TravelForm from 'src/containers/TravelForm';
@@ -43,10 +43,12 @@ const App = ({ loggedIn }) => (
     <Navbar />
     <Switch>
       <Route path="/" exact component={Homepage} />
-      <Route path="/connexion" component={LoginForm}>
+      <Route exact path="/connexion">
         {loggedIn ? <Redirect to="/tableau-de-bord" /> : <LoginForm />}
       </Route>
-      <Route path="/inscription" component={RegisterForm} />
+      <Route exact path="/inscription">
+        {loggedIn ? <Redirect to="/tableau-de-bord" /> : <RegisterForm />}
+      </Route>
       <Route path="/mentions-legales" component={Mentions} />
       <Route path="/contact" component={Contact} />
       <Route path="/a-propos" component={About} />
