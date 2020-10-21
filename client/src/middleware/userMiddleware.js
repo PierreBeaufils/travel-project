@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { HANDLE_SIGNUP, HANDLE_LOGIN, LOGOUT, saveUser } from 'src/actions/user';
+import { HANDLE_SIGNUP, HANDLE_LOGIN, LOGOUT, setError, saveUser } from 'src/actions/user';
 
 import { baseURL } from 'src/config';
 import axios from 'axios';
@@ -11,9 +11,14 @@ const userMiddleware = (store) => (next) => (action) => {
       console.log(signup);
       axios.post(`${baseURL}/signup`, signup)
         .then((response) => {
-          // store.dispatch(saveUser(response.data));
-          console.log(response.data);
-          next(action);
+          if (response.status !== 200) {
+            store.dispatch(setError(response.data));
+          }
+          else {
+            store.dispatch(saveUser(response.data));
+            store.dispatch(setError(null));
+            next(action);
+          }
         })
         .catch((e) => {
           console.error(e);
@@ -23,9 +28,14 @@ const userMiddleware = (store) => (next) => (action) => {
       const { login } = store.getState().user;
       axios.post(`${baseURL}/login`, login, { withCredentials: true })
         .then((response) => {
-          store.dispatch(saveUser(response.data));
-          console.log('connexion réussie');
-          next(action);
+          if (response.status !== 200) {
+            store.dispatch(setError(response.data));
+          }
+          else {
+            store.dispatch(saveUser(response.data));
+            store.dispatch(setError(null));
+            next(action);
+          }
         })
         .catch((e) => {
           console.error(e);

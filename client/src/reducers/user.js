@@ -1,11 +1,13 @@
-import { CHANGE_FIELD_VALUE, SAVE_USER } from 'src/actions/user';
+import { CHANGE_FIELD_VALUE, SAVE_USER, SET_ERROR } from 'src/actions/user';
 
 const initialState = {
   loggedIn: false,
   session: null,
+  error: null,
   login: {
     email: '',
     password: '',
+    remember: true,
   },
   signup: {
     email: '',
@@ -35,6 +37,11 @@ const user = (state = initialState, action = {}) => {
         ...state,
         loggedIn: true,
         session: action.user,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.error,
       };
     default:
       return state;
