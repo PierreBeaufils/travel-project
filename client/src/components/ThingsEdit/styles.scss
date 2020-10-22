@@ -133,6 +133,12 @@
     width: 40%;
   }
 }
+.validate_selection {
+  position: fixed;
+  bottom: 10vh;
+  z-index: 1;
+  right: 10vh;
+}
 @media (max-width: 500px) {
   .category-container {
     margin: 1rem auto;
@@ -170,5 +176,9 @@
       }
       
     }
+  }
+  .validate_selection {
+    bottom: 1vh;
+    right: 1vh;
   }
 }
