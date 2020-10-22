@@ -2,17 +2,17 @@ POST http://localhost:3000/v1/login
 Content-Type : application/json
 
 {
-  "email": "test2@email.com",
+  "email": "test5@email.com",
   "password": "0000"
 }
 ###
-POST http://localhost:3000/v1/login
+POST http://localhost:3000/v1/signup
 Content-Type : application/json
 
 {
-  "email": "test4@email.com",
-  "lastname": "toto",
-  "firstname": "titi",
+  "email": "test5@email.com",
+  "lastName": "toto",
+  "firstName": "titi",
   "password": "0000",
   "passwordConfirm": "0000"
 }

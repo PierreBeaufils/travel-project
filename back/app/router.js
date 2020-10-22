@@ -23,6 +23,8 @@ router.delete('/traveler/:id', travelerController.deleteTraveler);
 
 // Formulaire de login : affichage et traitement
 router.post('/login', loginController.doLogin);
+
+router.post('/isLogged', loginController.loginCheck);
 // Formulaire de signup : affichage et traitement
 router.post('/signup', loginController.doSignup);
 // Déconnexion
