@@ -15,8 +15,8 @@ const loginController = {
             } else {
                 req.session.user = {
                     id: user.id,
-                    firstName: user.first_name,
-                    lastName: user.last_name,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
                     email: user.email,
                     role: user.role
                 };
@@ -46,14 +46,14 @@ const loginController = {
             res.status(202).json('cette adresse email existe déjà');
             // res.json ('cette adresse email existe déjà');
         } else {
-            if (req.body.password !== req.body.passwordConfirm) {
+            if (req.body.password !== req.body.password_confirm) {
                 res.status(202).json('la confirmation du mot de passe est incorrecte');
             } else {
                 const hashPwd = bcrypt.hashSync(req.body.password, 10);
 
                 const newUser = new Traveler({
-                    first_name: req.body.firstName,
-                    last_name: req.body.lastName,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_Name,
                     email: req.body.email,
                     password: hashPwd,
                 });
