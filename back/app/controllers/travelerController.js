@@ -2,30 +2,39 @@ const Traveler = require('../models/Traveler')
 
 const travelerController = {
 
-    allTravelers: async (req,res) => {
+    allTravelers: async (req, res) => {
         const travelers = await Traveler.findAllTravelComponent();
         res.json(travelers);
     },
 
-    newTraveler: async (req,res)=> {
+    newTraveler: async (req, res) => {
         const newTraveler = new Traveler(req.body);
         await newTraveler.saveAllTravelComponent();
         res.json(newTraveler);
     },
 
-    editTraveler: async (req,res) => {        
-        const traveler = await Traveler.findOneTravelComponent(null ,req.params.id);
+    editTraveler: async (req, res) => {
+        const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
-        res.json(travelerToEdit);
+        req.session.user = {
+            id: travelerToEdit.id,
+            first_name: travelerToEdit.first_name,
+            last_name: travelerToEdit.last_name,
+            email: travelerToEdit.email,
+            role: travelerToEdit.role,
+        };
+        req.session.reload(function () {
+            res.status(200).json({ logged: true, session: req.session.user });
+        });
     },
 
-    deleteTraveler: async (req,res)=> {
-        const traveler = await Traveler.findOneTravelComponent(null,req.params.id);
+    deleteTraveler: async (req, res) => {
+        const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
         const travelerToDelete = new Traveler(traveler);
         await travelerToDelete.delete();
-        res.json ('suppression effectuée');
+        res.json('suppression effectuée');
 
         // if (!traveler) {
         //     res.json('voyageur introuvable');
@@ -36,11 +45,11 @@ const travelerController = {
     },
 
     getOneTraveler: async (req, res) => {
-        const foundTraveler = await Traveler.findOneTravelComponent(null ,req.params.id);
-        if (foundTraveler){
+        const foundTraveler = await Traveler.findOneTravelComponent(null, req.params.id);
+        if (foundTraveler) {
             res.json(foundTraveler);
         } else {
-            res.json('ce voyageur n\'existe pas') 
+            res.json('ce voyageur n\'existe pas')
         }
     },
 
@@ -50,7 +59,7 @@ const travelerController = {
     //     res.json(travelers);
     // },
 
-    
+
 
     // editTraveler: async (req, res) => {
     //     const traveler = await Traveler.findOne(req.params.id);
