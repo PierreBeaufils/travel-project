@@ -2,6 +2,7 @@
   "accomodation": [
     {
       "id": 1,
+      "selected": true,
       "name": null,
       "adress": "028 Hovde Junction",
       "city": "Hayama",
@@ -19,6 +20,7 @@
     },
     {
       "id": 16,
+      "selected": true,
       "name": null,
       "adress": "84 Florence Lane",
       "city": "Staroyur’yevo",
@@ -38,6 +40,7 @@
   "activity": [
     {
       "id": 1,
+      "selected": true,
       "name": "Mongoose, banded",
       "topic": "Services",
       "place": "43 Pennsylvania Alley",
@@ -53,6 +56,7 @@
     },
     {
       "id": 12,
+      "selected": true,
       "name": "Bird, secretary",
       "topic": "Training",
       "place": "422 Glendale Crossing",
@@ -68,6 +72,7 @@
     },
     {
       "id": 16,
+      "selected": true,
       "name": "Lizard, frilled",
       "topic": "Business Development",
       "place": "98 Glacier Hill Way",
@@ -83,6 +88,7 @@
     },
     {
       "id": 17,
+      "selected": true,
       "name": "Flamingo, greater",
       "topic": "Support",
       "place": "627 Lighthouse Bay Crossing",
@@ -100,6 +106,7 @@
   "transport": [
     {
       "id": 2,
+      "selected": true,
       "type": "Mitsubishi",
       "company": "Skyble",
       "from": "Pajung",
@@ -114,6 +121,7 @@
     },
     {
       "id": 11,
+      "selected": true,
       "type": "Mitsubishi",
       "company": "Thoughtstorm",
       "from": "Yarumal",
@@ -128,6 +136,7 @@
     },
     {
       "id": 23,
+      "selected": true,
       "type": "Mercury",
       "company": "Skimia",
       "from": "Tambo",
