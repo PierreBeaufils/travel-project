@@ -3,14 +3,21 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+
 const session = require('express-session');
 
-const app = express();
 app.use(session({
     secret: 'keyboard cat',
-    resave:false,
+    resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: {
+        httpOnly: true,
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24,
+    },
 }));
 
 const port = process.env.PORT || 5555;
@@ -22,9 +29,9 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PATCH, DELETE');
-next();
+    next();
 });
-  
+
 
 app.use(express.json());
 app.use('/v1', router);
