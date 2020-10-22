@@ -16,7 +16,7 @@ const router = Router();
 
 router.get('/travelers', travelerController.allTravelers);
 router.get('/traveler/:id', travelerController.getOneTraveler);
-router.post('/traveler', travelerController.newTraveler);
+router.post('/traveler', travelerController.newTraveler); //Cette route existe juste , on ne l'utilise pas ,pour le moment mais elle pourrait être utilisé par la suite pour permettre a l'organisateur de creer un traveler par exemple
 router.patch('/traveler/:id', travelerController.editTraveler);
 router.delete('/traveler/:id', travelerController.deleteTraveler);
 
@@ -24,8 +24,11 @@ router.delete('/traveler/:id', travelerController.deleteTraveler);
 // Formulaire de login : affichage et traitement
 router.post('/login', loginController.doLogin);
 // Formulaire de signup : affichage et traitement
-router.post('/signup', loginController.doSignup);
+router.post('/signup', loginController.doSignup,loginController.verifyEmail);
 // Déconnexion
+
+router.get('/mail', loginController.verifyToken);
+
 
 // Infos persos de l'utilisateur : affichage et traitement
 // router.get('/profile', travelerController.profile);
