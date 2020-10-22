@@ -4,6 +4,7 @@ import {
   HANDLE_LOGIN,
   LOGIN_CHECK,
   LOGOUT,
+  HANDLE_EDIT_PROFILE,
   setError,
   saveUser,
   setLoadingState,
@@ -70,6 +71,18 @@ const userMiddleware = (store) => (next) => (action) => {
         .catch((e) => {
           console.error(e);
         });
+      break;
+    case HANDLE_EDIT_PROFILE:
+      const { id } = store.getState().user.session;
+      const { profile } = store.getState().user;
+      axios.patch(`${baseURL}/traveler/${id}`, profile)
+        .then((response) => {
+          store.dispatch(saveUser(response.data));
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+      next(action);
       break;
     default:
       next(action);

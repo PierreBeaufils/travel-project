@@ -7,6 +7,7 @@ export const SET_LOGGED = 'SET_LOGGED';
 export const LOGOUT = 'LOGOUT';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_LOADING_STATE = 'SET_LOADING_STATE';
+export const HANDLE_EDIT_PROFILE = 'HANDLE_EDIT_PROFILE';
 
 export const changeFieldValue = (section, field, value) => ({
   type: CHANGE_FIELD_VALUE,
@@ -52,4 +53,8 @@ export const setError = (error) => ({
 export const setLoadingState = (loading) => ({
   type: SET_LOADING_STATE,
   loading,
+});
+
+export const handleEditProfile = () => ({
+  type: HANDLE_EDIT_PROFILE,
 });

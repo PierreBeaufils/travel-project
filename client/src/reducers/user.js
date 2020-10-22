@@ -19,14 +19,15 @@ const initialState = {
   },
   signup: {
     email: '',
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     password: '',
-    passwordConfirm: '',
+    password_confirm: '',
   },
   profile: {
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
+    email: '',
   },
 };
 
@@ -45,6 +46,11 @@ const user = (state = initialState, action = {}) => {
         ...state,
         loggedIn: action.user.logged,
         session: action.user.session,
+        profile: {
+          first_name: action.user.session.first_name,
+          last_name: action.user.session.last_name,
+          email: action.user.session.email,
+        },
       };
     case SET_LOGGED:
       return {

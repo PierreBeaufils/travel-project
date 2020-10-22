@@ -22,16 +22,16 @@ const RegisterForm = ({ handleSignup, changeFieldValue, fields }) => {
             <input name="email" type="email" value={fields.email} onChange={handleChange} required />
           </label>
           <label htmlFor="firstName">Prénom
-            <input name="firstName" type="text" value={fields.firstName} onChange={handleChange} required />
+            <input name="firstName" type="text" value={fields.first_name} onChange={handleChange} required />
           </label>
           <label htmlFor="lastName">Nom
-            <input name="lastName" type="text" value={fields.lastName} onChange={handleChange} required />
+            <input name="lastName" type="text" value={fields.last_name} onChange={handleChange} required />
           </label>
           <label htmlFor="password">Mot de passe
             <input name="password" type="password" value={fields.password} onChange={handleChange} required />
           </label>
           <label htmlFor="passwordConfirm">Confirmez votre mot de passe
-            <input name="passwordConfirm" type="password" value={fields.passwordConfirm} onChange={handleChange} required />
+            <input name="passwordConfirm" type="password" value={fields.password_confirm} onChange={handleChange} required />
           </label>
           {/*
           <label htmlFor="gender">Genre
@@ -54,10 +54,10 @@ RegisterForm.propTypes = {
   changeFieldValue: PropTypes.func.isRequired,
   fields: PropTypes.shape({
     email: PropTypes.string.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
+    first_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
-    passwordConfirm: PropTypes.string.isRequired,
+    password_confirm: PropTypes.string.isRequired,
   }),
 };
 

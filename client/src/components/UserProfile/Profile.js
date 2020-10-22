@@ -4,70 +4,73 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const Profile = ({ dataUser }) => {
+const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
   const {
-    register, errors, handleSubmit, watch,
+    register, errors, watch,
   } = useForm();
   const password = useRef({});
   password.current = watch('password', '');
-  const onSubmit = (data) => console.log(data);
+
+  const handleChange = (event) => {
+    changeFieldValue('profile', event.target.name, event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleEditProfile();
+  };
 
   return (
     <div className="profil">
       <div className="main-form">
         <h2>Compléter votre profil : </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="firstName">Prénom
+        <p>Adresse email: {userData.email}</p>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="first_name">Prénom
             <input
-              name="firstName"
+              name="first_name"
               ref={register({ required: true })}
-              defaultValue={dataUser.firstname}
+              defaultValue={userData.first_name}
+              onChange={handleChange}
             />
           </label>
-          <label htmlFor="lastName">Nom
+          <label htmlFor="last_name">Nom
             <input
-              name="lastName"
+              name="last_name"
               ref={register({ required: true })}
-              defaultValue={dataUser.lastname}
+              defaultValue={userData.last_name}
+              onChange={handleChange}
             />
           </label>
+          {/*
           <label htmlFor="adresse">Adresse
             <input
               name="adresse"
               ref={register({ required: true })}
-              defaultValue={dataUser.address}
+              defaultValue={userData.address}
             />
           </label>
           <label htmlFor="postcode">Code postal
             <input
               name="postcode"
               ref={register({ required: true })}
-              defaultValue={dataUser.postcode}
+              defaultValue={userData.postcode}
             />
           </label>
           <label htmlFor="ville">Ville
             <input
               name="ville"
               ref={register({ required: true })}
-              defaultValue={dataUser.city}
+              defaultValue={userData.city}
             />
           </label>
           <label htmlFor="phone">Téléphone
             <input
               name="phone"
               ref={register({ required: true })}
-              defaultValue={dataUser.phone}
+              defaultValue={userData.phone}
             />
           </label>
-          <label htmlFor="email">Email
-            <input
-              name="email"
-              ref={register({ required: true })}
-              type="email"
-              defaultValue={dataUser.mail}
-            />
-          </label>
-
           <label htmlFor="password">Mot de passe
             <input
               name="password"
@@ -91,7 +94,9 @@ const Profile = ({ dataUser }) => {
               type="password"
             />
           </label>
-          {errors.password_repeat && <p className="warning-text">{errors.password_repeat.message}</p>}
+          {errors.password_repeat &&
+            <p className="warning-text">{errors.password_repeat.message}</p>}
+          */}
           <input type="submit" />
         </form>
       </div>
@@ -100,20 +105,13 @@ const Profile = ({ dataUser }) => {
 };
 
 Profile.propTypes = {
-  dataUser: PropTypes.shape({
-    firstname: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    postcode: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    mail: PropTypes.string.isRequired,
-    documents: PropTypes.array.isRequired,
-  }),
+  changeFieldValue: PropTypes.func.isRequired,
+  handleEditProfile: PropTypes.func.isRequired,
+  userData: PropTypes.shape({
+    first_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
 };
-
-// LoginForm.defaultProps = {
-
-// };
 
 export default Profile;

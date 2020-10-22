@@ -10,7 +10,7 @@ const ProfileCard = ({ user }) => (
     <div className="user-card-image">
       <User color="#2B7AFD" size={64} />
     </div>
-    <div className="user-card-name">{user.firstName} {user.lastName}</div>
+    <div className="user-card-name">{user.first_name} {user.last_name}</div>
     <div className="user-card-email">
       {user.email}
     </div>
