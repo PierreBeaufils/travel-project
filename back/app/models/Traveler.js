@@ -18,6 +18,4 @@ class Traveler extends CoreModel {
     
 }
 
-
-
 module.exports = Traveler;
