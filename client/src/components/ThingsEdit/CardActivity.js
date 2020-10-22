@@ -29,6 +29,9 @@ const CardActivity = (oneActivity) => {
       <ModalDelete
         isShowing={isShowingModalDeleteCard}
         hide={toggleModalDeleteCard}
+        oneThingName={oneActivity.name}
+        categoryName="Activité"
+        cardID={oneActivity.id}
       />
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}

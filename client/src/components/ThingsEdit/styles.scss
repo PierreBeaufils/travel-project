@@ -133,3 +133,42 @@
     width: 40%;
   }
 }
+@media (max-width: 500px) {
+  .category-container {
+    margin: 1rem auto;
+  }
+  
+  .card__container {
+    margin: 0.5rem auto;
+    width: 100%;
+  }
+  .modal {
+    padding: 0.5rem;
+  }
+  .addThingDesktop {
+    min-width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    & label {
+      width: 80%;
+    }
+  }
+  .modal_content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    &-main {
+      h4 {
+        padding: 1rem;
+      }
+      h3 {
+        align-self: center;
+      }
+      
+    }
+  }
+}
