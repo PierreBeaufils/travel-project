@@ -1,15 +1,17 @@
 import { connect } from 'react-redux';
 import TravelForm from 'src/components/TravelForm';
-import { submitTravelForm, editTravelForm } from 'src/actions/travels';
+import { submitTravelForm, changeFieldValue } from 'src/actions/travels';
 
-const mapStateToProps = null;
+const mapStateToProps = (state) => ({
+  travelFields: state.travels.travelFields,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  submitTravelForm: (data) => {
-    dispatch(submitTravelForm(data));
+  submitTravelForm: () => {
+    dispatch(submitTravelForm());
   },
-  editTravelForm: (data) => {
-    dispatch(editTravelForm(data));
+  changeFieldValue: (field, value) => {
+    dispatch(changeFieldValue(field, value));
   },
 });
 

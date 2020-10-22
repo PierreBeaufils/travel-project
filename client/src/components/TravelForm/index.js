@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './createTravelForm.scss';
 
-const TravelForm = ({ travel, submitTravelForm, editTravelForm }) => {
+const TravelForm = ({ submitTravelForm, changeFieldValue, travelFields }) => {
   const {
     register, errors,
   } = useForm();
@@ -20,36 +20,34 @@ const TravelForm = ({ travel, submitTravelForm, editTravelForm }) => {
     return result.toISOString().split('T')[0];
   }
 
-  const handleCreate = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    submitTravelForm(data);
+    submitTravelForm();
   };
 
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    editTravelForm(data);
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    changeFieldValue(event.target.name, event.target.value);
   };
 
   return (
     <div className="travel__create-form">
       <div className="main-form">
         <h2>Créer un voyage</h2>
-        <form onSubmit={travel ? handleUpdate : handleCreate}>
+        <form onSubmit={handleSubmit}>
 
           <label htmlFor="title">Titre du voyage
-            <input name="title" type="text" id="title" ref={register({ required: true })} />
+            <input name="title" type="text" id="title" onChange={handleChange} ref={register({ required: true })} />
             {errors.title && <span className="warning-text">Veuillez saisir un titre</span>}
           </label>
 
           <label htmlFor="destination">Destination
-            <input name="destination" id="destination" type="text" ref={register({ required: true })} />
+            <input name="destination" id="destination" type="text" onChange={handleChange} ref={register({ required: true })} />
             {errors.destination && <span className="warning-text">Veuillez saisir une destination</span>}
           </label>
 
           <label htmlFor="theme">Thème
-            <select name="theme" id="theme" ref={register({ required: true })} placeholder="Veuillez choisir un thème">
+            <select name="theme" id="theme" ref={register({ required: true })} onChange={handleChange} placeholder="Veuillez choisir un thème">
               <option value="" disabled>Veuillez choisir un thème</option>
               <option value="Professionnel">Professionnel</option>
               <option value="Loisir">Loisir</option>
@@ -65,7 +63,7 @@ const TravelForm = ({ travel, submitTravelForm, editTravelForm }) => {
               type="date"
               value={startDate}
               min={todayDateISOString}
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(e) => console.log(e.target.value)}
             />
             {errors.startDate && <span className="warning-text">Veuillez selectionner une date de départ</span>}
           </label>
@@ -89,14 +87,10 @@ const TravelForm = ({ travel, submitTravelForm, editTravelForm }) => {
   );
 };
 
-TravelForm.defaultProps = {
-  travel: null,
-};
-
 TravelForm.propTypes = {
-  travel: PropTypes.object,
   submitTravelForm: PropTypes.func.isRequired,
-  editTravelForm: PropTypes.func.isRequired,
+  changeFieldValue: PropTypes.func.isRequired,
+  travelFields: PropTypes.object.isRequired,
 };
 
 export default TravelForm;

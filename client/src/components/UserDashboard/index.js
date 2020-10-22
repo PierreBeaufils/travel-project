@@ -7,13 +7,20 @@ import { PlusCircle } from 'react-feather';
 import ProfileCard from 'src/components/UserDashboard/ProfileCard';
 import TravelCard from './TravelCard';
 
-const UserDashboard = ({ user, travels, loadingUser, fetchUserData, fetchTravels }) => {
+const UserDashboard = ({
+  user,
+  travels,
+  loadingUser,
+  fetchUserData,
+  fetchTravels,
+}) => {
   const travelsList = travels.map((travel) => (
     <TravelCard key={travel.id} {...travel} />
   ));
 
   useEffect(() => {
     fetchUserData();
+    // fetchTravels();
   }, []);
 
   return (
