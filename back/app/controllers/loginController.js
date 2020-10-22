@@ -16,8 +16,8 @@ const loginController = {
                 // res.json('le mot de passe est incorrect');                
             } else {
                 req.session.user = {
-                    firstname : user.first_name,
-                    lastname : user.last_name,
+                    firstName : user.first_name,
+                    lastName : user.last_name,
                     email: user.email,
                     role: user.role
                 };
@@ -46,8 +46,8 @@ const loginController = {
                 const hashPwd = bcrypt.hashSync(req.body.password, 10);
 
                 const newUser = new Traveler({
-                    first_name: req.body.firstname,
-                    last_name: req.body.lastname,
+                    first_name: req.body.firstName,
+                    last_name: req.body.lastName,
                     email: req.body.email,
                     password: hashPwd,                     
                 });
