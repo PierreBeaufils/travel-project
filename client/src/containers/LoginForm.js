@@ -5,6 +5,7 @@ import { changeFieldValue, handleLogin } from 'src/actions/user';
 const mapStateToProps = (state) => ({
   email: state.user.login.email,
   password: state.user.login.password,
+  error: state.user.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

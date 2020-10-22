@@ -1,3 +1,4 @@
+/*
 import { connect } from 'react-redux';
 import ProfileCard from 'src/components/UserDashboard/ProfileCard';
 
@@ -13,3 +14,4 @@ const ProfileCardContainer = connect(
 )(ProfileCard);
 
 export default ProfileCardContainer;
+*/

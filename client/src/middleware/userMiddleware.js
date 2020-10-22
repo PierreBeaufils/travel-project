@@ -1,5 +1,13 @@
 /* eslint-disable no-case-declarations */
-import { HANDLE_SIGNUP, HANDLE_LOGIN, LOGOUT, setError, saveUser } from 'src/actions/user';
+import {
+  HANDLE_SIGNUP,
+  HANDLE_LOGIN,
+  LOGIN_CHECK,
+  LOGOUT,
+  setError,
+  saveUser,
+  setLoadingState,
+} from 'src/actions/user';
 
 import { baseURL } from 'src/config';
 import axios from 'axios';
@@ -8,7 +16,6 @@ const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case HANDLE_SIGNUP:
       const { signup } = store.getState().user;
-      console.log(signup);
       axios.post(`${baseURL}/signup`, signup)
         .then((response) => {
           if (response.status !== 200) {
@@ -17,12 +24,12 @@ const userMiddleware = (store) => (next) => (action) => {
           else {
             store.dispatch(saveUser(response.data));
             store.dispatch(setError(null));
-            next(action);
           }
         })
         .catch((e) => {
           console.error(e);
         });
+      next(action);
       break;
     case HANDLE_LOGIN:
       const { login } = store.getState().user;
@@ -34,12 +41,26 @@ const userMiddleware = (store) => (next) => (action) => {
           else {
             store.dispatch(saveUser(response.data));
             store.dispatch(setError(null));
-            next(action);
           }
         })
         .catch((e) => {
           console.error(e);
         });
+      next(action);
+      break;
+    case LOGIN_CHECK:
+      store.dispatch(setLoadingState(true));
+      axios.post(`${baseURL}/isLogged`, {}, { withCredentials: true })
+        .then((response) => {
+          store.dispatch(saveUser(response.data));
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          store.dispatch(setLoadingState(false));
+        });
+      next(action);
       break;
     case LOGOUT:
       axios.post(`${baseURL}/logout`, {}, { withCredentials: true })

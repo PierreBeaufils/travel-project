@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './styles.css';
@@ -18,58 +18,48 @@ import UserDashboard from 'src/containers/UserDashboard';
 import Travel from 'src/components/Travel';
 import ThingsEdit from 'src/components/ThingsEdit';
 
-const dataUserTest = {
-  firstname: 'Monprenom',
-  lastname: 'Monnomdefamille',
-  address: '1 Rue Demarue',
-  postcode: '0123456',
-  city: 'Maville',
-  phone: '+33123456789',
-  mail: 'monmail@monfai.fr',
-  documents: [{
-    docName: 'Le nom de mon document1',
-    docDate: 1603111990,
-    docLink: 'http://test1.fr',
-  }, {
-    docName: 'Le nom de mon document2',
-    docDate: 1503111990,
-    docLink: 'http://test2.fr',
-  }],
+// == Component
+const App = ({ loggedIn, loginCheck, loading }) => {
+  // Check if the user is connected
+  useEffect(() => {
+    loginCheck();
+  }, []);
 
+  return (
+    <div className="app">
+      {!loading && (
+        <>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Homepage} />
+            <Route exact path="/connexion">
+              {loggedIn ? <Redirect to="/tableau-de-bord" /> : <LoginForm />}
+            </Route>
+            <Route exact path="/inscription">
+              {loggedIn ? <Redirect to="/tableau-de-bord" /> : <RegisterForm />}
+            </Route>
+            <Route path="/mentions-legales" component={Mentions} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/a-propos" component={About} />
+            <Route path="/deconnexion" component={Homepage} />
+            <Route path="/profil" component={UserProfile} />
+            <Route path="/creer-un-voyage" component={TravelForm} />
+            <Route path="/tableau-de-bord" component={UserDashboard} />
+            <Route path="/voyage/:id" component={Travel} />
+            <Route path="/modifiervoyage/:id" component={ThingsEdit} />
+            <Route component={NotFound} />
+          </Switch>
+          <Footer />
+        </>
+      )}
+    </div>
+  );
 };
-// == Composant
-const App = ({ loggedIn }) => (
-  <div className="app">
-    <Navbar />
-    <Switch>
-      <Route path="/" exact component={Homepage} />
-      <Route exact path="/connexion">
-        {loggedIn ? <Redirect to="/tableau-de-bord" /> : <LoginForm />}
-      </Route>
-      <Route exact path="/inscription">
-        {loggedIn ? <Redirect to="/tableau-de-bord" /> : <RegisterForm />}
-      </Route>
-      <Route path="/mentions-legales" component={Mentions} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/a-propos" component={About} />
-      <Route
-        path="/profil"
-        render={(props) => (
-          <UserProfile {...props} dataUser={dataUserTest} />
-        )}
-      />
-      <Route path="/creer-un-voyage" component={TravelForm} />
-      <Route path="/tableau-de-bord" component={UserDashboard} />
-      <Route path="/voyage/:id" component={Travel} />
-      <Route path="/modifiervoyage/:id" component={ThingsEdit} />
-      <Route component={NotFound} />
-    </Switch>
-    <Footer />
-  </div>
-);
 
 App.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
+  loginCheck: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default App;

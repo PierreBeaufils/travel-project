@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Profile from './Profile';
 import TabsUserProfileMobile from './TabsUserProfileMobile';
@@ -10,16 +10,15 @@ const UserProfile = ({ dataUser }) => {
   const isMobile = window.innerWidth <= 500;
   if (isMobile) {
     return (
-      <TabsUserProfileMobile dataUser={dataUser}/>
+      <TabsUserProfileMobile dataUser={dataUser} />
     );
-  } else {
+  }
   return (
     <div className="profil-main">
-    <Profile dataUser={dataUser}/>
-    <Documents dataUser={dataUser}/>
+      <Profile dataUser={dataUser} />
+      <Documents dataUser={dataUser} />
     </div>
   );
-          }
 };
 
 UserProfile.propTypes = {
@@ -32,11 +31,7 @@ UserProfile.propTypes = {
     phone: PropTypes.string.isRequired,
     mail: PropTypes.string.isRequired,
     documents: PropTypes.array.isRequired,
-  }),
+  }).isRequired,
 };
-
-// LoginForm.defaultProps = {
-
-// };
 
 export default UserProfile;

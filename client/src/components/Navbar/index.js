@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './navbar.scss';
 import logo from 'src/assets/images/logo.png';
 
-const Navbar = ({ loggedIn }) => {
+const Navbar = ({ loggedIn, logout }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [fade, setFade] = useState(false);
 
@@ -25,6 +25,12 @@ const Navbar = ({ loggedIn }) => {
     setFade(!fade);
   };
 
+  const handleLogout = () => {
+    setToggleMenu(!toggleMenu);
+    setFade(!fade);
+    logout();
+  };
+
   const links = () => {
     if (!loggedIn) {
       return (
@@ -39,7 +45,7 @@ const Navbar = ({ loggedIn }) => {
       <>
         <Link to="tableau-de-bord"><li className={toggleFade()} onClick={handleToggle}>Mon espace</li></Link>
         <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
-        <Link to="deconnexion"><li className={toggleFade()} onClick={handleToggle}>Déconnexion</li></Link>
+        <Link to="deconnexion"><li className={toggleFade()} onClick={handleLogout}>Déconnexion</li></Link>
       </>
     );
   };
@@ -68,12 +74,9 @@ const Navbar = ({ loggedIn }) => {
   );
 };
 
-Navbar.defaultProps = {
-  loggedIn: false,
-};
-
 Navbar.propTypes = {
-  loggedIn: PropTypes.bool,
+  loggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default Navbar;
