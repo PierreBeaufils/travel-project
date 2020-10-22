@@ -18,16 +18,6 @@ const travelerController = {
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
-        req.session.user = {
-            id: travelerToEdit.id,
-            first_name: travelerToEdit.first_name,
-            last_name: travelerToEdit.last_name,
-            email: travelerToEdit.email,
-            role: travelerToEdit.role,
-        };
-        req.session.reload(function () {
-            res.status(200).json({ logged: true, session: req.session.user });
-        });
     },
 
     deleteTraveler: async (req, res) => {
