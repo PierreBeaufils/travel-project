@@ -58,6 +58,12 @@ const travelController = {
         } else {
             res.json ('Cette activité n\'existe pas');
         };
+    },    
+
+    showUserTravels : async (req,res) =>{
+        const travelerId = req.params.id;
+        const userTravels = await Travel.findAllTravels(travelerId);
+        res.json(userTravels);
     },
 
     createAccommodation: async (req,res) => {

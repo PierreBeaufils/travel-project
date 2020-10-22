@@ -20,6 +20,8 @@ router.post('/traveler', travelerController.newTraveler);
 router.patch('/traveler/:id', travelerController.editTraveler);
 router.delete('/traveler/:id', travelerController.deleteTraveler);
 
+router.get('/user-travels/:id', travelController.showUserTravels);
+
 
 // Formulaire de login : affichage et traitement
 router.post('/login', loginController.doLogin);
