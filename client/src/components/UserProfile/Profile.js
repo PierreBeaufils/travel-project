@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import './styles.scss';
 
@@ -11,6 +12,8 @@ const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
   const password = useRef({});
   password.current = watch('password', '');
 
+  const history = useHistory();
+
   const handleChange = (event) => {
     changeFieldValue('profile', event.target.name, event.target.value);
   };
@@ -18,6 +21,7 @@ const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     handleEditProfile();
+    history.push('/tableau-de-bord');
   };
 
   return (
