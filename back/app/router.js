@@ -1,8 +1,8 @@
- const mainController = require('./controllers/mainController');
- const travelerController = require('./controllers/travelerController');
- const adminController = require('./controllers/adminController');
- const travelController = require('./controllers/travelController');
- const loginController = require ('./controllers/loginController');
+const mainController = require('./controllers/mainController');
+const travelerController = require('./controllers/travelerController');
+const adminController = require('./controllers/adminController');
+const travelController = require('./controllers/travelController');
+const loginController = require('./controllers/loginController');
 
 const { Router } = require('express');
 
@@ -30,7 +30,7 @@ router.post('/isLogged', loginController.loginCheck);
 // Formulaire de signup : affichage et traitement
 router.post('/signup', loginController.doSignup);
 // Déconnexion
-
+router.post('/logout', loginController.logout);
 // Infos persos de l'utilisateur : affichage et traitement
 // router.get('/profile', travelerController.profile);
 // router.post('/profile', travelerController.modifyProfile);
@@ -56,19 +56,19 @@ router.patch('/travel/:id', travelController.editTravel);
 router.delete('/travel/:id', travelController.delete);
 
 // infos liées à l'hébergement d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/accommodation', travelController.showAccommodations) ;
+router.get('/travel/:id/accommodation', travelController.showAccommodations);
 router.post('/travel/:id/accommodation', travelController.createAccommodation);
 router.patch('/travel/:id/accommodation/:accoId', travelController.editAccommodation);
 // router.delete('/travel/:id/accommodation', travelController)
 
 // infos liées aux activités d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/activity', travelController.showActivity) ;
+router.get('/travel/:id/activity', travelController.showActivity);
 router.post('/travel/:id/activity', travelController.createActivity);
 router.patch('/travel/:id/activity/:activityId', travelController.editActivity);
 // router.delete('/travel/:id/activity', travelController)
 
 // Info liés aux transport d'un voyage :
-router.get('/travel/:id/transport', travelController.showTransport) ;
+router.get('/travel/:id/transport', travelController.showTransport);
 router.post('/travel/:id/transport', travelController.createTransport);
 router.patch('/travel/:id/transport/:transportId', travelController.editTransport);
 
