@@ -6,6 +6,7 @@ import useModal from './useModal';
 import ModalAddAccomodation from './Modals/ModalAddAccomodation';
 import ModalAddTransport from './Modals/ModalAddTransport';
 import ModalAddActivity from './Modals/ModalAddActivity';
+import TabsThingsEditMobile from './TabsThingsEditMobile';
 
 import data from './data.json';
 // import PropTypes from 'prop-types';
@@ -30,17 +31,11 @@ const ThingsEdit = () => {
   };
 
   const isMobile = window.innerWidth <= 500;
-  if (isMobile) {
-    return (
-      <div className="">
-        <p>version mobile</p>
-      </div>
-    );
-  // eslint-disable-next-line no-else-return
-  }
 
   return (
+
     <div className="">
+      {(isMobile === true) ? (<TabsThingsEditMobile />) : null }
       <ModalAddAccomodation
         isShowing={isShowingModalAddAccomodation}
         hide={toggleModalAddAccomodation}
@@ -53,7 +48,15 @@ const ThingsEdit = () => {
         isShowing={isShowingModalAddActivity}
         hide={toggleModalAddActivity}
       />
-      <p>versiondesktop</p>
+      <div
+        className="create--button validate_selection"
+        //onClick={() => handleAddThing()}
+      >
+        <CheckSquare
+          color="#fff"
+        />
+        <p>Valider</p>
+      </div>
       <CategoryFrame
         categoryName="Hébergement"
         textButton="Ajouter un hébergement"

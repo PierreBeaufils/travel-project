@@ -28,6 +28,9 @@ const CardTransport = (oneTransport) => {
       <ModalDelete
         isShowing={isShowingModalDeleteCard}
         hide={toggleModalDeleteCard}
+        oneThingName={oneTransport.from}
+        categoryName="Transport"
+        cardID={oneTransport.id}
       />
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}

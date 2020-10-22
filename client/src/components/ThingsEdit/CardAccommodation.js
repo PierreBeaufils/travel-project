@@ -30,6 +30,9 @@ const CardAccommodation = (oneAccomodation) => {
       <ModalDelete
         isShowing={isShowingModalDeleteCard}
         hide={toggleModalDeleteCard}
+        oneThingName={oneAccomodation.name}
+        categoryName="Hébergement"
+        cardID={oneAccomodation.id}
       />
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
