@@ -5,15 +5,20 @@ import {
   LOGIN_CHECK,
   LOGOUT,
   HANDLE_EDIT_PROFILE,
+  FETCH_USER_DATA,
+  fillProfile,
   setError,
   saveUser,
   setLoadingState,
+  setLoadingUser,
 } from 'src/actions/user';
 
 import { baseURL } from 'src/config';
 import axios from 'axios';
 
 const userMiddleware = (store) => (next) => (action) => {
+  const { id } = store.getState().user.session;
+  const { profile } = store.getState().user;
   switch (action.type) {
     case HANDLE_SIGNUP:
       const { signup } = store.getState().user;
@@ -23,7 +28,7 @@ const userMiddleware = (store) => (next) => (action) => {
             store.dispatch(setError(response.data));
           }
           else {
-            store.dispatch(saveUser(response.data));
+            store.dispatch(saveUser(response.data)); // A voir si on enlève cette action !!
             store.dispatch(setError(null));
           }
         })
@@ -73,14 +78,25 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       break;
     case HANDLE_EDIT_PROFILE:
-      const { id } = store.getState().user.session;
-      const { profile } = store.getState().user;
       axios.patch(`${baseURL}/traveler/${id}`, profile)
-        .then((response) => {
-          store.dispatch(saveUser(response.data));
+        .then(() => {
+          next(action);
         })
         .catch((e) => {
           console.error(e);
+        });
+      break;
+    case FETCH_USER_DATA:
+      store.dispatch(setLoadingUser(true));
+      axios.get(`${baseURL}/traveler/${id}`)
+        .then((response) => {
+          store.dispatch(fillProfile(response.data));
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          store.dispatch(setLoadingUser(false));
         });
       next(action);
       break;

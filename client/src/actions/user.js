@@ -8,6 +8,9 @@ export const LOGOUT = 'LOGOUT';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_LOADING_STATE = 'SET_LOADING_STATE';
 export const HANDLE_EDIT_PROFILE = 'HANDLE_EDIT_PROFILE';
+export const FETCH_USER_DATA = 'FETCH_USER_DATA';
+export const FILL_PROFILE = 'FILL_PROFILE';
+export const SET_LOADING_USER = 'SET_LOADING_USER';
 
 export const changeFieldValue = (section, field, value) => ({
   type: CHANGE_FIELD_VALUE,
@@ -53,6 +56,20 @@ export const setError = (error) => ({
 export const setLoadingState = (loading) => ({
   type: SET_LOADING_STATE,
   loading,
+});
+
+export const setLoadingUser = (loading) => ({
+  type: SET_LOADING_USER,
+  loading,
+});
+
+export const fetchUserData = () => ({
+  type: FETCH_USER_DATA,
+});
+
+export const fillProfile = (infos) => ({
+  type: FILL_PROFILE,
+  infos,
 });
 
 export const handleEditProfile = () => ({
