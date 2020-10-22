@@ -32,12 +32,10 @@ const ThingsEdit = () => {
 
   const isMobile = window.innerWidth <= 500;
 
-
   return (
-    
 
     <div className="">
-    {(isMobile === true) ? (<TabsThingsEditMobile />) : null }
+      {(isMobile === true) ? (<TabsThingsEditMobile />) : null }
       <ModalAddAccomodation
         isShowing={isShowingModalAddAccomodation}
         hide={toggleModalAddAccomodation}
@@ -50,6 +48,15 @@ const ThingsEdit = () => {
         isShowing={isShowingModalAddActivity}
         hide={toggleModalAddActivity}
       />
+      <div
+        className="create--button validate_selection"
+        //onClick={() => handleAddThing()}
+      >
+        <CheckSquare
+          color="#fff"
+        />
+        <p>Valider</p>
+      </div>
       <CategoryFrame
         categoryName="Hébergement"
         textButton="Ajouter un hébergement"
