@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const LoginForm = ({ email, password, changeFieldValue, handleLogin, error }) => {
+const LoginForm = ({
+  email,
+  password,
+  changeFieldValue,
+  handleLogin,
+  error,
+}) => {
   const handleChange = (event) => {
     changeFieldValue('login', event.target.name, event.target.value);
   };
