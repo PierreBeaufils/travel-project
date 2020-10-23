@@ -35,11 +35,11 @@ const travelerController = {
     },
 
     getOneTraveler: async (req, res) => {
-        const foundTraveler = await Traveler.findOneTravelComponent(null, req.params.id);
-        if (foundTraveler) {
+        const foundTraveler = await Traveler.findOneTravelComponent(null ,req.params.id);
+        if (foundTraveler){
             res.json(foundTraveler);
         } else {
-            res.json('ce voyageur n\'existe pas')
+            res.json('ce voyageur n\'existe pas') 
         }
     },
 
@@ -49,7 +49,7 @@ const travelerController = {
     //     res.json(travelers);
     // },
 
-
+    
 
     // editTraveler: async (req, res) => {
     //     const traveler = await Traveler.findOne(req.params.id);
