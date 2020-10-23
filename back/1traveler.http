@@ -1,6 +1,6 @@
 GET http://localhost:3000/v1/travelers
 ###
-GET http://localhost:3000/v1/traveler/53
+GET http://localhost:3000/v1/traveler/1
 ###
 POST http://localhost:3000/v1/traveler
 Content-Type: application/json
