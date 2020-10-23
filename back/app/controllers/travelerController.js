@@ -6,20 +6,17 @@ const travelerController = {
         const travelers = await Traveler.findAllTravelComponent();
         res.json(travelers);
     },
-
     newTraveler: async (req, res) => {
         const newTraveler = new Traveler(req.body);
         await newTraveler.saveAllTravelComponent();
         res.json(newTraveler);
     },
-
     editTraveler: async (req, res) => {
         const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
     },
-
     deleteTraveler: async (req, res) => {
         const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
         const travelerToDelete = new Traveler(traveler);
@@ -33,7 +30,6 @@ const travelerController = {
         //     res.json ('suppression effectuée');
         // }
     },
-
     getOneTraveler: async (req, res) => {
         const foundTraveler = await Traveler.findOneTravelComponent(null, req.params.id);
         if (foundTraveler) {
@@ -43,13 +39,10 @@ const travelerController = {
         }
     },
 
-
     // allTravelers: async (req,res) => {
     //     const travelers = await Traveler.findAll();
     //     res.json(travelers);
     // },
-
-
 
     // editTraveler: async (req, res) => {
     //     const traveler = await Traveler.findOne(req.params.id);

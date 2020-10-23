@@ -22,22 +22,27 @@ router.post('/create-travel', mainController.createTravel);
 router.patch('/travel/:id', mainController.editTravel);
 router.delete('/travel/:id', mainController.delete);
 
-// INFOS HEBERGEMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression 
+// INFOS VOYAGEURS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
+router.get('/travel/:id/travelers', mainController.showTravelers);
+// router.post('/travel/:id/traveler', mainController.createTravelers);
+// router.patch('/travel/:id/traveler/:travelerId', mainController.editTravelers);
+
+// INFOS HEBERGEMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
 router.get('/travel/:id/accommodation', mainController.showAccommodations);
 router.post('/travel/:id/accommodation', mainController.createAccommodation);
 router.patch('/travel/:id/accommodation/:accoId', mainController.editAccommodation);
 
-// INFOS ACTIVITES LIEES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression 
+// INFOS ACTIVITES LIEES A UN VOYAGE : affichage globale et individuel, insertion, modification 
 router.get('/travel/:id/activity', mainController.showActivity);
 router.post('/travel/:id/activity', mainController.createActivity);
 router.patch('/travel/:id/activity/:activityId', mainController.editActivity);
 
-// INFOS TRANSPORT LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
+// INFOS TRANSPORT LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
 router.get('/travel/:id/transport', mainController.showTransport);
 router.post('/travel/:id/transport', mainController.createTransport);
 router.patch('/travel/:id/transport/:transportId', mainController.editTransport);
 
-// INFOS TACHES LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression 
+// INFOS TACHES LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
 router.get('/travel/:id/task', mainController.showTask);
 router.post('/travel/:id/task', mainController.createTask);
 router.patch('/travel/:id/task/:taskId', mainController.editTask);
@@ -73,5 +78,6 @@ router.post('/logout', loginController.logout);
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
 // router.get('/admin', adminMW, adminController.admin);
+
 
 module.exports = router;

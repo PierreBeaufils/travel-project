@@ -3,8 +3,10 @@ const Activity = require("../models/Activity");
 const Transport = require("../models/Transport");
 const Travel = require("../models/Travel");
 const Task = require ("../models/Task");
+const Traveler = require("../models/Traveler");
+const travel_has_traveler = require("../models/Travel_has_travelers");
 
-const objectModel = [Accommodation,Activity,Transport,Travel, Task];
+const objectModel = [Accommodation,Activity,Transport,Travel, Task, Traveler, travel_has_traveler];
 
 
 const travelController = {
@@ -47,6 +49,16 @@ const travelController = {
             res.json(travelAccommodations);
         } else {
             res.json ('Cet hébergement n\'existe pas');
+        };
+    },
+    showTravelers: async (req, res) =>{
+        const travelId = req.params.id ;
+        const travelersInTravel = await travel_has_traveler.findTravelersByTravel(travelId);
+        
+        if (travelersInTravel.length > 0) { 
+            res.json(travelersInTravel);
+        } else {
+            res.json ('Ce voyageur n\'existe pas');
         };
     },
     showTransport: async (req, res) =>{ 
