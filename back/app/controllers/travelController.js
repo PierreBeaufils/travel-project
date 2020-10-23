@@ -31,10 +31,10 @@ const travelController = {
     },
     showAccommodations: async (req, res) =>{
         const travelId = req.params.id ;
-        const travelAccommodations = await Accommodation.findAllTravelComponent(travelId);
+        const travelAccomodations = await Accommodation.findAllTravelComponent(travelId);
         
-        if (travelAccommodations.length > 0) { 
-            res.json(travelAccommodations);
+        if (travelAccomodations.length > 0) { 
+            res.json(travelAccomodations);
         } else {
             res.json ('Cet hébergement n\'existe pas');
         };
