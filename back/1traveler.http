@@ -1,0 +1,45 @@
+GET http://localhost:3000/v1/travelers
+###
+GET http://localhost:3000/v1/traveler/53
+###
+POST http://localhost:3000/v1/traveler
+Content-Type: application/json
+ 
+{
+  "first_name": "AAAA",
+  "last_name": "AAAAAAAAA",
+  "role": "traveler",
+  "gender": "male",
+  "dob": "1967-12-31T23:00:00.000Z",
+  "adress": "Universal real-time emulation",
+  "zipcode": "287",
+  "city": "Ketapang",
+  "phone": "+594694090422",
+  "email": "mbudgey1@webnode.com",
+  "email_check": false,
+  "password": "0000",
+  "passport_number": null,
+  "expiration_date": null
+}
+###
+PATCH  http://localhost:3000/v1/traveler/55
+Content-Type: application/json
+
+{
+  "first_name": "BBBBBB",
+  "last_name": "BBBBBB",
+  "role": "traveler",
+  "gender": "male",
+  "dob": "1967-12-31T23:00:00.000Z",
+  "adress": "Universal real-time emulation",
+  "zipcode": "287",
+  "city": "Ketapang",
+  "phone": "+594694090422",
+  "email": "mbudgey1@webnode.com",
+  "email_check": false,
+  "password": "0000",
+  "passport_number": null,
+  "expiration_date": null
+}
+###
+DELETE http://localhost:3000/v1/traveler/55

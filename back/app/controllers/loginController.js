@@ -44,7 +44,7 @@ const loginController = {
         };
     },
 
-    doSignup: async (req, res) => {
+    doSignup: async (req, res,next) => {
         const user = await Traveler.findByEmail(req.body.email)
         if (user) {
             res.status(202).json('cette adresse email existe déjà');
@@ -57,7 +57,7 @@ const loginController = {
 
                 const newUser = new Traveler({
                     first_name: req.body.first_name,
-                    last_name: req.body.last_Name,
+                    last_name: req.body.last_name,
                     email: req.body.email,
                     password: hashPwd,
                 });
@@ -67,6 +67,7 @@ const loginController = {
                 res.json('signup réussi');
             }
         }
+        next();
     },
 
     logout: (req, res) => {

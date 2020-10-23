@@ -18,7 +18,7 @@ app.use(session({
 
 app.use(express.urlencoded({ extended: true }));
 
-const session = require('express-session');
+
 
 app.use(session({
     secret: 'keyboard cat',
