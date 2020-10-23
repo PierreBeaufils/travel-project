@@ -2,30 +2,29 @@ const Traveler = require('../models/Traveler')
 
 const travelerController = {
 
-    allTravelers: async (req,res) => {
+    allTravelers: async (req, res) => {
         const travelers = await Traveler.findAllTravelComponent();
         res.json(travelers);
     },
 
-    newTraveler: async (req,res)=> {
+    newTraveler: async (req, res) => {
         const newTraveler = new Traveler(req.body);
         await newTraveler.saveAllTravelComponent();
         res.json(newTraveler);
     },
 
-    editTraveler: async (req,res) => {        
-        const traveler = await Traveler.findOneTravelComponent(null ,req.params.id);
+    editTraveler: async (req, res) => {
+        const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
-        res.json(travelerToEdit);
     },
 
-    deleteTraveler: async (req,res)=> {
-        const traveler = await Traveler.findOneTravelComponent(null,req.params.id);
+    deleteTraveler: async (req, res) => {
+        const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
         const travelerToDelete = new Traveler(traveler);
         await travelerToDelete.delete();
-        res.json ('suppression effectuée');
+        res.json('suppression effectuée');
 
         // if (!traveler) {
         //     res.json('voyageur introuvable');
@@ -36,37 +35,45 @@ const travelerController = {
     },
 
     getOneTraveler: async (req, res) => {
-        const foundTraveler = await Traveler.findOneTravelComponent(null ,req.params.id);
-        res.json(foundTraveler);
+        const foundTraveler = await Traveler.findOneTravelComponent(null, req.params.id);
+        if (foundTraveler) {
+            res.json(foundTraveler);
+        } else {
+            res.json('ce voyageur n\'existe pas')
+        }
     },
 
-    loginForm: async(req, res) => {
 
-    },
+    // allTravelers: async (req,res) => {
+    //     const travelers = await Traveler.findAll();
+    //     res.json(travelers);
+    // },
 
-    doLogin: async (req, res) => {
 
-    },
-    
-    signupForm: (req, res) => {
 
-    },
+    // editTraveler: async (req, res) => {
+    //     const traveler = await Traveler.findOne(req.params.id);
 
-    doSignup: async (req, res) => {
+    //     const travelerToEdit = new Traveler(traveler);
 
-    },
+    //     if (travelerToEdit) {
+    //         travelerToEdit.update(req.body);
+    //         await travelerToEdit.save();
+    //         res.json(travelerToEdit)
+    //     }
+    // }, 
 
-    logout: (req, res) => {
-
-    },
-
-    modifyProfile: (req, res) => {
-
-    },
-
-    doContact: (req, res) => {
-
-    }
-};
+    // deleteTraveler: async (req,res)=> {
+    //     const traveler = await Traveler.findOne(req.params.id);
+    //     // console.log(traveler.id);
+    //     if (traveler) {
+    //         const travelerToDelete = new Traveler(traveler);
+    //         await travelerToDelete.delete();
+    //         res.json ('suppression effectuée');
+    //     } else {
+    //         res.json('Suppression impossible')
+    //     };
+    // }    
+}
 
 module.exports = travelerController

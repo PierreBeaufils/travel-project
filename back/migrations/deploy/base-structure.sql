@@ -28,11 +28,11 @@ CREATE TABLE "traveler" (
     "role" TEXT default 'traveler',
     "gender" TEXT,
     "dob" DATE,
-    "adress" TEXT default 'unknown',
+    "address" TEXT default 'unknown',
     "zipcode" TEXT,
     "city" TEXT,
     "phone" TEXT,
-    "email" TEXT NOT NULL,
+    "email" TEXT NOT NULL UNIQUE,
     "email_check" BOOLEAN default false,
     "password" TEXT NOT NULL,
     "passport_number" TEXT,
@@ -79,10 +79,10 @@ CREATE TABLE "transport" (
 
 );
 
-CREATE TABLE "accomodation" (
+CREATE TABLE "accommodation" (
     "id" INT GENERATED ALWAYS AS IDENTITY  PRIMARY KEY,
     "name" TEXT,
-    "adress" TEXT,
+    "address" TEXT,
     "city" TEXT NOT NULL,
     "coordinate" POINT,
     "information" TEXT,
