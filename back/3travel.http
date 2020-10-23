@@ -7,7 +7,7 @@ POST http://localhost:3000/v1/create-travel
 Content-Type: application/json
 
 {
-    "title": "TEST 3", 
+    "title": "TEST 4", 
     "destination": "Czech Republic", 
     "departure_date": "2020-06-21 20:17:03", 
     "return_date": "2020-08-30 22:38:58", 
@@ -100,7 +100,7 @@ POST http://localhost:3000/v1/travel/1/transport
 Content-Type: application/json
 
   {
-    "type": "TEST",
+    "type": "TEST POST",
     "company": "Agivu",
     "from": "Boavista",
     "to": "Falun",
@@ -130,9 +130,34 @@ Content-Type: application/json
     "travel_id": 1
   }
 ###
-DELETE http://localhost:3000/v1/travel/1/transport/31
+DELETE http://localhost:3000/v1/travel/1/transport/32
 ###
 
 ////////////////////////////////////////// ROUTES DE TRAVEL VERS TASK////////////////////////////////////////////////
 
+GET http://localhost:3000/v1/travel/1/task
+###
+POST http://localhost:3000/v1/travel/1/task
+Content-Type: application/json
 
+  {
+    "name": "TEST 2",
+    "description": "Echinocereus viridiflorus Engelm.",
+    "deadline": "2020-10-21T11:11:51.000Z",
+    "status": false,
+    "travel_id": 1
+  }
+###
+PATCH http://localhost:3000/v1/travel/1/task/18
+Content-Type: application/json
+
+  {
+    "name": "TEST PATCH 1",
+    "description": "Echinocereus viridiflorus Engelm.",
+    "deadline": "2020-10-21T11:11:51.000Z",
+    "status": false,
+    "travel_id": 1
+  }
+###
+DELETE http://localhost:3000/v1/travel/1/task/18
+###

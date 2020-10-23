@@ -42,7 +42,7 @@ Content-Type: application/json
   "expiration_date": null
 }
 ###
-DELETE http://localhost:3000/v1/traveler/55
+DELETE http://localhost:3000/v1/traveler/30
 
 ###
 GET http://localhost:3000/v1/user-travels/1
