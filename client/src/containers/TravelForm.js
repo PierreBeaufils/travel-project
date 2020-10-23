@@ -3,12 +3,13 @@ import TravelForm from 'src/components/TravelForm';
 import { submitTravelForm, changeFieldValue } from 'src/actions/travels';
 
 const mapStateToProps = (state) => ({
-  travelFields: state.travels.travelFields,
+  travel: state.travels.travelFields,
+  ownerId: state.user.session.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  submitTravelForm: () => {
-    dispatch(submitTravelForm());
+  submitTravelForm: (data) => {
+    dispatch(submitTravelForm(data));
   },
   changeFieldValue: (field, value) => {
     dispatch(changeFieldValue(field, value));

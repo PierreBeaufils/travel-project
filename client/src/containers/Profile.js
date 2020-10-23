@@ -3,7 +3,7 @@ import Profile from 'src/components/UserProfile/Profile';
 import { changeFieldValue, handleEditProfile } from 'src/actions/user';
 
 const mapStateToProps = (state) => ({
-  userData: state.user.profile,
+  user: state.user.profile,
 });
 
 const mapDispatchToProps = (dispatch) => ({

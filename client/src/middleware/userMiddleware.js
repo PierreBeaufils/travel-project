@@ -19,9 +19,10 @@ import axios from 'axios';
 const userMiddleware = (store) => (next) => (action) => {
   const { id } = store.getState().user.session;
   const { profile } = store.getState().user;
+  const { signup } = store.getState().user;
   switch (action.type) {
     case HANDLE_SIGNUP:
-      const { signup } = store.getState().user;
+      console.log(signup);
       axios.post(`${baseURL}/signup`, signup)
         .then((response) => {
           if (response.status !== 200) {
@@ -87,16 +88,12 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       break;
     case FETCH_USER_DATA:
-      store.dispatch(setLoadingUser(true));
       axios.get(`${baseURL}/traveler/${id}`)
         .then((response) => {
           store.dispatch(fillProfile(response.data));
         })
         .catch((e) => {
           console.error(e);
-        })
-        .finally(() => {
-          store.dispatch(setLoadingUser(false));
         });
       next(action);
       break;

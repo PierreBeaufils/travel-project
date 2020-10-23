@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import './styles.scss';
 
-const RegisterForm = ({ handleSignup, changeFieldValue, fields }) => {
+const RegisterForm = ({
+  handleSignup,
+  changeFieldValue,
+  fields,
+  error,
+}) => {
   const handleChange = (event) => {
     changeFieldValue('signup', event.target.name, event.target.value);
   };
@@ -21,17 +26,17 @@ const RegisterForm = ({ handleSignup, changeFieldValue, fields }) => {
           <label htmlFor="email">Email
             <input name="email" type="email" value={fields.email} onChange={handleChange} required />
           </label>
-          <label htmlFor="firstName">Prénom
-            <input name="firstName" type="text" value={fields.first_name} onChange={handleChange} required />
+          <label htmlFor="first_name">Prénom
+            <input name="first_name" type="text" value={fields.first_name} onChange={handleChange} required />
           </label>
-          <label htmlFor="lastName">Nom
-            <input name="lastName" type="text" value={fields.last_name} onChange={handleChange} required />
+          <label htmlFor="last_name">Nom
+            <input name="last_name" type="text" value={fields.last_name} onChange={handleChange} required />
           </label>
           <label htmlFor="password">Mot de passe
             <input name="password" type="password" value={fields.password} onChange={handleChange} required />
           </label>
-          <label htmlFor="passwordConfirm">Confirmez votre mot de passe
-            <input name="passwordConfirm" type="password" value={fields.password_confirm} onChange={handleChange} required />
+          <label htmlFor="password_nonfirm">Confirmez votre mot de passe
+            <input name="password_confirm" type="password" value={fields.password_confirm} onChange={handleChange} required />
           </label>
           {/*
           <label htmlFor="gender">Genre
@@ -42,6 +47,7 @@ const RegisterForm = ({ handleSignup, changeFieldValue, fields }) => {
             </select>
           </label>
           */}
+          {error && (<div className="form-error">{error}</div>)}
           <input type="submit" />
         </form>
       </div>
@@ -50,6 +56,7 @@ const RegisterForm = ({ handleSignup, changeFieldValue, fields }) => {
 };
 
 RegisterForm.propTypes = {
+  error: PropTypes.string,
   handleSignup: PropTypes.func.isRequired,
   changeFieldValue: PropTypes.func.isRequired,
   fields: PropTypes.shape({
@@ -63,6 +70,7 @@ RegisterForm.propTypes = {
 
 RegisterForm.defaultProps = {
   fields: null,
+  error: null,
 };
 
 export default RegisterForm;
