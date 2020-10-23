@@ -1,4 +1,4 @@
-const accommodation = require("../models/Accomodation");
+const accommodation = require("../models/Accommodation");
 const activity = require("../models/Activity");
 const transport = require("../models/Transport");
 const traveler = require("../models/Traveler");
@@ -13,16 +13,16 @@ const mainController = {
         const taskToSave = new Task(task);
         accommodationToSave.saveAllTravelComponent(req.params.id);
 
-        // let travelAccomodations = await accommodation.findAllTravelComponent(4);
-        // res.json(travelAccomodations);
+        // let travelAccommodations = await accommodation.findAllTravelComponent(4);
+        // res.json(travelAccommodations);
     },
     test2: async (req, res) =>{
-        let travelAccomodations = await activity.findAllTravelComponent(6);
-        res.json(travelAccomodations);
+        let travelAccommodations = await activity.findAllTravelComponent(6);
+        res.json(travelAccommodations);
     },
     test3: async (req, res) =>{
-        let travelAccomodations = await transport.findAllTravelComponent(4);
-        res.json(travelAccomodations);
+        let travelAccommodations = await transport.findAllTravelComponent(4);
+        res.json(travelAccommodations);
     }
 };
 
