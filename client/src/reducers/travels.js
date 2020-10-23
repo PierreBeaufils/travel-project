@@ -2,7 +2,7 @@ import { SAVE_TRAVELS, SET_LOADING_STATE, CHANGE_FIELD_VALUE } from 'src/actions
 
 const initialState = {
   travels: [],
-  loadingTravel: false,
+  loadingDatas: false,
   travelFields: {},
 };
 
@@ -16,7 +16,7 @@ const travels = (state = initialState, action = {}) => {
     case SET_LOADING_STATE:
       return {
         ...state,
-        loading: action.loading,
+        loadingDatas: action.loading,
       };
     case CHANGE_FIELD_VALUE:
       return {

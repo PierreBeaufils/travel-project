@@ -48,7 +48,7 @@ const Travel = () => (
       </div>
     </div>
     <div className="travel-container">
-      Charger Component içi
+      Component içi
     </div>
   </>
 );

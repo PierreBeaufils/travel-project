@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import './styles.scss';
 
-const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
+const Profile = ({ user, changeFieldValue, handleEditProfile }) => {
   const {
     register, errors, watch,
   } = useForm();
@@ -28,13 +28,13 @@ const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
     <div className="profil">
       <div className="main-form">
         <h2>Compléter votre profil : </h2>
-        <p>Adresse email: {userData.email}</p>
+        <p>Adresse email: {user.email}</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="first_name">Prénom
             <input
               name="first_name"
               ref={register({ required: true })}
-              defaultValue={userData.first_name}
+              defaultValue={user.first_name}
               onChange={handleChange}
             />
           </label>
@@ -42,7 +42,7 @@ const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
             <input
               name="last_name"
               ref={register({ required: true })}
-              defaultValue={userData.last_name}
+              defaultValue={user.last_name}
               onChange={handleChange}
             />
           </label>
@@ -51,28 +51,28 @@ const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
             <input
               name="adresse"
               ref={register({ required: true })}
-              defaultValue={userData.address}
+              defaultValue={user.address}
             />
           </label>
           <label htmlFor="postcode">Code postal
             <input
               name="postcode"
               ref={register({ required: true })}
-              defaultValue={userData.postcode}
+              defaultValue={user.postcode}
             />
           </label>
           <label htmlFor="ville">Ville
             <input
               name="ville"
               ref={register({ required: true })}
-              defaultValue={userData.city}
+              defaultValue={user.city}
             />
           </label>
           <label htmlFor="phone">Téléphone
             <input
               name="phone"
               ref={register({ required: true })}
-              defaultValue={userData.phone}
+              defaultValue={user.phone}
             />
           </label>
           <label htmlFor="password">Mot de passe
@@ -111,7 +111,7 @@ const Profile = ({ userData, changeFieldValue, handleEditProfile }) => {
 Profile.propTypes = {
   changeFieldValue: PropTypes.func.isRequired,
   handleEditProfile: PropTypes.func.isRequired,
-  userData: PropTypes.shape({
+  user: PropTypes.shape({
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
