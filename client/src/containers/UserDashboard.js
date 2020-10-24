@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import UserDashboard from 'src/components/UserDashboard/';
 import { fetchUserData } from 'src/actions/user';
-import { fetchTravels, fetchUserTravelsData } from 'src/actions/travels';
+import { fetchTravels, setLoadingState } from 'src/actions/travels';
 
 const mapStateToProps = (state) => ({
   user: state.user.profile,
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchUserTravelsData: () => {
-    dispatch(fetchUserTravelsData());
+  setLoadingState: (loading) => {
+    dispatch(setLoadingState(loading));
   },
   fetchUserData: () => {
     dispatch(fetchUserData());

@@ -11,11 +11,22 @@ const UserDashboard = ({
   user,
   travels,
   loadingDatas,
-  fetchUserTravelsData,
+  setLoadingState,
+  fetchTravels,
+  fetchUserData,
 }) => {
   const travelsList = travels.map((travel) => (
     <TravelCard key={travel.id} {...travel} />
   ));
+
+  const fetchUserTravelsData = () => {
+    setLoadingState(true);
+    Promise.resolve(fetchTravels())
+      .then(() => {
+        fetchUserData();
+      })
+      .then(setLoadingState(false));
+  };
 
   useEffect(() => {
     fetchUserTravelsData();
@@ -54,7 +65,9 @@ const UserDashboard = ({
 UserDashboard.propTypes = {
   user: PropTypes.object.isRequired,
   travels: PropTypes.array.isRequired,
-  fetchUserTravelsData: PropTypes.func.isRequired,
+  fetchTravels: PropTypes.func.isRequired,
+  fetchUserData: PropTypes.func.isRequired,
+  setLoadingState: PropTypes.func.isRequired,
   loadingDatas: PropTypes.bool.isRequired,
 };
 

@@ -1,11 +1,11 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './userdashboard.scss';
 import { MapPin } from 'react-feather';
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
 
-const TravelCard = () => (
+const TravelCard = ({ travel }) => (
   <div className="travel-card">
     <img src={thumbnail} className="travel-card-image" alt="thumbnail" />
     <div className="travel-card-content">
@@ -22,12 +22,12 @@ const TravelCard = () => (
   </div>
 );
 
-// LoginForm.propTypes = {
+TravelCard.defaultProps = {
+  travel: {},
+};
 
-// };
-
-// LoginForm.defaultProps = {
-
-// };
+TravelCard.propTypes = {
+  travel: PropTypes.object,
+};
 
 export default TravelCard;

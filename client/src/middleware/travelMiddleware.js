@@ -6,8 +6,10 @@ import {
   setLoadingState,
   fetchTravels,
   saveTravels,
+  errorMessage,
 } from 'src/actions/travels';
 import { fetchUserData } from 'src/actions/user';
+import { useHistory } from 'react-router-dom';
 
 import { baseURL } from 'src/config';
 import axios from 'axios';
@@ -16,21 +18,28 @@ const travelMiddleware = (store) => (next) => (action) => {
   const { id } = store.getState().user.session;
   switch (action.type) {
     case SUBMIT_TRAVEL_FORM:
-      console.log(action.data);
       axios.post(`${baseURL}/create-travel`, action.data)
         .then((res) => {
           console.log(`voyage créé : ${res.data}`);
           next(action);
         })
         .catch((e) => {
-          console.error(e);
+          store.dispatch(errorMessage(e));
         });
       break;
-    case FETCH_USER_TRAVELS_DATA:
-      store.dispatch(setLoadingState(true));
-      store.dispatch(fetchTravels());
-      store.dispatch(fetchUserData());
-      store.dispatch(setLoadingState(false));
+    case FETCH_USER_TRAVELS_DATA: // A VOIR CE CASE A MODIFIER !!!!
+      const test = () => async () => {
+        try {
+          store.dispatch(setLoadingState(true));
+          await store.dispatch(fetchTravels());
+          await store.dispatch(fetchUserData());
+          store.dispatch(setLoadingState(false));
+        }
+        catch (error) {
+          store.dispatch(errorMessage(error));
+        }
+      };
+      test();
       next(action);
       break;
     case FETCH_TRAVELS:
@@ -41,7 +50,7 @@ const travelMiddleware = (store) => (next) => (action) => {
           next(action);
         })
         .catch((e) => {
-          console.error(e);
+          store.dispatch(errorMessage(e));
         });
       break;
     default:

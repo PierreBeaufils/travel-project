@@ -10,7 +10,6 @@ import {
   setError,
   saveUser,
   setLoadingState,
-  setLoadingUser,
 } from 'src/actions/user';
 
 import { baseURL } from 'src/config';

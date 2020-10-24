@@ -1,6 +1,9 @@
-import { SAVE_TRAVELS, SET_LOADING_STATE, CHANGE_FIELD_VALUE } from 'src/actions/travels';
+import {
+  SAVE_TRAVELS, SET_LOADING_STATE, CHANGE_FIELD_VALUE, ERROR_MESSAGE,
+} from 'src/actions/travels';
 
 const initialState = {
+  errorMessage: null,
   travels: [],
   loadingDatas: false,
   travelFields: {},
@@ -22,6 +25,11 @@ const travels = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.field]: action.value,
+      };
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.error,
       };
     default:
       return state;
