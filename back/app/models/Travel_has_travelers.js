@@ -22,7 +22,6 @@ class travel_has_traveler extends CoreModel {
         `, [travelId]);
 
         return travelers.rows;
-
     }
 }
 
