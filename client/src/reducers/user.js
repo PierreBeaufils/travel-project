@@ -5,11 +5,13 @@ import {
   SET_ERROR,
   SET_LOADING_STATE,
   FILL_PROFILE,
+  LOADING_USER,
   LOGOUT,
 } from 'src/actions/user';
 
 const initialState = {
   loading: true,
+  loadingUser: false,
   loggedIn: false,
   session: {},
   error: null,
@@ -71,6 +73,11 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: action.loading,
+      };
+    case LOADING_USER:
+      return {
+        ...state,
+        loadingUser: action.loading,
       };
     case LOGOUT:
       return {

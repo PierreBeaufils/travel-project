@@ -1,11 +1,11 @@
 import {
-  SAVE_TRAVELS, SET_LOADING_STATE, CHANGE_FIELD_VALUE, ERROR_MESSAGE,
+  SAVE_TRAVELS, LOADING_TRAVELS, CHANGE_FIELD_VALUE, ERROR_MESSAGE,
 } from 'src/actions/travels';
 
 const initialState = {
   errorMessage: null,
   travels: [],
-  loadingDatas: false,
+  loadingTravels: false,
   travelFields: {},
 };
 
@@ -16,10 +16,10 @@ const travels = (state = initialState, action = {}) => {
         ...state,
         travels: action.travels,
       };
-    case SET_LOADING_STATE:
+    case LOADING_TRAVELS:
       return {
         ...state,
-        loadingDatas: action.loading,
+        loadingTravels: action.loading,
       };
     case CHANGE_FIELD_VALUE:
       return {

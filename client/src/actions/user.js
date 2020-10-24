@@ -10,6 +10,7 @@ export const SET_LOADING_STATE = 'SET_LOADING_STATE';
 export const HANDLE_EDIT_PROFILE = 'HANDLE_EDIT_PROFILE';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const FILL_PROFILE = 'FILL_PROFILE';
+export const LOADING_USER = 'LOADING_USER';
 
 export const changeFieldValue = (section, field, value) => ({
   type: CHANGE_FIELD_VALUE,
@@ -59,6 +60,11 @@ export const setLoadingState = (loading) => ({
 
 export const fetchUserData = () => ({
   type: FETCH_USER_DATA,
+});
+
+export const loadingUser = (loading) => ({
+  type: LOADING_USER,
+  loading,
 });
 
 export const fillProfile = (infos) => ({

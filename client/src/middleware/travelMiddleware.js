@@ -2,9 +2,7 @@
 import {
   SUBMIT_TRAVEL_FORM,
   FETCH_TRAVELS,
-  FETCH_USER_TRAVELS_DATA,
-  setLoadingState,
-  fetchTravels,
+  loadingTravels,
   saveTravels,
   errorMessage,
 } from 'src/actions/travels';
@@ -17,7 +15,7 @@ import axios from 'axios';
 const travelMiddleware = (store) => (next) => (action) => {
   const { id } = store.getState().user.session;
   switch (action.type) {
-    case SUBMIT_TRAVEL_FORM:
+    case SUBMIT_TRAVEL_FORM: // REDIRECTION ET ERREUR A LA SOUMISSION DU FORMULAIRE A AJOUTER
       axios.post(`${baseURL}/create-travel`, action.data)
         .then((res) => {
           console.log(`voyage créé : ${res.data}`);
@@ -27,31 +25,20 @@ const travelMiddleware = (store) => (next) => (action) => {
           store.dispatch(errorMessage(e));
         });
       break;
-    case FETCH_USER_TRAVELS_DATA: // A VOIR CE CASE A MODIFIER !!!!
-      const test = () => async () => {
-        try {
-          store.dispatch(setLoadingState(true));
-          await store.dispatch(fetchTravels());
-          await store.dispatch(fetchUserData());
-          store.dispatch(setLoadingState(false));
-        }
-        catch (error) {
-          store.dispatch(errorMessage(error));
-        }
-      };
-      test();
-      next(action);
-      break;
     case FETCH_TRAVELS:
+      store.dispatch(loadingTravels(true));
       axios.get(`${baseURL}/user-travels/${id}`)
         .then((res) => {
           console.log(`récupération des voyages: ${res.data}`);
           store.dispatch(saveTravels(res.data));
-          next(action);
         })
         .catch((e) => {
           store.dispatch(errorMessage(e));
+        })
+        .finally(() => {
+          store.dispatch(loadingTravels(false));
         });
+      next(action);
       break;
     default:
       next(action);

@@ -10,6 +10,7 @@ import {
   setError,
   saveUser,
   setLoadingState,
+  loadingUser,
 } from 'src/actions/user';
 
 import { baseURL } from 'src/config';
@@ -87,12 +88,16 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       break;
     case FETCH_USER_DATA:
+      store.dispatch(loadingUser(true));
       axios.get(`${baseURL}/traveler/${id}`)
         .then((response) => {
           store.dispatch(fillProfile(response.data));
         })
         .catch((e) => {
           console.error(e);
+        })
+        .then(() => {
+          store.dispatch(loadingUser(false));
         });
       next(action);
       break;

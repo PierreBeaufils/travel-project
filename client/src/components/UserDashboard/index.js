@@ -10,8 +10,8 @@ import TravelCard from './TravelCard';
 const UserDashboard = ({
   user,
   travels,
-  loadingDatas,
-  setLoadingState,
+  loadingTravels,
+  loadingUser,
   fetchTravels,
   fetchUserData,
 }) => {
@@ -19,24 +19,14 @@ const UserDashboard = ({
     <TravelCard key={travel.id} {...travel} />
   ));
 
-  const fetchUserTravelsData = () => {
-    setLoadingState(true);
-    Promise.resolve(fetchTravels())
-      .then(() => {
-        fetchUserData();
-      })
-      .then(setLoadingState(false));
-  };
-
   useEffect(() => {
-    fetchUserTravelsData();
-    // fetchUserData();
-    // fetchTravels();
+    fetchUserData();
+    fetchTravels();
   }, []);
 
   return (
     <div className="userdashboard">
-      {!loadingDatas && (
+      {!loadingTravels && !loadingUser && (
         <>
           <h2>Tableau de bord</h2>
           <div className="user-container">
@@ -67,8 +57,8 @@ UserDashboard.propTypes = {
   travels: PropTypes.array.isRequired,
   fetchTravels: PropTypes.func.isRequired,
   fetchUserData: PropTypes.func.isRequired,
-  setLoadingState: PropTypes.func.isRequired,
-  loadingDatas: PropTypes.bool.isRequired,
+  loadingUser: PropTypes.bool.isRequired,
+  loadingTravels: PropTypes.bool.isRequired,
 };
 
 export default UserDashboard;
