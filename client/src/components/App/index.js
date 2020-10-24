@@ -41,7 +41,6 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route path="/mentions-legales" component={Mentions} />
             <Route path="/contact" component={Contact} />
             <Route path="/a-propos" component={About} />
-            <Route path="/deconnexion" component={Homepage} />
             <Route path="/profil" component={UserProfile} />
             <Route path="/creer-un-voyage" component={TravelForm} />
             <Route path="/tableau-de-bord" component={UserDashboard} />

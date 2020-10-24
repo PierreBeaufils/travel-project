@@ -9,9 +9,8 @@ const Profile = ({ user, changeFieldValue, handleEditProfile }) => {
   const {
     register, errors, watch,
   } = useForm();
-  const password = useRef({});
-  password.current = watch('password', '');
-
+  // const password = useRef({});
+  // password.current = watch('password', '');
   const history = useHistory();
 
   const handleChange = (event) => {

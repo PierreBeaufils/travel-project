@@ -12,7 +12,6 @@ import {
   setLoadingState,
   loadingUser,
 } from 'src/actions/user';
-
 import { baseURL } from 'src/config';
 import axios from 'axios';
 

@@ -6,8 +6,6 @@ import {
   saveTravels,
   errorMessage,
 } from 'src/actions/travels';
-import { fetchUserData } from 'src/actions/user';
-import { useHistory } from 'react-router-dom';
 
 import { baseURL } from 'src/config';
 import axios from 'axios';
