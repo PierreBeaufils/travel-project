@@ -17,7 +17,7 @@ const UserDashboard = ({
     <TravelCard key={travel.id} {...travel} />
   ));
 
-  useEffect(() => {
+  useEffect(() => { // NE FONCTIONNE PAS A REFAIRE !!
     fetchUserTravelsData();
     // fetchUserData();
     // fetchTravels();

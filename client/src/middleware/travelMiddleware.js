@@ -26,7 +26,7 @@ const travelMiddleware = (store) => (next) => (action) => {
           console.error(e);
         });
       break;
-    case FETCH_USER_TRAVELS_DATA:
+    case FETCH_USER_TRAVELS_DATA: // NE FONCTIONNE PAS A REFAIRE !!
       store.dispatch(setLoadingState(true));
       store.dispatch(fetchTravels());
       store.dispatch(fetchUserData());
