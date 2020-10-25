@@ -18,6 +18,7 @@ import UserDashboard from 'src/containers/UserDashboard';
 import Travel from 'src/components/Travel';
 import ThingsEdit from 'src/components/ThingsEdit';
 import RegisterValidation from 'src/components/RegisterForm/RegisterValidation';
+import TokenValidation from 'src/containers/TokenValidation';
 
 // == Component
 const App = ({ loggedIn, loginCheck, loading }) => {
@@ -39,6 +40,7 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route exact path="/inscription">
               {loggedIn ? <Redirect to="/tableau-de-bord" /> : <RegisterForm />}
             </Route>
+            <Route exact path="/inscription/validation" component={RegisterValidation} />
             <Route path="/mentions-legales" component={Mentions} />
             <Route path="/contact" component={Contact} />
             <Route path="/a-propos" component={About} />
@@ -48,6 +50,7 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route path="/voyage/:id" component={Travel} />
             <Route path="/modifiervoyage/:id" component={ThingsEdit} />
             <Route path="/validation" component={RegisterValidation} />
+            <Route path="/verifier" component={TokenValidation} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

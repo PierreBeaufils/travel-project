@@ -6,6 +6,8 @@ import {
   LOGOUT,
   HANDLE_EDIT_PROFILE,
   FETCH_USER_DATA,
+  VERIFY_TOKEN,
+  validateRegister,
   fillProfile,
   setError,
   saveUser,
@@ -21,20 +23,23 @@ const userMiddleware = (store) => (next) => (action) => {
   const { signup } = store.getState().user;
   switch (action.type) {
     case HANDLE_SIGNUP:
-      console.log(signup);
       axios.post(`${baseURL}/signup`, signup)
         .then((response) => {
           if (response.status !== 200) {
             store.dispatch(setError(response.data));
           }
           else {
-            store.dispatch(saveUser(response.data)); // A voir si on enlève cette action !!
             store.dispatch(setError(null));
+            store.dispatch(validateRegister(true));
           }
         })
         .catch((e) => {
           console.error(e);
         });
+      next(action);
+      break;
+    case VERIFY_TOKEN:
+      console.log(action.token);
       next(action);
       break;
     case HANDLE_LOGIN:

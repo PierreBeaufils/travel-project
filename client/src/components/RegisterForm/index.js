@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import './styles.scss';
 
@@ -8,6 +9,7 @@ const RegisterForm = ({
   changeFieldValue,
   fields,
   error,
+  validateRegister,
 }) => {
   const handleChange = (event) => {
     changeFieldValue('signup', event.target.name, event.target.value);
@@ -18,7 +20,9 @@ const RegisterForm = ({
     handleSignup();
   };
 
-  return (
+  if (validateRegister) {
+    return <Redirect to="/inscription/validation" />;
+  } return (
     <div className="register">
       <div className="main-form register-form">
         <h2>Inscription</h2>
@@ -72,6 +76,7 @@ const RegisterForm = ({
 };
 
 RegisterForm.propTypes = {
+  validateRegister: PropTypes.bool.isRequired,
   error: PropTypes.string,
   handleSignup: PropTypes.func.isRequired,
   changeFieldValue: PropTypes.func.isRequired,
