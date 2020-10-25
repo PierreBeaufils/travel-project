@@ -2,6 +2,8 @@ export const CHANGE_FIELD_VALUE = 'CHANGE_FIELD_VALUE';
 export const HANDLE_LOGIN = 'HANDLE_LOGIN';
 export const SAVE_USER = 'SAVE_USER';
 export const HANDLE_SIGNUP = 'HANDLE_SIGNUP';
+export const VALIDATE_REGISTER = 'VALIDATE_REGISTER';
+export const VERIFY_TOKEN = 'VERIFY_TOKEN';
 export const LOGIN_CHECK = 'LOGIN_CHECK';
 export const SET_LOGGED = 'SET_LOGGED';
 export const LOGOUT = 'LOGOUT';
@@ -19,9 +21,18 @@ export const changeFieldValue = (section, field, value) => ({
   value,
 });
 
-export const handleSignup = (data) => ({
+export const handleSignup = () => ({
   type: HANDLE_SIGNUP,
-  data,
+});
+
+export const validateRegister = (boolean) => ({
+  type: VALIDATE_REGISTER,
+  boolean,
+});
+
+export const verifyToken = (token) => ({
+  type: VERIFY_TOKEN,
+  token,
 });
 
 export const handleLogin = () => ({

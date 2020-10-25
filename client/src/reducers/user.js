@@ -1,5 +1,6 @@
 import {
   CHANGE_FIELD_VALUE,
+  VALIDATE_REGISTER,
   SAVE_USER,
   SET_LOGGED,
   SET_ERROR,
@@ -11,6 +12,7 @@ import {
 
 const initialState = {
   loading: true,
+  validateRegister: false,
   loadingUser: false,
   loggedIn: false,
   session: {},
@@ -43,6 +45,11 @@ const user = (state = initialState, action = {}) => {
           ...state[action.section],
           [action.field]: action.value,
         },
+      };
+    case VALIDATE_REGISTER:
+      return {
+        ...state,
+        validateRegister: action.boolean,
       };
     case SAVE_USER:
       return {
