@@ -42,9 +42,13 @@
     transition: all 200ms ease;
 
     &:hover {
-      color: red;
+      color: #f05454;
     }
   }
+}
+
+.navlink-selected {
+  color: #f05454;
 }
 
 

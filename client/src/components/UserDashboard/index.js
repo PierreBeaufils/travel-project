@@ -10,22 +10,23 @@ import TravelCard from './TravelCard';
 const UserDashboard = ({
   user,
   travels,
-  loadingDatas,
-  fetchUserTravelsData,
+  loadingTravels,
+  loadingUser,
+  fetchTravels,
+  fetchUserData,
 }) => {
   const travelsList = travels.map((travel) => (
     <TravelCard key={travel.id} {...travel} />
   ));
 
-  useEffect(() => { // NE FONCTIONNE PAS A REFAIRE !!
-    fetchUserTravelsData();
-    // fetchUserData();
-    // fetchTravels();
+  useEffect(() => {
+    fetchUserData();
+    fetchTravels();
   }, []);
 
   return (
     <div className="userdashboard">
-      {!loadingDatas && (
+      {!loadingTravels && !loadingUser && (
         <>
           <h2>Tableau de bord</h2>
           <div className="user-container">
@@ -54,8 +55,10 @@ const UserDashboard = ({
 UserDashboard.propTypes = {
   user: PropTypes.object.isRequired,
   travels: PropTypes.array.isRequired,
-  fetchUserTravelsData: PropTypes.func.isRequired,
-  loadingDatas: PropTypes.bool.isRequired,
+  fetchTravels: PropTypes.func.isRequired,
+  fetchUserData: PropTypes.func.isRequired,
+  loadingUser: PropTypes.bool.isRequired,
+  loadingTravels: PropTypes.bool.isRequired,
 };
 
 export default UserDashboard;

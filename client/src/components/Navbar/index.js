@@ -45,7 +45,7 @@ const Navbar = ({ loggedIn, logout }) => {
       <>
         <Link to="tableau-de-bord"><li className={toggleFade()} onClick={handleToggle}>Mon espace</li></Link>
         <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
-        <Link to="deconnexion"><li className={toggleFade()} onClick={handleLogout}>Déconnexion</li></Link>
+        <Link to="/"><li className={toggleFade()} onClick={handleLogout}>Déconnexion</li></Link>
       </>
     );
   };

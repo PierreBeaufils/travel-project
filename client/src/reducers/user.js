@@ -4,14 +4,14 @@ import {
   SET_LOGGED,
   SET_ERROR,
   SET_LOADING_STATE,
-  SET_LOADING_USER,
   FILL_PROFILE,
+  LOADING_USER,
   LOGOUT,
 } from 'src/actions/user';
 
 const initialState = {
   loading: true,
-  loadingUser: true,
+  loadingUser: false,
   loggedIn: false,
   session: {},
   error: null,
@@ -74,7 +74,7 @@ const user = (state = initialState, action = {}) => {
         ...state,
         loading: action.loading,
       };
-    case SET_LOADING_USER:
+    case LOADING_USER:
       return {
         ...state,
         loadingUser: action.loading,

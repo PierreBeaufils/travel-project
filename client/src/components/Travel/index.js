@@ -1,11 +1,14 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 import './travel.scss';
-import { MapPin, FileText, Users, Map, Home, Briefcase, Calendar } from 'react-feather';
+import {
+  MapPin, FileText, Users, Map, Home, Briefcase, Calendar,
+} from 'react-feather';
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
 
-const Travel = () => (
+const Travel = ({ travel }) => (
   <>
     <div className="card-container">
       <div className="travel-card card-detail">
@@ -26,26 +29,36 @@ const Travel = () => (
       </div>
     </div>
     <div className="travel-menu">
-      <div className="travel-menu-icon">
-        <Users size={24} className="travel-menu-logo" />
-        <p>Participants</p>
-      </div>
-      <div className="travel-menu-icon">
-        <Briefcase size={24} className="travel-menu-logo" />
-        <p>Transport</p>
-      </div>
-      <div className="travel-menu-icon">
-        <Home size={24} className="travel-menu-logo" />
-        <p>Hébergement</p>
-      </div>
-      <div className="travel-menu-icon">
-        <Map size={24} className="travel-menu-logo" />
-        <p>Activités</p>
-      </div>
-      <div className="travel-menu-icon">
-        <FileText size={24} className="travel-menu-logo" />
-        <p>Documents</p>
-      </div>
+      <NavLink to={`/travel/${travel.id}/membres`} activeClassName="navlink-selected">
+        <div className="travel-menu-icon">
+          <Users size={24} className="travel-menu-logo" />
+          <p>Participants</p>
+        </div>
+      </NavLink>
+      <NavLink to={`/travel/${travel.id}/transport`} activeClassName="navlink-selected">
+        <div className="travel-menu-icon">
+          <Briefcase size={24} className="travel-menu-logo" />
+          <p>Transport</p>
+        </div>
+      </NavLink>
+      <NavLink to={`/travel/${travel.id}/hebergements`} activeClassName="navlink-selected">
+        <div className="travel-menu-icon">
+          <Home size={24} className="travel-menu-logo" />
+          <p>Hébergement</p>
+        </div>
+      </NavLink>
+      <NavLink to={`/travel/${travel.id}/activites`} activeClassName="navlink-selected">
+        <div className="travel-menu-icon">
+          <Map size={24} className="travel-menu-logo" />
+          <p>Activités</p>
+        </div>
+      </NavLink>
+      <NavLink to={`/travel/${travel.id}/documents`} activeClassName="navlink-selected">
+        <div className="travel-menu-icon">
+          <FileText size={24} className="travel-menu-logo" />
+          <p>Documents</p>
+        </div>
+      </NavLink>
     </div>
     <div className="travel-container">
       Component içi
@@ -53,12 +66,12 @@ const Travel = () => (
   </>
 );
 
-// LoginForm.propTypes = {
+Travel.propTypes = {
+  travel: PropTypes.object,
+};
 
-// };
-
-// LoginForm.defaultProps = {
-
-// };
+Travel.defaultProps = {
+  travel: {},
+};
 
 export default Travel;
