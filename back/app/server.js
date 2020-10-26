@@ -7,9 +7,9 @@ const session = require('express-session');
 const multer = require('multer');
 const bodyParser = multer();
 
-app.use(express.urlencoded({ extended: true }));
+const app = express();
 
-const session = require('express-session');
+app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
     secret: 'keyboard cat',
@@ -23,19 +23,6 @@ app.use(session({
 }));
 
 app.use(express.urlencoded({ extended: true }));
-
-
-
-app.use(session({
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24,
-    },
-}));
 
 const port = process.env.PORT || 5555;
 

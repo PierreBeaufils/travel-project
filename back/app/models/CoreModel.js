@@ -92,11 +92,13 @@ class CoreModel {
             UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1};`
             , fieldValues);
         } else {
-            await db.query(`
+            const insert = await db.query(`
             INSERT INTO ${this.constructor.tableName} (${fieldNames.join(", ")})
             VALUES (${fieldIndex.join(", ")})
             RETURNING id;`
             , fieldValues);
+
+            return insert.rows[0];
         } 
     }
 
