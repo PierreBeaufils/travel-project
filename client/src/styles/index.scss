@@ -47,10 +47,7 @@ h3 {
 }
 
 .main-form {
-<<<<<<< HEAD
-=======
   background-color: vars.$background-color;
->>>>>>> client
   margin: 1.2rem auto;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -106,28 +103,9 @@ h3 {
     font-size: 1.02rem;
     transition: all 300ms ease;
 
-<<<<<<< HEAD
-      &[type=submit] {
-        background-color: vars.$primary-color;
-        color: #fff;
-        font-weight: 700;
-        border: none;
-        border-radius: 27px;
-        margin-top: 20px;
-        margin-bottom: 0;
-        padding: 17px;
-        font-size: 1.05rem;
-        transition: all 300ms ease;
-
-          &:hover {
-            background-color: darken(vars.$primary-color, 10%);
-            cursor: pointer;
-          }
-=======
       &:hover {
         background-color: darken(vars.$primary-color, 10%);
         cursor: pointer;
->>>>>>> client
       }
   }
   
@@ -163,11 +141,7 @@ h3 {
 }
 
 .form-error {
-<<<<<<< HEAD
-  color: rgb(175, 6, 6);
-=======
   color: red;
   font-weight: 350;
->>>>>>> client
   font-size: 1rem;
 }

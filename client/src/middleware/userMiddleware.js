@@ -6,25 +6,16 @@ import {
   LOGOUT,
   HANDLE_EDIT_PROFILE,
   FETCH_USER_DATA,
-<<<<<<< HEAD
-=======
   VERIFY_TOKEN,
   validateRegister,
   setTokenVerified,
   setTokenMessage,
->>>>>>> client
   fillProfile,
   setError,
   saveUser,
   setLoadingState,
-<<<<<<< HEAD
-  setLoadingUser,
-} from 'src/actions/user';
-
-=======
   loadingUser,
 } from 'src/actions/user';
->>>>>>> client
 import { baseURL } from 'src/config';
 import axios from 'axios';
 
@@ -34,21 +25,12 @@ const userMiddleware = (store) => (next) => (action) => {
   const { signup } = store.getState().user;
   switch (action.type) {
     case HANDLE_SIGNUP:
-<<<<<<< HEAD
-      console.log(signup);
-=======
->>>>>>> client
       axios.post(`${baseURL}/signup`, signup)
         .then((response) => {
           if (response.status !== 200) {
             store.dispatch(setError(response.data));
           }
           else {
-<<<<<<< HEAD
-            store.dispatch(saveUser(response.data)); // A voir si on enlève cette action !!
-            store.dispatch(setError(null));
-          }
-=======
             store.dispatch(setError(null));
             store.dispatch(validateRegister(true));
           }
@@ -63,7 +45,6 @@ const userMiddleware = (store) => (next) => (action) => {
       axios.get(`${baseURL}/mail`, action.token)
         .then((response) => {
           store.dispatch(setTokenMessage(response.data));
->>>>>>> client
         })
         .catch((e) => {
           console.error(e);
@@ -123,22 +104,16 @@ const userMiddleware = (store) => (next) => (action) => {
         });
       break;
     case FETCH_USER_DATA:
-<<<<<<< HEAD
-=======
       store.dispatch(loadingUser(true));
->>>>>>> client
       axios.get(`${baseURL}/traveler/${id}`)
         .then((response) => {
           store.dispatch(fillProfile(response.data));
         })
         .catch((e) => {
           console.error(e);
-<<<<<<< HEAD
-=======
         })
         .then(() => {
           store.dispatch(loadingUser(false));
->>>>>>> client
         });
       next(action);
       break;

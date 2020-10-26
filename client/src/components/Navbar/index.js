@@ -35,29 +35,17 @@ const Navbar = ({ loggedIn, logout }) => {
     if (!loggedIn) {
       return (
         <>
-<<<<<<< HEAD
-          <Link to="inscription"><li className={toggleFade()} onClick={handleToggle}>Inscription</li></Link>
-          <Link to="connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
-          <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
-=======
           <Link to="/inscription"><li className={toggleFade()} onClick={handleToggle}>Inscription</li></Link>
           <Link to="/connexion"><li className={toggleFade()} onClick={handleToggle}>Connexion</li></Link>
           <Link to="/contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
->>>>>>> client
         </>
       );
     }
     return (
       <>
-<<<<<<< HEAD
-        <Link to="tableau-de-bord"><li className={toggleFade()} onClick={handleToggle}>Mon espace</li></Link>
-        <Link to="contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
-        <Link to="deconnexion"><li className={toggleFade()} onClick={handleLogout}>Déconnexion</li></Link>
-=======
         <Link to="/tableau-de-bord"><li className={toggleFade()} onClick={handleToggle}>Mon espace</li></Link>
         <Link to="/contact"><li className={toggleFade()} onClick={handleToggle}>Contact</li></Link>
         <Link to="/"><li className={toggleFade()} onClick={handleLogout}>Déconnexion</li></Link>
->>>>>>> client
       </>
     );
   };

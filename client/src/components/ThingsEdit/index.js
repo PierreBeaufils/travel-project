@@ -35,11 +35,7 @@ const ThingsEdit = () => {
   return (
 
     <div className="">
-<<<<<<< HEAD
-      {(isMobile === true) ? (<TabsThingsEditMobile />) : null }
-=======
       {(isMobile === true) ? (<TabsThingsEditMobile />) : null}
->>>>>>> client
       <ModalAddAccomodation
         isShowing={isShowingModalAddAccomodation}
         hide={toggleModalAddAccomodation}
@@ -53,13 +49,8 @@ const ThingsEdit = () => {
         hide={toggleModalAddActivity}
       />
       <div
-<<<<<<< HEAD
-        className="create--button validate_selection"
-        //onClick={() => handleAddThing()}
-=======
         className="validate--button validate_selection"
       //onClick={() => handleAddThing()}
->>>>>>> client
       >
         <CheckSquare
           color="#fff"
