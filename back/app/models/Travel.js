@@ -14,11 +14,11 @@ class Travel extends CoreModel {
 
     static async findAllTravels(travelerId) {
         const travels = await db.query (`
-        SELECT *
+        SELECT travel_id, title, destination, departure_date, return_date, price, "owner", traveler_id, first_name, last_name, gender, email, phone, "role", dob
         FROM travel_has_traveler 
         JOIN travel ON travel_has_traveler.travel_id = travel.id
         JOIN traveler ON travel_has_traveler.traveler_id = traveler.id
-        WHERE travel_has_traveler.traveler_id = $1 AND travel.return_date > now()
+        WHERE travel_has_traveler.traveler_id = $1
         ORDER BY travel.departure_date;
         `, [travelerId]);
 

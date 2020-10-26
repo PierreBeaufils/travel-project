@@ -1,13 +1,13 @@
 //////////////////////////////////////////// ROUTES DE TRAVEL ////////////////////////////////////////////////////
 GET http://localhost:3000/v1/travels
 ###
-GET http://localhost:3000/v1/travel/15
+GET http://localhost:3000/v1/travel/31
 ###
 POST http://localhost:3000/v1/create-travel
 Content-Type: application/json
 
 {
-    "title": "TEST 4", 
+    "title": "TEST 2", 
     "destination": "Czech Republic", 
     "departure_date": "2020-06-21 20:17:03", 
     "return_date": "2020-08-30 22:38:58", 
@@ -15,9 +15,19 @@ Content-Type: application/json
     "owner": "5"
 }
 ###
-PATCH  http://localhost:3000/v1/travel/3
+PATCH  http://localhost:3000/v1/travel/31
+Content-Type: application/json
+
+{
+    "title": "TEST PATCH 2", 
+    "destination": "Czech Republic", 
+    "departure_date": "2020-06-21 20:17:03", 
+    "return_date": "2020-08-30 22:38:58", 
+    "price": "220.47", 
+    "owner": "5"
+}
 ###
-DELETE http://localhost:3000/v1/travel/3
+DELETE http://localhost:3000/v1/travel/31
 ###
 
 //////////////////////////////////// ROUTES DE TRAVEL VERS ACCOMODATION///////////////////////////////////////////
@@ -28,28 +38,32 @@ POST http://localhost:3000/v1/travel/3/accommodation
 Content-Type: application/json
 
 {
-   "adress": "028 Hovde Junction",
-   "city": "Hayama",
-   "coordinate": "38.1483676,39.1483676",
-   "arrival_date": "2020-05-13 14:23:08",
-   "departure_date": "2020-12-03 00:04:24",
-   "unit_price": "58.05",
-   "quantity": "7",
-   "travel_id": "3"
+  "name": null,
+  "address": "adresse test post",
+  "city": "ville post",
+  "coordinate": "38.1483676,39.1483676",
+  "information": null,
+  "availability": null,
+  "arrival_date": "2020-05-24T05:12:58.000Z",
+  "departure_date": "2020-06-25T03:12:32.000Z",
+  "unit_price": "31.79",
+  "quantity": 9
 }
 ###
-PATCH http://localhost:3000/v1/travel/3/accommodation/32
+PATCH http://localhost:3000/v1/travel/3/accommodation/1
 Content-Type: application/json
 
 {
-   "adress": "000 Hovde Junction",
-   "city": "Hayama",
-   "coordinate": "38.1483676,39.1483676",
-   "arrival_date": "2020-05-13 14:23:08",
-   "departure_date": "2020-12-03 00:04:24",
-   "unit_price": "58.05",
-   "quantity": "7",
-   "travel_id": "3"
+  "name": null,
+  "address": "adresse test patch",
+  "city": "ville post",
+  "coordinate": "38.1483676,39.1483676",
+  "information": null,
+  "availability": null,
+  "arrival_date": "2020-05-24T05:12:58.000Z",
+  "departure_date": "2020-06-25T03:12:32.000Z",
+  "unit_price": "31.79",
+  "quantity": 9
 }
 ###
 DELETE http://localhost:3000/v1/travel/3/accommodation/32
@@ -57,39 +71,37 @@ DELETE http://localhost:3000/v1/travel/3/accommodation/32
 
 /////////////////////////////////////// ROUTES DE TRAVEL VERS ACTIVITY//////////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/4/activity
+GET http://localhost:3000/v1/travel/15/activity
 ###
 POST http://localhost:3000/v1/travel/4/activity
 Content-Type: application/json
 
 {
-    "name": "Activité TEST",
-    "topic": "Services",
-    "place": "886 Surrey Lane",
-    "duration": "35 minute",
-    "description": "Operative composite productivity",
-    "date": "2020-11-16T10:58:36.000Z",
-    "unit_price": "85.99",
-    "quantity": 4,
-    "travel_id": 4
+  "name": "Activité TEST",
+  "topic": "Services",
+  "place": "886 Surrey Lane",
+  "duration": "35 minute",
+  "description": "Operative composite productivity",
+  "date": "2020-11-16T10:58:36.000Z",
+  "unit_price": "85.99",
+  "quantity": 4
 }
 ###
-PATCH http://localhost:3000/v1/travel/4/activity/33
+PATCH http://localhost:3000/v1/travel/4/activity/31
 Content-Type: application/json
 
 {
-    "name": "Activité TEST",
+    "name": "Activité TEST PATCH 2",
     "topic": "TEST",
     "place": "886 Surrey Lane",
     "duration": "35 minute",
     "description": "Operative composite productivity",
     "date": "2020-11-16T10:58:36.000Z",
     "unit_price": "85.99",
-    "quantity": 4,
-    "travel_id": 4
+    "quantity": 4
 }
 ###
-DELETE http://localhost:3000/v1/travel/4/activity/34
+DELETE http://localhost:3000/v1/travel/15/activity/17
 ###
 
 /////////////////////////////////////// ROUTES DE TRAVEL VERS TRANSPORT//////////////////////////////////////////////
@@ -109,8 +121,7 @@ Content-Type: application/json
     "reservation_ref": "2657",
     "unit_price": "0",
     "quantity": 8,
-    "memo": "Reactive",
-    "travel_id": 1
+    "memo": "Reactive"
   }
 ###
 PATCH http://localhost:3000/v1/travel/1/transport/31
@@ -135,31 +146,29 @@ DELETE http://localhost:3000/v1/travel/1/transport/32
 
 ////////////////////////////////////////// ROUTES DE TRAVEL VERS TASK////////////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/1/task
+GET http://localhost:3000/v1/travel/1/tasks
 ###
 POST http://localhost:3000/v1/travel/1/task
 Content-Type: application/json
 
   {
-    "name": "TEST 2",
+    "name": "TEST 3",
     "description": "Echinocereus viridiflorus Engelm.",
     "deadline": "2020-10-21T11:11:51.000Z",
-    "status": false,
-    "travel_id": 1
+    "status": false
   }
 ###
-PATCH http://localhost:3000/v1/travel/1/task/19
+PATCH http://localhost:3000/v1/travel/1/task/22
 Content-Type: application/json
 
   {
-    "name": "TEST PATCH 1",
+    "name": "TEST PATCH 2",
     "description": "Echinocereus viridiflorus Engelm.",
     "deadline": "2020-10-21T11:11:51.000Z",
-    "status": false,
-    "travel_id": 1
+    "status": false
   }
 ###
-DELETE http://localhost:3000/v1/travel/1/task/18
+DELETE http://localhost:3000/v1/travel/1/task/22
 ###
 
 ////////////////////////////////////////// ROUTES DE TRAVEL VERS TRAVELER////////////////////////////////////////////////
@@ -170,8 +179,7 @@ POST http://localhost:3000/v1/travel/1/traveler
 Content-Type: application/json
 
   {
-    "travel_id" : 1,
-    "traveler_id" : 6
+    "traveler_id" : 16
   }
 ###
-DELETE http://localhost:3000/v1/travel/1/traveler/6
+DELETE http://localhost:3000/v1/travel/1/traveler/16

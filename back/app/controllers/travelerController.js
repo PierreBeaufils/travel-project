@@ -16,12 +16,18 @@ const travelerController = {
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
+        res.json('voyageur mis à jour')
     },
     deleteTraveler: async (req, res) => {
         const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
-        const travelerToDelete = new Traveler(traveler);
-        await travelerToDelete.delete();
-        res.json('suppression effectuée');
+        if (traveler) {
+            const travelerToDelete = new Traveler(traveler);
+            await travelerToDelete.delete();
+            res.json('suppression effectuée');
+        } else {
+            res.json('ce voyageur n\'existe pas')
+        }
+
 
         // if (!traveler) {
         //     res.json('voyageur introuvable');
