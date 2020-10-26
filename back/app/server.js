@@ -3,11 +3,28 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
-const app = express();
+const session = require('express-session');
+const multer = require('multer');
+const bodyParser = multer();
 
 app.use(express.urlencoded({ extended: true }));
 
 const session = require('express-session');
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24,
+    },
+}));
+
+app.use(express.urlencoded({ extended: true }));
+
+
 
 app.use(session({
     secret: 'keyboard cat',
@@ -34,6 +51,7 @@ app.use((req, res, next) => {
 
 
 app.use(express.json());
+app.use(bodyParser.none());
 app.use('/v1', router);
 
 app.launch = () => {

@@ -10,9 +10,9 @@ POST http://localhost:3000/v1/signup
 Content-Type : application/json
 
 {
-  "email": "test5@email.com",
-  "lastName": "toto",
-  "firstName": "titi",
+  "first_name": "titi",
+  "last_name": "toto",
+  "email": "sbad973@gmail.com",
   "password": "0000",
-  "passwordConfirm": "0000"
+  "password_confirm": "0000"
 }

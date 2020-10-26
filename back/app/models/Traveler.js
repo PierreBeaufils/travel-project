@@ -17,6 +17,7 @@ class Traveler extends CoreModel {
         return user.rows[0];
     }
     
+    
 }
 
 module.exports = Traveler;
