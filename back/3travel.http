@@ -148,7 +148,7 @@ Content-Type: application/json
     "travel_id": 1
   }
 ###
-PATCH http://localhost:3000/v1/travel/1/task/18
+PATCH http://localhost:3000/v1/travel/1/task/19
 Content-Type: application/json
 
   {
@@ -166,27 +166,12 @@ DELETE http://localhost:3000/v1/travel/1/task/18
 
 GET http://localhost:3000/v1/travel/1/travelers
 ###
-POST http://localhost:3000/v1/travel/1/travelers
+POST http://localhost:3000/v1/travel/1/traveler
 Content-Type: application/json
 
   {
-    "name": "TEST 2",
-    "description": "Echinocereus viridiflorus Engelm.",
-    "deadline": "2020-10-21T11:11:51.000Z",
-    "status": false,
-    "travel_id": 1
+    "travel_id" : 1,
+    "traveler_id" : 6
   }
 ###
-PATCH http://localhost:3000/v1/travel/1/travelers/18
-Content-Type: application/json
-
-  {
-    "name": "TEST PATCH 1",
-    "description": "Echinocereus viridiflorus Engelm.",
-    "deadline": "2020-10-21T11:11:51.000Z",
-    "status": false,
-    "travel_id": 1
-  }
-###
-DELETE http://localhost:3000/v1/travel/1/travelers/18
-###
+DELETE http://localhost:3000/v1/travel/1/traveler/6

@@ -1,12 +1,12 @@
 const db = require('../database');
 const CoreModel = require('./CoreModel');
 
-class travel_has_traveler extends CoreModel {
+class travel_has_traveler {
 
     static tableName = 'travel_has_traveler';
 
     constructor (data) {
-        super(data);
+        // super(data);
         for (const prop in data){
             this[prop] = data[prop];
         }
@@ -22,6 +22,38 @@ class travel_has_traveler extends CoreModel {
         `, [travelId]);
 
         return travelers.rows;
+    }
+
+    static async findOneTravelerByTravel(travelId, travelerId) {
+        const OneTraveler = await db.query (`
+        SELECT *
+        FROM travel_has_traveler
+        WHERE travel_id = $1 AND traveler_id = $2;
+        `, [travelId, travelerId]);
+
+        return OneTraveler.rows[0];
+    }
+
+    async saveTravelerIntoTravel () {
+        await db.query (`
+        INSERT INTO travel_has_traveler (travel_id, traveler_id)
+        VALUES ($1, $2);
+        `, [this.travel_id, this.traveler_id]);
+    }
+
+    update(data){
+        for(const prop in data){
+            this[prop] = data[prop];
+        }
+    }
+
+    async deleteTraveler() {
+        console.log(this);
+        await db.query (`
+        DELETE FROM travel_has_traveler
+        WHERE travel_id = $1
+        AND traveler_id = $2
+        `, [this.travel_id, this.traveler_id]);
     }
 }
 
