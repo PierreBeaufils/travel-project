@@ -3,6 +3,7 @@
 .userdashboard {
   margin: 0 auto;
   max-width: 1200px;
+  background-color: v.$background-color;
   display: flex;
   flex-flow: column wrap;
 
@@ -34,6 +35,7 @@
 
 .travel-card {
   max-width: 800px;
+  background-color: v.$background-color;
   display: flex;
   margin: 1rem auto;
   border-radius: 8px;
@@ -67,8 +69,8 @@
     &-more {
       margin-top: 0.6rem;
       align-self: flex-end;
-      font-weight: 700;
-      text-transform: uppercase;
+      font-weight: normal;
+      font-size: 0.8rem;
       color: #fff;
       padding: 0.7rem;
       border: none;
