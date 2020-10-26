@@ -5,17 +5,18 @@ import {
   Map, Marker, Popup, TileLayer,
 } from 'react-leaflet';
 import AlgoliaPlaces from 'algolia-places-react';
+import PropTypes from 'prop-types';
 import './style.scss';
 
 const AlgoLeaflet = ({
-  isMapRequired, isAdressInputRequired, setLocationData,
+  isMapRequired, isAdressInputRequired, setLocationData, mapPositionToDisplay,
 }) => {
   const mapBoxToken = 'pk.eyJ1IjoiaXppbWVsbG93IiwiYSI6ImNrZzBvOTh5ZDAweWIyem4xenMyOWY5cmgifQ.t75gYDPDZoUegSq0G6kqgA'; // Token Mapbox api key
-  const [currentPosition, setPosition] = useState([51.505, -0.09]);
-  useEffect(() => {
-    console.log('changement de position');
-    // insertMarker(currentPosition);
-  }, [currentPosition]);
+  const [currentPosition, setPosition] = useState([mapPositionToDisplay.x, mapPositionToDisplay.y]);
+  // useEffect(() => {
+  //   console.log('changement de position');
+  //   // insertMarker(currentPosition);
+  // }, [currentPosition]);
 
   return (
     <div className="algolia-container">
@@ -44,10 +45,10 @@ const AlgoLeaflet = ({
       {(isMapRequired) ? ( // affiche la carte en cas de valeur à true, sinon ne l'affiche pas
         <Map
           className="map"
-          center={[51.505, -0.09]}
+          center={currentPosition}
           zoom={13}
           maxZoom={20}
-          style={{ height: '500px', width: '300px' }}
+          style={{ height: '332px', width: '332px' }}
         >
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapBoxToken}`}
@@ -62,6 +63,21 @@ const AlgoLeaflet = ({
 
     </div>
   );
+};
+
+AlgoLeaflet.defaultProps = {
+  mapPositionToDisplay: {
+    x: 0,
+    y: 0,
+  },
+};
+
+AlgoLeaflet.propTypes = {
+  isMapRequired: PropTypes.bool.isRequired,
+  isAdressInputRequired: PropTypes.bool.isRequired,
+  setLocationData: PropTypes.func.isRequired,
+  mapPositionToDisplay: PropTypes.object,
+
 };
 
 export default AlgoLeaflet;
