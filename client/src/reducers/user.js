@@ -1,17 +1,34 @@
 import {
   CHANGE_FIELD_VALUE,
+<<<<<<< HEAD
+=======
+  VALIDATE_REGISTER,
+  SET_TOKEN_VERIFIED,
+  SET_TOKEN_MESSAGE,
+>>>>>>> client
   SAVE_USER,
   SET_LOGGED,
   SET_ERROR,
   SET_LOADING_STATE,
+<<<<<<< HEAD
   SET_LOADING_USER,
   FILL_PROFILE,
+=======
+  FILL_PROFILE,
+  LOADING_USER,
+>>>>>>> client
   LOGOUT,
 } from 'src/actions/user';
 
 const initialState = {
   loading: true,
+<<<<<<< HEAD
   loadingUser: true,
+=======
+  validateRegister: false,
+  isTokenVerified: false,
+  loadingUser: false,
+>>>>>>> client
   loggedIn: false,
   session: {},
   error: null,
@@ -43,6 +60,24 @@ const user = (state = initialState, action = {}) => {
           ...state[action.section],
           [action.field]: action.value,
         },
+<<<<<<< HEAD
+=======
+      };
+    case VALIDATE_REGISTER:
+      return {
+        ...state,
+        validateRegister: action.boolean,
+      };
+    case SET_TOKEN_VERIFIED:
+      return {
+        ...state,
+        isTokenVerified: action.verified,
+      };
+    case SET_TOKEN_MESSAGE:
+      return {
+        ...state,
+        tokenMessage: action.message,
+>>>>>>> client
       };
     case SAVE_USER:
       return {
@@ -74,7 +109,11 @@ const user = (state = initialState, action = {}) => {
         ...state,
         loading: action.loading,
       };
+<<<<<<< HEAD
     case SET_LOADING_USER:
+=======
+    case LOADING_USER:
+>>>>>>> client
       return {
         ...state,
         loadingUser: action.loading,

@@ -5,6 +5,10 @@ import { changeFieldValue, handleSignup } from 'src/actions/user';
 const mapStateToProps = (state) => ({
   fields: state.user.signup,
   error: state.user.error,
+<<<<<<< HEAD
+=======
+  validateRegister: state.user.validateRegister,
+>>>>>>> client
 });
 const mapDispatchToProps = (dispatch) => ({
   changeFieldValue: (section, field, value) => {

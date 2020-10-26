@@ -1,11 +1,12 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './userdashboard.scss';
 import { MapPin } from 'react-feather';
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
 
-const TravelCard = () => (
+const TravelCard = ({ travel }) => (
   <div className="travel-card">
     <img src={thumbnail} className="travel-card-image" alt="thumbnail" />
     <div className="travel-card-content">
@@ -16,18 +17,19 @@ const TravelCard = () => (
       </div>
       <div className="travel-card-content-date">Du 26/10/2020 au 01/11/2020</div>
       <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
-      <button type="button" className="travel-card-content-more">Voir ce voyage</button>
-
+      <Link to={`/voyage/${travel.id}`} className="travel-card-content-more">
+        Voir ce voyage
+      </Link>
     </div>
   </div>
 );
 
-// LoginForm.propTypes = {
+TravelCard.defaultProps = {
+  travel: {},
+};
 
-// };
-
-// LoginForm.defaultProps = {
-
-// };
+TravelCard.propTypes = {
+  travel: PropTypes.object,
+};
 
 export default TravelCard;

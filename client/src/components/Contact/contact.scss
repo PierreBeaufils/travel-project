@@ -1,8 +1,9 @@
 @use 'src/styles/vars' as v;
 
-.contact {
+.contact-container {
   margin: 0 auto;
-  text-align: center;
   max-width: 1200px;
+  text-align: center;
   padding: 1rem;
+  background-color: v.$background-color;
 }

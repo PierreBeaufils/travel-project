@@ -18,7 +18,7 @@ const CategoryFrame = ({
       <div className="headerWithAddThingMenu">
         <h2>{categoryName}s</h2>
         <div
-          className="create--button"
+          className="validate--button"
           onClick={() => handleAddThing()}
         >
           <PlusCircle
@@ -28,9 +28,9 @@ const CategoryFrame = ({
         </div>
       </div>
       <div className="cards__container">
-        {(categoryName === 'Hébergement') ? data.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} />) : null }
-        {(categoryName === 'Transport') ? data.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} />) : null }
-        {(categoryName === 'Activité') ? data.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} />) : null }
+        {(categoryName === 'Hébergement') ? data.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} />) : null}
+        {(categoryName === 'Transport') ? data.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} />) : null}
+        {(categoryName === 'Activité') ? data.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} />) : null}
 
       </div>
     </div>
