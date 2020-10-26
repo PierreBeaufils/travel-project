@@ -56,6 +56,7 @@ CREATE TABLE "activity" (
     "date" TIMESTAMP,
     "unit_price" NUMERIC DEFAULT 0,
     "quantity" INT NOT NULL,
+    "selected" BOOLEAN DEFAULT false,
     "travel_id" INT NOT NULL references travel(id),
     CHECK (unit_price >= 0)
 );
@@ -73,6 +74,7 @@ CREATE TABLE "transport" (
     "unit_price" NUMERIC default 0,
     "quantity" INT NOT NULL,
     "memo" TEXT,
+    "selected" BOOLEAN DEFAULT false,
     "travel_id" INT NOT NULL references travel(id),
     CHECK (arrival_date > departure_date),
     CHECK (unit_price >= 0)
@@ -91,6 +93,7 @@ CREATE TABLE "accommodation" (
     "departure_date" TIMESTAMP,
     "unit_price" NUMERIC default 0,
     "quantity" INT,
+    "selected" BOOLEAN DEFAULT false,
     "travel_id" INT NOT NULL references travel(id),
     CHECK (unit_price >= 0),
     CHECK (departure_date > arrival_date)
