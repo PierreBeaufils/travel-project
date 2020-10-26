@@ -177,6 +177,37 @@ insert into accommodation ("address", "city", coordinate, arrival_date, "departu
 insert into accommodation ("address", "city", coordinate, arrival_date, "departure_date", "unit_price", "quantity", travel_id) values ('8949 Delladonna Hill', 'Grabów', '52.1260857,56.1260857', '2020-02-22 09:20:29', '2020-10-06 07:07:02', 63.28, 8, 14);
 insert into accommodation ("address", "city", coordinate, arrival_date, "departure_date", "unit_price", "quantity", travel_id) values ('62 Warner Place', 'Libenge', '3.6489578,6.6489578', '2019-12-13 13:18:11', '2020-02-11 09:31:28', 60.49, 8, 4);
 
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (2, 8), (2, 14), (2, 6), (2, 4), (2, 5), (2, 16), (2, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (3, 9), (3, 5), (3, 19), (3, 4), (3, 15), (3, 6), (3, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (4, 4), (4, 7), (4, 12), (4, 24), (4, 5), (4, 6), (4, 17);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (5, 10), (5, 9), (5, 15), (5, 4), (5, 5), (5, 6), (5, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (6, 21), (6, 11), (6, 18), (6, 4), (6, 5), (6, 6), (6, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (7, 7), (7, 12), (7, 21), (7, 4), (7, 5), (7, 6), (7, 15);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (8, 8), (8, 22), (8, 24), (8, 4), (8, 5), (8, 6), (8, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (9, 12), (9, 21), (9, 27), (9, 4), (9, 5), (9, 6), (9, 7);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (10, 10), (10, 25), (10, 30), (10, 4), (10, 5), (10, 16), (10, 26);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (11, 13), (11, 23), (11, 4), (11, 14), (11, 15), (11, 26), (11, 17);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (12, 12), (12, 15), (12, 8), (12, 4), (12, 5), (12, 25), (12, 18);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (13, 14), (13, 17), (13, 12), (13, 4), (13, 5), (13, 22), (13, 19);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (14, 14), (14, 19), (14, 16), (14, 4), (14, 25), (14, 6), (14, 26);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (15, 15), (15, 10), (15, 20), (15, 4), (15, 7), (15, 16), (15, 21);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (16, 15), (16, 2), (16, 24), (16, 4), (16, 5), (16, 26), (16, 22);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (17, 17), (17, 12), (17, 28), (17, 4), (17, 5), (17, 1), (17, 21);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (18, 18), (18, 11), (18, 15), (18, 3), (18, 1), (18, 2), (18, 9);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (19, 16), (19, 15), (19, 10), (19, 2), (19, 12), (19, 3), (19, 20);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (20, 20), (20, 13), (20, 15), (20, 1), (20, 3), (20, 4), (20, 28);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (21, 21), (21, 29), (21, 20), (21, 3), (21, 4), (21, 5), (21, 13);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (22, 17), (22, 23), (22, 25), (22, 2), (22, 7), (22, 10), (22, 14);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (23, 23), (23, 28), (23, 30), (23, 1), (23, 18), (23, 12), (23, 8);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (24, 18), (24, 14), (24, 7), (24, 4), (24, 19), (24, 17), (24, 9);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (25, 25), (25, 18), (25, 14), (25, 4), (25, 10), (25, 16), (25, 3);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (26, 21), (26, 19), (26, 16), (26, 4), (26, 11), (26, 12), (26, 15);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (27, 27), (27, 2), (27, 28), (27, 4), (27, 12), (27, 26), (27, 25);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (28, 22), (28, 17), (28, 3), (28, 4), (28, 5), (28, 16), (28, 26);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (29, 23), (29, 16), (29, 3), (29, 4), (29, 5), (29, 29), (29, 30);
+insert into travel_has_traveler ("travel_id", "traveler_id") VALUES (30, 30), (30, 25), (30, 23), (30, 14), (30, 5), (30, 12), (30, 27);
 
 
-COMMIT ;
+
+COMMIT;

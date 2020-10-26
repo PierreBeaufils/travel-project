@@ -62,10 +62,10 @@ class CoreModel {
     }
 
     async saveAllTravelComponent(){ 
-        const fieldNames = [];
-        const fieldIndex = [];
-        const fieldValues = [];
-        const fieldConcat = [];
+        const fieldNames = []; // clés
+        const fieldValues = []; // valeurs
+        const fieldIndex = []; // index
+        const fieldConcat = []; // requête au format SQL
 
         let index = 1 ; 
 
@@ -79,24 +79,25 @@ class CoreModel {
             fieldIndex.push("$" + index);
             fieldConcat.push(fieldNames[index-1] + " = " + fieldIndex[index-1]);
             index ++;
-        };        
+        };       
+                
+        // console.log ("fieldConcat: ", fieldConcat);
+        // console.log ("fieldNames: ", fieldNames);
+        // console.log ("fieldValues: ", fieldValues);
+        // console.log ("fieldConcat: ", fieldConcat);
 
         if (this.id) {
             fieldValues.push(this.id);
-            // console.log(fieldValues);
             await db.query(`
             UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1};`
             , fieldValues);
-        }         
-
-        else {
+        } else {
             await db.query(`
             INSERT INTO ${this.constructor.tableName} (${fieldNames.join(", ")})
             VALUES (${fieldIndex.join(", ")})
             RETURNING id;`
-            , fieldValues) ;
+            , fieldValues);
         } 
-
     }
 
     // update(data){
