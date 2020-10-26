@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import './travel.scss';
 import {
@@ -9,7 +9,7 @@ import {
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
 
 const Travel = ({ travel }) => (
-  <>
+  <div className="travel-details-container">
     <div className="card-container">
       <div className="travel-card card-detail">
         <img src={thumbnail} className="travel-card-image card-detail-image" alt="thumbnail" />
@@ -24,7 +24,9 @@ const Travel = ({ travel }) => (
             26/10/2020 au 01/11/2020
           </div>
           <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
-          <button type="button" className="travel-card-content-more card-details">Modifier les détails</button>
+          <Link to={`/voyage/${travel.id}/modifer`} className="travel-card-content-more card-details">
+            Modifier les détails
+          </Link>
         </div>
       </div>
     </div>
@@ -63,7 +65,7 @@ const Travel = ({ travel }) => (
     <div className="travel-container">
       Component içi
     </div>
-  </>
+  </div>
 );
 
 Travel.propTypes = {

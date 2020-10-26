@@ -8,6 +8,8 @@ const mapStateToProps = (state, ownProps) => {
   const { search } = ownProps.location;
   return {
     token: getQuery(search, 'token'),
+    isTokenVerified: state.user.isTokenVerified,
+    tokenMessage: state.user.tokenMessage,
   };
 };
 

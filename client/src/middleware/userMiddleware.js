@@ -8,6 +8,8 @@ import {
   FETCH_USER_DATA,
   VERIFY_TOKEN,
   validateRegister,
+  setTokenVerified,
+  setTokenMessage,
   fillProfile,
   setError,
   saveUser,
@@ -39,7 +41,17 @@ const userMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     case VERIFY_TOKEN:
-      console.log(action.token);
+      store.dispatch(setTokenVerified(false));
+      axios.get(`${baseURL}/mail`, action.token)
+        .then((response) => {
+          store.dispatch(setTokenMessage(response.data));
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          store.dispatch(setTokenVerified(true));
+        });
       next(action);
       break;
     case HANDLE_LOGIN:

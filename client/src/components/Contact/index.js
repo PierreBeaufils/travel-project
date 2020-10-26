@@ -7,7 +7,7 @@ const Contact = () => {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <div className="contact">
+    <div className="contact-container">
       <div className="main-form">
         <h2>Nous contacter</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -22,7 +22,7 @@ const Contact = () => {
           <label htmlFor="message">Message
             <textarea name="message" ref={register({ required: true })} minLength="50" rows="10" />
           </label>
-          <input type="submit" value="Envoyer" />
+          <input type="submit" className="submit-button" value="Envoyer" />
         </form>
       </div>
     </div>

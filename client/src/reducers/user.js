@@ -1,6 +1,8 @@
 import {
   CHANGE_FIELD_VALUE,
   VALIDATE_REGISTER,
+  SET_TOKEN_VERIFIED,
+  SET_TOKEN_MESSAGE,
   SAVE_USER,
   SET_LOGGED,
   SET_ERROR,
@@ -13,6 +15,7 @@ import {
 const initialState = {
   loading: true,
   validateRegister: false,
+  isTokenVerified: false,
   loadingUser: false,
   loggedIn: false,
   session: {},
@@ -50,6 +53,16 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         validateRegister: action.boolean,
+      };
+    case SET_TOKEN_VERIFIED:
+      return {
+        ...state,
+        isTokenVerified: action.verified,
+      };
+    case SET_TOKEN_MESSAGE:
+      return {
+        ...state,
+        tokenMessage: action.message,
       };
     case SAVE_USER:
       return {
