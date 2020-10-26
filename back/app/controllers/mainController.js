@@ -41,7 +41,7 @@ const travelController = {
     showTravels: async (req, res) =>{
         const allTravels = await Travel.findAllTravelComponent();
         
-        if (allTravels.length > 0) { 
+        if (allTravels) { 
             res.json(allTravels);
         } else {
             res.json ('Il n\'existe pas de voyage');
@@ -60,6 +60,7 @@ const travelController = {
     showTravelers: async (req, res) =>{
         const travelId = req.params.id ;
         const travelersInTravel = await travel_has_traveler.findTravelersByTravel(travelId);
+        console.log(travelersInTravel);
         
         if (travelersInTravel.length > 0) { 
             res.json(travelersInTravel);

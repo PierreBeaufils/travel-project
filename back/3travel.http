@@ -124,7 +124,7 @@ Content-Type: application/json
     "memo": "Reactive"
   }
 ###
-PATCH http://localhost:3000/v1/travel/1/transport/31
+PATCH http://localhost:3000/v1/travel/1/transport/32
 Content-Type: application/json
 
   {
@@ -137,8 +137,7 @@ Content-Type: application/json
     "reservation_ref": "2657",
     "unit_price": "0",
     "quantity": 8,
-    "memo": "Reactive",
-    "travel_id": 1
+    "memo": "Reactive"
   }
 ###
 DELETE http://localhost:3000/v1/travel/1/transport/32
@@ -152,13 +151,13 @@ POST http://localhost:3000/v1/travel/1/task
 Content-Type: application/json
 
   {
-    "name": "TEST 3",
+    "name": "TEST 5",
     "description": "Echinocereus viridiflorus Engelm.",
     "deadline": "2020-10-21T11:11:51.000Z",
     "status": false
   }
 ###
-PATCH http://localhost:3000/v1/travel/1/task/22
+PATCH http://localhost:3000/v1/travel/1/task/17
 Content-Type: application/json
 
   {
@@ -168,18 +167,18 @@ Content-Type: application/json
     "status": false
   }
 ###
-DELETE http://localhost:3000/v1/travel/1/task/22
+DELETE http://localhost:3000/v1/travel/1/task/17
 ###
 
 ////////////////////////////////////////// ROUTES DE TRAVEL VERS TRAVELER////////////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/1/travelers
+GET http://localhost:3000/v1/travel/30/travelers
 ###
-POST http://localhost:3000/v1/travel/1/traveler
+POST http://localhost:3000/v1/travel/10/traveler
 Content-Type: application/json
 
   {
-    "traveler_id" : 16
+    "traveler_id" : 1
   }
 ###
-DELETE http://localhost:3000/v1/travel/1/traveler/16
+DELETE http://localhost:3000/v1/travel/10/traveler/1
