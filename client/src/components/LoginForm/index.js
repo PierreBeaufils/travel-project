@@ -20,7 +20,7 @@ const LoginForm = ({
   };
 
   return (
-    <div className="login">
+    <div className="login-container">
       <div className="main-form">
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit}>

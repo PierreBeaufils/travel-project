@@ -4,6 +4,8 @@ export const SAVE_USER = 'SAVE_USER';
 export const HANDLE_SIGNUP = 'HANDLE_SIGNUP';
 export const VALIDATE_REGISTER = 'VALIDATE_REGISTER';
 export const VERIFY_TOKEN = 'VERIFY_TOKEN';
+export const SET_TOKEN_VERIFIED = 'SET_TOKEN_VERIFIED';
+export const SET_TOKEN_MESSAGE = 'SET_TOKEN_MESSAGE';
 export const LOGIN_CHECK = 'LOGIN_CHECK';
 export const SET_LOGGED = 'SET_LOGGED';
 export const LOGOUT = 'LOGOUT';
@@ -33,6 +35,16 @@ export const validateRegister = (boolean) => ({
 export const verifyToken = (token) => ({
   type: VERIFY_TOKEN,
   token,
+});
+
+export const setTokenMessage = (message) => ({
+  type: SET_TOKEN_MESSAGE,
+  message,
+});
+
+export const setTokenVerified = (verified) => ({
+  type: SET_TOKEN_VERIFIED,
+  verified,
 });
 
 export const handleLogin = () => ({

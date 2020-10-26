@@ -1,4 +1,13 @@
-.travel-container {
+@use 'src/styles/vars' as v;
+
+.travel-details-container {
+  max-width: v.$max-width;
+  background-color: v.$background-color;
+  margin: 0 auto;
+}
+
+.travel-category-container {
+  margin: 0 auto;
   width: 100%;
   padding: 0.5rem;
 }
