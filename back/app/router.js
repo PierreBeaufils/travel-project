@@ -1,27 +1,61 @@
- const mainController = require('./controllers/mainController');
- const travelerController = require('./controllers/travelerController');
- const adminController = require('./controllers/adminController');
- const travelController = require('./controllers/travelController');
- const loginController = require ('./controllers/loginController');
+const mainController = require('./controllers/mainController');
+const travelerController = require('./controllers/travelerController');
+const loginController = require('./controllers/loginController');
 
 const { Router } = require('express');
 
 const router = Router();
 
-// router.post('/',mainController.test);
+// router.get('/travel/:id/traveler/:travelerId', mainController.test);
 
-// router.patch('/',mainController.test);
-// router.get('/test1',mainController.test3);
-// router.get('/test2',mainController.test2);
-
+// INFOS VOYAGEURS : affichage globale et individuel, insertion, modification et suppression
 router.get('/travelers', travelerController.allTravelers);
 router.get('/traveler/:id', travelerController.getOneTraveler);
 router.post('/traveler', travelerController.newTraveler);
 router.patch('/traveler/:id', travelerController.editTraveler);
 router.delete('/traveler/:id', travelerController.deleteTraveler);
+// VOYAGES LIES A UN VOYAGEUR : Voyages à venir auxquels un voyageur est inscrit
+router.get('/user-travels/:id', mainController.showUserTravels);
 
-router.get('/user-travels/:id', travelController.showUserTravels);
+// INFOS DU VOYAGE : affichage globale et individuel, insertion, modification et suppression
+router.get('/travels', mainController.showTravels);
+router.get('/travel/:id', mainController.showAllInfos);
+router.post('/create-travel', mainController.createTravel);
+router.patch('/travel/:id', mainController.editTravel);
+router.delete('/travel/:id', mainController.delete);
 
+// INFOS VOYAGEURS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
+router.get('/travel/:id/travelers', mainController.showTravelers);
+router.post('/travel/:id/traveler', mainController.addTravelers);
+router.delete('/travel/:id/traveler/:travelerId', mainController.deleteTravelerFromTravel);
+
+// INFOS HEBERGEMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
+router.get('/travel/:id/accommodation', mainController.showAccommodations);
+router.post('/travel/:id/accommodation', mainController.createAccommodation);
+router.patch('/travel/:id/accommodation/:accoId', mainController.editAccommodation);
+
+// INFOS ACTIVITES LIEES A UN VOYAGE : affichage globale et individuel, insertion, modification 
+router.get('/travel/:id/activity', mainController.showActivity);
+router.post('/travel/:id/activity', mainController.createActivity);
+router.patch('/travel/:id/activity/:activityId', mainController.editActivity);
+
+// INFOS TRANSPORT LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
+router.get('/travel/:id/transport', mainController.showTransport);
+router.post('/travel/:id/transport', mainController.createTransport);
+router.patch('/travel/:id/transport/:transportId', mainController.editTransport);
+
+// INFOS TACHES LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
+router.get('/travel/:id/tasks', mainController.showTask);
+router.post('/travel/:id/task', mainController.createTask);
+router.patch('/travel/:id/task/:taskId', mainController.editTask);
+
+// ROUTE FACTORISEE POUR SUPPRESSION de Hébergement, activité, transport, task liés à un voyage
+router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity);
+
+// INFOS DOCUMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
+// router.post('/travel/:id/document', travelController)
+// router.patch('/travel/:id/document', travelController)
+// router.delete('/travel/:id/document', travelController)
 
 // Formulaire de login : affichage et traitement
 router.post('/login', loginController.doLogin);
@@ -50,51 +84,5 @@ router.get('/mail', loginController.verifyToken);
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
 // router.get('/admin', adminMW, adminController.admin);
-
-// Page dashboard
-// router.get('/dashboard', Controller)
-
-// Créer un voyage
-router.post('/create-travel', travelController.createTravel);
-
-router.get('/travel/:id', travelController.showAllInfos) //Toutes les datas du voyage Voyageurs + Acco + Transp + activities 
-// router.post('/travel/:id', travelController) => Elle fait quoi ???
-router.patch('/travel/:id', travelController.editTravel);
-router.delete('/travel/:id', travelController.delete);
-
-// infos liées à l'hébergement d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/accommodation', travelController.showAccommodations);
-router.post('/travel/:id/accommodation', travelController.createAccommodation);
-router.patch('/travel/:id/accommodation/:accoId', travelController.editAccommodation);
-// router.delete('/travel/:id/accommodation', travelController)
-
-// infos liées aux activités d'un voyage : affichage, insertion, modification suppression 
-router.get('/travel/:id/activity', travelController.showActivity);
-router.post('/travel/:id/activity', travelController.createActivity);
-router.patch('/travel/:id/activity/:activityId', travelController.editActivity);
-// router.delete('/travel/:id/activity', travelController)
-
-// Info liés aux transport d'un voyage :
-router.get('/travel/:id/transport', travelController.showTransport);
-router.post('/travel/:id/transport', travelController.createTransport);
-router.patch('/travel/:id/transport/:transportId', travelController.editTransport);
-
-router.delete('/travel/:id/:entity/:entityId', travelController.deleteEntity);
-
-// infos liées aux tâches d'un voyage : affichage, insertion, modification suppression 
-// router.get('/travel/:id/task', travelController)
-// router.post('/travel/:id/task', travelController)
-// router.patch('/travel:id/task/:id', mainController.test);
-// router.delete('/travel/:id/task', travelController)
-
-// infos liées aux documents d'un voyage : affichage, insertion, modification suppression 
-// router.post('/travel/:id/document', travelController)
-// router.patch('/travel/:id/document', travelController)
-// router.delete('/travel/:id/document', travelController)
-
-// Routes optionnelles
-// '/travel/:id/activity/:id'
-// '/travel/:id/transport/:id'
-// '/travel/:id/accommodation/:id'
 
 module.exports = router;

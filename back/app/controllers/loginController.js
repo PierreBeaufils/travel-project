@@ -1,7 +1,6 @@
 const Traveler = require('../models/Traveler');
 const bcrypt = require('bcrypt');
 
-
 const mailApp = require('../services/nodemailer');
 const crypt = require("../services/crypt");
 
