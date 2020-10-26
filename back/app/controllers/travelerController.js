@@ -27,8 +27,7 @@ const travelerController = {
         } else {
             res.json('ce voyageur n\'existe pas')
         }
-
-
+        
         // if (!traveler) {
         //     res.json('voyageur introuvable');
         // } else {

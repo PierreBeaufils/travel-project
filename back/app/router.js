@@ -57,14 +57,29 @@ router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity);
 // router.patch('/travel/:id/document', travelController)
 // router.delete('/travel/:id/document', travelController)
 
-// Formulaire de login : traitement
+// Formulaire de login : affichage et traitement
 router.post('/login', loginController.doLogin);
-// MW de vérification de session de login
+
 router.post('/isLogged', loginController.loginCheck);
-// Formulaire de signup : traitement
-router.post('/signup', loginController.doSignup);
 // Déconnexion
 router.post('/logout', loginController.logout);
+
+
+// Formulaire de signup : affichage et traitement
+router.post('/signup', loginController.doSignup,loginController.verifyEmail);
+// Déconnexion
+
+router.get('/mail', loginController.verifyToken);
+
+
+// Infos persos de l'utilisateur : affichage et traitement
+// router.get('/profile', travelerController.profile);
+// router.post('/profile', travelerController.modifyProfile);
+// page de contact (mail prérempli)
+
+
+// router.get('/travel/id/travelers', travelerController.allTravelers);
+// Voir tout les travelers associé à un voyage
 
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
