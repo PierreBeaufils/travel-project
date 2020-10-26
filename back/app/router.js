@@ -6,6 +6,8 @@ const { Router } = require('express');
 
 const router = Router();
 
+// router.get('/travel/:id/traveler/:travelerId', mainController.test);
+
 // INFOS VOYAGEURS : affichage globale et individuel, insertion, modification et suppression
 router.get('/travelers', travelerController.allTravelers);
 router.get('/traveler/:id', travelerController.getOneTraveler);
@@ -24,8 +26,8 @@ router.delete('/travel/:id', mainController.delete);
 
 // INFOS VOYAGEURS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
 router.get('/travel/:id/travelers', mainController.showTravelers);
-// router.post('/travel/:id/traveler', mainController.createTravelers);
-// router.patch('/travel/:id/traveler/:travelerId', mainController.editTravelers);
+router.post('/travel/:id/traveler', mainController.addTravelers);
+router.delete('/travel/:id/traveler/:travelerId', mainController.deleteTravelerFromTravel);
 
 // INFOS HEBERGEMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
 router.get('/travel/:id/accommodation', mainController.showAccommodations);
@@ -64,20 +66,8 @@ router.post('/signup', loginController.doSignup);
 // Déconnexion
 router.post('/logout', loginController.logout);
 
-// Routes optionnelles
-// '/travel/:id/activity/:id'
-// '/travel/:id/transport/:id'
-// '/travel/:id/accommodation/:id'
-
-// Infos persos de l'utilisateur : affichage et traitement
-// page de contact (mail prérempli)
-
-// Voir tout les travelers associé à un voyage
-// router.get('/travel/id/travelers', travelerController.allTravelers);
-
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
 // router.get('/admin', adminMW, adminController.admin);
-
 
 module.exports = router;

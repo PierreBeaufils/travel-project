@@ -116,6 +116,12 @@ const travelController = {
         const savedTask = await newTask.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
+    addTravelers: async (req, res) => {
+        const newTraveler = new travel_has_traveler(req.body);
+        // console.log("newTraveler : ", newTraveler);
+        const addedTraveler = await newTraveler.saveTravelerIntoTravel();
+        res.json("ajout effectué");
+    },
     editAccommodation: async (req,res) => {
         const accoToEdit = await Accommodation.findOneTravelComponent(req.params.id,req.params.accoId);
         const accoEdited = await new Accommodation(accoToEdit);
@@ -150,6 +156,18 @@ const travelController = {
         await travelToDelete.delete();
         res.json("suppresion effectuée");
     },
+    deleteTravelerFromTravel : async (req, res) => {
+        const travelerToFind = await travel_has_traveler.findOneTravelerByTravel(req.params.id, req.params.travelerId);
+        // console.log(travelerToFind);
+        if (travelerToFind) {
+            const travelerToDelete = new travel_has_traveler(travelerToFind);
+            // console.log(travelerToDelete);
+            await travelerToDelete.deleteTraveler()
+            res.json("suppression effectuée")
+        } else {
+            res.json('ce voyageur n\'est pas inscrit sur ce voyage')
+        }
+    },
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
         // entity = entity.charAt(0).toUpperCase() + entity.slice(1);
@@ -176,7 +194,6 @@ const travelController = {
         } else {
             res.json("cette entité n'existe pas");
         }
-
     }
 };
 
