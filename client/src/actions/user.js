@@ -2,13 +2,10 @@ export const CHANGE_FIELD_VALUE = 'CHANGE_FIELD_VALUE';
 export const HANDLE_LOGIN = 'HANDLE_LOGIN';
 export const SAVE_USER = 'SAVE_USER';
 export const HANDLE_SIGNUP = 'HANDLE_SIGNUP';
-<<<<<<< HEAD
-=======
 export const VALIDATE_REGISTER = 'VALIDATE_REGISTER';
 export const VERIFY_TOKEN = 'VERIFY_TOKEN';
 export const SET_TOKEN_VERIFIED = 'SET_TOKEN_VERIFIED';
 export const SET_TOKEN_MESSAGE = 'SET_TOKEN_MESSAGE';
->>>>>>> client
 export const LOGIN_CHECK = 'LOGIN_CHECK';
 export const SET_LOGGED = 'SET_LOGGED';
 export const LOGOUT = 'LOGOUT';
@@ -17,11 +14,7 @@ export const SET_LOADING_STATE = 'SET_LOADING_STATE';
 export const HANDLE_EDIT_PROFILE = 'HANDLE_EDIT_PROFILE';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const FILL_PROFILE = 'FILL_PROFILE';
-<<<<<<< HEAD
-export const SET_LOADING_USER = 'SET_LOADING_USER';
-=======
 export const LOADING_USER = 'LOADING_USER';
->>>>>>> client
 
 export const changeFieldValue = (section, field, value) => ({
   type: CHANGE_FIELD_VALUE,
@@ -30,11 +23,6 @@ export const changeFieldValue = (section, field, value) => ({
   value,
 });
 
-<<<<<<< HEAD
-export const handleSignup = (data) => ({
-  type: HANDLE_SIGNUP,
-  data,
-=======
 export const handleSignup = () => ({
   type: HANDLE_SIGNUP,
 });
@@ -57,7 +45,6 @@ export const setTokenMessage = (message) => ({
 export const setTokenVerified = (verified) => ({
   type: SET_TOKEN_VERIFIED,
   verified,
->>>>>>> client
 });
 
 export const handleLogin = () => ({
@@ -94,26 +81,15 @@ export const setLoadingState = (loading) => ({
   loading,
 });
 
-<<<<<<< HEAD
-export const setLoadingUser = (loading) => ({
-  type: SET_LOADING_USER,
-  loading,
-});
-
-=======
->>>>>>> client
 export const fetchUserData = () => ({
   type: FETCH_USER_DATA,
 });
 
-<<<<<<< HEAD
-=======
 export const loadingUser = (loading) => ({
   type: LOADING_USER,
   loading,
 });
 
->>>>>>> client
 export const fillProfile = (infos) => ({
   type: FILL_PROFILE,
   infos,

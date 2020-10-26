@@ -9,10 +9,7 @@ const RegisterForm = ({
   changeFieldValue,
   fields,
   error,
-<<<<<<< HEAD
-=======
   validateRegister,
->>>>>>> client
 }) => {
   const handleChange = (event) => {
     changeFieldValue('signup', event.target.name, event.target.value);
@@ -30,21 +27,6 @@ const RegisterForm = ({
       <div className="main-form register-form">
         <h2>Inscription</h2>
         <form onSubmit={handleSubmit}>
-<<<<<<< HEAD
-          <label htmlFor="email">Email
-            <input name="email" type="email" value={fields.email} onChange={handleChange} required />
-          </label>
-          <label htmlFor="first_name">Prénom
-            <input name="first_name" type="text" value={fields.first_name} onChange={handleChange} required />
-          </label>
-          <label htmlFor="last_name">Nom
-            <input name="last_name" type="text" value={fields.last_name} onChange={handleChange} required />
-          </label>
-          <label htmlFor="password">Mot de passe
-            <input name="password" type="password" value={fields.password} onChange={handleChange} required />
-          </label>
-          <label htmlFor="password_nonfirm">Confirmez votre mot de passe
-=======
 
           <div className="register-form-field">
             <label htmlFor="email">Email
@@ -74,7 +56,6 @@ const RegisterForm = ({
             </label>
           </div>
           <label htmlFor="password_confirm">Confirmez votre mot de passe
->>>>>>> client
             <input name="password_confirm" type="password" value={fields.password_confirm} onChange={handleChange} required />
           </label>
           {/*
@@ -95,10 +76,7 @@ const RegisterForm = ({
 };
 
 RegisterForm.propTypes = {
-<<<<<<< HEAD
-=======
   validateRegister: PropTypes.bool.isRequired,
->>>>>>> client
   error: PropTypes.string,
   handleSignup: PropTypes.func.isRequired,
   changeFieldValue: PropTypes.func.isRequired,
