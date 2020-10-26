@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { Users, XSquare, MapPin, DollarSign, LogIn, LogOut, Send, FileText, Home, Info, Clock, } from 'react-feather';
+import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
@@ -19,6 +20,10 @@ const ModalAddTransport = ({ isShowing, hide }) => {
 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [locationData, setLocationData] = useState({
+    departurePlace: '',
+    arrivalPlace: '',
+  });
 
   return (isShowing ? ReactDOM.createPortal(
     <>
@@ -41,11 +46,21 @@ const ModalAddTransport = ({ isShowing, hide }) => {
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop">
 
                 <label htmlFor="from"><MapPin color="#2B7AFD" size={15} />Lieu de départ
-                  <input name="from" ref={register({ required: true })} type="text" />
+                  {/*<input name="from" ref={register({ required: true })} type="text" />*/}
+                  <AlgoLeaflet
+                    isMapRequired={false}
+                    isAdressInputRequired={true}
+                    setLocationData={setLocationData}
+                  />
                   {errors.from && <span className="warning-text">Veuillez selectionner un lieu de départ</span>}
                 </label>
                 <label htmlFor="to"><MapPin color="#2B7AFD" size={15} />Lieu d'arrivée
-                  <input name="to" ref={register({ required: true })} type="text" />
+                  {/*<input name="to" ref={register({ required: true })} type="text" />*/}
+                  <AlgoLeaflet
+                    isMapRequired={false}
+                    isAdressInputRequired={true}
+                    setLocationData={setLocationData}
+                  />
                   {errors.to && <span className="warning-text">Veuillez selectionner un lieu d'arrivée</span>}
                 </label>
                 <label htmlFor="arrival_date"><LogIn color="#2B7AFD" size={15} />Date et heure de départ

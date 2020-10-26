@@ -1,0 +1,11 @@
+@use '../../styles/vars' as v;
+
+.map {
+  display: block;
+}
+.ap-icon-pin {
+  display: none;
+}
+.ap-dataset-places {
+color: v.$primary-color;
+}

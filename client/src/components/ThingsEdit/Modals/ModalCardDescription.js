@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {
   Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock,
 } from 'react-feather';
+import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
@@ -33,6 +34,10 @@ const ModalCardDescription = ({
               <div className="modal_content-main">
                 <h2>Hébergement {oneThingData.name}</h2>
                 <h4><MapPin color="#2B7AFD" size={15} /> {oneThingData.adress} {oneThingData.city}</h4>
+                <AlgoLeaflet
+                    isMapRequired={true}
+                    isAdressInputRequired={false}
+                  />
                 <h4><LogIn color="#2B7AFD" size={15} /> Date d'arrivée: {transformDateISOtoString(oneThingData.arrival_date)}</h4>
                 <h4><LogOut color="#2B7AFD" size={15} /> Date de départ: {transformDateISOtoString(oneThingData.departure_date)}</h4>
                 <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} USD</h4>
