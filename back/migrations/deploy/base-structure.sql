@@ -97,8 +97,8 @@ CREATE TABLE "accommodation" (
 );
 
 CREATE TABLE "travel_has_traveler" (
-    "travel_id" INT NOT NULL references travel(id),
-    "traveler_id" INT NOT NULL references traveler(id),
+    "travel_id" INT NOT NULL references travel(id) ON DELETE CASCADE,
+    "traveler_id" INT NOT NULL references traveler(id) ON DELETE CASCADE,
     PRIMARY KEY ("travel_id","traveler_id")
 );
 

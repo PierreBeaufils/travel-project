@@ -13,24 +13,30 @@ const travelController = {
     createTravel: async (req,res) => {
         const newTravel = new Travel(req.body);
         const savedTravel = await newTravel.saveAllTravelComponent();
-        res.json(savedTravel);
+        res.json('ajout réussi');
         // Theme / destination / date départ / date de fin
     },
     showAllInfos: async (req,res) => {
         const travelId = req.params.id;
         const travelinfos = {};
         travelinfos.infos = await Travel.findOneTravelComponent(null,travelId);
-        travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
-        travelinfos.activity = await Activity.findAllTravelComponent(travelId);
-        travelinfos.transport = await Transport.findAllTravelComponent(travelId);
-        res.json(travelinfos);
+        if (travelinfos.infos) {
+            travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
+            travelinfos.activity = await Activity.findAllTravelComponent(travelId);
+            travelinfos.transport = await Transport.findAllTravelComponent(travelId);
+            res.json(travelinfos);
+        } else {
+            res.json('ce voyage n\'existe pas')
+        }
+
     },
 
     editTravel: async (req,res) => {
-        const travelToEdit = await travel.findOneTravelComponent(null,req.params.id);
+        const travelToEdit = await Travel.findOneTravelComponent(null,req.params.id);
         const travelEdited = await new Travel(travelToEdit);
         travelEdited.update(req.body);
-        res.json(await travelEdited.saveAllTravelComponent());
+        await travelEdited.saveAllTravelComponent();
+        res.json('voyage mis à jour')
     },
     showTravels: async (req, res) =>{
         const allTravels = await Travel.findAllTravelComponent();
@@ -38,7 +44,7 @@ const travelController = {
         if (allTravels.length > 0) { 
             res.json(allTravels);
         } else {
-            res.json ('Cet hébergement n\'existe pas');
+            res.json ('Il n\'existe pas de voyage');
         };
     },
     showAccommodations: async (req, res) =>{
@@ -48,7 +54,7 @@ const travelController = {
         if (travelAccommodations.length > 0) { 
             res.json(travelAccommodations);
         } else {
-            res.json ('Cet hébergement n\'existe pas');
+            res.json ('Ce voyage ne comporte pas encore d\'hébergements');
         };
     },
     showTravelers: async (req, res) =>{
@@ -58,7 +64,7 @@ const travelController = {
         if (travelersInTravel.length > 0) { 
             res.json(travelersInTravel);
         } else {
-            res.json ('Ce voyageur n\'existe pas');
+            res.json ('Ce voyage ne comporte pas encore de voyageurs');
         };
     },
     showTransport: async (req, res) =>{ 
@@ -68,7 +74,7 @@ const travelController = {
         if (travelTransport.length > 0) { 
             res.json(travelTransport);
         } else {
-            res.json ('Ce transport n\'existe pas');
+            res.json ('Ce voyage ne comporte pas encore de transports');
         };
     },
     showActivity: async (req, res) =>{
@@ -78,7 +84,7 @@ const travelController = {
         if (travelActivity.length > 0) { 
             res.json(travelActivity);
         } else {
-            res.json ('Cette activité n\'existe pas');
+            res.json ('Ce voyage ne comporte pas encore d\'activités');
         };
     },
     showTask: async (req, res) =>{
@@ -88,7 +94,7 @@ const travelController = {
         if (travelTask.length > 0) { 
             res.json(travelTask);
         } else {
-            res.json ('Cette tâche n\'existe pas');
+            res.json ('Ce voyage ne comporte pas encore de tâches');
         };
     },
     showUserTravels : async (req,res) =>{
@@ -98,63 +104,88 @@ const travelController = {
     },
     createAccommodation: async (req,res) => {
         const newAcco = new Accommodation(req.body);
+        newAcco.travel_id = req.params.id;
         const savedAcco = await newAcco.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
     createActivity: async (req,res) => {
         const newActiv = new Activity(req.body);
+        newActiv.travel_id = req.params.id;
         const savedActiv = await newActiv.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
     createTransport: async (req,res) => {
         const newTransp = new Transport(req.body);
+        newTransp.travel_id = req.params.id; 
         const savedTransp = await newTransp.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
     createTask: async (req,res) => {
         const newTask = new Task(req.body);
+        newTask.travel_id = req.params.id;
         const savedTask = await newTask.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
     addTravelers: async (req, res) => {
         const newTraveler = new travel_has_traveler(req.body);
         // console.log("newTraveler : ", newTraveler);
+        newTraveler.travel_id = req.params.id;
         const addedTraveler = await newTraveler.saveTravelerIntoTravel();
         res.json("ajout effectué");
     },
     editAccommodation: async (req,res) => {
         const accoToEdit = await Accommodation.findOneTravelComponent(req.params.id,req.params.accoId);
-        const accoEdited = await new Accommodation(accoToEdit);
-        accoEdited.update(req.body);
-        accoEdited.saveAllTravelComponent();
-        res.json("Hébergement mis à jour");
+        if (accoToEdit) {
+            const accoEdited = await new Accommodation(accoToEdit);
+            accoEdited.update(req.body);
+            accoEdited.saveAllTravelComponent();
+            res.json("Hébergement mis à jour");  
+        } else [
+            res.json('cet hébergement ne fait pas partie de ce voyage')
+        ]
     },
     editTransport: async (req,res) => {
         const transportToEdit = await Transport.findOneTravelComponent(req.params.id,req.params.transportId);
-        const transportEdited = await new Transport(transportToEdit);
-        transportEdited.update(req.body);
-        transportEdited.saveAllTravelComponent();
-        res.json("Transport mis à jour"); 
+        if (transportToEdit) {
+            const transportEdited = await new Transport(transportToEdit);
+            transportEdited.update(req.body);
+            transportEdited.saveAllTravelComponent();
+            res.json("Transport mis à jour");  
+        } else {
+            res.json ('Ce transport ne fait pas partie de ce voyage')
+        }
     },
     editActivity: async (req,res) => {
         const activityToEdit = await Activity.findOneTravelComponent(req.params.id,req.params.activityId);
-        const activityEdited = await new Activity(activityToEdit);
-        activityEdited.update(req.body);
-        activityEdited.saveAllTravelComponent();
-        res.json("Activité mise à jour"); 
+        if (activityToEdit) {
+            const activityEdited = await new Activity(activityToEdit);
+            activityEdited.update(req.body, req.params.id);
+            activityEdited.saveAllTravelComponent();
+            res.json("Activité mise à jour");  
+        } else {
+            res.json('Cette activité ne fait pas partie de ce voyage');
+        }
     },
     editTask: async (req,res) => {
         const taskToEdit = await Task.findOneTravelComponent(req.params.id,req.params.taskId);
-        const taskEdited = await new Task(taskToEdit);
-        taskEdited.update(req.body);
-        taskEdited.saveAllTravelComponent();
-        res.json("Task mise à jour"); 
+        if (taskToEdit) {
+            const taskEdited = await new Task(taskToEdit);
+            taskEdited.update(req.body, req.params.id);
+            taskEdited.saveAllTravelComponent();
+            res.json("Task mise à jour");     
+        } else {
+            res.json('cette tâche ne fait pas partie de ce voyage');
+        }
     },
     delete: async (req,res) => {
         const travelToFind = await Travel.findOneTravelComponent(null,req.params.id);
-        const travelToDelete = new Travel(travelToFind);
-        await travelToDelete.delete();
-        res.json("suppresion effectuée");
+        if (travelToFind) {
+            const travelToDelete = new Travel(travelToFind);
+            await travelToDelete.delete();
+            res.json("suppression effectuée");    
+        } else {
+            res.json('cette entité n\'existe pas')
+        }
     },
     deleteTravelerFromTravel : async (req, res) => {
         const travelerToFind = await travel_has_traveler.findOneTravelerByTravel(req.params.id, req.params.travelerId);
@@ -192,7 +223,7 @@ const travelController = {
             await entityToDelete.delete();
             res.json("suppresion effectuée");
         } else {
-            res.json("cette entité n'existe pas");
+            res.json("cette entité n'existe pas dans ce voyage");
         }
     }
 };

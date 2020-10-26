@@ -45,7 +45,7 @@ router.post('/travel/:id/transport', mainController.createTransport);
 router.patch('/travel/:id/transport/:transportId', mainController.editTransport);
 
 // INFOS TACHES LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
-router.get('/travel/:id/task', mainController.showTask);
+router.get('/travel/:id/tasks', mainController.showTask);
 router.post('/travel/:id/task', mainController.createTask);
 router.patch('/travel/:id/task/:taskId', mainController.editTask);
 
