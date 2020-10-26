@@ -5,11 +5,10 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
+const app = express();
 const bodyParser = multer();
 
 app.use(express.urlencoded({ extended: true }));
-
-const session = require('express-session');
 
 app.use(session({
     secret: 'keyboard cat',
