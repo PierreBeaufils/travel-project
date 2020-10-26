@@ -16,7 +16,7 @@ const travelerController = {
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
-        res.json('voyageur mis à jour')
+        res.status(404).json('voyageur mis à jour')
     },
     deleteTraveler: async (req, res) => {
         const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
@@ -25,7 +25,7 @@ const travelerController = {
             await travelerToDelete.delete();
             res.json('suppression effectuée');
         } else {
-            res.json('ce voyageur n\'existe pas')
+            res.status(404).json('ce voyageur n\'existe pas')
         }
         
         // if (!traveler) {
@@ -40,7 +40,7 @@ const travelerController = {
         if (foundTraveler) {
             res.json(foundTraveler);
         } else {
-            res.json('ce voyageur n\'existe pas')
+            res.status(404).json('ce voyageur n\'existe pas')
         }
     },
 
