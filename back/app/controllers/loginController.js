@@ -90,7 +90,9 @@ const loginController = {
             travelerToValidate = new Traveler(travelerToValidate);
            travelerToValidate.update({"email_check": true});
            travelerToValidate.saveAllTravelComponent();
-       } else {console.log("c'est raté");
+           res.json("Votre compte à bien été vérifié, vous pouvez désormais vous connecter en accédant à la page de login");
+       } else {
+           res.json("Un problème est survenu lors de la vérification de l'email, veuillez contact l'administrateur sur la page contact");
        console.log(Date.now() - decryptedToken[1]);
     }
        
