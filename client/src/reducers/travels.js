@@ -5,7 +5,7 @@ import {
 const initialState = {
   errorMessage: null,
   travels: [],
-  loadingTravels: false,
+  loadingTravels: true,
   travelFields: {},
 };
 

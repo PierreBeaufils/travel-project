@@ -28,7 +28,6 @@ const travelMiddleware = (store) => (next) => (action) => {
       axios.get(`${baseURL}/user-travels/${id}`)
         .then((res) => {
           console.log(`récupération des voyages: ${res.data}`);
-          console.log(res);
           store.dispatch(saveTravels(res.data));
         })
         .catch((e) => {
