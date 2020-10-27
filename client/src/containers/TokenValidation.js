@@ -7,7 +7,7 @@ import getQuery from 'src/selectors/token';
 const mapStateToProps = (state, ownProps) => {
   const { search } = ownProps.location;
   return {
-    token: getQuery(search, 'token'),
+    token: search, // getQuery(search, 'token'),
     isTokenVerified: state.user.isTokenVerified,
     tokenMessage: state.user.tokenMessage,
   };

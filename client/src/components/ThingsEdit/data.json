@@ -44,7 +44,10 @@
       "name": "Mongoose, banded",
       "topic": "Services",
       "place": "43 Pennsylvania Alley",
-      "coordinate": null,
+      "coordinate": {
+        "x": 38.1483676,
+        "y": 39.1483676
+      },
       "duration": {
         "minutes": 34
       },
