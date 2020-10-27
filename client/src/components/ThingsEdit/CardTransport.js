@@ -24,14 +24,17 @@ const CardTransport = (oneTransport) => {
   };
 
   return (
-    <div className="card__container">
-      <ModalDelete
-        isShowing={isShowingModalDeleteCard}
-        hide={toggleModalDeleteCard}
-        oneThingName={oneTransport.from}
-        categoryName="Transport"
-        cardID={oneTransport.id}
-      />
+      // Timestamp is used to order by date in CSS rendering
+    <div className="card__container" style={{ order: `${oneTransport.timestamp}` }}>
+      {(oneTransport.isEditingAllowed) ? (
+        <ModalDelete
+          isShowing={isShowingModalDeleteCard}
+          hide={toggleModalDeleteCard}
+          oneThingName={oneTransport.from}
+          categoryName="Transport"
+          cardID={oneTransport.id}
+        />
+      ) : null}
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
         hide={toggleModalCardDescription}
@@ -50,16 +53,18 @@ const CardTransport = (oneTransport) => {
 
           <p><Info color="#2B7AFD" size={15} /> {oneTransport.memo}</p>
         </div>
-        <div className="card__footer">
-          <CheckSquare
-            onClick={() => handleAddCardCLick(oneTransport.id)}
-            color="#80CC24"
-          />
-          <Trash2
-            color="#FF7A32"
-            onClick={() => handleDeleteCardCLick(oneTransport.id)}
-          />
-        </div>
+        {(oneTransport.isEditingAllowed) ? (
+          <div className="card__footer">
+            <CheckSquare
+              onClick={() => handleAddCardCLick(oneTransport.id)}
+              color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(oneTransport.id)}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
