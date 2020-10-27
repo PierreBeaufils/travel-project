@@ -1,35 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './travel.scss';
 import {
-  MapPin, FileText, Users, Map, Home, Briefcase, Calendar,
+  FileText, Users, Map, Home, Briefcase,
 } from 'react-feather';
-import thumbnail from 'src/assets/images/ile-maurice.jpg';
 
-const Travel = ({ travel }) => (
+const TravelMenu = ({ travel }) => (
   <div className="travel-details-container">
-    <div className="card-container">
-      <div className="travel-card card-detail">
-        <img src={thumbnail} className="travel-card-image card-detail-image" alt="thumbnail" />
-        <div className="travel-card-content">
-          <div className="travel-card-content-title">{travel.title}</div>
-          <div className="travel-card-content-destination">
-            <MapPin color="grey" size={15} />
-            Rome, Italie
-          </div>
-          <div className="travel-card-content-date">
-            <Calendar color="grey" size={15} />
-            26/10/2020 au 01/11/2020
-          </div>
-          <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
-          <Link to={`/voyage/${travel.id}/modifer`} className="travel-card-content-more card-details">
-            Modifier les détails
-          </Link>
-        </div>
-      </div>
-    </div>
     <div className="travel-menu">
       <NavLink to={`/travel/${travel.id}/membres`} activeClassName="navlink-selected">
         <div className="travel-menu-icon">
@@ -62,18 +41,15 @@ const Travel = ({ travel }) => (
         </div>
       </NavLink>
     </div>
-    <div className="travel-container">
-      Component içi
-    </div>
   </div>
 );
 
-Travel.propTypes = {
+TravelMenu.propTypes = {
   travel: PropTypes.object,
 };
 
-Travel.defaultProps = {
+TravelMenu.defaultProps = {
   travel: {},
 };
 
-export default Travel;
+export default TravelMenu;
