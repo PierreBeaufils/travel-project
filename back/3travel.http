@@ -1,7 +1,7 @@
 //////////////////////////////////////////// ROUTES DE TRAVEL ////////////////////////////////////////////////////
 GET http://localhost:3000/v1/travels
 ###
-GET http://localhost:3000/v1/travel/45
+GET http://localhost:3000/v1/travel/
 ###
 POST http://localhost:3000/v1/create-travel
 Content-Type: application/json
@@ -32,7 +32,7 @@ DELETE http://localhost:3000/v1/travel/45
 
 //////////////////////////////////// ROUTES DE TRAVEL VERS ACCOMODATION///////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/1/accommodation
+GET http://localhost:3000/v1/travel/15/accommodation/
 ###
 POST http://localhost:3000/v1/travel/1/accommodation
 Content-Type: application/json
@@ -50,17 +50,12 @@ Content-Type: application/json
   "quantity": 9
 }
 ###
-PATCH http://localhost:3000/v1/travel/1/accommodation/32
+PATCH http://localhost:3000/v1/travel/15/accommodation/33
 Content-Type: application/json
 
 {
-  "name": "test patch",
+  "name": "Grande marée",
   "address": "adresse test patch",
-  "city": "ville post",
-  "coordinate": "38.1483676,39.1483676",
-  "information": null,
-  "availability": null,
-  "arrival_date": "2020-05-24T05:12:58.000Z",
   "departure_date": "2020-06-25T03:12:32.000Z",
   "unit_price": "31.79",
   "quantity": 9
@@ -87,11 +82,11 @@ Content-Type: application/json
   "quantity": 4
 }
 ###
-PATCH http://localhost:3000/v1/travel/15/activity/32
+PATCH http://localhost:3000/v1/travel/33/activity/33
 Content-Type: application/json
 
 {
-    "name": "Activité TEST PATCH 2",
+    "name": "Chasse a cour",
     "topic": "TEST",
     "place": "886 Surrey Lane",
     "duration": "35 minute",
