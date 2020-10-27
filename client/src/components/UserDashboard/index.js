@@ -16,8 +16,9 @@ const UserDashboard = ({
   fetchUserData,
 }) => {
   const travelsList = travels.map((travel) => (
-    <TravelCard key={travel.id} {...travel} />
+    <TravelCard key={travel.travel_id} {...travel} />
   ));
+  console.log(typeof travelsList);
 
   useEffect(() => {
     fetchUserData();
@@ -43,8 +44,6 @@ const UserDashboard = ({
 
             </div>
             {travelsList}
-            <TravelCard />
-            <TravelCard />
           </div>
         </>
       )}
