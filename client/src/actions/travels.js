@@ -7,6 +7,7 @@ export const CHANGE_FIELD_VALUE = 'CHANGE_FIELD_VALUE';
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';
 export const FETCH_ONE_TRAVEL = 'FETCH_ONE_TRAVEL';
 export const SAVE_ONE_TRAVEL = 'SAVE_ONE_TRAVEL';
+export const DELETE_TRAVEL_ELEMENT = 'DELETE_TRAVEL_ELEMENT';
 
 export const submitTravelForm = (data) => ({
   type: SUBMIT_TRAVEL_FORM,
@@ -48,4 +49,9 @@ export const SaveOneTravel = (travel) => ({
   travel,
 });
 
-
+export const deleteTravelElement = (travelId, category, elementId) => ({
+  type: DELETE_TRAVEL_ELEMENT,
+  travelId,
+  category,
+  elementId,
+});

@@ -6,7 +6,7 @@ import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 import '../styles.scss';
 
 const ModalDelete = ({
-  isShowing, hide, category, elementName, elementId, deleteTravelElement,
+  isShowing, hide, travelId, category, elementName, elementId, deleteTravelElement,
 }) => {
   const displayMessage = () => {
     if (category === 'accommodation') {
@@ -40,7 +40,7 @@ const ModalDelete = ({
             </div>
 
             <div className="modal_buttons_container">
-              <div className="create--button" onClick={deleteTravelElement(category, elementId)}>
+              <div className="create--button" onClick={deleteTravelElement(travelId, category, elementId)}>
                 <Trash2 color="#FF7A32" />
                 <p>Supprimer</p>
               </div>
@@ -60,6 +60,7 @@ const ModalDelete = ({
 ModalDelete.propTypes = {
   isShowing: PropTypes.bool.isRequired,
   hide: PropTypes.func.isRequired,
+  travelId: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
   elementName: PropTypes.string.isRequired,
   elementId: PropTypes.number.isRequired,

@@ -3,6 +3,7 @@ import {
   SUBMIT_TRAVEL_FORM,
   FETCH_TRAVELS,
   FETCH_ONE_TRAVEL,
+  DELETE_TRAVEL_ELEMENT,
   SaveOneTravel,
   loadingTravels,
   saveTravels,
@@ -46,6 +47,20 @@ const travelMiddleware = (store) => (next) => (action) => {
         .then((res) => {
           console.log(`voyage récupéré : ${res.data}`);
           store.dispatch(SaveOneTravel(res.data));
+        })
+        .catch((e) => {
+          store.dispatch(errorMessage(e));
+        })
+        .finally(() => {
+          store.dispatch(loadingTravels(false));
+        });
+      next(action);
+      break;
+    case DELETE_TRAVEL_ELEMENT:
+      store.dispatch(loadingTravels(true));
+      axios.delete(`${baseURL}/travel/${action.travelId}/${action.category}/${action.elementId}`)
+        .then((res) => {
+          console.log(res.data);
         })
         .catch((e) => {
           store.dispatch(errorMessage(e));
