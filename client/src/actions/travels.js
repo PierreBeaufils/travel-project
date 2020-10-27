@@ -5,6 +5,8 @@ export const SAVE_TRAVELS = 'SAVE_TRAVELS';
 export const LOADING_TRAVELS = 'LOADING_TRAVELS';
 export const CHANGE_FIELD_VALUE = 'CHANGE_FIELD_VALUE';
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';
+export const FETCH_ONE_TRAVEL = 'FETCH_ONE_TRAVEL';
+export const SAVE_ONE_TRAVEL = 'SAVE_ONE_TRAVEL';
 
 export const submitTravelForm = (data) => ({
   type: SUBMIT_TRAVEL_FORM,
@@ -35,3 +37,15 @@ export const loadingTravels = (loading) => ({
   type: LOADING_TRAVELS,
   loading,
 });
+
+export const fetchOneTravel = (id) => ({
+  type: FETCH_ONE_TRAVEL,
+  id,
+});
+
+export const SaveOneTravel = (travel) => ({
+  type: SAVE_ONE_TRAVEL,
+  travel,
+});
+
+

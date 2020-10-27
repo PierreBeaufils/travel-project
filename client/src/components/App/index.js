@@ -15,7 +15,7 @@ import NotFound from 'src/components/NotFound';
 import UserProfile from 'src/components/UserProfile';
 import TravelForm from 'src/containers/TravelForm';
 import UserDashboard from 'src/containers/UserDashboard';
-import Travel from 'src/components/Travel';
+import Travel from 'src/containers/Travel';
 import ThingsEdit from 'src/components/ThingsEdit';
 import RegisterValidation from 'src/components/RegisterForm/RegisterValidation';
 import TokenValidation from 'src/containers/TokenValidation';
@@ -48,8 +48,7 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route path="/creer-un-voyage" component={TravelForm} />
             <Route path="/tableau-de-bord" component={UserDashboard} />
             <Route path="/voyage/:id" component={Travel} />
-            <Route path="/modifiervoyage/:id" component={ThingsEdit} /> {/* A VOIR C'EST QUOI CETTE ROUTE ???? */}
-            <Route path="/voyage/:id/modifer" component={ThingsEdit} />
+            <Route path="/voyage/:id/modifier" component={ThingsEdit} />
             <Route path="/validation" component={RegisterValidation} />
             <Route path="/verifier" component={TokenValidation} />
             <Route component={NotFound} />
