@@ -32,5 +32,5 @@ Content-Type: application/json
 DELETE http://localhost:3000/v1/traveler/32
 
 ###
-GET http://localhost:3000/v1/user-travels/1
+GET http://localhost:3000/v1/user-travels/3
 ###
