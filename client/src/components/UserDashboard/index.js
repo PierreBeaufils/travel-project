@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './userdashboard.scss';
 import { PlusCircle } from 'react-feather';
 import ProfileCard from 'src/components/UserDashboard/ProfileCard';
-import TravelCard from './TravelCard';
+import TravelCard from 'src/components/UserDashboard/TravelCard';
 
 const UserDashboard = ({
   user,
@@ -15,11 +15,6 @@ const UserDashboard = ({
   fetchTravels,
   fetchUserData,
 }) => {
-  const travelsList = travels.map((travel) => (
-    <TravelCard key={travel.travel_id} {...travel} />
-  ));
-  console.log(typeof travelsList);
-
   useEffect(() => {
     fetchUserData();
     fetchTravels();
@@ -27,7 +22,7 @@ const UserDashboard = ({
 
   return (
     <div className="userdashboard">
-      {!loadingTravels && !loadingUser && (
+      {(!loadingUser && !loadingTravels) && (
         <>
           <h2>Tableau de bord</h2>
           <div className="user-container">
@@ -43,7 +38,7 @@ const UserDashboard = ({
               </Link>
 
             </div>
-            {travelsList}
+            {travels.map((travel) => <TravelCard key={travel.travel_id} travel={travel} />)}
           </div>
         </>
       )}
@@ -53,11 +48,15 @@ const UserDashboard = ({
 
 UserDashboard.propTypes = {
   user: PropTypes.object.isRequired,
-  travels: PropTypes.array.isRequired,
   fetchTravels: PropTypes.func.isRequired,
   fetchUserData: PropTypes.func.isRequired,
   loadingUser: PropTypes.bool.isRequired,
   loadingTravels: PropTypes.bool.isRequired,
+  travels: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  ).isRequired,
 };
 
 export default UserDashboard;
