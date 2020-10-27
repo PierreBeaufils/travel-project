@@ -10,12 +10,12 @@ const TravelCard = ({ travel }) => (
   <div className="travel-card">
     <img src={thumbnail} className="travel-card-image" alt="thumbnail" />
     <div className="travel-card-content">
-      <div className="travel-card-content-title">Voyage à Rome</div>
+      <div className="travel-card-content-title">{travel.title}</div>
       <div className="travel-card-content-destination">
         <MapPin color="grey" size={15} />
-        Rome, Italie
+        {travel.destination}
       </div>
-      <div className="travel-card-content-date">Du 26/10/2020 au 01/11/2020</div>
+      <div className="travel-card-content-date">Du {travel.departure_date} au {travel.return_date}</div>
       <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
       <Link to={`/voyage/${travel.id}`} className="travel-card-content-more">
         Voir ce voyage
@@ -24,12 +24,8 @@ const TravelCard = ({ travel }) => (
   </div>
 );
 
-TravelCard.defaultProps = {
-  travel: {},
-};
-
 TravelCard.propTypes = {
-  travel: PropTypes.object,
+  travel: PropTypes.object.isRequired,
 };
 
 export default TravelCard;

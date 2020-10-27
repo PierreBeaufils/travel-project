@@ -42,7 +42,7 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
     case VERIFY_TOKEN:
       store.dispatch(setTokenVerified(false));
-      axios.get(`${baseURL}/mail`, action.token)
+      axios.get(`${baseURL}/mail/${action.token}`)
         .then((response) => {
           store.dispatch(setTokenMessage(response.data));
         })

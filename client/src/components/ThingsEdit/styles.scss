@@ -3,6 +3,23 @@
   width: fit-content;
   margin-left: 1rem;
   height: fit-content;
+  margin-left: auto;
+  padding: 0.6rem;
+  background-color: rgba(64, 192, 156, 1);
+  color: #fff;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken( rgba(64, 192, 156, 0.8), 10%);
+  }
+
+  & p {
+    margin-left: 5px;
+  }
 }
 .category-container {
   display: flex;
