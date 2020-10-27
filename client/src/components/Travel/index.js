@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './travel.scss';
 import {
-  MapPin, FileText, Users, Map, Home, Briefcase, Calendar,
+  MapPin, Calendar,
 } from 'react-feather';
 
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
@@ -47,8 +47,8 @@ const Travel = ({
           <div className="travel-container">
             {/* <Documents userData={[{}]} /> */}
             <div className="cards__container travel__view">
-              {/* Timestamp is sent to order by date in CSS rendering
-              {travel.accomodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
+              {/* Timestamp is sent to order by date in CSS rendering */}
+              {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)}
               {travel.activity.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={false} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} />)}
               {travel.transport.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={false} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} />)}
             </div>

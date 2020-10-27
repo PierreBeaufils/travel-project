@@ -1,77 +1,69 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+
 import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
-// import PropTypes from 'prop-types';
 import '../styles.scss';
 
 const ModalDelete = ({
-  isShowing, hide, oneThingName, categoryName, cardID,
-}) => (isShowing ? ReactDOM.createPortal(
-  <>
-    <div className="modal-overlay" />
-    <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-      <div className="modal">
-        <div className="modal-header">
+  isShowing, hide, category, elementName, elementId, deleteTravelElement,
+}) => {
+  const displayMessage = () => {
+    if (category === 'accommodation') {
+      return 'Voulez-vous confirmer la suppression de l\'hébergement:';
+    } if (category === 'transport') {
+      return 'Voulez-vous confirmer la suppression du transport:';
+    } if (category === 'activity') {
+      return 'Voulez-vous confirmer la suppression de l\'activité:';
+    }
+    return '';
+  };
 
-          <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
-            <span aria-hidden="true"><XSquare
-              color="#FF7A32"
-            />
-            </span>
+  return (isShowing ? ReactDOM.createPortal(
+    <>
+      <div className="modal-overlay" />
+      <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
+        <div className="modal">
+          <div className="modal-header">
 
-          </button>
-        </div>
-        <p></p>
-        <div className="modal_content">
-          <AlertTriangle
-            color="#FF7A32"
-          />
-          {(categoryName === 'Hébergement') ? ( // modale de description lorsqu'il s'agit d'un hebergement
+            <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
+              <span aria-hidden="true">
+                <XSquare color="#FF7A32" />
+              </span>
+            </button>
+          </div>
+
+          <div className="modal_content">
+            <AlertTriangle color="#FF7A32" />
             <div className="modal_content-main">
-              <h3>Confirmer-vous la suppression de l'hebergement {oneThingName} ?</h3>
+              <h3>{displayMessage()} {elementName} ?</h3>
             </div>
-          ) : null }
-          {(categoryName === 'Transport') ? ( // modale de description lorsqu'il s'agit d'un hebergement
-            <div className="modal_content-main">
-              <h3>Confirmer-vous la suppression du transport de {oneThingName} ?</h3>
+
+            <div className="modal_buttons_container">
+              <div className="create--button" onClick={deleteTravelElement(category, elementId)}>
+                <Trash2 color="#FF7A32" />
+                <p>Supprimer</p>
+              </div>
+              <div className="create--button" onClick={hide}>
+                <XSquare color="#fff" />
+                <p>Annuler</p>
+              </div>
             </div>
-          ) : null }
-          {(categoryName === 'Activité') ? ( // modale de description lorsqu'il s'agit d'un hebergement
-            <div className="modal_content-main">
-              <h3>Confirmer-vous la suppression de l'activité {oneThingName} ?</h3>
-            </div>
-          ) : null }
-          <div className="modal_buttons_container">
-            <div
-              className="create--button"
-            >
-              <Trash2
-                color="#FF7A32"
-              />
-              <p>Supprimer</p>
-            </div>
-            <div
-              className="create--button"
-            >
-              <XSquare
-                color="#fff"
-              />
-              <p>Annuler</p>
-            </div>
+
           </div>
         </div>
-
       </div>
-    </div>
-  </>, document.body,
-) : null);
+    </>, document.body,
+  ) : null);
+};
 
-// ModalDelete.propTypes = {
-
-// };
-
-// ModalDelete.defaultProps = {
-
-// };
+ModalDelete.propTypes = {
+  isShowing: PropTypes.bool.isRequired,
+  hide: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
+  elementName: PropTypes.string.isRequired,
+  elementId: PropTypes.number.isRequired,
+  deleteTravelElement: PropTypes.func.isRequired,
+};
 
 export default ModalDelete;
