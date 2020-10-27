@@ -51,12 +51,11 @@ Content-Type: application/json
   "selected": false
 }
 ###
-PATCH http://localhost:3000/v1/travel/2/accommodation/31
+PATCH http://localhost:3000/v1/travel/2/accommodation/3
 Content-Type: application/json
 
 {
-  "name": "test patch 2"
-
+  "selected": true
 }
 ###
 DELETE http://localhost:3000/v1/travel/1/accommodation/32
@@ -77,21 +76,15 @@ Content-Type: application/json
   "description": "Operative composite productivity",
   "date": "2020-11-16T10:58:36.000Z",
   "unit_price": "85.99",
-  "quantity": 4
+  "quantity": 4,
+  "selected": false
 }
 ###
-PATCH http://localhost:3000/v1/travel/15/activity/32
+PATCH http://localhost:3000/v1/travel/15/activity/16
 Content-Type: application/json
 
 {
-    "name": "Activité TEST PATCH 2",
-    "topic": "TEST",
-    "place": "886 Surrey Lane",
-    "duration": "35 minute",
-    "description": "Operative composite productivity",
-    "date": "2020-11-16T10:58:36.000Z",
-    "unit_price": "85.99",
-    "quantity": 4
+  "selected": true
 }
 ###
 DELETE http://localhost:3000/v1/travel/15/activity/32
@@ -114,23 +107,15 @@ Content-Type: application/json
     "reservation_ref": "2657",
     "unit_price": "0",
     "quantity": 8,
+    "selected": false,
     "memo": "Reactive"
   }
 ###
-PATCH http://localhost:3000/v1/travel/1/transport/32
+PATCH http://localhost:3000/v1/travel/1/transport/1
 Content-Type: application/json
 
   {
-    "type": "TEST PATCH 1",
-    "company": "Agivu",
-    "from": "Boavista",
-    "to": "Falun",
-    "departure_date": "2020-03-08T09:09:44.000Z",
-    "arrival_date": "2020-05-14T16:56:15.000Z",
-    "reservation_ref": "2657",
-    "unit_price": "0",
-    "quantity": 8,
-    "memo": "Reactive"
+    "selected": true
   }
 ###
 DELETE http://localhost:3000/v1/travel/1/transport/32
