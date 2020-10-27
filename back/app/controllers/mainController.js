@@ -20,17 +20,19 @@ const travelController = {
         const newTravelerToTravel = new travel_has_traveler({travel_id, traveler_id});
         newTravelerToTravel.saveTravelerIntoTravel();
 
-        res.json('Voyage créé');
+        res.json('Voyage créé'); 
         // Theme / destination / date départ / date de fin
     },
     showAllInfos: async (req,res) => {
         const travelId = req.params.id;
-        const travelinfos = {};
-        travelinfos.infos = await Travel.findOneTravelComponent(null,travelId);
-        if (travelinfos.infos) {
+        let  travelinfos = {};
+        travelinfos = await Travel.findOneTravelComponent(null,travelId);
+        if (travelinfos) {
+            travelinfos.traveler = await travel_has_traveler.findTravelersByTravel(travelId);
+            travelinfos.transport = await Transport.findAllTravelComponent(travelId);
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
             travelinfos.activity = await Activity.findAllTravelComponent(travelId);
-            travelinfos.transport = await Transport.findAllTravelComponent(travelId);
+            travelinfos.task = await Task.findAllTravelComponent(travelId)
             res.json(travelinfos);
         } else {
             res.status(404).json('ce voyage n\'existe pas');
@@ -148,7 +150,10 @@ const travelController = {
         const accoToEdit = await Accommodation.findOneTravelComponent(req.params.id,req.params.accoId);
         if (accoToEdit) {
             const accoEdited = await new Accommodation(accoToEdit);
+            // console.log(accoEdited.coordinate);
             accoEdited.update(req.body);
+            // console.log(accoEdited.coordinate);
+            // accoEdited.coordinate = 
             accoEdited.saveAllTravelComponent();
             res.json("Hébergement mis à jour");  
         } else {
