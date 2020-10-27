@@ -2,7 +2,10 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
-import { Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock, } from 'react-feather';
+import {
+  Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock,
+} from 'react-feather';
+import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
@@ -18,6 +21,10 @@ const ModalAddActivity = ({ isShowing, hide }) => {
   console.log(watch('example')); // watch input value by passing the name of it
 
   const [startDate, setStartDate] = useState(todayDateISOString);
+  const [locationData, setLocationData] = useState({
+    city: '',
+    latLong: '',
+  });
 
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
@@ -70,7 +77,12 @@ const ModalAddActivity = ({ isShowing, hide }) => {
                   <input name="duration" ref={register()} type="time" />
                 </label>
                 <label htmlFor="place"><MapPin color="#2B7AFD" size={15} />Lieu
-                  <input name="place" ref={register()} type="text" />
+                  <AlgoLeaflet
+                    isMapRequired={false}
+                    isAdressInputRequired
+                    setLocationData={setLocationData}
+                  />
+                  {/* <input name="place" ref={register()} type="text" /> */}
                 </label>
                 <label htmlFor="description"><Info color="#2B7AFD" size={15} />Description
                   <input name="description" ref={register()} type="text" />

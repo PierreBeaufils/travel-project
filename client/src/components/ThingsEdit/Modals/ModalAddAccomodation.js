@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
-import { XSquare, MapPin, LogIn, LogOut, DollarSign, Info, Users } from 'react-feather';
+import {
+  XSquare, MapPin, LogIn, LogOut, DollarSign, Info, Users,
+} from 'react-feather';
+import AlgoLeaflet from '../../AlgoLeaflet';
+
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
@@ -18,6 +22,10 @@ const ModalAddAccomodation = ({ isShowing, hide }) => {
 
   const [startDate, setStartDate] = useState(todayDateISOString);
   const [endDate, setEndDate] = useState(addOneDay(startDate));
+  const [locationData, setLocationData] = useState({
+    city: '',
+    latLong: '',
+  });
 
   const handleStartDateChange = (e) => {
     setStartDate(e.target.value);
@@ -54,10 +62,15 @@ const ModalAddAccomodation = ({ isShowing, hide }) => {
                   <input name="name" ref={register()} type="text" />
                 </label>
                 <label htmlFor="address"><MapPin color="#2B7AFD" size={15} />Adresse de l'établissement
-                  <input name="address" ref={register()} type="text" />
+                  {/* <input name="address" ref={register()} type="text" à effacer car utilisation l'input d'Algolia*/}
+                  <AlgoLeaflet
+                    isMapRequired={false}
+                    isAdressInputRequired={true}
+                    setLocationData={setLocationData}
+                  />
                 </label>
                 <label htmlFor="city"><MapPin color="#2B7AFD" size={15} />Ville
-                  <input name="city" ref={register({ required: true })} type="text" />
+                  <input name="city" ref={register({ required: true })} type="text" defaultValue={locationData.city} />
                   {errors.city && <span className="warning-text">Veuillez saisir une ville</span>}
                 </label>
                 <label htmlFor="availability">Nombre de places disponibles

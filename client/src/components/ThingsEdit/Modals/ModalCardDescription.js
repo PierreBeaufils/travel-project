@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {
   Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock,
 } from 'react-feather';
+import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
@@ -13,7 +14,7 @@ const ModalCardDescription = ({
   // fonction pour transformer la date de ISO à string.
   const transformDateISOtoString = (ISOdate) => new Date(ISOdate).toLocaleString('fr-FR', { timeZone: 'UTC' });
 
-  return (isShowing ? ReactDOM.createPortal( //s'affiche en cas de state qui demande l'affichage de la modale
+  return (isShowing ? ReactDOM.createPortal( // s'affiche en cas de state qui demande l'affichage de la modale
     <>
       <div className="modal-overlay" />
       <div className="modal-wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
@@ -28,11 +29,19 @@ const ModalCardDescription = ({
 
             </button>
           </div>
+
           <div className="modal_content">
             {(categoryName === 'Hébergement') ? ( // modale de description lorsqu'il s'agit d'un hebergement
               <div className="modal_content-main">
                 <h2>Hébergement {oneThingData.name}</h2>
                 <h4><MapPin color="#2B7AFD" size={15} /> {oneThingData.adress} {oneThingData.city}</h4>
+                {(oneThingData.coordinate !== null) ? (
+                  <AlgoLeaflet
+                    isMapRequired
+                    isAdressInputRequired={false}
+                    mapPositionToDisplay={oneThingData.coordinate}
+                  />
+                ) : null}
                 <h4><LogIn color="#2B7AFD" size={15} /> Date d'arrivée: {transformDateISOtoString(oneThingData.arrival_date)}</h4>
                 <h4><LogOut color="#2B7AFD" size={15} /> Date de départ: {transformDateISOtoString(oneThingData.departure_date)}</h4>
                 <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} USD</h4>
@@ -60,6 +69,13 @@ const ModalCardDescription = ({
                 <h3>Activité: {oneThingData.name}</h3>
                 <h4><Info color="#2B7AFD" size={15} /> Thématique: {oneThingData.topic}</h4>
                 <h4><MapPin color="#2B7AFD" size={15} /> Lieu: {oneThingData.place}</h4>
+                {(oneThingData.coordinate !== null) ? (
+                  <AlgoLeaflet
+                    isMapRequired
+                    isAdressInputRequired={false}
+                    mapPositionToDisplay={oneThingData.coordinate}
+                  />
+                ) : null}
                 <h4><Calendar color="#2B7AFD" size={15} /> Date et heure: {transformDateISOtoString(oneThingData.date)}</h4>
                 <h4><Clock color="#2B7AFD" size={15} /> Durée prévue: {oneThingData.duration.minutes} minutes</h4>
                 <h4><Users color="#2B7AFD" size={15} /> Nombre de participants prévu: {oneThingData.quantity}</h4>
