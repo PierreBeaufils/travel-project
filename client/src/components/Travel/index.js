@@ -20,8 +20,6 @@ const Travel = ({
     fetchOneTravel(id);
   }, []);
 
-  console.log(travel);
-
   return (
     <div className="travel-details-container">
       {!travelLoaded && (
