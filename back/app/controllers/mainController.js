@@ -40,6 +40,7 @@ const travelController = {
         const travelToEdit = await Travel.findOneTravelComponent(null,req.params.id);
         const travelEdited = await new Travel(travelToEdit);
         travelEdited.update(req.body);
+        console.log(travelEdited);
         await travelEdited.saveAllTravelComponent();
         res.json('voyage mis à jour')
     },
