@@ -1,7 +1,7 @@
 //////////////////////////////////////////// ROUTES DE TRAVEL ////////////////////////////////////////////////////
 GET http://localhost:3000/v1/travels
 ###
-GET http://localhost:3000/v1/travel/45
+GET http://localhost:3000/v1/travel/3
 ###
 POST http://localhost:3000/v1/create-travel
 Content-Type: application/json
@@ -32,9 +32,9 @@ DELETE http://localhost:3000/v1/travel/45
 
 //////////////////////////////////// ROUTES DE TRAVEL VERS ACCOMODATION///////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/1/accommodation
+GET http://localhost:3000/v1/travel/2/accommodation
 ###
-POST http://localhost:3000/v1/travel/1/accommodation
+POST http://localhost:3000/v1/travel/2/accommodation
 Content-Type: application/json
 
 {
@@ -47,23 +47,16 @@ Content-Type: application/json
   "arrival_date": "2020-05-24T05:12:58.000Z",
   "departure_date": "2020-06-25T03:12:32.000Z",
   "unit_price": "31.79",
-  "quantity": 9
+  "quantity": 9,
+  "selected": false
 }
 ###
-PATCH http://localhost:3000/v1/travel/1/accommodation/32
+PATCH http://localhost:3000/v1/travel/2/accommodation/31
 Content-Type: application/json
 
 {
-  "name": "test patch",
-  "address": "adresse test patch",
-  "city": "ville post",
-  "coordinate": "38.1483676,39.1483676",
-  "information": null,
-  "availability": null,
-  "arrival_date": "2020-05-24T05:12:58.000Z",
-  "departure_date": "2020-06-25T03:12:32.000Z",
-  "unit_price": "31.79",
-  "quantity": 9
+  "name": "test patch 2"
+
 }
 ###
 DELETE http://localhost:3000/v1/travel/1/accommodation/32
@@ -145,9 +138,9 @@ DELETE http://localhost:3000/v1/travel/1/transport/32
 
 ////////////////////////////////////////// ROUTES DE TRAVEL VERS TASK////////////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/1/tasks
+GET http://localhost:3000/v1/travel/3/tasks
 ###
-POST http://localhost:3000/v1/travel/1/task
+POST http://localhost:3000/v1/travel/3/task
 Content-Type: application/json
 
   {
@@ -172,7 +165,7 @@ DELETE http://localhost:3000/v1/travel/1/task/18
 
 ////////////////////////////////////////// ROUTES DE TRAVEL VERS TRAVELER////////////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/10/travelers
+GET http://localhost:3000/v1/travel/3/travelers
 ###
 POST http://localhost:3000/v1/travel/10/traveler
 Content-Type: application/json

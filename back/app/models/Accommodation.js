@@ -3,7 +3,9 @@ const CoreModel = require("./CoreModel");
 
 class Accommodation extends CoreModel {
 
-        static tableName = 'accommodation';
+    // _coordinate;
+
+    static tableName = 'accommodation';
 
     constructor (data) {
         super(data);
@@ -11,6 +13,34 @@ class Accommodation extends CoreModel {
             this[prop] = data[prop];
         }
     }
+
+    // get coordinate() {
+    //     return this._coordinate;
+    // };
+
+    get coordinate(){
+        // console.log('value: ' ,typeof value);
+        let rawCoordinate = [];
+        console.log(this.coordinate);
+        // for (const key in value) {
+        //     // console.log('key: ', key);
+        //     // console.log('value[key]: ', value[key]);
+        //     rawCoordinate.push(value[key]);
+        // }
+
+        // console.log(typeof rawCoordinate.join(', '));
+        // this.coordinate = rawCoordinate.join(', ');
+        // console.log(this.coordinate);
+
+
+        // if (value !== ~ '') {
+        //     for (const position of value) {
+        //         console.log(position)
+        //     }
+        // }
+    };
+
+
 
     // static async findAllOfTravel(travelId){
     //     const accomodations = await db.query('SELECT * FROM accomodation WHERE travel_id = $1 ;', [travelId]);
