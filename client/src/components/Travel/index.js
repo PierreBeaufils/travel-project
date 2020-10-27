@@ -20,7 +20,7 @@ const Travel = ({ travel }) => (
       <div className="travel-card card-detail">
         <img src={thumbnail} className="travel-card-image card-detail-image" alt="thumbnail" />
         <div className="travel-card-content">
-          <div className="travel-card-content-title">Voyage à Rome</div>
+          <div className="travel-card-content-title">{travel.title}</div>
           <div className="travel-card-content-destination">
             <MapPin color="grey" size={15} />
             Rome, Italie
