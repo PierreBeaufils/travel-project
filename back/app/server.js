@@ -8,7 +8,6 @@ const multer = require('multer');
 const app = express();
 const bodyParser = multer();
 
-const app = express();
 
 app.use(session({
     secret: 'keyboard cat',
