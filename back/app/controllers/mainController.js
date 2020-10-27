@@ -20,13 +20,13 @@ const travelController = {
         const newTravelerToTravel = new travel_has_traveler({travel_id, traveler_id});
         newTravelerToTravel.saveTravelerIntoTravel();
 
-        res.json('Voyage créé');
+        res.json('Voyage créé'); 
         // Theme / destination / date départ / date de fin
     },
     showAllInfos: async (req,res) => {
         const travelId = req.params.id;
-        const travelinfos = {};
-        // travelinfos.infos = await Travel.findOneTravelComponent(null,travelId);
+        let  travelinfos = {};
+        travelinfos = await Travel.findOneTravelComponent(null,travelId);
         if (travelinfos) {
             travelinfos.traveler = await travel_has_traveler.findTravelersByTravel(travelId);
             travelinfos.transport = await Transport.findAllTravelComponent(travelId);

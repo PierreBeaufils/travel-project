@@ -18,27 +18,27 @@ class Accommodation extends CoreModel {
     //     return this._coordinate;
     // };
 
-    get coordinate(){
-        // console.log('value: ' ,typeof value);
-        let rawCoordinate = [];
-        console.log(this.coordinate);
-        // for (const key in value) {
-        //     // console.log('key: ', key);
-        //     // console.log('value[key]: ', value[key]);
-        //     rawCoordinate.push(value[key]);
-        // }
+    // get coordinate(){
+    //     // console.log('value: ' ,typeof value);
+    //     let rawCoordinate = [];
+    //     console.log(this.coordinate);
+    //     // for (const key in value) {
+    //     //     // console.log('key: ', key);
+    //     //     // console.log('value[key]: ', value[key]);
+    //     //     rawCoordinate.push(value[key]);
+    //     // }
 
-        // console.log(typeof rawCoordinate.join(', '));
-        // this.coordinate = rawCoordinate.join(', ');
-        // console.log(this.coordinate);
+    //     // console.log(typeof rawCoordinate.join(', '));
+    //     // this.coordinate = rawCoordinate.join(', ');
+    //     // console.log(this.coordinate);
 
 
-        // if (value !== ~ '') {
-        //     for (const position of value) {
-        //         console.log(position)
-        //     }
-        // }
-    };
+    //     // if (value !== ~ '') {
+    //     //     for (const position of value) {
+    //     //         console.log(position)
+    //     //     }
+    //     // }
+    // };
 
 
 
