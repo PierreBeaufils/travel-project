@@ -7,10 +7,9 @@ import CardActivity from './CardActivity';
 import './styles.scss';
 
 const CategoryFrame = ({
-  categoryName, textButton, handleAddThing, data,
+  categoryName, textButton, handleAddThing, data, isEditingAllowed
 }) => {
-  const test = 'test';
-  console.log(data);
+  console.log(isEditingAllowed + "frame");
 
   return (
 
@@ -27,10 +26,11 @@ const CategoryFrame = ({
           <p>{textButton}</p>
         </div>
       </div>
+      
       <div className="cards__container">
-        {(categoryName === 'Hébergement') ? data.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} />) : null}
-        {(categoryName === 'Transport') ? data.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} />) : null}
-        {(categoryName === 'Activité') ? data.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} />) : null}
+        {(categoryName === 'Hébergement') ? data.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={isEditingAllowed} />) : null}
+        {(categoryName === 'Transport') ? data.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={isEditingAllowed} />) : null}
+        {(categoryName === 'Activité') ? data.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={isEditingAllowed} />) : null}
 
       </div>
     </div>

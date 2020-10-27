@@ -25,14 +25,17 @@ const CardActivity = (oneActivity) => {
   };
 
   return (
-    <div className="card__container">
-      <ModalDelete
-        isShowing={isShowingModalDeleteCard}
-        hide={toggleModalDeleteCard}
-        oneThingName={oneActivity.name}
-        categoryName="Activité"
-        cardID={oneActivity.id}
-      />
+  // Timestamp is used to order by date in CSS rendering
+    <div className="card__container" style={{ order: `${oneActivity.timestamp}` }}>
+      {(oneActivity.isEditingAllowed) ? (
+        <ModalDelete
+          isShowing={isShowingModalDeleteCard}
+          hide={toggleModalDeleteCard}
+          oneThingName={oneActivity.name}
+          categoryName="Activité"
+          cardID={oneActivity.id}
+        />
+      ) : null}
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
         hide={toggleModalCardDescription}
@@ -50,16 +53,18 @@ const CardActivity = (oneActivity) => {
           <h4><Clock color="#2B7AFD" size={15} /> durée: {oneActivity.duration.minutes} minutes</h4>
           <p><Info color="#2B7AFD" size={15} /> {oneActivity.description}</p>
         </div>
-        <div className="card__footer">
-          <CheckSquare
-            onClick={() => handleAddCardCLick(oneActivity.id)}
-            color="#80CC24"
-          />
-          <Trash2
-            color="#FF7A32"
-            onClick={() => handleDeleteCardCLick(oneActivity.id)}
-          />
-        </div>
+        {(oneActivity.isEditingAllowed) ? (
+          <div className="card__footer">
+            <CheckSquare
+              onClick={() => handleAddCardCLick(oneActivity.id)}
+              color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(oneActivity.id)}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
