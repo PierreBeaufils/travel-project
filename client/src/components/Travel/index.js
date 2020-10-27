@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './travel.scss';
 import {
@@ -44,42 +44,10 @@ const Travel = ({
               </div>
             </div>
           </div>
-          <div className="travel-menu">
-            <NavLink to={`/travel/${travel.id}/membres`} activeClassName="navlink-selected">
-              <div className="travel-menu-icon">
-                <Users size={24} className="travel-menu-logo" />
-                <p>Participants</p>
-              </div>
-            </NavLink>
-            <NavLink to={`/travel/${travel.id}/transport`} activeClassName="navlink-selected">
-              <div className="travel-menu-icon">
-                <Briefcase size={24} className="travel-menu-logo" />
-                <p>Transport</p>
-              </div>
-            </NavLink>
-            <NavLink to={`/travel/${travel.id}/hebergements`} activeClassName="navlink-selected">
-              <div className="travel-menu-icon">
-                <Home size={24} className="travel-menu-logo" />
-                <p>Hébergement</p>
-              </div>
-            </NavLink>
-            <NavLink to={`/travel/${travel.id}/activites`} activeClassName="navlink-selected">
-              <div className="travel-menu-icon">
-                <Map size={24} className="travel-menu-logo" />
-                <p>Activités</p>
-              </div>
-            </NavLink>
-            <NavLink to={`/travel/${travel.id}/documents`} activeClassName="navlink-selected">
-              <div className="travel-menu-icon">
-                <FileText size={24} className="travel-menu-logo" />
-                <p>Documents</p>
-              </div>
-            </NavLink>
-          </div>
           <div className="travel-container">
             {/* <Documents userData={[{}]} /> */}
             <div className="cards__container travel__view">
-              {/* Timestamp is sent to order by date in CSS rendering 
+              {/* Timestamp is sent to order by date in CSS rendering
               {travel.accomodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
               {travel.activity.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={false} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} />)}
               {travel.transport.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={false} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} />)}
