@@ -1,5 +1,8 @@
 const {S3} = require("aws-sdk");
+const { urlencoded } = require("express");
 const uuid = require("uuid");
+
+const s3 = new S3();
 
 
 class Document {
@@ -14,20 +17,18 @@ class Document {
     }
 
 
-    static async getAll() {
-       await new S3().listObjectsV2({Bucket: this.Bucket}, (err,results) => {
-            if (err) {
-                console.log(err);
-            } else {
-                return results;
-        }
-        });
+    static async getAllPublic(prefix) {
         
+            
+           const objectPromise = await  s3.listObjectsV2({Bucket: this.Bucket,Prefix: prefix}).promise().catch((err) => {
+               console.log(err);
+           });
+        return objectPromise;
     }
 
     async uploadDoc() {
         console.log(this);
-            await new  S3().upload(this, (err,data) => {
+            s3.upload(this, (err,data) => {
                 if (err) {
                     console.log(err);
                 } else {
@@ -36,6 +37,17 @@ class Document {
              });
          
     }
+
+    async getObject() {
+        const test = await s3.getObject(this).promise();
+        return test ;
+    }
+    getUrl() {
+        let url = "https://" + this.Bucket + ".s3.amazonaws.com/" + this.Key ;
+        url = encodeURI(url);
+        return url ;
+    }
+
 
 
 
