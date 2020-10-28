@@ -6,7 +6,7 @@ import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 import '../styles.scss';
 
 const ModalDelete = ({
-  isShowing, hide, travelId, category, elementName, elementId, deleteTravelElement,
+  isShowing, hide, travelId, category, elementName, elementId,
 }) => {
   const displayMessage = () => {
     if (category === 'accommodation') {
@@ -17,6 +17,10 @@ const ModalDelete = ({
       return 'Voulez-vous confirmer la suppression de l\'activité:';
     }
     return '';
+  };
+
+  const deleteTravelElement = () => {
+    console.log('ok');
   };
 
   return (isShowing ? ReactDOM.createPortal(
@@ -57,14 +61,20 @@ const ModalDelete = ({
   ) : null);
 };
 
+ModalDelete.defaultProps = {
+  travelId: null,
+  category: null,
+  elementName: null,
+  elementId: null,
+};
+
 ModalDelete.propTypes = {
   isShowing: PropTypes.bool.isRequired,
   hide: PropTypes.func.isRequired,
-  travelId: PropTypes.number.isRequired,
-  category: PropTypes.string.isRequired,
-  elementName: PropTypes.string.isRequired,
-  elementId: PropTypes.number.isRequired,
-  deleteTravelElement: PropTypes.func.isRequired,
+  travelId: PropTypes.number,
+  category: PropTypes.string,
+  elementName: PropTypes.string,
+  elementId: PropTypes.number,
 };
 
 export default ModalDelete;

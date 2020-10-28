@@ -12,9 +12,7 @@ import data from './data.json';
 // import PropTypes from 'prop-types';
 import './styles.scss';
 
-
 const ThingsEdit = () => {
-  
   const { isShowingModalAddAccomodation, toggleModalAddAccomodation } = useModal('ModalAddAccomodation');
   const { isShowingModalAddTransport, toggleModalAddTransport } = useModal('ModalAddTransport');
   const { isShowingModalAddActivity, toggleModalAddActivity } = useModal('ModalAddActivity');
@@ -34,9 +32,8 @@ const ThingsEdit = () => {
 
   const isMobile = window.innerWidth <= 500;
   const isEditingAllowed = true; // booleen permettant d'afficher les options d'édition
-// (pour page edition d'un voyage), contrairement à la page visualisation d'un
-// voyage qui permet que la lecture des données.
-  
+  // (pour page edition d'un voyage), contrairement à la page visualisation d'un
+  // voyage qui permet que la lecture des données.
 
   return (
 
@@ -69,7 +66,7 @@ const ThingsEdit = () => {
         handleAddThing={handleAddAccommodationCLick}
         data={data.accomodation}
         isEditingAllowed={isEditingAllowed}
-        
+
       />
       <CategoryFrame
         categoryName="Transport"

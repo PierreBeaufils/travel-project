@@ -47,7 +47,7 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route path="/profil" component={UserProfile} />
             <Route path="/creer-un-voyage" component={TravelForm} />
             <Route path="/tableau-de-bord" component={UserDashboard} />
-            <Route path="/voyage/:id" component={Travel} />
+            <Route exact path="/voyage/:id" component={Travel} />
             <Route path="/voyage/:id/modifier" component={ThingsEdit} />
             <Route path="/validation" component={RegisterValidation} />
             <Route path="/verifier" component={TokenValidation} />
