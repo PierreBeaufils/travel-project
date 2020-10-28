@@ -16,7 +16,7 @@ import UserProfile from 'src/components/UserProfile';
 import TravelForm from 'src/containers/TravelForm';
 import UserDashboard from 'src/containers/UserDashboard';
 import Travel from 'src/containers/Travel';
-import ThingsEdit from 'src/components/ThingsEdit';
+import TravelDashboard from 'src/containers/TravelDashboard';
 import RegisterValidation from 'src/components/RegisterForm/RegisterValidation';
 import TokenValidation from 'src/containers/TokenValidation';
 
@@ -48,7 +48,7 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route path="/creer-un-voyage" component={TravelForm} />
             <Route path="/tableau-de-bord" component={UserDashboard} />
             <Route exact path="/voyage/:id" component={Travel} />
-            <Route path="/voyage/:id/modifier" component={ThingsEdit} />
+            <Route exact path="/voyage/:id/dashboard" component={TravelDashboard} />
             <Route path="/validation" component={RegisterValidation} />
             <Route path="/verifier" component={TokenValidation} />
             <Route component={NotFound} />

@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import { AlertTriangle, XSquare, Trash2 } from 'react-feather';
 import '../styles.scss';
+import { baseURL } from 'src/config';
 
 const ModalDelete = ({
   isShowing, hide, travelId, category, elementName, elementId,
@@ -20,7 +22,10 @@ const ModalDelete = ({
   };
 
   const deleteTravelElement = () => {
-    console.log('ok');
+    axios.delete(`${baseURL}/travel/${travelId}/${category}/${elementId}`)
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   return (isShowing ? ReactDOM.createPortal(
@@ -40,7 +45,7 @@ const ModalDelete = ({
           <div className="modal_content">
             <AlertTriangle color="#FF7A32" />
             <div className="modal_content-main">
-              <h3>{displayMessage()} {elementName} ?</h3>
+              <h3>{displayMessage} {elementName} ?</h3>
             </div>
 
             <div className="modal_buttons_container">

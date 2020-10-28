@@ -55,7 +55,7 @@ const useModal = (modalName) => {
         toggleModalAddActivity,
       };
     default:
-      console.log(`Sorry, we are out of ${modalName}.`);
+      return {};
   }
 };
 
