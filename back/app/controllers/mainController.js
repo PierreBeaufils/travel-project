@@ -117,7 +117,15 @@ const travelController = {
         // Je recupere l'id du voyage
         const prefix = req.params.id + "/public/";
         const documents = await Document.getAllPublic(prefix);
-        
+        const documentsToShow = [];
+        for (let object of documents.Contents) {
+           
+            let documentToPush = await new Document(object);
+            
+            documentsToShow.push(documentToPush);
+            
+        }
+        documents.Contents = documentsToShow;
         res.json(documents);
 
     },

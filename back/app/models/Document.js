@@ -6,14 +6,15 @@ const s3 = new S3();
 
 
 class Document {
-
+    
     static Bucket = "globe-trotter-travel";
     constructor (data) {
             this.Bucket = Document.Bucket ;
            for (const prop in data) {
             this[prop] = data[prop];
+            this.url = this.getUrl();
            }
-        
+    
     }
 
 
@@ -42,10 +43,11 @@ class Document {
         const test = await s3.getObject(this).promise();
         return test ;
     }
+    
     getUrl() {
-        let url = "https://" + this.Bucket + ".s3.amazonaws.com/" + this.Key ;
+        let url = "https://" + this.Bucket + ".s3.amazonaws.com/" + this.Key;
         url = encodeURI(url);
-        return url ;
+        return url;
     }
 
 
