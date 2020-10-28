@@ -49,6 +49,9 @@ router.get('/travel/:id/tasks', mainController.showTask);
 router.post('/travel/:id/task', mainController.createTask);
 router.patch('/travel/:id/task/:taskId', mainController.editTask);
 
+// INFOS DOCUMENTS LIES A UN VOYAGE : Affichage des documents Public :
+router.get('/travel/:id/documents', mainController.showDocuments);
+
 // ROUTE FACTORISEE POUR SUPPRESSION de Hébergement, activité, transport, task liés à un voyage
 router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity);
 

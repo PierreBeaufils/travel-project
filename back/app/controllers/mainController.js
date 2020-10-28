@@ -4,6 +4,7 @@ const Transport = require("../models/Transport");
 const Travel = require("../models/Travel");
 const Task = require ("../models/Task");
 const Traveler = require("../models/Traveler");
+const Document = require("../models/Document");
 const travel_has_traveler = require("../models/Travel_has_travelers");
 
 const objectModel = [Accommodation,Activity,Transport,Travel, Task, Traveler, travel_has_traveler];
@@ -112,6 +113,15 @@ const travelController = {
             res.status(404).json('ce voyageur n\'appartient à aucun voyage')
         }
     },
+    showDocuments : async (req,res) => {
+        // Je recupere l'id du voyage
+        const prefix = req.params.id + "/public/";
+        const documents = await Document.getAllPublic(prefix);
+        
+        res.json(documents);
+
+    },
+
     createAccommodation: async (req,res) => {
         const newAcco = new Accommodation(req.body);
         newAcco.travel_id = req.params.id;
@@ -136,6 +146,12 @@ const travelController = {
         const savedTask = await newTask.saveAllTravelComponent();
         res.json("Ajout effectué");
     },
+    createDocument: async (req,res) => {
+        const createdDocument = new Document(req.body);
+        createdDocument.uploadDoc();
+        res.json("le document a bien été ajouté !");
+    },
+
     addTravelers: async (req, res) => {
         const newTraveler = new travel_has_traveler(req.body);
         // console.log("newTraveler : ", newTraveler);

@@ -1,15 +1,10 @@
 const Document = require("../models/Document");
 
 const document1 = new Document({
-    Key: "15/test.txt",
-    Body: "Ceci est est un test"
+    Key: "15/public/Banane peze horizontal.mp4"
 });
 
-console.log(document1);
+console.log(document1.getUrl());
 
-test = async () => {
-await document1.uploadDoc();
-};
 
-test();
 
