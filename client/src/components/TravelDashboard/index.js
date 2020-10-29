@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CheckSquare } from 'react-feather';
 
@@ -14,6 +14,7 @@ const TravelDashboard = ({ travel }) => {
   const { isShowingModalAddAccomodation, toggleModalAddAccomodation } = useModal('ModalAddAccomodation');
   const { isShowingModalAddTransport, toggleModalAddTransport } = useModal('ModalAddTransport');
   const { isShowingModalAddActivity, toggleModalAddActivity } = useModal('ModalAddActivity');
+  const [oneAccomodationDataToEdit, setOneAccomodationDataToEdit] = useState();
 
   const handleAddModal = (event) => { // gere le click sur l'ajout d'un hebergement
     if (event.currentTarget.value === 'accommodation') {

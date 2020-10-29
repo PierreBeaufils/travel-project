@@ -4,18 +4,35 @@ import { useForm } from 'react-hook-form';
 import {
   XSquare, MapPin, LogIn, LogOut, DollarSign, Info, Users,
 } from 'react-feather';
+import { baseURL } from 'src/config';
+import axios from 'axios';
 import AlgoLeaflet from '../../AlgoLeaflet';
 
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
-const ModalAddAccomodation = ({ isShowing, hide }) => {
+const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation }) => {
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const travelID = 1; // penser à passer l'id du voyage dans les props
 
+  const onSubmit = (data) => {
+    console.log(data);
+    // data.selected = false;
+    axios.post(`${baseURL}/travel/${travelID}/accommodation`, data)
+      .then((res) => {
+        console.log(`voyage envoyé vers back : ${res.data}`);
+        console.log(data);
+        hide();
+      })
+      .catch((e) => {
+        // store.dispatch(errorMessage(e));
+        console.log(`erreur : ${e}`);
+      });
+    console.log(data);
+  };
   const todayDateISOString = new Date().toISOString().split('T')[0]; // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
 
   console.log(watch('example')); // watch input value by passing the name of it
@@ -25,6 +42,7 @@ const ModalAddAccomodation = ({ isShowing, hide }) => {
   const [locationData, setLocationData] = useState({
     city: '',
     latLong: '',
+    address: '',
   });
 
   const handleStartDateChange = (e) => {
@@ -65,12 +83,13 @@ const ModalAddAccomodation = ({ isShowing, hide }) => {
                   {/* <input name="address" ref={register()} type="text" à effacer car utilisation l'input d'Algolia*/}
                   <AlgoLeaflet
                     isMapRequired={false}
-                    isAdressInputRequired={true}
+                    isAdressInputRequired
                     setLocationData={setLocationData}
                   />
                 </label>
                 <label htmlFor="city"><MapPin color="#2B7AFD" size={15} />Ville
-                  <input name="city" ref={register({ required: true })} type="text" defaultValue={locationData.city} />
+                  <input name="city" ref={register({ required: true })} type="text" value={locationData.city} />
+                  <input name="address" ref={register()} type="hidden" value={locationData.address} />
                   {errors.city && <span className="warning-text">Veuillez saisir une ville</span>}
                 </label>
                 <label htmlFor="availability">Nombre de places disponibles
@@ -108,7 +127,6 @@ const ModalAddAccomodation = ({ isShowing, hide }) => {
                 <label htmlFor="information"><Info color="#2B7AFD" size={15} />Informations
                   <input name="information" ref={register()} type="text" />
                 </label>
-
                 <input
                   type="submit"
                   value="Ajouter l'hébergement"

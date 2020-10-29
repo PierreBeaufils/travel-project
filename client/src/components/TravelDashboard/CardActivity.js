@@ -10,7 +10,7 @@ import useModal from './useModal';
 
 import './styles.scss';
 
-const CardActivity = ({ activity }) => {
+const CardActivity = (activity) => {
   const { isShowingModalDeleteCard, toggleModalDeleteCard } = useModal('ModalDeleteCard');
   const { isShowingModalCardDescription, toggleModalCardDescription } = useModal('ModalCardDescription');
   const transformDateISOtoString = (ISOdate) => new Date(ISOdate).toLocaleString('fr-FR', { timeZone: 'UTC' });

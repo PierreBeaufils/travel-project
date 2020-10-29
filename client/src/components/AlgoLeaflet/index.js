@@ -36,6 +36,7 @@ const AlgoLeaflet = ({
             setLocationData({
               city: suggestion.city,
               latLong: suggestion.latlng,
+              address: suggestion.name,
             });
           }}
           onClear={() => setPosition(null)}

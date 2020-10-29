@@ -1,10 +1,11 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import './travel.scss';
 import {
-  MapPin, Calendar,
+  MapPin, Calendar, PlusSquare,
 } from 'react-feather';
 
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
@@ -44,11 +45,17 @@ const Travel = ({
               </div>
             </div>
           </div>
-          <Link to={`/voyage/${travel.id}/dashboard`}>Dashboard</Link>
-          {/*
+          <Link to={`/voyage/${travel.id}/dashboard`}>
+            <div className="validate--button validate_selection">
+              <PlusSquare color="#fff" />
+              <p>Ajouter un hébergement, trajet ou activité au voyage (s'affiche que pour organisateur)</p>
+            </div>
+          </Link>
+
           <div className="travel-container">
 
             <div className="cards__container travel__view">
+              {/*
               Timestamp is sent to order by date in CSS rendering
               {travel.accommodation.map((accomodation) =>
                 <CardAccommodation key={accomodation.id} {...accomodation} isEditingAllowed={false}
@@ -58,9 +65,9 @@ const Travel = ({
                 timestamp={new Date(`${activity.date}`).getTime() / 1000} />)}
               {travel.transport.map((transport) => <CardTransport key={transport.id} {...transport}
               isEditingAllowed={false} timestamp={new Date(`${transport.departure_date}`).getTime() / 1000} />)}
+              */}
             </div>
           </div>
-          */}
         </>
       )}
     </div>

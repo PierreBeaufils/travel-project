@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  MapPin, CheckSquare, Trash2, Calendar, Info,
+  MapPin, CheckSquare, Trash2, Calendar, Info, Edit,
 } from 'react-feather';
 import ModalDelete from './Modals/ModalDelete';
 import ModalCardDescription from './Modals/ModalCardDescription';
@@ -23,9 +23,9 @@ const CardAccommodation = (oneAccomodation) => {
   const handleDeleteCardCLick = () => { // gere le click sur bouton supprimer d'une carte du stock
     toggleModalDeleteCard();
   };
-
+  console.log(oneAccomodation);
   return (
-  // Timestamp is used to order by date in CSS rendering
+    // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${oneAccomodation.timestamp}` }}>
       {(oneAccomodation.isEditingAllowed) ? (
         <ModalDelete
@@ -49,9 +49,9 @@ const CardAccommodation = (oneAccomodation) => {
           onClick={() => handleTextCardCLick('ceci est ma target 1')}
         >
           <h3>Séjour à l'établisement {oneAccomodation.name}</h3>
-          <h4><MapPin color="#2B7AFD" size={15} /> {oneAccomodation.adress} {oneAccomodation.city}</h4>
+          <h4><MapPin color="#2B7AFD" size={15} /> {oneAccomodation.address} {oneAccomodation.city}</h4>
           <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneAccomodation.arrival_date)} au {transformDateISOtoString(oneAccomodation.departure_date)}</h4>
-          {(oneAccomodation.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null }
+          {(oneAccomodation.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null}
         </div>
         {(oneAccomodation.isEditingAllowed) ? (
           <div className="card__footer">
@@ -59,9 +59,9 @@ const CardAccommodation = (oneAccomodation) => {
               onClick={() => handleAddCardCLick(oneAccomodation.id)}
               color="#80CC24"
             />
-            <Trash2
-              color="#FF7A32"
-              onClick={() => handleDeleteCardCLick(oneAccomodation.id)}
+            <Edit
+              onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
+              color="#80CC24"
             />
           </div>
         ) : null}
