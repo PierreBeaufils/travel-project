@@ -21,7 +21,7 @@ router.get('/travels', mainController.showTravels); // Afficher tous les voyages
 router.get('/travel/:id', mainController.showAllInfos); // Afficher 1 voyage 
 router.post('/create-travel', mainController.createTravel); // Créer 1 nouveau voyage 
 router.patch('/travel/:id', mainController.editTravel); // Modifier 1 voyage existant
-router.delete('/travel/:id', mainController.delete); // Supprimer 1 voyage existant
+router.delete('/travel/:id', mainController.deleteTravel); // Supprimer 1 voyage existant
 
 // INFOS VOYAGEURS LIES A UN VOYAGE : affichage des voyageurs inscrits dans un voyage, inscrire un nouveau voyageur dans un voyage, et supprimer un voyageur d'un voyage
 router.get('/travel/:id/travelers', mainController.showTravelers); // Afficher les voyageurs faisant partie d'un voyage

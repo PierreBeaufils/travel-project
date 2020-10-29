@@ -48,7 +48,7 @@ class travel_has_traveler {
     }
 
     async deleteTraveler() {
-        console.log(this);
+        // console.log(this);
         await db.query (`
         DELETE FROM travel_has_traveler
         WHERE travel_id = $1
