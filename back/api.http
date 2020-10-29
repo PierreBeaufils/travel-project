@@ -125,7 +125,7 @@ PATCH http://localhost:3000/v1/travel/1/transport/33
         "type": "Bateau",
         "from": "Paris",
         "to": "Stockholm",
-        "departure_date": "(2020-05-13 14:23:08)",
+        "departure_date": "(2020-05-13 14:23:08)",ble app
         "unit_price": 58.05,
         "quantity": 7,
         "travel_id": 33

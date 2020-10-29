@@ -56,9 +56,9 @@ router.get('/travel/:id/documents', mainController.showDocuments);
 router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity);
 
 // INFOS DOCUMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
-// router.post('/travel/:id/document', travelController)
-// router.patch('/travel/:id/document', travelController)
-// router.delete('/travel/:id/document', travelController)
+router.post('/travel/:id/document', mainController.createDocument); // Route doit etre accessible unniquement à l'admin
+// router.patch('/travel/:id/document', travelController) => nécessaire ?
+// router.delete('/travel/:id/document', travelController) 
 
 // Formulaire de login : affichage et traitement
 router.post('/login', loginController.doLogin);
