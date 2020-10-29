@@ -59,6 +59,9 @@
 .navlink-selected {
   color: #f05454;
 }
+.travel-details {
+  margin: auto;
+}
 
 
 @media screen and (min-width: 512px) {
@@ -89,3 +92,8 @@
     }
   }
 }
+.travel__view > *{
+min-width: 100%;
+}
+
+

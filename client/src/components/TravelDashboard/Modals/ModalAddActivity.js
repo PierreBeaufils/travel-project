@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import {
   Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock,
 } from 'react-feather';
+import { baseURL } from 'src/config';
+import axios from 'axios';
 import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
@@ -14,7 +16,24 @@ const ModalAddActivity = ({ isShowing, hide }) => {
     register, handleSubmit, watch, errors,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+
+  const travelID = 1; // penser à passer l'id du voyage dans les props
+
+  const onSubmit = (data) => {
+    console.log(data);
+    // data.selected = false;
+    axios.post(`${baseURL}/travel/${travelID}/activity`, data)
+      .then((res) => {
+        console.log(`voyage envoyé vers back : ${res.data}`);
+        console.log(data);
+        hide();
+      })
+      .catch((e) => {
+        // store.dispatch(errorMessage(e));
+        console.log(`erreur : ${e}`);
+      });
+    console.log(data);
+  };
 
   const todayDateISOString = new Date().toISOString().slice(0, -8); // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
 
@@ -24,6 +43,7 @@ const ModalAddActivity = ({ isShowing, hide }) => {
   const [locationData, setLocationData] = useState({
     city: '',
     latLong: '',
+    address: '',
   });
 
   const handleStartDateChange = (e) => {
@@ -82,7 +102,7 @@ const ModalAddActivity = ({ isShowing, hide }) => {
                     isAdressInputRequired
                     setLocationData={setLocationData}
                   />
-                  {/* <input name="place" ref={register()} type="text" /> */}
+                  <input name="place" ref={register()} type="hidden" value={locationData.address} />
                 </label>
                 <label htmlFor="description"><Info color="#2B7AFD" size={15} />Description
                   <input name="description" ref={register()} type="text" />

@@ -2,6 +2,9 @@
 import {
   SUBMIT_TRAVEL_FORM,
   FETCH_TRAVELS,
+  FETCH_ONE_TRAVEL,
+  DELETE_TRAVEL_ELEMENT,
+  SaveOneTravel,
   loadingTravels,
   saveTravels,
   errorMessage,
@@ -28,8 +31,36 @@ const travelMiddleware = (store) => (next) => (action) => {
       axios.get(`${baseURL}/user-travels/${id}`)
         .then((res) => {
           console.log(`récupération des voyages: ${res.data}`);
-          console.log(res);
           store.dispatch(saveTravels(res.data));
+        })
+        .catch((e) => {
+          store.dispatch(errorMessage(e));
+        })
+        .finally(() => {
+          store.dispatch(loadingTravels(false));
+        });
+      next(action);
+      break;
+    case FETCH_ONE_TRAVEL:
+      store.dispatch(loadingTravels(true));
+      axios.get(`${baseURL}/travel/${action.id}`)
+        .then((res) => {
+          console.log(`voyage récupéré : ${res.data}`);
+          store.dispatch(SaveOneTravel(res.data));
+        })
+        .catch((e) => {
+          store.dispatch(errorMessage(e));
+        })
+        .finally(() => {
+          store.dispatch(loadingTravels(false));
+        });
+      next(action);
+      break;
+    case DELETE_TRAVEL_ELEMENT:
+      store.dispatch(loadingTravels(true));
+      axios.delete(`${baseURL}/travel/${action.travelId}/${action.category}/${action.elementId}`)
+        .then((res) => {
+          console.log(res.data);
         })
         .catch((e) => {
           store.dispatch(errorMessage(e));

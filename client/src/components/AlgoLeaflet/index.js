@@ -6,7 +6,7 @@ import {
 } from 'react-leaflet';
 import AlgoliaPlaces from 'algolia-places-react';
 import PropTypes from 'prop-types';
-import { appId, apiKey, mapBoxToken } from '../../config'; // importation des clefs API
+import { appId, apiKey, mapBoxToken } from 'src/config';
 import './style.scss';
 
 const AlgoLeaflet = ({
@@ -36,6 +36,7 @@ const AlgoLeaflet = ({
             setLocationData({
               city: suggestion.city,
               latLong: suggestion.latlng,
+              address: suggestion.name,
             });
           }}
           onClear={() => setPosition(null)}
