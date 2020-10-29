@@ -56,7 +56,7 @@ router.get('/travel/:id/documents', mainController.showDocuments);
 router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity);
 
 // ROUTE DE SUPRESSION D'UN DOCUMENT
-router.delete('/travel/:id/document/delete', mainController.deleteDocument);
+
 
 // INFOS DOCUMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
 router.post('/travel/:id/document', mainController.createDocument); // Route doit etre accessible unniquement à l'admin
