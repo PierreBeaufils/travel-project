@@ -32,6 +32,7 @@ h3 {
   background-color: rgba(64, 192, 156, 1);
   color: #fff;
   border-radius: 5px;
+  border: none;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -145,4 +146,13 @@ h3 {
   color: red;
   font-weight: 350;
   font-size: 1rem;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 5px;
+}
+
+input.inputalgolia {
+  padding-right: 35px;
 }

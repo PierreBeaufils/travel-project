@@ -8,6 +8,7 @@
   background-color: rgba(64, 192, 156, 1);
   color: #fff;
   border-radius: 5px;
+  border: none;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -198,4 +199,12 @@
     bottom: 1vh;
     right: 1vh;
   }
+}
+
+.fieldName {
+  margin-left: 5px;
+}
+
+.modal-title {
+  text-align: center;
 }

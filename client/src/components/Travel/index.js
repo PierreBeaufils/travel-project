@@ -9,9 +9,9 @@ import {
 
 import thumbnail from 'src/assets/images/ile-maurice.jpg';
 import Documents from '../UserProfile/Documents';
-import CardAccommodation from '../ThingsEdit/CardAccommodation';
-import CardTransport from '../ThingsEdit/CardTransport';
-import CardActivity from '../ThingsEdit/CardActivity';
+import CardAccommodation from '../TravelDashboard/CardAccommodation';
+import CardTransport from '../TravelDashboard/CardTransport';
+import CardActivity from '../TravelDashboard/CardActivity';
 
 const Travel = ({
   travel, fetchOneTravel, travelLoaded, id,
@@ -44,15 +44,23 @@ const Travel = ({
               </div>
             </div>
           </div>
+          <Link to={`/voyage/${travel.id}/dashboard`}>Dashboard</Link>
+          {/*
           <div className="travel-container">
-            {/* <Documents userData={[{}]} /> */}
+
             <div className="cards__container travel__view">
-              {/* Timestamp is sent to order by date in CSS rendering */}
-              {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)}
-              {travel.activity.map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={false} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} />)}
-              {travel.transport.map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={false} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} />)}
+              Timestamp is sent to order by date in CSS rendering
+              {travel.accommodation.map((accomodation) =>
+                <CardAccommodation key={accomodation.id} {...accomodation} isEditingAllowed={false}
+                timestamp={new Date(`${accomodation.arrival_date}`).getTime() / 1000} />)}
+              {travel.activity.map((activity) =>
+                <CardActivity key={activity.id} {...activity} isEditingAllowed={false}
+                timestamp={new Date(`${activity.date}`).getTime() / 1000} />)}
+              {travel.transport.map((transport) => <CardTransport key={transport.id} {...transport}
+              isEditingAllowed={false} timestamp={new Date(`${transport.departure_date}`).getTime() / 1000} />)}
             </div>
           </div>
+          */}
         </>
       )}
     </div>
@@ -67,7 +75,7 @@ Travel.propTypes = {
 };
 
 Travel.defaultProps = {
-  travel: {},
+  travel: null,
 };
 
 export default Travel;
