@@ -1,29 +1,32 @@
-/* eslint-disable max-len */
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import { Users, XSquare, MapPin, DollarSign, LogIn, LogOut, Send, FileText, Home, Info, Clock, } from 'react-feather';
-import AlgoLeaflet from '../../AlgoLeaflet';
-// import PropTypes from 'prop-types';
+import {
+  Users, XSquare, MapPin, DollarSign, LogIn, LogOut, Send, FileText, Home, Info,
+} from 'react-feather';
+import AlgoliaPlaces from 'algolia-places-react';
+import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
-const ModalAddTransport = ({ isShowing, hide }) => {
+const ModalAddTransport = ({
+  isShowing, hide, transport, travelId,
+}) => {
+  const [startPlace, setStartPlace] = useState('');
+  const [arrivalPlace, setArrivalPlace] = useState('');
+
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
-
-  const todayDateISOString = new Date().toISOString().slice(0, -8); // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
-
-  console.log(watch('example')); // watch input value by passing the name of it
-
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [locationData, setLocationData] = useState({
-    departurePlace: '',
-    arrivalPlace: '',
-  });
+  const onSubmit = (data) => {
+    console.log(data);
+    axios.post(`${baseURL}/travel/s${travelId}/transport`, data)
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
 
   return (isShowing ? ReactDOM.createPortal(
     <>
@@ -42,80 +45,119 @@ const ModalAddTransport = ({ isShowing, hide }) => {
           </div>
           <div className="modal_content">
             <div>
-              <h3>Ajouter un transport</h3>
-              <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop">
+              <h3 className="modal-title">Ajouter un transport</h3>
+              <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop"> {/* Changer le nom de la classe ! */}
 
-                <label htmlFor="from"><MapPin color="#2B7AFD" size={15} />Lieu de départ
-                  {/*<input name="from" ref={register({ required: true })} type="text" />*/}
-                  <AlgoLeaflet
-                    isMapRequired={false}
-                    isAdressInputRequired={true}
-                    setLocationData={setLocationData}
+                <label htmlFor="from">
+                  <MapPin color="#2B7AFD" size={15} />
+                  <span className="fieldName">Lieu de départ</span>
+                  <span className="required-asterisk">*</span>
+                  <input name="from" id="from" type="hidden" ref={register({ required: true })} value={startPlace} />
+                  {errors.from && <span className="warning-text">Veuillez sélectionner un lieu de départ</span>}
+                  <AlgoliaPlaces
+                    className="inputalgolia"
+                    placeholder="Saisissez le lieu"
+                    options={{
+                      appId,
+                      apiKey,
+                    }}
+                    onChange={({ suggestion }) => {
+                      setStartPlace(suggestion.value);
+                    }}
+                    onClear={() => setStartPlace('')}
                   />
-                  {errors.from && <span className="warning-text">Veuillez selectionner un lieu de départ</span>}
                 </label>
-                <label htmlFor="to"><MapPin color="#2B7AFD" size={15} />Lieu d'arrivée
-                  {/*<input name="to" ref={register({ required: true })} type="text" />*/}
-                  <AlgoLeaflet
-                    isMapRequired={false}
-                    isAdressInputRequired={true}
-                    setLocationData={setLocationData}
+
+                <label htmlFor="to">
+                  <MapPin color="#2B7AFD" size={15} />
+                  <span className="fieldName">Lieu d'arrivée</span>
+                  <span className="required-asterisk">*</span>
+                  <input name="to" id="to" ref={register({ required: true })} type="hidden" value={arrivalPlace} />
+                  {errors.to && <span className="warning-text">Veuillez sélectionner un lieu d'arrivée</span>}
+                  <AlgoliaPlaces
+                    className="inputalgolia"
+                    placeholder="Saisissez le lieu"
+                    options={{
+                      appId,
+                      apiKey,
+                    }}
+                    onChange={({ suggestion }) => {
+                      setArrivalPlace(suggestion.value);
+                    }}
+                    onClear={() => setArrivalPlace('')}
                   />
-                  {errors.to && <span className="warning-text">Veuillez selectionner un lieu d'arrivée</span>}
                 </label>
-                <label htmlFor="arrival_date"><LogIn color="#2B7AFD" size={15} />Date et heure de départ
+
+                <label htmlFor="arrival_date">
+                  <LogIn color="#2B7AFD" size={15} />
+                  <span className="fieldName">Date et heure de départ</span>
+                  <span className="required-asterisk">*</span>
                   <input
                     name="arrival_date"
                     ref={register({ required: true })}
                     type="datetime-local"
-                    // value={startDate}
                     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
-                    min={todayDateISOString}
-                    max={endDate}
-                    onChange={(e) => setStartDate(new Date(e.target.value).toISOString().slice(0, -8))}
                   />
-                  {errors.startDate && <span className="warning-text">Veuillez selectionner une date de départ</span>}
+                  {errors.startDate && <span className="warning-text">Veuillez sélectionner une date de départ</span>}
                 </label>
-                <label htmlFor="departure_date"><LogOut color="#2B7AFD" size={15} />Date et heure de départ d'arrivée
+
+                <label htmlFor="departure_date">
+                  <LogOut color="#2B7AFD" size={15} />
+                  <span className="fieldName">Date et heure d'arrivée</span>
                   <input
                     name="departure_date"
-                    ref={register()}
+                    ref={register({ required: false })}
                     type="datetime-local"
-                    min={startDate}
-                    // value={endDate}
-                    onChange={(e) => setEndDate(new Date(e.target.value).toISOString().slice(0, -8))}
                   />
                 </label>
-                <label htmlFor="type"><Send color="#2B7AFD" size={15} />Mode de transport
+
+                <label htmlFor="type">
+                  <Send color="#2B7AFD" size={15} />
+                  <span className="fieldName">Mode de transport</span>
+                  <span className="required-asterisk">*</span>
                   <input name="type" ref={register({ required: true })} type="text" />
-                  {errors.type && <span className="warning-text">Veuillez saisir un type de transport</span>}
+                  {errors.type && <span className="warning-text">Veuillez saisir un mode de transport</span>}
                 </label>
-                <label htmlFor="company"><Home color="#2B7AFD" size={15} />Société de transport
-                  <input name="company" ref={register()} type="text" />
+
+                <label htmlFor="company">
+                  <Home color="#2B7AFD" size={15} />
+                  <span className="fieldName">Société/compagnie</span>
+                  <input name="company" ref={register({ required: false })} type="text" />
                 </label>
-                <label htmlFor="unit_price"><DollarSign color="#2B7AFD" size={15} />Prix unitaire (€)
+
+                <label htmlFor="unit_price">
+                  <DollarSign color="#2B7AFD" size={15} />
+                  <span className="fieldName">Tarif par personne</span>
                   <input
                     name="unit_price"
-                    ref={register()}
+                    ref={register({ required: false })}
                     type="number"
                     min="0"
                   />
                 </label>
-                <label htmlFor="quantity"><Users color="#2B7AFD" size={15} />Nombre prévu de voyageurs
+
+                <label htmlFor="quantity">
+                  <Users color="#2B7AFD" size={15} />
+                  <span className="fieldName">Nombre de voyageurs</span>
                   <input
                     name="quantity"
-                    ref={register({ required: true })}
+                    ref={register({ required: false })}
                     type="number"
                     step="1"
                     min="0"
                   />
-                  {errors.type && <span className="warning-text">Veuillez saisir un nombre prévu de voyageurs</span>}
                 </label>
-                <label htmlFor="memo"><Info color="#2B7AFD" size={15} />Informations complémentaires
-                  <input name="memo" ref={register()} type="text" />
+
+                <label htmlFor="reservation_ref">
+                  <FileText color="#2B7AFD" size={15} />
+                  <span className="fieldName">Référence de réservation</span>
+                  <input name="reservation_ref" ref={register({ required: false })} type="text" />
                 </label>
-                <label htmlFor="reservation_ref"><FileText color="#2B7AFD" size={15} />Référence de réservation
-                  <input name="reservation_ref" ref={register()} type="text" />
+
+                <label htmlFor="memo">
+                  <Info color="#2B7AFD" size={15} />
+                  <span className="fieldName">Informations complémentaires</span>
+                  <input name="memo" ref={register({ required: false })} type="text" />
                 </label>
 
                 <input
@@ -124,9 +166,6 @@ const ModalAddTransport = ({ isShowing, hide }) => {
                 />
               </form>
             </div>
-            <div className="modal_buttons_container">
-              <p>ici eventuellement boutons</p>
-            </div>
           </div>
         </div>
       </div>
@@ -134,12 +173,12 @@ const ModalAddTransport = ({ isShowing, hide }) => {
   ) : null);
 };
 
-// ModalAddTransport.propTypes = {
+ModalAddTransport.propTypes = {
+  transport: PropTypes.object,
+};
 
-// };
-
-// ModalAddTransport.defaultProps = {
-
-// };
+ModalAddTransport.defaultProps = {
+  transport: null,
+};
 
 export default ModalAddTransport;
