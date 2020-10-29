@@ -11,7 +11,7 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelId, typeOfSubmit,
+  isShowing, hide, transport, travelId, editOrCreate,
 }) => {
   const [startPlace, setStartPlace] = useState(transport.departure_date || '');
   const [arrivalPlace, setArrivalPlace] = useState(transport.arrival_date || '');
@@ -22,7 +22,7 @@ const ModalAddTransport = ({
 
   const onSubmit = (data) => {
     console.log(data);
-    axios.post(`${baseURL}/travel/s${travelId}/transport`, data)
+    axios.post(`${baseURL}/travel/${travelId}/transport`, data)
       .then((res) => {
         console.log(res.data);
       });
@@ -175,12 +175,12 @@ const ModalAddTransport = ({
 
 ModalAddTransport.propTypes = {
   transport: PropTypes.object,
-  typeOfSubmit: PropTypes.string,
+  editOrCreate: PropTypes.string,
 };
 
 ModalAddTransport.defaultProps = {
   transport: null,
-  typeOfSubmit: 'create',
+  editOrCreate: 'create',
 };
 
 export default ModalAddTransport;
