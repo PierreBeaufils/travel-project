@@ -11,10 +11,10 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelId,
+  isShowing, hide, transport, travelId, typeOfSubmit,
 }) => {
-  const [startPlace, setStartPlace] = useState('');
-  const [arrivalPlace, setArrivalPlace] = useState('');
+  const [startPlace, setStartPlace] = useState(transport.departure_date || '');
+  const [arrivalPlace, setArrivalPlace] = useState(transport.arrival_date || '');
 
   const {
     register, handleSubmit, watch, errors,
@@ -175,10 +175,12 @@ const ModalAddTransport = ({
 
 ModalAddTransport.propTypes = {
   transport: PropTypes.object,
+  typeOfSubmit: PropTypes.string,
 };
 
 ModalAddTransport.defaultProps = {
   transport: null,
+  typeOfSubmit: 'create',
 };
 
 export default ModalAddTransport;
