@@ -251,7 +251,14 @@ const travelController = {
         let entity = req.params.entity;
         // entity = entity.charAt(0).toUpperCase() + entity.slice(1);
         let entityToUse ;
-        
+
+        if (entity === 'document') {
+            const documentToDelete = req.body ;
+            const deletedDocument = new Document(documentToDelete);
+            const deleteConfirmation = await deletedDocument.deleteFile();
+            res.json(deleteConfirmation);
+        }
+        else {
         for (let i = 0 ; i < objectModel.length ; i++) {
             // console.log('objectModel[i].tableName', objectModel[i].tableName);
             if (entity === objectModel[i].tableName) {
@@ -272,7 +279,13 @@ const travelController = {
             res.json("suppresion effectuée");
         } else {
             res.status(404).json("cette entité n'existe pas dans ce voyage");
-        }
+        }}
+    },
+
+    deleteDocument: async (req,res) => {
+        const documentToDelete = req.body ;
+        const deletedDocument = new Document(documentToDelete);
+        deletedDocument.deleteFile();
     }
 };
 

@@ -42,8 +42,21 @@ class Document {
     }
 
     async getObject() {
-        const test = await s3.getObject(this).promise();
+        const test = await s3.getObject(this).promise().catch((err) => {
+            console.log(err);
+        });
         return test ;
+    }
+
+     async deleteFile() {
+         delete this.travel_id ;
+         delete this.url ;
+         delete this.name ;
+         
+        const deleted = await s3.deleteObject(this).promise().catch((err) => {
+            console.log(err);
+        });
+        return "La suppremssion c'est bien passé";
     }
     
     getUrl() {
