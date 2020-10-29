@@ -17,7 +17,7 @@ const TravelCard = ({ travel }) => (
       </div>
       <div className="travel-card-content-date">Du {travel.departure_date} au {travel.return_date}</div>
       <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
-      <Link to={`/voyage/${travel.id}`} className="travel-card-content-more">
+      <Link to={`/voyage/${travel.travel_id}`} className="travel-card-content-more">
         Voir ce voyage
       </Link>
     </div>

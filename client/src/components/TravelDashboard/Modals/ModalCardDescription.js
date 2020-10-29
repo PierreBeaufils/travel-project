@@ -34,7 +34,7 @@ const ModalCardDescription = ({
             {(categoryName === 'Hébergement') ? ( // modale de description lorsqu'il s'agit d'un hebergement
               <div className="modal_content-main">
                 <h2>Hébergement {oneThingData.name}</h2>
-                <h4><MapPin color="#2B7AFD" size={15} /> {oneThingData.adress} {oneThingData.city}</h4>
+                <h4><MapPin color="#2B7AFD" size={15} /> {oneThingData.address} {oneThingData.city}</h4>
                 {(oneThingData.coordinate !== null) ? (
                   <AlgoLeaflet
                     isMapRequired
@@ -45,11 +45,11 @@ const ModalCardDescription = ({
                 <h4><LogIn color="#2B7AFD" size={15} /> Date d'arrivée: {transformDateISOtoString(oneThingData.arrival_date)}</h4>
                 <h4><LogOut color="#2B7AFD" size={15} /> Date de départ: {transformDateISOtoString(oneThingData.departure_date)}</h4>
                 <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} USD</h4>
-                {(oneThingData.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneThingData.information}</p> : null }
-                {(oneThingData.availability != null) ? <p>Disponibilité: {oneThingData.availability} places</p> : null }
+                {(oneThingData.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneThingData.information}</p> : null}
+                {(oneThingData.availability != null) ? <p>Disponibilité: {oneThingData.availability} places</p> : null}
                 <h4><Users color="#2B7AFD" size={15} /> Nombre prévu voyageurs: {oneThingData.quantity}</h4>
               </div>
-            ) : null }
+            ) : null}
             {(categoryName === 'Transport') ? (// modale de description lorsqu'il s'agit d'un transport
               <div className="modal_content-main">
                 <h2>Transport {oneThingData.name}</h2>
@@ -59,11 +59,11 @@ const ModalCardDescription = ({
                 <h4><LogOut color="#2B7AFD" size={15} /> Date et heure de départ: {transformDateISOtoString(oneThingData.departure_date)}</h4>
                 <h4><LogIn color="#2B7AFD" size={15} /> Date et heure d'arrivée: {transformDateISOtoString(oneThingData.arrival_date)}</h4>
                 <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} EUR</h4>
-                {(oneThingData.reservation_ref != null) ? <h4><FileText color="#2B7AFD" size={15} /> Réference de reservation: {oneThingData.reservation_ref}</h4> : null }
+                {(oneThingData.reservation_ref != null) ? <h4><FileText color="#2B7AFD" size={15} /> Réference de reservation: {oneThingData.reservation_ref}</h4> : null}
                 <h4><Users color="#2B7AFD" size={15} /> Nombre de voyageurs prévu: {oneThingData.quantity}</h4>
-                {(oneThingData.memo != null) ? <h4><Info color="#2B7AFD" size={15} /> {oneThingData.memo}</h4> : null }
+                {(oneThingData.memo != null) ? <h4><Info color="#2B7AFD" size={15} /> {oneThingData.memo}</h4> : null}
               </div>
-            ) : null }
+            ) : null}
             {(categoryName === 'Activité') ? (// modale de description lorsqu'il s'agit d'une activité
               <div className="modal_content-main">
                 <h3>Activité: {oneThingData.name}</h3>
@@ -82,7 +82,7 @@ const ModalCardDescription = ({
                 <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} EUR</h4>
                 <h4><Info color="#2B7AFD" size={15} /> {oneThingData.description}</h4>
               </div>
-            ) : null }
+            ) : null}
             <div className="modal_buttons_container">
               <p>ici boutons eventuels</p>
             </div>

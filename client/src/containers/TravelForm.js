@@ -3,7 +3,7 @@ import TravelForm from 'src/components/TravelForm';
 import { submitTravelForm, changeFieldValue } from 'src/actions/travels';
 
 const mapStateToProps = (state) => ({
-  travel: state.travels.travelFields,
+  travel: state.travels.currentTravel,
   ownerId: state.user.session.id,
 });
 

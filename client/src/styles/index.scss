@@ -10,7 +10,7 @@ html {
 body {
   font-family: 'Ubuntu', sans-serif;
   color: vars.$text-color;
-  background-color: #E9EAED;
+  background-color:white;
   position: relative;
   min-height: 100%;
   padding-bottom: 90px;
@@ -32,6 +32,7 @@ h3 {
   background-color: rgba(64, 192, 156, 1);
   color: #fff;
   border-radius: 5px;
+  border: none;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -94,12 +95,13 @@ h3 {
     width: inherit;
     align-self: center;
     color: #fff;
+    font-size: 14px;
     font-weight: 700;
     border: none;
-    border-radius: 27px;
+    border-radius: 45px;
     margin-top: 20px;
     margin-bottom: 0;
-    padding: 15px;
+    padding: 12px 32px;
     font-size: 1.02rem;
     transition: all 300ms ease;
 
@@ -144,4 +146,13 @@ h3 {
   color: red;
   font-weight: 350;
   font-size: 1rem;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 5px;
+}
+
+input.inputalgolia {
+  padding-right: 35px;
 }
