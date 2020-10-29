@@ -217,9 +217,62 @@ const travelController = {
             res.status(404).json('ce voyageur n\'est pas inscrit sur ce voyage')
         }
     },
+    showEntity: async (req,res) => {
+        let entity = req.params.entity;
+        let entityToUse;
+
+        for (let i = 0 ; i < objectModel.length ; i++) {
+            if (entity === objectModel[i].tableName) {
+                entityToUse = objectModel[i];
+            }
+        };
+
+        const entityToFind = await entityToUse.findAllTravelComponent(req.params.id);
+        if (entityToFind.length > 0) {
+            res.json (entityToFind);
+        } else {
+            res.status(404).json (`Il y a 0 ${entityToUse.tableName} dans ce voyage`);
+        }
+    },
+    createEntity: async (req,res) => {
+        let entity = req.params.entity;
+        let entityToUse;
+
+        for (let i = 0 ; i < objectModel.length ; i++) {
+            if (entity === objectModel[i].tableName) {
+                entityToUse = objectModel[i];
+            }
+        };
+
+        const newEntity = new entityToUse(req.body);
+        newEntity.travel_id = req.params.id;
+
+        await newEntity.saveAllTravelComponent();
+        res.json('Ajout effectué');
+    },
+    editEntity: async (req,res)=>{
+        let entity = req.params.entity;
+        let entityToUse ;
+        
+        for (let i = 0 ; i < objectModel.length ; i++) {
+            // console.log('objectModel[i].tableName', objectModel[i].tableName);
+            if (entity === objectModel[i].tableName) {
+                entityToUse = objectModel[i];
+            }
+        };
+
+        const entityToEdit = await entityToUse.findOneTravelComponent(req.params.id,req.params.entityId);
+        if (entityToEdit) {
+            const editedEntity = await new entityToUse(entityToEdit);
+            editedEntity.update(req.body);
+            editedEntity.saveAllTravelComponent();
+            res.json(`${entityToUse.tableName} mise à jour`)
+        } else {
+            res.status(404).json('mise à jour impossible')
+        }
+    },
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
-        // entity = entity.charAt(0).toUpperCase() + entity.slice(1);
         let entityToUse ;
         
         for (let i = 0 ; i < objectModel.length ; i++) {
