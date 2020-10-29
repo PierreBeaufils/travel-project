@@ -37,18 +37,30 @@ const TravelForm = ({
   } = useForm({ defaultValues: initialValues() });
 
   const [startDate, setStartDate] = useState('');
+  const [redirection, setRedirection] = useState(false);
+  const [redirectionUrl, setRedirectionUrl] = useState('');
 
   const onSubmit = (data) => {
+    console.log(data);
     if (editOrCreate === 'create') {
       axios.post(`${baseURL}/create-travel`, data)
-        .then(() => <Redirect to="/tableau-de-bord" />);
+        .then(() => {
+          setRedirectionUrl('/tableau-de-bord');
+          setRedirection(true);
+        });
     }
     else {
       axios.patch(`${baseURL}/travel/${travel.infos.id}`, data)
-        .then(() => <Redirect to={`/voyage/${travel.infos.id}`} />);
+        .then(() => {
+          setRedirectionUrl(`/voyage/${travel.infos.id}`);
+          setRedirection(true);
+        });
     }
   };
 
+  if (redirection) {
+    return <Redirect to={redirectionUrl} />;
+  }
   return (
     <div className="travel__create-form">
       <div className="main-form">

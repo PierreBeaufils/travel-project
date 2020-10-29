@@ -53,20 +53,34 @@ const Travel = ({
           </Link>
 
           <div className="travel-container">
-
+            {/*
             <div className="cards__container travel__view">
-              {/*
-              Timestamp is sent to order by date in CSS rendering
-              {travel.accommodation.map((accomodation) =>
-                <CardAccommodation key={accomodation.id} {...accomodation} isEditingAllowed={false}
-                timestamp={new Date(`${accomodation.arrival_date}`).getTime() / 1000} />)}
-              {travel.activity.map((activity) =>
-                <CardActivity key={activity.id} {...activity} isEditingAllowed={false}
-                timestamp={new Date(`${activity.date}`).getTime() / 1000} />)}
-              {travel.transport.map((transport) => <CardTransport key={transport.id} {...transport}
-              isEditingAllowed={false} timestamp={new Date(`${transport.departure_date}`).getTime() / 1000} />)}
-              */}
+              {travel.accommodation.map((accomodation) => (
+                <CardAccommodation
+                  key={accomodation.id}
+                  {...accomodation}
+                  EditAllowed={false}
+                  timestamp={new Date(`${accomodation.arrival_date}`).getTime() / 1000}
+                />
+              ))}
+              {travel.activity.map((activity) => (
+                <CardActivity
+                  key={activity.id}
+                  {...activity}
+                  EditAllowed={false}
+                  timestamp={new Date(`${activity.date}`).getTime() / 1000}
+                />
+              ))}
+              {travel.transport.map((transport) => (
+                <CardTransport
+                  key={transport.id}
+                  {...transport}
+                  EditAllowed={false}
+                  timestamp={new Date(`${transport.departure_date}`).getTime() / 1000}
+                />
+              ))}
             </div>
+            */}
           </div>
         </>
       )}
