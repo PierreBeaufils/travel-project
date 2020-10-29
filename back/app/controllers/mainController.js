@@ -142,7 +142,7 @@ const travelController = {
         await newEntity.saveAllTravelComponent();
         res.json('Ajout effectué');
     },
-    editEntity: async (req,res)=>{
+    editEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
 
@@ -170,7 +170,8 @@ const travelController = {
         } else {
             res.status(404).json('mise à jour impossible')
         }
-    },
+    }},
+
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
@@ -189,7 +190,7 @@ const travelController = {
         } else {
             res.status(404).json("cette entité n'existe pas dans ce voyage");
         }}
-    },
+    ,
 
     
 };
