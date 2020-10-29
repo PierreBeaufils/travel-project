@@ -28,6 +28,7 @@ const travelController = {
         let  travelinfos = {};
         travelinfos = await Travel.findOneTravelComponent(null,travelId);
         if (travelinfos) {
+            travelinfos.prices = await Travel.findPrice(travelId);
             travelinfos.traveler = await travel_has_traveler.findTravelersByTravel(travelId);
             travelinfos.transport = await Transport.findAllTravelComponent(travelId);
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
@@ -47,10 +48,11 @@ const travelController = {
         res.json('voyage mis à jour')
     },
     showTravels: async (req, res) =>{
-        const allTravels = await Travel.findAllTravelComponent();
+        let travelInfos = {};
+        travelInfos = await Travel.findAllTravelComponent();
         
-        if (allTravels) { 
-            res.json(allTravels);
+        if (travelInfos) { 
+            res.json(travelInfos);
         } else {
             res.status(404).json ('Il n\'existe pas de voyage');
         };

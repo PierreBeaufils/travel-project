@@ -1,11 +1,7 @@
 //////////////////////////////////////////// ROUTES DE TRAVEL ////////////////////////////////////////////////////
 GET http://localhost:3000/v1/travels
 ###
-<<<<<<< HEAD
-GET http://localhost:3000/v1/travel/
-=======
-GET http://localhost:3000/v1/travel/3
->>>>>>> 59bebca4d8d226b6c520c2c32733f12bce7703f4
+GET http://localhost:3000/v1/travel/10
 ###
 POST http://localhost:3000/v1/create-travel
 Content-Type: application/json
@@ -36,7 +32,7 @@ DELETE http://localhost:3000/v1/travel/45
 
 //////////////////////////////////// ROUTES DE TRAVEL VERS ACCOMODATION///////////////////////////////////////////
 
-GET http://localhost:3000/v1/travel/15/accommodation/
+GET http://localhost:3000/v1/travel/2/accommodation
 ###
 POST http://localhost:3000/v1/travel/2/accommodation
 Content-Type: application/json
@@ -55,15 +51,11 @@ Content-Type: application/json
   "selected": false
 }
 ###
-PATCH http://localhost:3000/v1/travel/15/accommodation/33
+PATCH http://localhost:3000/v1/travel/2/accommodation/3
 Content-Type: application/json
 
 {
-  "name": "Grande marée",
-  "address": "adresse test patch",
-  "departure_date": "2020-06-25T03:12:32.000Z",
-  "unit_price": "31.79",
-  "quantity": 9
+  "selected": true
 }
 ###
 DELETE http://localhost:3000/v1/travel/1/accommodation/32
@@ -88,18 +80,11 @@ Content-Type: application/json
   "selected": false
 }
 ###
-PATCH http://localhost:3000/v1/travel/33/activity/33
+PATCH http://localhost:3000/v1/travel/15/activity/16
 Content-Type: application/json
 
 {
-    "name": "Chasse a cour",
-    "topic": "TEST",
-    "place": "886 Surrey Lane",
-    "duration": "35 minute",
-    "description": "Operative composite productivity",
-    "date": "2020-11-16T10:58:36.000Z",
-    "unit_price": "85.99",
-    "quantity": 4
+  "selected": true
 }
 ###
 DELETE http://localhost:3000/v1/travel/15/activity/32
