@@ -13,8 +13,8 @@ import '../styles.scss';
 const ModalAddTransport = ({
   isShowing, hide, transport, travelId, typeOfSubmit,
 }) => {
-  const [startPlace, setStartPlace] = useState(transport.departure_date || '');
-  const [arrivalPlace, setArrivalPlace] = useState(transport.arrival_date || '');
+  const [startPlace, setStartPlace] = useState('');
+  const [arrivalPlace, setArrivalPlace] = useState('');
 
   const {
     register, handleSubmit, watch, errors,

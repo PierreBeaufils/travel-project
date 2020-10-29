@@ -28,7 +28,7 @@ const CardActivity = (activity) => {
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${activity.timestamp}` }}>
-      {(activity.isEditingAllowed) ? (
+      {(activity.EditAllowed) ? (
         <ModalDelete
           isShowing={isShowingModalDeleteCard}
           hide={toggleModalDeleteCard}
@@ -54,7 +54,7 @@ const CardActivity = (activity) => {
           <h4><Clock color="#2B7AFD" size={15} /> durée: {activity.duration.minutes} minutes</h4>
           <p><Info color="#2B7AFD" size={15} /> {activity.description}</p>
         </div>
-        {(activity.isEditingAllowed) ? (
+        {(activity.EditAllowed) ? (
           <div className="card__footer">
             <CheckSquare
               onClick={() => handleAddCardCLick(activity.id)}
