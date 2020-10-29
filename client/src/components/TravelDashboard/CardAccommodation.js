@@ -27,7 +27,7 @@ const CardAccommodation = (oneAccomodation) => {
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${oneAccomodation.timestamp}` }}>
-      {(oneAccomodation.isEditingAllowed) ? (
+      {(oneAccomodation.EditAllowed) ? (
         <ModalDelete
           isShowing={isShowingModalDeleteCard}
           hide={toggleModalDeleteCard}
@@ -53,7 +53,7 @@ const CardAccommodation = (oneAccomodation) => {
           <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneAccomodation.arrival_date)} au {transformDateISOtoString(oneAccomodation.departure_date)}</h4>
           {(oneAccomodation.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null}
         </div>
-        {(oneAccomodation.isEditingAllowed) ? (
+        {(oneAccomodation.EditAllowed) ? (
           <div className="card__footer">
             <CheckSquare
               onClick={() => handleAddCardCLick(oneAccomodation.id)}
@@ -62,6 +62,10 @@ const CardAccommodation = (oneAccomodation) => {
             <Edit
               onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
               color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(activity.id)}
             />
           </div>
         ) : null}

@@ -9,7 +9,7 @@ import ModalCardDescription from './Modals/ModalCardDescription';
 import useModal from './useModal';
 import './styles.scss';
 
-const CardTransport = ({ transport }) => {
+const CardTransport = (transport) => {
   const { isShowingModalDeleteCard, toggleModalDeleteCard } = useModal('ModalDeleteCard');
   const { isShowingModalCardDescription, toggleModalCardDescription } = useModal('ModalCardDescription');
 

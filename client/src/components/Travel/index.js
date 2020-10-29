@@ -53,7 +53,6 @@ const Travel = ({
           </Link>
 
           <div className="travel-container">
-            {/*
             <div className="cards__container travel__view">
               {travel.accommodation.map((accomodation) => (
                 <CardAccommodation
@@ -80,7 +79,6 @@ const Travel = ({
                 />
               ))}
             </div>
-            */}
           </div>
         </>
       )}
