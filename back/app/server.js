@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 
 
 app.use(express.json());
-app.use(bodyParser.none());
+app.use(bodyParser.any());
 app.use('/v1', router);
 
 app.launch = () => {

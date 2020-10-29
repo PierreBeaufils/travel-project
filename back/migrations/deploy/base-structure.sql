@@ -7,8 +7,7 @@ CREATE TABLE "travel" (
     "title" TEXT NOT NULL,
     "destination" TEXT NOT NULL,
     "departure_date" TIMESTAMP,
-    "return_date" TIMESTAMP,
-    "price"  NUMERIC DEFAULT 0,
+    "return_date" TIMESTAMP
     CHECK (return_date > departure_date)
 );
 

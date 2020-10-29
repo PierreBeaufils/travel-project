@@ -11,36 +11,32 @@ class Accommodation extends CoreModel {
         super(data);
         for (const prop in data){
             this[prop] = data[prop];
+            if (prop === "coordinate") {
+               if (typeof(this.coordinate) === 'object') {
+                   this.coordinate = this.transformCoordinates(this.coordinate);
+               }
+            }
         }
     }
 
-    // get coordinate() {
-    //     return this._coordinate;
-    // };
+        transformCoordinates(value) {
+        let rawCoordinate = [];
+        for (const key in value) {
+            rawCoordinate.push(value[key]);
+        }
 
-    // get coordinate(){
-    //     // console.log('value: ' ,typeof value);
-    //     let rawCoordinate = [];
-    //     console.log(this.coordinate);
-    //     // for (const key in value) {
-    //     //     // console.log('key: ', key);
-    //     //     // console.log('value[key]: ', value[key]);
-    //     //     rawCoordinate.push(value[key]);
-    //     // }
+        rawCoordinate = rawCoordinate.join(",");
 
-    //     // console.log(typeof rawCoordinate.join(', '));
-    //     // this.coordinate = rawCoordinate.join(', ');
-    //     // console.log(this.coordinate);
+        return rawCoordinate;
+    }
 
+    // get test() {
+    //     return this.makeSomethin();
+    // }
 
-    //     // if (value !== ~ '') {
-    //     //     for (const position of value) {
-    //     //         console.log(position)
-    //     //     }
-    //     // }
-    // };
-
-
+    // makeSomethin() {
+    //     return "nothing";
+    // }
 
     // static async findAllOfTravel(travelId){
     //     const accomodations = await db.query('SELECT * FROM accomodation WHERE travel_id = $1 ;', [travelId]);

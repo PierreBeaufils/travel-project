@@ -14,7 +14,7 @@ class Travel extends CoreModel {
 
     static async findAllTravels(travelerId) {
         const travels = await db.query (`
-        SELECT travel_id, title, destination, departure_date, return_date, price, "owner", traveler_id, first_name, last_name, gender, email, phone, "role", dob
+        SELECT travel_id, title, destination, departure_date, return_date, "owner", traveler_id, first_name, last_name, gender, email, phone, "role", dob
         FROM travel_has_traveler 
         JOIN travel ON travel_has_traveler.travel_id = travel.id
         JOIN traveler ON travel_has_traveler.traveler_id = traveler.id

@@ -6,80 +6,49 @@ const { Router } = require('express');
 
 const router = Router();
 
-// router.get('/travel/:id/traveler/:travelerId', mainController.test);
-
 // INFOS VOYAGEURS : affichage globale et individuel, insertion, modification et suppression
-router.get('/travelers', travelerController.allTravelers);
-router.get('/traveler/:id', travelerController.getOneTraveler);
-router.post('/traveler', travelerController.newTraveler);
-router.patch('/traveler/:id', travelerController.editTraveler);
-router.delete('/traveler/:id', travelerController.deleteTraveler);
+router.get('/travelers', travelerController.allTravelers); // Afficher tous les voyageurs en BDD
+router.get('/traveler/:id', travelerController.getOneTraveler); // Afficher les infos d'un voyageur
+router.post('/traveler', travelerController.newTraveler); // Création d'un nouveau voyageur (signup)
+router.patch('/traveler/:id', travelerController.editTraveler); // Modification du profil d'un voyageur
+router.delete('/traveler/:id', travelerController.deleteTraveler); // Suppression d'un compte voyageur
+
 // VOYAGES LIES A UN VOYAGEUR : Voyages à venir auxquels un voyageur est inscrit
-router.get('/user-travels/:id', mainController.showUserTravels);
+router.get('/user-travels/:id', mainController.showUserTravels); // Liste des voyages où le voyageur est inscrit
 
-// INFOS DU VOYAGE : affichage globale et individuel, insertion, modification et suppression
-router.get('/travels', mainController.showTravels);
-router.get('/travel/:id', mainController.showAllInfos);
-router.post('/create-travel', mainController.createTravel);
-router.patch('/travel/:id', mainController.editTravel);
-router.delete('/travel/:id', mainController.delete);
+// INFOS DES VOYAGES : affichage globale et individuel, insertion, modification et suppression
+router.get('/travels', mainController.showTravels); // Afficher tous les voyages en BDD
+router.get('/travel/:id', mainController.showAllInfos); // Afficher 1 voyage 
+router.post('/create-travel', mainController.createTravel); // Créer 1 nouveau voyage 
+router.patch('/travel/:id', mainController.editTravel); // Modifier 1 voyage existant
+router.delete('/travel/:id', mainController.deleteTravel); // Supprimer 1 voyage existant
 
-// INFOS VOYAGEURS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
-router.get('/travel/:id/travelers', mainController.showTravelers);
-router.post('/travel/:id/traveler', mainController.addTravelers);
-router.delete('/travel/:id/traveler/:travelerId', mainController.deleteTravelerFromTravel);
+// INFOS VOYAGEURS LIES A UN VOYAGE : affichage des voyageurs inscrits dans un voyage, inscrire un nouveau voyageur dans un voyage, et supprimer un voyageur d'un voyage
+router.get('/travel/:id/travelers', mainController.showTravelers); // Afficher les voyageurs faisant partie d'un voyage
+router.post('/travel/:id/traveler', mainController.addTravelers); // Ajouter un voyageur dans un voyage
+router.delete('/travel/:id/traveler/:travelerId', mainController.deleteTravelerFromTravel); // Supprimer 1 voyageur d'un voyage
 
-// INFOS HEBERGEMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
-router.get('/travel/:id/accommodation', mainController.showAccommodations);
-router.post('/travel/:id/accommodation', mainController.createAccommodation);
-router.patch('/travel/:id/accommodation/:accoId', mainController.editAccommodation);
+// ROUTES FACTORISEES: INFOS D'UN VOYAGE EN TERMES DE TRANSPORT, ACCOMMODATION, ACTIVITY et TASK  : affichage globale, insertion, modification et suppression
+router.get('/travel/:id/:entity', mainController.showEntity); // Afficher les entités en stock lié à un voyage 
+router.post('/travel/:id/:entity',mainController.createEntity); // Ajouter une nouvelle entité dans le stock d'un voyage
+router.patch('/travel/:id/:entity/:entityId', mainController.editEntity); // Modifier les infos d'une entité dans un voyage
+router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity); // Supprimer une entité d'un voyage
 
-// INFOS ACTIVITES LIEES A UN VOYAGE : affichage globale et individuel, insertion, modification 
-router.get('/travel/:id/activity', mainController.showActivity);
-router.post('/travel/:id/activity', mainController.createActivity);
-router.patch('/travel/:id/activity/:activityId', mainController.editActivity);
+// ROUTE DE SUPRESSION D'UN DOCUMENT
 
-// INFOS TRANSPORT LIES A UN VOYAGE : affichage globale et individuel, insertion, modification
-router.get('/travel/:id/transport', mainController.showTransport);
-router.post('/travel/:id/transport', mainController.createTransport);
-router.patch('/travel/:id/transport/:transportId', mainController.editTransport);
-
-// INFOS TACHES LIES A UN VOYAGE : affichage globale et individuel, insertion, modification 
-router.get('/travel/:id/tasks', mainController.showTask);
-router.post('/travel/:id/task', mainController.createTask);
-router.patch('/travel/:id/task/:taskId', mainController.editTask);
-
-// ROUTE FACTORISEE POUR SUPPRESSION de Hébergement, activité, transport, task liés à un voyage
-router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity);
 
 // INFOS DOCUMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
-// router.post('/travel/:id/document', travelController)
-// router.patch('/travel/:id/document', travelController)
-// router.delete('/travel/:id/document', travelController)
+// router.patch('/travel/:id/document', travelController) => nécessaire ?
+// router.delete('/travel/:id/document', travelController) 
 
-// Formulaire de login : affichage et traitement
-router.post('/login', loginController.doLogin);
+// LOGIN et LOGOUT 
+router.post('/login', loginController.doLogin); // Login et début de session
+router.post('/isLogged', loginController.loginCheck); // MW de contrôle de session active ou pas
+router.post('/logout', loginController.logout); // Déconnexion
 
-router.post('/isLogged', loginController.loginCheck);
-// Déconnexion
-router.post('/logout', loginController.logout);
-
-
-// Formulaire de signup : affichage et traitement
-router.post('/signup', loginController.doSignup,loginController.verifyEmail);
-// Déconnexion
-
-router.get('/mail', loginController.verifyToken);
-
-
-// Infos persos de l'utilisateur : affichage et traitement
-// router.get('/profile', travelerController.profile);
-// router.post('/profile', travelerController.modifyProfile);
-// page de contact (mail prérempli)
-
-
-// router.get('/travel/id/travelers', travelerController.allTravelers);
-// Voir tout les travelers associé à un voyage
+// SIGNUP
+router.post('/signup', loginController.doSignup,loginController.verifyEmail); // inscription et envoi d'un email avec un lien pour contrôler la validité de l'adresse email
+router.get('/mail', loginController.verifyToken); // MW de validation de l'email et inscription de l'utilisateur en cas de succès
 
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
