@@ -21,8 +21,8 @@ const travelController = {
             travelinfos.transport = await Transport.findAllTravelComponent(travelId);
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
             travelinfos.activity = await Activity.findAllTravelComponent(travelId);
-            travelinfos.task = await Task.findAllTravelComponent(travelId)
-            res.json(travelinfos);
+            travelinfos.task = await Task.findAllTravelComponent(travelId);
+            travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
         } else {
             res.status(404).json('ce voyage n\'existe pas');
         }
@@ -126,9 +126,45 @@ const travelController = {
             res.status(404).json (`Il y a 0 ${entityToUse.tableName} dans ce voyage`);
         }
     },
+    showDocuments : async (req,res,travelinfos) => {
+        // Je recupere l'id du voyage
+        const prefix = req.params.id + "/public/";
+        const documents = await Document.getAllPublic(prefix);
+        const documentsToShow = [];
+        for (let object of documents.Contents) {
+            if (object.Size != 0) {
+            object.travel_id = req.params.id;
+            let documentToPush = await new Document(object);
+
+            delete documentToPush.ETag ;
+            delete documentToPush.StorageClass;
+            documentsToShow.push(documentToPush);
+        }
+        }
+        travelinfos.documents = documentsToShow;
+        // res.json(documentsToShow);
+        res.json(travelinfos);
+
+    },
     createEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse;
+
+        if (entity === "document") {
+            console.log(req.files);
+            console.log(req.body.Key);
+            const nameOfFile = req.files[0].originalname || req.body.name;
+            console.log(nameOfFile);
+            const uploadParams = {
+                Body: req.files[0].buffer,
+                Key: `${req.params.id}/public/${nameOfFile}`,
+                travel_id: req.params.id,
+                ACL: "public-read"
+            }
+            const createdDocument = new Document(uploadParams);
+            createdDocument.uploadDoc();
+            res.json("le document a bien été ajouté !");
+        }
 
         for (let i = 0 ; i < objectModel.length ; i++) {
             if (entity === objectModel[i].tableName) {
@@ -142,6 +178,21 @@ const travelController = {
         await newEntity.saveAllTravelComponent();
         res.json('Ajout effectué');
     },
+    // createDocument: async (req,res) => {
+    //     console.log(req.files);
+    //     console.log(req.body.Key);
+    //     const nameOfFile = req.files[0].originalname || req.body.name;
+    //     console.log(nameOfFile);
+    //     const uploadParams = {
+    //         Body: req.files[0].buffer,
+    //         Key: `${req.params.id}/public/${nameOfFile}`,
+    //         travel_id: req.params.id,
+    //         ACL: "public-read"
+    //     }
+    //     const createdDocument = new Document(uploadParams);
+    //     createdDocument.uploadDoc();
+    //     res.json("le document a bien été ajouté !");
+    // },
     editEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
@@ -175,6 +226,13 @@ const travelController = {
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
+
+        if (entity === 'document') {
+            const documentToDelete = req.body ;
+            const deletedDocument = new Document(documentToDelete);
+            const deleteConfirmation = await deletedDocument.deleteFile();
+            res.json(deleteConfirmation);
+        }
         
         for (let i = 0 ; i < objectModel.length ; i++) {
             if (entity === objectModel[i].tableName) {
