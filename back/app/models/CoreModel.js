@@ -31,6 +31,11 @@ class CoreModel {
     //     this.travel_id = value;
     // }
 
+    static async findPrice(travelId) {
+        const component = await db.query (`SELECT * FROM global_price WHERE id=$1;`, [travelId]);
+        return component.rows;
+    }
+
     static async findAllTravelComponent(travelId){
         if (travelId) { 
             const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
