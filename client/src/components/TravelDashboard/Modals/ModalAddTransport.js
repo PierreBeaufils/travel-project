@@ -11,21 +11,55 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelId, typeOfSubmit,
+  isShowing, hide, transport, travelId, editOrCreate,
 }) => {
+  const setTitle = () => {
+    if (editOrCreate === 'edit') {
+      return 'Modifier un transport';
+    }
+    return 'Ajouter un transport';
+  };
+
+  const initialValues = () => {
+    if (editOrCreate === 'edit') {
+      return {
+        // from: transport.from,
+        // to: transport.to,
+        type: transport.type,
+        company: transport.company,
+        departure_date: transport.departure_date,
+        arrival_date: transport.arrival_date,
+        reservation_ref: transport.reservation_ref,
+        unit_price: transport.unit_price,
+        quantity: transport.quantity,
+        memo: transport.memo,
+      };
+    }
+    return {};
+  };
+
+  const {
+    register, handleSubmit, errors,
+  } = useForm({ defaultValues: initialValues() });
+
   const [startPlace, setStartPlace] = useState('');
   const [arrivalPlace, setArrivalPlace] = useState('');
 
-  const {
-    register, handleSubmit, watch, errors,
-  } = useForm();
-
   const onSubmit = (data) => {
-    console.log(data);
-    axios.post(`${baseURL}/travel/s${travelId}/transport`, data)
-      .then((res) => {
-        console.log(res.data);
-      });
+    if (editOrCreate === 'edit') {
+      axios.patch(`${baseURL}/travel/${travelId}/transport${transport.id}`, data)
+        .then(() => {
+          hide();
+        });
+    }
+    else {
+      console.log(data);
+      axios.post(`${baseURL}/travel/${travelId}/transport`, data)
+        .then((res) => {
+          console.log(res);
+          hide();
+        });
+    }
   };
 
   return (isShowing ? ReactDOM.createPortal(
@@ -45,7 +79,7 @@ const ModalAddTransport = ({
           </div>
           <div className="modal_content">
             <div>
-              <h3 className="modal-title">Ajouter un transport</h3>
+              <h3 className="modal-title">{setTitle()}</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop"> {/* Changer le nom de la classe ! */}
 
                 <label htmlFor="from">
@@ -175,12 +209,12 @@ const ModalAddTransport = ({
 
 ModalAddTransport.propTypes = {
   transport: PropTypes.object,
-  typeOfSubmit: PropTypes.string,
+  editOrCreate: PropTypes.string,
 };
 
 ModalAddTransport.defaultProps = {
   transport: null,
-  typeOfSubmit: 'create',
+  editOrCreate: 'create',
 };
 
 export default ModalAddTransport;
