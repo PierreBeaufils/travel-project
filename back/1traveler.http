@@ -1,6 +1,6 @@
 GET http://localhost:3000/v1/travelers
 ###
-GET http://localhost:3000/v1/traveler/32
+GET http://localhost:3000/v1/traveler/30
 ###
 POST http://localhost:3000/v1/traveler
 Content-Type: application/json
@@ -22,15 +22,15 @@ Content-Type: application/json
   "expiration_date": null
 }
 ###
-PATCH  http://localhost:3000/v1/traveler/32
+PATCH  http://localhost:3000/v1/traveler/31
 Content-Type: application/json
 
 {
   "first_name": "test patch 2"
 }
 ###
-DELETE http://localhost:3000/v1/traveler/32
+DELETE http://localhost:3000/v1/traveler/31
 
 ###
-GET http://localhost:3000/v1/user-travels/3
+GET http://localhost:3000/v1/user-travels/2
 ###
