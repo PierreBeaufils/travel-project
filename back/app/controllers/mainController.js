@@ -282,11 +282,7 @@ const travelController = {
         }}
     },
 
-    deleteDocument: async (req,res) => {
-        const documentToDelete = req.body ;
-        const deletedDocument = new Document(documentToDelete);
-        deletedDocument.deleteFile();
-    }
+    
 };
 
 module.exports = travelController ;
