@@ -53,7 +53,7 @@ class Document {
     }
 
     getName() {
-        const regex = /[a-zA-Z0-9-_.]+[.][a-z,A-Z,0-9]+$/gi
+        const regex = /[a-zA-Z0-9-_.\s*]+[.][a-z,A-Z,0-9]+$/gi
         let name =  this.Key.match(regex) ;
         if (name != null) {
         return name[0];
