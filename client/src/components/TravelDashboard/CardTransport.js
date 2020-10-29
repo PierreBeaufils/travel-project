@@ -27,7 +27,7 @@ const CardTransport = ({ transport }) => {
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${transport.timestamp}` }}>
-      {(transport.isEditingAllowed) ? (
+      {(transport.EditAllowed) ? (
         <ModalDelete
           isShowing={isShowingModalDeleteCard}
           hide={toggleModalDeleteCard}
@@ -54,7 +54,7 @@ const CardTransport = ({ transport }) => {
 
           <p><Info color="#2B7AFD" size={15} /> {transport.memo}</p>
         </div>
-        {(transport.isEditingAllowed) ? (
+        {(transport.EditAllowed) ? (
           <div className="card__footer">
             <CheckSquare
               onClick={() => handleAddCardCLick(transport.id)}
