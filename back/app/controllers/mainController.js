@@ -32,7 +32,7 @@ const travelController = {
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
             travelinfos.activity = await Activity.findAllTravelComponent(travelId);
             travelinfos.transport = await Transport.findAllTravelComponent(travelId);
-            res.json(travelinfos);
+            travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
         } else {
             res.status(404).json('ce voyage n\'existe pas');
         }
@@ -113,20 +113,24 @@ const travelController = {
             res.status(404).json('ce voyageur n\'appartient à aucun voyage')
         }
     },
-    showDocuments : async (req,res) => {
+    showDocuments : async (req,res,travelinfos) => {
         // Je recupere l'id du voyage
         const prefix = req.params.id + "/public/";
         const documents = await Document.getAllPublic(prefix);
         const documentsToShow = [];
         for (let object of documents.Contents) {
-           
+            if (object.Size != 0) {
+            object.travel_id = req.params.id;
             let documentToPush = await new Document(object);
-            
+
+            delete documentToPush.ETag ;
+            delete documentToPush.StorageClass;
             documentsToShow.push(documentToPush);
-            
         }
-        documents.Contents = documentsToShow;
-        res.json(documents);
+        }
+        travelinfos.documents = documentsToShow;
+        // res.json(documentsToShow);
+        res.json(travelinfos);
 
     },
 
@@ -155,7 +159,17 @@ const travelController = {
         res.json("Ajout effectué");
     },
     createDocument: async (req,res) => {
-        const createdDocument = new Document(req.body);
+        console.log(req.files);
+        console.log(req.body.Key);
+        const nameOfFile = req.files[0].originalname || req.body.name;
+        console.log(nameOfFile);
+        const uploadParams = {
+            Body: req.files[0].buffer,
+            Key: `${req.params.id}/public/${nameOfFile}`,
+            travel_id: req.params.id,
+            ACL: "public-read"
+        }
+        const createdDocument = new Document(uploadParams);
         createdDocument.uploadDoc();
         res.json("le document a bien été ajouté !");
     },

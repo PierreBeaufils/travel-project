@@ -9,11 +9,13 @@ class Document {
     
     static Bucket = "globe-trotter-travel";
     constructor (data) {
-            this.Bucket = Document.Bucket ;
-           for (const prop in data) {
+        this.travel_id = data.travel_id;
+        this.Bucket = Document.Bucket ;
+        for (const prop in data) {
             this[prop] = data[prop];
-            this.url = this.getUrl();
-           }
+        }
+        this.url = this.getUrl();
+        this.name = this.getName();
     
     }
 
@@ -22,7 +24,7 @@ class Document {
         
             
            const objectPromise = await  s3.listObjectsV2({Bucket: this.Bucket,Prefix: prefix}).promise().catch((err) => {
-               console.log(err);
+                return "une erreur c'est produite : " + err ;
            });
         return objectPromise;
     }
@@ -48,6 +50,14 @@ class Document {
         let url = "https://" + this.Bucket + ".s3.amazonaws.com/" + this.Key;
         url = encodeURI(url);
         return url;
+    }
+
+    getName() {
+        const regex = /[a-zA-Z0-9-_.]+[.][a-z,A-Z,0-9]+$/gi
+        let name =  this.Key.match(regex) ;
+        if (name != null) {
+        return name[0];
+    }
     }
 
 
