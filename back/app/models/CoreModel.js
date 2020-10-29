@@ -31,6 +31,11 @@ class CoreModel {
     //     this.travel_id = value;
     // }
 
+    static async findPrice(travelId) {
+        const component = await db.query (`SELECT * FROM global_price WHERE id=$1;`, [travelId]);
+        return component.rows;
+    }
+
     static async findAllTravelComponent(travelId){
         if (travelId) { 
             const component = await db.query(`SELECT * FROM ${this.tableName} WHERE travel_id = $1 ;`, [travelId]);
@@ -89,7 +94,8 @@ class CoreModel {
         if (this.id) {
             fieldValues.push(this.id);
             await db.query(`
-            UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} WHERE id = $${fieldNames.length + 1};`
+            UPDATE ${this.constructor.tableName} SET ${fieldConcat.join(", ")} 
+            WHERE id = $${fieldNames.length + 1};`
             , fieldValues);
         } else {
             const insert = await db.query(`
@@ -115,6 +121,14 @@ class CoreModel {
     async delete() {
         // console.log(`DELETE FROM ${this.constructor.tableName} WHERE id = ${this.id} ;`)
         await db.query(`DELETE FROM ${this.constructor.tableName} WHERE id = $1 ;`, [this.id]);
+    }
+
+    async validateEntity() {
+        await db.query (`
+        UPDATE ${this.constructor.tableName}
+        SET selected = true
+        WHERE travel_id = $1 AND "id" = $2; 
+        `, [travelId, id])
     }
 }
 

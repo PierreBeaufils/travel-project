@@ -3,14 +3,40 @@ const CoreModel = require("./CoreModel");
 
 class Accommodation extends CoreModel {
 
-        static tableName = 'accommodation';
+    // _coordinate;
+
+    static tableName = 'accommodation';
 
     constructor (data) {
         super(data);
         for (const prop in data){
             this[prop] = data[prop];
+            if (prop === "coordinate") {
+               if (typeof(this.coordinate) === 'object') {
+                   this.coordinate = this.transformCoordinates(this.coordinate);
+               }
+            }
         }
     }
+
+        transformCoordinates(value) {
+        let rawCoordinate = [];
+        for (const key in value) {
+            rawCoordinate.push(value[key]);
+        }
+
+        rawCoordinate = rawCoordinate.join(",");
+
+        return rawCoordinate;
+    }
+
+    // get test() {
+    //     return this.makeSomethin();
+    // }
+
+    // makeSomethin() {
+    //     return "nothing";
+    // }
 
     // static async findAllOfTravel(travelId){
     //     const accomodations = await db.query('SELECT * FROM accomodation WHERE travel_id = $1 ;', [travelId]);
