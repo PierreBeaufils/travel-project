@@ -9,10 +9,24 @@ class Activity extends CoreModel {
         super(data);
         for (const prop in data){
             this[prop] = data[prop];
+            if (prop === "coordinate") {
+                if (typeof(this.coordinate) === 'object') {
+                    this.coordinate = this.transformCoordinates(this.coordinate);
+                }
+             }
         }
     }
 
-    
+    transformCoordinates(value) {
+        let rawCoordinate = [];
+        for (const key in value) {
+            rawCoordinate.push(value[key]);
+        }
+
+        rawCoordinate = rawCoordinate.join(",");
+
+        return rawCoordinate;
+    }
 
     
 }
