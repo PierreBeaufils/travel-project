@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Map, CheckSquare, Trash2, Calendar, Info,
+  Map, CheckSquare, Trash2, Calendar, Info, Edit,
 } from 'react-feather';
 
 import ModalDelete from './Modals/ModalDelete';
@@ -18,7 +18,15 @@ const CardTransport = (transport) => {
   const handleTextCardCLick = () => { // gere le click sur le texte d'une carte
     toggleModalCardDescription();
   };
-  const handleAddCardCLick = () => { // gere le click sur bouton + d'ajouter une carte à la selection
+  const handleAddCardCLick = (e) => { // gere le click sur bouton + d'ajouter une carte à la selection
+    console.log(e);
+    // si l'élément (id) est déjà présent dans le tableau je renvois un tableau neuf sans l'élément
+    if (transport.checkedTransports.find((element) => element === transport.id)) { // si c'est TRUE c'est que présent dans tableau
+      transport.setcheckedTransports(transport.checkedTransports.filter((e) => e !== transport.id));
+    }
+    else { // j'ajoute dans le tableau si l'id de la carte pas présent
+      transport.setcheckedTransports([...transport.checkedTransports, transport.id]);
+    }
   };
   const handleDeleteCardCLick = () => { // gere le click sur bouton supprimer d'une carte du stock
     toggleModalDeleteCard();
@@ -56,8 +64,19 @@ const CardTransport = (transport) => {
         </div>
         {(transport.isEditingAllowed) ? (
           <div className="card__footer">
-            <CheckSquare
-              onClick={() => handleAddCardCLick(transport.id)}
+            {(transport.checkedTransports.find((element) => element === transport.id)) ? ( // ternaire pour definir couleur du checkbox
+              <CheckSquare
+                onClick={() => handleAddCardCLick(transport.id)}
+                color="#80CC24"
+              />
+            ) : (
+              <CheckSquare
+                onClick={() => handleAddCardCLick(transport.id)}
+                color="#F5F5F5"
+              />
+            )}
+            <Edit
+              onClick={() => transport.handleAddThing(transport)}
               color="#80CC24"
             />
             <Trash2

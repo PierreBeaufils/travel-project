@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CheckSquare } from 'react-feather';
+import axios from 'axios';
+import { appId, apiKey, baseURL } from 'src/config';
 
 import CategoryFrame from './CategoryFrame';
 import useModal from './useModal';
@@ -15,7 +17,12 @@ const TravelDashboard = ({ travel }) => {
   const { isShowingModalAddTransport, toggleModalAddTransport } = useModal('ModalAddTransport');
   const { isShowingModalAddActivity, toggleModalAddActivity } = useModal('ModalAddActivity');
   const [oneAccomodationDataToEdit, setOneAccomodationDataToEdit] = useState();
-
+  const [checkedAccommodations, setcheckedAccommodations] = useState([]);
+  const [checkedTransports, setcheckedTransports] = useState([]);
+  const [checkedActivities, setcheckedActivities] = useState([]);
+  console.log('icciiiiiiiiiii');
+  console.log(travel);
+  console.log('icciiiiiiiiiii');
   const handleAddModal = (event) => { // gere le click sur l'ajout d'un hebergement
     if (event.currentTarget.value === 'accommodation') {
       toggleModalAddAccomodation();
@@ -27,14 +34,39 @@ const TravelDashboard = ({ travel }) => {
       toggleModalAddActivity();
     }
   };
-
+  const handleValidateSlection = () => { // gere le click sur le texte d'une carte
+    console.log('cliqueeeeeeuuuuu');
+    // console.log(data);
+    // axios.post(`${baseURL}/travel/s${travelId}/transport`, data)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   });
+    checkedAccommodations.map((idToSelect) => {
+      console.log(idToSelect);
+      axios.patch(`${baseURL}/travel/${travel.infos.id}/accommodation/${idToSelect}`)
+        .then((res) => {
+          console.log(res.data);
+        });
+    });
+  };
   const EditAllowed = true;
 
+const filterNotSelectedCards = () => {
+  travel.accommodation.map((item) => {
+     
+    console.log(item);
+  })
+
+}
+console.log('testttttt');
+filterNotSelectedCards();
+console.log('testttttt');
   return (
     <div className="travel-dashboard-container">
       <ModalAddAccomodation
         isShowing={isShowingModalAddAccomodation}
         hide={toggleModalAddAccomodation}
+
       />
       <ModalAddTransport
         isShowing={isShowingModalAddTransport}
@@ -44,8 +76,10 @@ const TravelDashboard = ({ travel }) => {
         isShowing={isShowingModalAddActivity}
         hide={toggleModalAddActivity}
       />
-      <div className="validate--button validate_selection">
-        <CheckSquare color="#fff" />
+      <div onClick={() => handleValidateSlection()} className="validate--button validate_selection">
+        <CheckSquare
+          color="#fff"
+        />
         <p>Valider</p>
       </div>
       <CategoryFrame
@@ -54,6 +88,8 @@ const TravelDashboard = ({ travel }) => {
         handleAddElement={handleAddModal}
         data={travel.accommodation}
         EditAllowed={EditAllowed}
+        setcheckedAccommodations={setcheckedAccommodations}
+        checkedAccommodations={checkedAccommodations}
       />
       <CategoryFrame
         category="transport"
@@ -61,6 +97,8 @@ const TravelDashboard = ({ travel }) => {
         handleAddElement={handleAddModal}
         data={travel.transport}
         EditAllowed={EditAllowed}
+        setcheckedTransports={setcheckedTransports}
+        checkedTransports={checkedTransports}
       />
       <CategoryFrame
         category="activity"
@@ -68,6 +106,8 @@ const TravelDashboard = ({ travel }) => {
         handleAddElement={handleAddModal}
         data={travel.activity}
         EditAllowed={EditAllowed}
+        setcheckedActivities={setcheckedActivities}
+        checkedActivities={checkedActivities}
       />
     </div>
   );
