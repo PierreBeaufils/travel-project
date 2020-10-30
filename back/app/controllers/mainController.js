@@ -22,7 +22,9 @@ const travelController = {
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
             travelinfos.activity = await Activity.findAllTravelComponent(travelId);
             travelinfos.task = await Task.findAllTravelComponent(travelId);
-            travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+            // travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+
+            res.json(travelinfos);
         } else {
             res.status(404).json('ce voyage n\'existe pas');
         }
@@ -126,26 +128,29 @@ const travelController = {
             res.status(404).json (`Il y a 0 ${entityToUse.tableName} dans ce voyage`);
         }
     },
-    showDocuments : async (req,res,travelinfos) => {
-        // Je recupere l'id du voyage
-        const prefix = req.params.id + "/public/";
-        const documents = await Document.getAllPublic(prefix);
-        const documentsToShow = [];
-        for (let object of documents.Contents) {
-            if (object.Size != 0) {
-            object.travel_id = req.params.id;
-            let documentToPush = await new Document(object);
-
-            delete documentToPush.ETag ;
-            delete documentToPush.StorageClass;
-            documentsToShow.push(documentToPush);
-        }
-        }
-        travelinfos.documents = documentsToShow;
-        // res.json(documentsToShow);
-        res.json(travelinfos);
-
-    },
+    // showDocuments : async (req,res,travelinfos) => {
+    //     // Je recupere l'id du voyage
+    //     const prefix = req.params.id + "/public/";
+    //     const documents = await Document.getAllPublic(prefix);
+    //     if (documents.length > 0) {
+    //       const documentsToShow = [];
+    //       for (let object of documents.Contents) {
+    //           if (object.Size != 0) {
+    //           object.travel_id = req.params.id;
+    //           let documentToPush = await new Document(object);
+  
+    //           delete documentToPush.ETag ;
+    //           delete documentToPush.StorageClass;
+    //           documentsToShow.push(documentToPush);
+    //         }
+    //       }
+    //       travelinfos.documents = documentsToShow;
+    //       // res.json(documentsToShow);
+    //       res.json(travelinfos);
+    //     } else {
+    //       res.json(travelinfos);
+    //     }
+    // },
     createEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse;
