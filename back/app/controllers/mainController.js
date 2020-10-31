@@ -22,7 +22,9 @@ const travelController = {
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
             travelinfos.activity = await Activity.findAllTravelComponent(travelId);
             travelinfos.task = await Task.findAllTravelComponent(travelId);
-            travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+            // travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+
+            res.json(travelinfos);
         } else {
             res.status(404).json('ce voyage n\'existe pas');
         }
