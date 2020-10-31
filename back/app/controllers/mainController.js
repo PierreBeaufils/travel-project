@@ -130,6 +130,12 @@ const travelController = {
         // Je recupere l'id du voyage
         const prefix = req.params.id + "/public/";
         const documents = await Document.getAllPublic(prefix);
+        console.log(documents.Contents);
+       if (documents.Contents === undefined) {
+           travelinfos.documents = "Pas de document pour ce voyage";
+           res.json(travelinfos);
+       } 
+       else {
         const documentsToShow = [];
         for (let object of documents.Contents) {
             if (object.Size != 0) {
@@ -144,7 +150,7 @@ const travelController = {
         travelinfos.documents = documentsToShow;
         // res.json(documentsToShow);
         res.json(travelinfos);
-
+    }
     },
     createEntity: async (req,res) => {
         let entity = req.params.entity;
