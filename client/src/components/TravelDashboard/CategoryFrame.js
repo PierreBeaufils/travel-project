@@ -24,9 +24,9 @@ const CategoryFrame = ({
       </div>
 
       <div className="cards__container">
-        {(category === 'accommodation') ? data.map((accomodation) => <CardAccommodation key={accomodation.id} {...accomodation} EditAllowed={EditAllowed} setcheckedAccommodations={setcheckedAccommodations} checkedAccommodations={checkedAccommodations} />) : null}
-        {(category === 'transport') ? data.map((transport) => <CardTransport key={transport.id} {...transport} EditAllowed={EditAllowed} setcheckedTransports={setcheckedTransports} checkedTransports={checkedTransports} />) : null}
-        {(category === 'activity') ? data.map((activity) => <CardActivity key={activity.id} {...activity} EditAllowed={EditAllowed} setcheckedActivities={setcheckedActivities} checkedActivities={checkedActivities} />) : null}
+        {(category === 'Hébergements') ? data.filter((item) => !item.selected).map((accomodation) => <CardAccommodation key={accomodation.id} {...accomodation} EditAllowed={EditAllowed} setcheckedAccommodations={setcheckedAccommodations} checkedAccommodations={checkedAccommodations} />) : null}
+        {(category === 'Transports') ? data.filter((item) => !item.selected).map((transport) => <CardTransport key={transport.id} {...transport} EditAllowed={EditAllowed} setcheckedTransports={setcheckedTransports} checkedTransports={checkedTransports} />) : null}
+        {(category === 'Activités') ? data.filter((item) => !item.selected).map((activity) => <CardActivity key={activity.id} {...activity} EditAllowed={EditAllowed} setcheckedActivities={setcheckedActivities} checkedActivities={checkedActivities} />) : null}
       </div>
     </div>
   );

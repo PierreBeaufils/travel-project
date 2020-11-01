@@ -11,7 +11,7 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelId, typeOfSubmit,
+  isShowing, hide, transport, travelID, typeOfSubmit, fetchOneTravel,
 }) => {
   const [startPlace, setStartPlace] = useState('');
   const [arrivalPlace, setArrivalPlace] = useState('');
@@ -22,9 +22,11 @@ const ModalAddTransport = ({
 
   const onSubmit = (data) => {
     console.log(data);
-    axios.post(`${baseURL}/travel/s${travelId}/transport`, data)
+    axios.post(`${baseURL}/travel/${travelID}/transport`, data)
       .then((res) => {
         console.log(res.data);
+        hide();
+        fetchOneTravel(travelID);
       });
   };
 
