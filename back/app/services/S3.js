@@ -4,7 +4,7 @@ const errorMessage = "Une erreur c'est produite :";
 
 const S3 = async () => {
   let data = await new AWS.S3();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 

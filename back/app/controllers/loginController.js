@@ -33,6 +33,7 @@ const loginController = {
                 res.status(200).json({ logged: true, session: req.session.user });
             }
         }
+        // console.log(req.session.user);
     },
 
     loginCheck: (req, res) => {
@@ -41,6 +42,8 @@ const loginController = {
         } else {
             res.json({ logged: false, session: {} });
         };
+        // console.log(req.session.user);
+
     },
 
     doSignup: async (req, res,next) => {
@@ -78,12 +81,12 @@ const loginController = {
         const userToVerify = await Traveler.findByEmail(req.body.email);
         const tokenToSend = crypt.getToken(userToVerify.id,Date.now());
         mailApp.transporter.sendMail(mailApp.messageConstructor(userToVerify.email,tokenToSend));
-        console.log(tokenToSend);
+        // console.log(tokenToSend);
     },
 
     verifyToken: async (req,res) => {
        const decryptedToken = crypt.decryptText(req.query.token).split(new RegExp('-'));
-       console.log(decryptedToken);
+    //    console.log(decryptedToken);
        if (Date.now() - decryptedToken[1] < 1000*60*60*24) {
            let travelerToValidate = await Traveler.findOneTravelComponent(null,decryptedToken[0]);
         //    travelerToValidate.email_check = true;
