@@ -174,6 +174,8 @@ const travelController = {
             res.json("le document a bien été ajouté !");
         }
 
+        else {
+
         for (let i = 0 ; i < objectModel.length ; i++) {
             if (entity === objectModel[i].tableName) {
                 entityToUse = objectModel[i];
@@ -185,6 +187,8 @@ const travelController = {
 
         await newEntity.saveAllTravelComponent();
         res.json('Ajout effectué');
+    }
+        
     },
    
     editEntity: async (req,res) => {
