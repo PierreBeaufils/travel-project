@@ -11,7 +11,7 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelID, typeOfSubmit, fetchOneTravel,
+  isShowing, hide, transport, travelID, editOrCreate, fetchOneTravel,
 }) => {
   // const setTitle = () => {
   //   if (editOrCreate === 'edit') {

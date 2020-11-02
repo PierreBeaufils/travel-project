@@ -6,6 +6,7 @@ import {
   DELETE_TRAVEL_ELEMENT,
   SaveOneTravel,
   loadingTravels,
+  loadingTravel,
   saveTravels,
   errorMessage,
 } from 'src/actions/travels';
@@ -42,7 +43,7 @@ const travelMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     case FETCH_ONE_TRAVEL:
-      store.dispatch(loadingTravels(true));
+      store.dispatch(loadingTravel(true));
       axios.get(`${baseURL}/travel/${action.id}`)
         .then((res) => {
           console.log(`voyage récupéré : ${res.data}`);
@@ -52,7 +53,7 @@ const travelMiddleware = (store) => (next) => (action) => {
           store.dispatch(errorMessage(e));
         })
         .finally(() => {
-          store.dispatch(loadingTravels(false));
+          store.dispatch(loadingTravel(false));
         });
       next(action);
       break;

@@ -21,14 +21,16 @@ const TravelForm = ({
     if (editOrCreate === 'edit') {
       return {
         owner: ownerId,
-        title: travel.infos.title,
-        destination: travel.infos.destination,
-        departure_date: travel.infos.departure_date,
-        return_date: travel.infos.return_date,
+        title: travel.title,
+        destination: travel.destination,
+        departure_date: travel.departure_date,
+        return_date: travel.return_date,
       };
     }
     return {
       owner: ownerId,
+      departure_date: new Date().toISOString().substring(0, 10),
+      return_date: new Date().toISOString().substring(0, 10),
     };
   };
 
@@ -41,7 +43,6 @@ const TravelForm = ({
   const [redirectionUrl, setRedirectionUrl] = useState('');
 
   const onSubmit = (data) => {
-    console.log(data);
     if (editOrCreate === 'create') {
       axios.post(`${baseURL}/create-travel`, data)
         .then(() => {
@@ -50,9 +51,9 @@ const TravelForm = ({
         });
     }
     else {
-      axios.patch(`${baseURL}/travel/${travel.infos.id}`, data)
+      axios.patch(`${baseURL}/travel/${travel.id}`, data)
         .then(() => {
-          setRedirectionUrl(`/voyage/${travel.infos.id}`);
+          setRedirectionUrl(`/voyage/${travel.id}`);
           setRedirection(true);
         });
     }
