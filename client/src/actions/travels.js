@@ -30,6 +30,10 @@ export const fetchTravels = () => ({
   type: FETCH_TRAVELS,
 });
 
+export const fetchUserTravelsData = () => ({
+  type: FETCH_USER_TRAVELS_DATA,
+});
+
 export const saveTravels = (travels) => ({
   type: SAVE_TRAVELS,
   travels,
