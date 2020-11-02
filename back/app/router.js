@@ -34,11 +34,7 @@ router.post('/travel/:id/:entity',mainController.createEntity); // Ajouter une n
 router.patch('/travel/:id/:entity/:entityId', mainController.editEntity); // Modifier les infos d'une entité dans un voyage
 router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity); // Supprimer une entité d'un voyage
 
-// ROUTE DE SUPRESSION D'UN DOCUMENT
 
-
-// INFOS DOCUMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
-// router.delete('/travel/:id/document', travelController) 
 
 // LOGIN et LOGOUT 
 router.post('/login', loginController.doLogin); // Login et début de session
