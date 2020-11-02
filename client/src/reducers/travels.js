@@ -1,11 +1,12 @@
 import {
-  SAVE_TRAVELS, LOADING_TRAVELS, ERROR_MESSAGE, SAVE_ONE_TRAVEL,
+  SAVE_TRAVELS, LOADING_TRAVELS, LOADING_TRAVEL, ERROR_MESSAGE, SAVE_ONE_TRAVEL,
 } from 'src/actions/travels';
 
 const initialState = {
   errorMessage: null,
   travels: [],
   loadingTravels: true,
+  loadingTravel: true,
   currentTravel: {},
   travelLoaded: false,
 };
@@ -21,6 +22,11 @@ const travels = (state = initialState, action = {}) => {
       return {
         ...state,
         loadingTravels: action.loading,
+      };
+    case LOADING_TRAVEL:
+      return {
+        ...state,
+        loadingTravel: action.loading,
       };
     case SAVE_ONE_TRAVEL:
       return {

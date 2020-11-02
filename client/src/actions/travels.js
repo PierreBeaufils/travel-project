@@ -3,6 +3,7 @@ export const EDIT_TRAVEL_FORM = 'EDIT_TRAVEL_FORM';
 export const FETCH_TRAVELS = 'FETCH_TRAVELS';
 export const SAVE_TRAVELS = 'SAVE_TRAVELS';
 export const LOADING_TRAVELS = 'LOADING_TRAVELS';
+export const LOADING_TRAVEL = 'LOADING_TRAVEL';
 export const CHANGE_FIELD_VALUE = 'CHANGE_FIELD_VALUE';
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';
 export const FETCH_ONE_TRAVEL = 'FETCH_ONE_TRAVEL';
@@ -36,6 +37,11 @@ export const saveTravels = (travels) => ({
 
 export const loadingTravels = (loading) => ({
   type: LOADING_TRAVELS,
+  loading,
+});
+
+export const loadingTravel = (loading) => ({
+  type: LOADING_TRAVEL,
   loading,
 });
 
