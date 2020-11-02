@@ -24,7 +24,7 @@ const travelController = {
             travelinfos.task = await Task.findAllTravelComponent(travelId);
             travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
 
-            res.json(travelinfos);
+            
         } else {
             res.status(404).json('ce voyage n\'existe pas');
         }
