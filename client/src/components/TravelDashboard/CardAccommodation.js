@@ -18,7 +18,15 @@ const CardAccommodation = (oneAccomodation) => {
   const handleTextCardCLick = () => { // gere le click sur le texte d'une carte
     toggleModalCardDescription();
   };
-  const handleAddCardCLick = () => { // gere le click sur bouton + d'ajouter une carte à la selection
+  const handleAddCardCLick = (e) => { // gere le click sur bouton + d'ajouter une carte à la selection
+    console.log(e);
+    // si l'élément (id) est déjà présent dans le tableau je renvois un tableau neuf sans l'élément
+    if (oneAccomodation.checkedAccommodations.find((element) => element === oneAccomodation.id)) { // si c'est TRUE c'est que présent dans tableau
+      oneAccomodation.setcheckedAccommodations(oneAccomodation.checkedAccommodations.filter((e) => e !== oneAccomodation.id));
+    }
+    else { // j'ajoute dans le tableau si l'id de la carte pas présent
+      oneAccomodation.setcheckedAccommodations([...oneAccomodation.checkedAccommodations, oneAccomodation.id]);
+    }
   };
   const handleDeleteCardCLick = () => { // gere le click sur bouton supprimer d'une carte du stock
     toggleModalDeleteCard();
@@ -55,17 +63,26 @@ const CardAccommodation = (oneAccomodation) => {
         </div>
         {(oneAccomodation.EditAllowed) ? (
           <div className="card__footer">
-            <CheckSquare
-              onClick={() => handleAddCardCLick(oneAccomodation.id)}
-              color="#80CC24"
-            />
+
+            {(oneAccomodation.checkedAccommodations.find((element) => element === oneAccomodation.id)) ? ( //ternaire pour definir couleur du checkbox
+              <CheckSquare
+                onClick={() => handleAddCardCLick(oneAccomodation.id)}
+                color="#80CC24"
+              />
+            ) : (
+              <CheckSquare
+                onClick={() => handleAddCardCLick(oneAccomodation.id)}
+              color="#F5F5F5"
+               
+              />
+            )}
             <Edit
               onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
               color="#80CC24"
             />
             <Trash2
               color="#FF7A32"
-              onClick={() => handleDeleteCardCLick(activity.id)}
+              onClick={() => handleDeleteCardCLick(oneAccomodation.id)}
             />
           </div>
         ) : null}

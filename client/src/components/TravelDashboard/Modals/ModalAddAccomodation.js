@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
 import {
   XSquare, MapPin, LogIn, LogOut, DollarSign, Info, Users,
 } from 'react-feather';
 import { baseURL } from 'src/config';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AlgoLeaflet from '../../AlgoLeaflet';
 
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
-const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation }) => {
+const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetchOneTravel }) => {
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
+  const history = useHistory();
 
-  const travelID = 1; // penser à passer l'id du voyage dans les props
 
   const onSubmit = (data) => {
     console.log(data);
@@ -26,6 +27,8 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation }) => {
         console.log(`voyage envoyé vers back : ${res.data}`);
         console.log(data);
         hide();
+        fetchOneTravel(travelID);
+        //history.push(`/voyage/${travelID}`);
       })
       .catch((e) => {
         // store.dispatch(errorMessage(e));
@@ -41,7 +44,7 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation }) => {
   const [endDate, setEndDate] = useState(addOneDay(startDate));
   const [locationData, setLocationData] = useState({
     city: '',
-    latLong: '',
+    latLong: '{"lat":0.000,"lng":0.000}',
     address: '',
   });
 
@@ -90,6 +93,7 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation }) => {
                 <label htmlFor="city"><MapPin color="#2B7AFD" size={15} />Ville
                   <input name="city" ref={register({ required: true })} type="text" value={locationData.city} />
                   <input name="address" ref={register()} type="hidden" value={locationData.address} />
+                  <input name="coordinate" ref={register()} type="hidden" value={`${locationData.latLong.lat}, ${locationData.latLong.lng}`} />
                   {errors.city && <span className="warning-text">Veuillez saisir une ville</span>}
                 </label>
                 <label htmlFor="availability">Nombre de places disponibles

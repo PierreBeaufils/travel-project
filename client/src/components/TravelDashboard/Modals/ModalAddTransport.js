@@ -11,55 +11,49 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelId, editOrCreate,
+  isShowing, hide, transport, travelID, typeOfSubmit, fetchOneTravel,
 }) => {
-  const setTitle = () => {
-    if (editOrCreate === 'edit') {
-      return 'Modifier un transport';
-    }
-    return 'Ajouter un transport';
-  };
+  // const setTitle = () => {
+  //   if (editOrCreate === 'edit') {
+  //     return 'Modifier un transport';
+  //   } else {
+  //   return 'Ajouter un transport';
+  // }
+  // };
 
-  const initialValues = () => {
-    if (editOrCreate === 'edit') {
-      return {
-        // from: transport.from,
-        // to: transport.to,
-        type: transport.type,
-        company: transport.company,
-        departure_date: transport.departure_date,
-        arrival_date: transport.arrival_date,
-        reservation_ref: transport.reservation_ref,
-        unit_price: transport.unit_price,
-        quantity: transport.quantity,
-        memo: transport.memo,
-      };
-    }
-    return {};
-  };
+  // const initialValues = () => {
+  //   if (editOrCreate === 'edit') {
+  //     return {
+  //       // from: transport.from,
+  //       // to: transport.to,
+  //       type: transport.type,
+  //       company: transport.company,
+  //       departure_date: transport.departure_date,
+  //       arrival_date: transport.arrival_date,
+  //       reservation_ref: transport.reservation_ref,
+  //       unit_price: transport.unit_price,
+  //       quantity: transport.quantity,
+  //       memo: transport.memo,
+  //     };
+  //   }
+  //   return {};
+  // };
 
-  const {
-    register, handleSubmit, errors,
-  } = useForm({ defaultValues: initialValues() });
+  // const {
+  //   register, handleSubmit, errors,
+  // } = useForm({ defaultValues: initialValues() });
 
   const [startPlace, setStartPlace] = useState('');
   const [arrivalPlace, setArrivalPlace] = useState('');
 
   const onSubmit = (data) => {
-    if (editOrCreate === 'edit') {
-      axios.patch(`${baseURL}/travel/${travelId}/transport${transport.id}`, data)
-        .then(() => {
-          hide();
-        });
-    }
-    else {
-      console.log(data);
-      axios.post(`${baseURL}/travel/${travelId}/transport`, data)
-        .then((res) => {
-          console.log(res);
-          hide();
-        });
-    }
+    console.log(data);
+    axios.post(`${baseURL}/travel/${travelID}/transport`, data)
+      .then((res) => {
+        console.log(res.data);
+        hide();
+        fetchOneTravel(travelID);
+      });
   };
 
   return (isShowing ? ReactDOM.createPortal(
@@ -79,7 +73,7 @@ const ModalAddTransport = ({
           </div>
           <div className="modal_content">
             <div>
-              <h3 className="modal-title">{setTitle()}</h3>
+              <h3 className="modal-title">Ajouter un transport</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop"> {/* Changer le nom de la classe ! */}
 
                 <label htmlFor="from">
@@ -122,12 +116,12 @@ const ModalAddTransport = ({
                   />
                 </label>
 
-                <label htmlFor="arrival_date">
+                <label htmlFor="departure_date">
                   <LogIn color="#2B7AFD" size={15} />
                   <span className="fieldName">Date et heure de départ</span>
                   <span className="required-asterisk">*</span>
                   <input
-                    name="arrival_date"
+                    name="departure_date"
                     ref={register({ required: true })}
                     type="datetime-local"
                     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
@@ -135,11 +129,11 @@ const ModalAddTransport = ({
                   {errors.startDate && <span className="warning-text">Veuillez sélectionner une date de départ</span>}
                 </label>
 
-                <label htmlFor="departure_date">
+                <label htmlFor="arrival_date">
                   <LogOut color="#2B7AFD" size={15} />
                   <span className="fieldName">Date et heure d'arrivée</span>
                   <input
-                    name="departure_date"
+                    name="arrival_date"
                     ref={register({ required: false })}
                     type="datetime-local"
                   />
