@@ -11,7 +11,7 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelId, editOrCreate,
+  isShowing, hide, transport, travelID, typeOfSubmit, fetchOneTravel,
 }) => {
   const setTitle = () => {
     if (editOrCreate === 'edit') {
@@ -46,20 +46,13 @@ const ModalAddTransport = ({
   const [arrivalPlace, setArrivalPlace] = useState('');
 
   const onSubmit = (data) => {
-    if (editOrCreate === 'edit') {
-      axios.patch(`${baseURL}/travel/${travelId}/transport${transport.id}`, data)
-        .then(() => {
-          hide();
-        });
-    }
-    else {
-      console.log(data);
-      axios.post(`${baseURL}/travel/${travelId}/transport`, data)
-        .then((res) => {
-          console.log(res);
-          hide();
-        });
-    }
+    console.log(data);
+    axios.post(`${baseURL}/travel/${travelID}/transport`, data)
+      .then((res) => {
+        console.log(res.data);
+        hide();
+        fetchOneTravel(travelID);
+      });
   };
 
   return (isShowing ? ReactDOM.createPortal(
@@ -122,12 +115,12 @@ const ModalAddTransport = ({
                   />
                 </label>
 
-                <label htmlFor="arrival_date">
+                <label htmlFor="departure_date">
                   <LogIn color="#2B7AFD" size={15} />
                   <span className="fieldName">Date et heure de départ</span>
                   <span className="required-asterisk">*</span>
                   <input
-                    name="arrival_date"
+                    name="departure_date"
                     ref={register({ required: true })}
                     type="datetime-local"
                     pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
@@ -135,11 +128,11 @@ const ModalAddTransport = ({
                   {errors.startDate && <span className="warning-text">Veuillez sélectionner une date de départ</span>}
                 </label>
 
-                <label htmlFor="departure_date">
+                <label htmlFor="arrival_date">
                   <LogOut color="#2B7AFD" size={15} />
                   <span className="fieldName">Date et heure d'arrivée</span>
                   <input
-                    name="departure_date"
+                    name="arrival_date"
                     ref={register({ required: false })}
                     type="datetime-local"
                   />

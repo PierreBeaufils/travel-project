@@ -1,13 +1,18 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TravelDashboard from 'src/components/TravelDashboard';
-
+import { fetchOneTravel } from 'src/actions/travels';
 const mapStateToProps = (state, ownProps) => ({
   travel: state.travels.currentTravel,
+  travelLoaded: state.travels.loadingTravels,
   id: ownProps.match.params.id,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = (dispatch) => ({
+  fetchOneTravel: (id) => {
+    dispatch(fetchOneTravel(id));
+  },
+});
 
 // Container
 const TravelDashboardContainer = connect(

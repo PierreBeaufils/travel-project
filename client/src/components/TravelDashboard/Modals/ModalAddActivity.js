@@ -5,27 +5,29 @@ import { useForm } from 'react-hook-form';
 import {
   Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock,
 } from 'react-feather';
+
 import { baseURL } from 'src/config';
 import axios from 'axios';
 import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
-const ModalAddActivity = ({ isShowing, hide }) => {
+const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
+  
 
 
-  const travelID = 1; // penser à passer l'id du voyage dans les props
 
   const onSubmit = (data) => {
     console.log(data);
-    // data.selected = false;
+     data.selected = false;
     axios.post(`${baseURL}/travel/${travelID}/activity`, data)
       .then((res) => {
         console.log(`voyage envoyé vers back : ${res.data}`);
         console.log(data);
+        fetchOneTravel(travelID);
         hide();
       })
       .catch((e) => {
@@ -42,7 +44,7 @@ const ModalAddActivity = ({ isShowing, hide }) => {
   const [startDate, setStartDate] = useState(todayDateISOString);
   const [locationData, setLocationData] = useState({
     city: '',
-    latLong: '',
+    latLong: '{"lat":0.000,"lng":0.000}',
     address: '',
   });
 
@@ -103,6 +105,7 @@ const ModalAddActivity = ({ isShowing, hide }) => {
                     setLocationData={setLocationData}
                   />
                   <input name="place" ref={register()} type="hidden" value={locationData.address} />
+                  <input name="coordinate" ref={register()} type="hidden" value={`${locationData.latLong.lat}, ${locationData.latLong.lng}`} />
                 </label>
                 <label htmlFor="description"><Info color="#2B7AFD" size={15} />Description
                   <input name="description" ref={register()} type="text" />

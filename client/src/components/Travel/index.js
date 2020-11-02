@@ -45,7 +45,7 @@ const Travel = ({
               </div>
             </div>
           </div>
-          <Link to={`/voyage/${travel.infos.id}/dashboard`}>
+          <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id} >
             <div className="validate--button validate_selection">
               <PlusSquare color="#fff" />
               <p>Ajouter un hébergement, trajet ou activité au voyage (s'affiche que pour organisateur)</p>
@@ -54,30 +54,14 @@ const Travel = ({
 
           <div className="travel-container">
             <div className="cards__container travel__view">
-              {travel.accommodation.map((accomodation) => (
-                <CardAccommodation
-                  key={accomodation.id}
-                  {...accomodation}
-                  EditAllowed={false}
-                  timestamp={new Date(`${accomodation.arrival_date}`).getTime() / 1000}
-                />
-              ))}
-              {travel.activity.map((activity) => (
-                <CardActivity
-                  key={activity.id}
-                  {...activity}
-                  EditAllowed={false}
-                  timestamp={new Date(`${activity.date}`).getTime() / 1000}
-                />
-              ))}
-              {travel.transport.map((transport) => (
-                <CardTransport
-                  key={transport.id}
-                  {...transport}
-                  EditAllowed={false}
-                  timestamp={new Date(`${transport.departure_date}`).getTime() / 1000}
-                />
-              ))}
+
+              {/* Timestamp is sent to order by date in CSS rendering */}
+              {/* {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
+              
+              {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)}
+              {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={false} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} />)}
+              {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={false} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} />)}
+
             </div>
           </div>
         </>

@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  MapPin, CheckSquare, Trash2, Calendar, Clock, Info,
+  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit,
 } from 'react-feather';
 import ModalDelete from './Modals/ModalDelete';
 import ModalCardDescription from './Modals/ModalCardDescription';
@@ -18,8 +18,15 @@ const CardActivity = (activity) => {
   const handleTextCardCLick = () => { // gere le click sur le texte d'une carte
     toggleModalCardDescription();
   };
-  const handleAddCardCLick = (clickedCardId) => { // gere le click sur bouton + d'ajouter une carte à la selection
-    console.log('Click sur ajout', clickedCardId);
+  const handleAddCardCLick = (e) => { // gere le click sur bouton + d'ajouter une carte à la selection
+    console.log(e);
+    // si l'élément (id) est déjà présent dans le tableau je renvois un tableau neuf sans l'élément
+    if (activity.checkedActivities.find((element) => element === activity.id)) { // si c'est TRUE c'est que présent dans tableau
+      activity.setcheckedActivities(activity.checkedActivities.filter((e) => e !== activity.id));
+    }
+    else { // j'ajoute dans le tableau si l'id de la carte pas présent
+      activity.setcheckedActivities([...activity.checkedActivities, activity.id]);
+    }
   };
   const handleDeleteCardCLick = (clickedCardId) => { // gere le click sur bouton supprimer d'une carte du stock
     toggleModalDeleteCard(clickedCardId);
@@ -56,8 +63,19 @@ const CardActivity = (activity) => {
         </div>
         {(activity.EditAllowed) ? (
           <div className="card__footer">
-            <CheckSquare
-              onClick={() => handleAddCardCLick(activity.id)}
+            {(activity.checkedActivities.find((element) => element === activity.id)) ? ( // ternaire pour definir couleur du checkbox
+              <CheckSquare
+                onClick={() => handleAddCardCLick(activity.id)}
+                color="#80CC24"
+              />
+            ) : (
+              <CheckSquare
+                onClick={() => handleAddCardCLick(activity.id)}
+                color="#F5F5F5"
+              />
+            )}
+            <Edit
+              onClick={() => activity.handleAddThing(activity)}
               color="#80CC24"
             />
             <Trash2
