@@ -38,7 +38,6 @@ router.delete('/travel/:id/:entity/:entityId', mainController.deleteEntity); // 
 
 
 // INFOS DOCUMENTS LIES A UN VOYAGE : affichage globale et individuel, insertion, modification et suppression
-// router.patch('/travel/:id/document', travelController) => nécessaire ?
 // router.delete('/travel/:id/document', travelController) 
 
 // LOGIN et LOGOUT 

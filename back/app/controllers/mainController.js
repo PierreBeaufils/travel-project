@@ -22,7 +22,7 @@ const travelController = {
             travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
             travelinfos.activity = await Activity.findAllTravelComponent(travelId);
             travelinfos.task = await Task.findAllTravelComponent(travelId);
-            // travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+            travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
 
             res.json(travelinfos);
         } else {
@@ -186,30 +186,13 @@ const travelController = {
         await newEntity.saveAllTravelComponent();
         res.json('Ajout effectué');
     },
-    // createDocument: async (req,res) => {
-    //     console.log(req.files);
-    //     console.log(req.body.Key);
-    //     const nameOfFile = req.files[0].originalname || req.body.name;
-    //     console.log(nameOfFile);
-    //     const uploadParams = {
-    //         Body: req.files[0].buffer,
-    //         Key: `${req.params.id}/public/${nameOfFile}`,
-    //         travel_id: req.params.id,
-    //         ACL: "public-read"
-    //     }
-    //     const createdDocument = new Document(uploadParams);
-    //     createdDocument.uploadDoc();
-    //     res.json("le document a bien été ajouté !");
-    // },
+   
     editEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
 
         if (entity === 'document') {
-            const documentToDelete = req.body ;
-            const deletedDocument = new Document(documentToDelete);
-            const deleteConfirmation = await deletedDocument.deleteFile();
-            res.json(deleteConfirmation);
+            res.json("Un document ne peux être édité, veuillez le supprimer et ajouter votre nouveau document")
         }
         else {
         for (let i = 0 ; i < objectModel.length ; i++) {
