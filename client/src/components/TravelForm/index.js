@@ -1,62 +1,83 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import './createTravelForm.scss';
+import axios from 'axios';
+import { baseURL } from 'src/config';
 
 const TravelForm = ({
-  submitTravelForm, changeFieldValue, travel, ownerId,
+  travel, ownerId, editOrCreate,
 }) => {
-  const {
-    register, errors,
-  } = useForm();
-  const todayDateISOString = new Date().toISOString().split('T')[0]; // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
-
-  // Function to add 1 day from a starting date
-  function addOneDay(dateString) {
-    const result = new Date(dateString);
-    result.setDate(result.getDate() + 1);
-    return result.toISOString().split('T')[0];
-  }
-
-  const [title, setTitle] = useState(travel.title || '');
-  const [destination, setDestination] = useState(travel.destination || '');
-  // const [theme, setTheme] = useState(travel.theme || '');
-  const [startDate, setStartDate] = useState(travel.departure_date || todayDateISOString);
-  const [endDate, setEndDate] = useState(travel.return_date || addOneDay(startDate));
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    data.append('owner', ownerId);
-    data.set('departure_date', new Date(startDate).toISOString());
-    data.set('return_date', new Date(endDate).toISOString());
-
-    for (const pair of data.entries()) {
-      console.log(`${pair[0]}, ${pair[1]}`);
+  const setTitle = () => {
+    if (editOrCreate === 'edit') {
+      return <h2>Modifier un voyage</h2>;
     }
-
-    submitTravelForm(data);
+    return <h2>Créer un voyage</h2>;
   };
-  /*
-    const handleChange = (event) => {
-      console.log(event.target.value);
-      changeFieldValue(event.target.name, event.target.value);
+
+  const initialValues = () => {
+    if (editOrCreate === 'edit') {
+      return {
+        owner: ownerId,
+        title: travel.infos.title,
+        destination: travel.infos.destination,
+        departure_date: travel.infos.departure_date,
+        return_date: travel.infos.return_date,
+      };
+    }
+    return {
+      owner: ownerId,
     };
-  */
+  };
+
+  const {
+    register, handleSubmit, errors,
+  } = useForm({ defaultValues: initialValues() });
+
+  const [startDate, setStartDate] = useState('');
+  const [redirection, setRedirection] = useState(false);
+  const [redirectionUrl, setRedirectionUrl] = useState('');
+
+  const onSubmit = (data) => {
+    console.log(data);
+    if (editOrCreate === 'create') {
+      axios.post(`${baseURL}/create-travel`, data)
+        .then(() => {
+          setRedirectionUrl('/tableau-de-bord');
+          setRedirection(true);
+        });
+    }
+    else {
+      axios.patch(`${baseURL}/travel/${travel.infos.id}`, data)
+        .then(() => {
+          setRedirectionUrl(`/voyage/${travel.infos.id}`);
+          setRedirection(true);
+        });
+    }
+  };
+
+  if (redirection) {
+    return <Redirect to={redirectionUrl} />;
+  }
   return (
     <div className="travel__create-form">
       <div className="main-form">
-        <h2>Créer un voyage</h2>
-        <form onSubmit={handleSubmit}>
-
-          <label htmlFor="title">Titre du voyage
-            <input name="title" type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} ref={register({ required: true })} />
+        {setTitle()}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input name="owner" type="hidden" id="owner" ref={register} />
+          <label htmlFor="title">
+            <span>Titre du voyage</span>
+            <span className="required-asterisk">*</span>
+            <input name="title" type="text" id="title" ref={register({ required: true })} />
             {errors.title && <span className="warning-text">Veuillez saisir un titre</span>}
           </label>
 
-          <label htmlFor="destination">Destination
-            <input name="destination" id="destination" type="text" value={destination} onChange={(e) => setDestination(e.target.value)} ref={register({ required: true })} />
+          <label htmlFor="destination">
+            <span>Destination</span>
+            <span className="required-asterisk">*</span>
+            <input name="destination" id="destination" type="text" ref={register} />
             {errors.destination && <span className="warning-text">Veuillez saisir une destination</span>}
           </label>
           {/*
@@ -73,28 +94,23 @@ const TravelForm = ({
           </label>
           */}
 
-          <label htmlFor="departure_date">Date de départ
+          <label htmlFor="departure_date">
+            <span>Date de début</span>
             <input
               name="departure_date"
-              ref={register({ required: true })}
+              ref={register}
               type="date"
-              value={startDate}
-              min={todayDateISOString}
               onChange={(e) => setStartDate(e.target.value)}
             />
-            {errors.startDate && <span className="warning-text">Veuillez selectionner une date de départ</span>}
           </label>
 
           <label htmlFor="return_date">Date de fin
             <input
               name="return_date"
-              ref={register({ required: true })}
+              ref={register}
               type="date"
-              min={addOneDay(startDate)}
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              min={startDate}
             />
-            {errors.return_date && <span className="warning-text">Veuillez selectionner une date de fin</span>}
           </label>
 
           <input type="submit" />
@@ -106,13 +122,12 @@ const TravelForm = ({
 
 TravelForm.defaultProps = {
   travel: null,
-  changeFieldValue: null,
+  editOrCreate: 'create',
 };
 
 TravelForm.propTypes = {
-  submitTravelForm: PropTypes.func.isRequired,
   ownerId: PropTypes.number.isRequired,
-  changeFieldValue: PropTypes.func,
+  editOrCreate: PropTypes.string,
   travel: PropTypes.object,
 };
 

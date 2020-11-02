@@ -16,7 +16,7 @@ const RegisterValidation = () => (
           Votre compte a bien été créé ! Veuillez cliquer sur le lien de confirmation
           envoyé par mail afin de valider votre compte.
         </p>
-        <Link to="/login" className="mail-button">Se connecter</Link>
+        <Link to="/connexion" className="mail-button">Se connecter</Link>
       </div>
     </div>
   </div>

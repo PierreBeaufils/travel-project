@@ -48,6 +48,13 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route path="/creer-un-voyage" component={TravelForm} />
             <Route path="/tableau-de-bord" component={UserDashboard} />
             <Route exact path="/voyage/:id" component={Travel} />
+            <Route
+              exact
+              path="/voyage/:id/modifier"
+              render={(props) => (
+                <TravelForm {...props} editOrCreate="edit" />
+              )}
+            />
             <Route exact path="/voyage/:id/dashboard" component={TravelDashboard} />
             <Route path="/validation" component={RegisterValidation} />
             <Route path="/verifier" component={TokenValidation} />
