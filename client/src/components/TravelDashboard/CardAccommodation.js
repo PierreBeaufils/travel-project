@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  MapPin, CheckSquare, Trash2, Calendar, Info, Edit,
+  MapPin, CheckSquare, Trash2, Calendar, Info, Edit, Home,
 } from 'react-feather';
 import ModalDelete from './Modals/ModalDelete';
 import ModalCardDescription from './Modals/ModalCardDescription';
@@ -57,7 +57,7 @@ const CardAccommodation = (oneAccomodation) => {
           className="card__text"
           onClick={() => handleTextCardCLick('ceci est ma target 1')}
         >
-          <h3>Séjour à l'établisement {oneAccomodation.name}</h3>
+          <h3><Home size={32} className="travel-menu-logo" />Séjour à l'établisement {oneAccomodation.name}</h3>
           <h4><MapPin color="#2B7AFD" size={15} /> {oneAccomodation.address} {oneAccomodation.city}</h4>
           <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneAccomodation.arrival_date)} au {transformDateISOtoString(oneAccomodation.departure_date)}</h4>
           {(oneAccomodation.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null}

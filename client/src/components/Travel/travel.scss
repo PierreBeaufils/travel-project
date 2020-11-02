@@ -5,6 +5,10 @@
   background-color: v.$background-color;
   margin: 0 auto;
 }
+.travel-details-container-details {
+  display: flex;
+  flex-direction: row;
+}
 
 .travel-category-container {
   margin: 0 auto;
@@ -60,11 +64,14 @@
   color: #f05454;
 }
 .travel-details {
-  margin: auto;
+  margin: 2rem auto;
 }
 
 
 @media screen and (min-width: 512px) {
+  .card {
+    min-width: 100%;
+  }
 
   .travel-container {
     margin: 0 auto;
@@ -92,8 +99,35 @@
     }
   }
 }
-.travel__view > *{
-min-width: 100%;
+
+
+
+.prices_card {
+  display: flex;
+  flex-direction: column;
+  min-width: 30%;
+  h4 {
+    padding-bottom: 1rem;
+  }
+}
+.documents {
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.label-file {
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  align-self: center;
+  background-color: v.$primary-color;
+  margin-bottom: 1rem;
 }
 
 
+// et on masque le input
+.input-file {
+  display: none;
+}

@@ -39,9 +39,9 @@ const ModalAddTransport = ({
   //   return {};
   // };
 
-  // const {
-  //   register, handleSubmit, errors,
-  // } = useForm({ defaultValues: initialValues() });
+  const {
+    register, handleSubmit, errors,
+  } = useForm();
 
   const [startPlace, setStartPlace] = useState('');
   const [arrivalPlace, setArrivalPlace] = useState('');
