@@ -8,7 +8,7 @@ import '../styles.scss';
 import { baseURL } from 'src/config';
 
 const ModalDelete = ({
-  isShowing, hide, travelId, category, elementName, elementId,
+  isShowing, hide, travelId, category, elementName, elementId, fetchOneTravel,
 }) => {
   const displayMessage = () => {
     if (category === 'accommodation') {
@@ -25,6 +25,8 @@ const ModalDelete = ({
     axios.delete(`${baseURL}/travel/${travelId}/${category}/${elementId}`)
       .then((res) => {
         console.log(res.data);
+        hide();
+        fetchOneTravel(travelId);
       });
   };
 
@@ -45,11 +47,11 @@ const ModalDelete = ({
           <div className="modal_content">
             <AlertTriangle color="#FF7A32" />
             <div className="modal_content-main">
-              <h3>{displayMessage} {elementName} ?</h3>
+              <h3>{displayMessage()} {elementName} ?</h3>
             </div>
 
             <div className="modal_buttons_container">
-              <div className="create--button" onClick={deleteTravelElement(travelId, category, elementId)}>
+              <div className="create--button" onClick={deleteTravelElement}>
                 <Trash2 color="#FF7A32" />
                 <p>Supprimer</p>
               </div>

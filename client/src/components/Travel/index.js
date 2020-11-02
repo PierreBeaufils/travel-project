@@ -20,7 +20,7 @@ const Travel = ({
   useEffect(() => {
     fetchOneTravel(id);
   }, []);
-
+  const isEditingAllowed = true;
   return (
     <div className="travel-details-container">
       {!travelLoaded && (
@@ -58,9 +58,9 @@ const Travel = ({
               {/* Timestamp is sent to order by date in CSS rendering */}
               {/* {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
               
-              {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)}
-              {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={false} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} />)}
-              {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={false} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} />)}
+              {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
+              {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
+              {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
 
             </div>
           </div>

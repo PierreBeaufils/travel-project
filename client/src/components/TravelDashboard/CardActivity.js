@@ -28,22 +28,24 @@ const CardActivity = (activity) => {
       activity.setcheckedActivities([...activity.checkedActivities, activity.id]);
     }
   };
-  const handleDeleteCardCLick = (clickedCardId) => { // gere le click sur bouton supprimer d'une carte du stock
-    toggleModalDeleteCard(clickedCardId);
+  const handleDeleteCardCLick = () => { // gere le click sur bouton supprimer d'une carte du stock
+    toggleModalDeleteCard();
   };
 
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${activity.timestamp}` }}>
-      {(activity.EditAllowed) ? (
-        <ModalDelete
-          isShowing={isShowingModalDeleteCard}
-          hide={toggleModalDeleteCard}
-          oneThingName={activity.name}
-          categoryName="Activité"
-          cardID={activity.id}
-        />
-      ) : null}
+      {/* {(activity.EditAllowed) ? ( */}
+      <ModalDelete
+        isShowing={isShowingModalDeleteCard}
+        hide={toggleModalDeleteCard}
+        elementName={activity.name}
+        category="activity"
+        elementId={activity.id}
+        travelId={activity.travel_id}
+        fetchOneTravel={activity.fetchOneTravel}
+      />
+      {/* ) : null} */}
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
         hide={toggleModalCardDescription}
@@ -74,6 +76,18 @@ const CardActivity = (activity) => {
                 color="#F5F5F5"
               />
             )}
+            <Edit
+              onClick={() => activity.handleAddThing(activity)}
+              color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(activity.id)}
+            />
+          </div>
+        ) : null}
+        {(activity.isEditingAllowed) ? (
+          <div className="card__footer">
             <Edit
               onClick={() => activity.handleAddThing(activity)}
               color="#80CC24"

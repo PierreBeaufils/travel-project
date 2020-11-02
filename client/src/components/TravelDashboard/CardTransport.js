@@ -35,15 +35,17 @@ const CardTransport = (transport) => {
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${transport.timestamp}` }}>
-      {(transport.EditAllowed) ? (
-        <ModalDelete
-          isShowing={isShowingModalDeleteCard}
-          hide={toggleModalDeleteCard}
-          oneThingName={transport.from}
-          categoryName="Transport"
-          cardID={transport.id}
-        />
-      ) : null}
+      {/* {(transport.EditAllowed) ? ( */}
+      <ModalDelete
+        isShowing={isShowingModalDeleteCard}
+        hide={toggleModalDeleteCard}
+        elementName={transport.from}
+        category="transport"
+        elementId={transport.id}
+        travelId={transport.travel_id}
+        fetchOneTravel={transport.fetchOneTravel}
+      />
+      {/* ) : null} */}
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
         hide={toggleModalCardDescription}
@@ -75,6 +77,18 @@ const CardTransport = (transport) => {
                 color="#F5F5F5"
               />
             )}
+            <Edit
+              onClick={() => transport.handleAddThing(transport)}
+              color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(transport.id)}
+            />
+          </div>
+        ) : null}
+        {(transport.isEditingAllowed) ? (
+          <div className="card__footer">
             <Edit
               onClick={() => transport.handleAddThing(transport)}
               color="#80CC24"

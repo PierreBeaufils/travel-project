@@ -151,11 +151,16 @@
     width: 40%;
   }
 }
-.validate_selection {
+.validate_or_cancel_selection {
   position: fixed;
   bottom: 10vh;
   z-index: 1;
   right: 10vh;
+  display: flex;
+  flex-direction: row;
+  * {
+    margin: 1rem;
+  }
 }
 @media (max-width: 500px) {
   .category-container {
@@ -195,7 +200,7 @@
       
     }
   }
-  .validate_selection {
+  .validate_or_cancel_selection {
     bottom: 1vh;
     right: 1vh;
   }
@@ -207,4 +212,7 @@
 
 .modal-title {
   text-align: center;
+}
+.cancel-button {
+  background-color: vars.$danger-color;
 }

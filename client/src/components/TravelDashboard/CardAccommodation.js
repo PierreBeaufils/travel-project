@@ -9,7 +9,7 @@ import useModal from './useModal';
 import './styles.scss';
 
 const CardAccommodation = (oneAccomodation) => {
-  console.log(`${oneAccomodation.timestamp}timestamp`);
+  
   const { isShowingModalDeleteCard, toggleModalDeleteCard } = useModal('ModalDeleteCard');
   const { isShowingModalCardDescription, toggleModalCardDescription } = useModal('ModalCardDescription');
 
@@ -31,19 +31,20 @@ const CardAccommodation = (oneAccomodation) => {
   const handleDeleteCardCLick = () => { // gere le click sur bouton supprimer d'une carte du stock
     toggleModalDeleteCard();
   };
-  console.log(oneAccomodation);
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${oneAccomodation.timestamp}` }}>
-      {(oneAccomodation.EditAllowed) ? (
-        <ModalDelete
-          isShowing={isShowingModalDeleteCard}
-          hide={toggleModalDeleteCard}
-          oneThingName={oneAccomodation.name}
-          categoryName="Hébergement"
-          cardID={oneAccomodation.id}
-        />
-      ) : null}
+      {/* {(oneAccomodation.EditAllowed) ? ( */}
+      <ModalDelete
+        isShowing={isShowingModalDeleteCard}
+        hide={toggleModalDeleteCard}
+        elementName={oneAccomodation.name}
+        category="accommodation"
+        elementId={oneAccomodation.id}
+        travelId={oneAccomodation.travel_id}
+        fetchOneTravel={oneAccomodation.fetchOneTravel}
+      />
+      {/* ) : null} */}
 
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
@@ -64,7 +65,7 @@ const CardAccommodation = (oneAccomodation) => {
         {(oneAccomodation.EditAllowed) ? (
           <div className="card__footer">
 
-            {(oneAccomodation.checkedAccommodations.find((element) => element === oneAccomodation.id)) ? ( //ternaire pour definir couleur du checkbox
+            {(oneAccomodation.checkedAccommodations.find((element) => element === oneAccomodation.id)) ? ( // ternaire pour definir couleur du checkbox
               <CheckSquare
                 onClick={() => handleAddCardCLick(oneAccomodation.id)}
                 color="#80CC24"
@@ -72,10 +73,22 @@ const CardAccommodation = (oneAccomodation) => {
             ) : (
               <CheckSquare
                 onClick={() => handleAddCardCLick(oneAccomodation.id)}
-              color="#F5F5F5"
-               
+                color="#F5F5F5"
+
               />
             )}
+            <Edit
+              onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
+              color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(oneAccomodation.id)}
+            />
+          </div>
+        ) : null}
+        {(oneAccomodation.isEditingAllowed) ? (
+          <div className="card__footer">
             <Edit
               onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
               color="#80CC24"
