@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { baseURL } from 'src/config';
 
 import './travel.scss';
 import {
@@ -15,15 +17,31 @@ import CardTransport from '../TravelDashboard/CardTransport';
 import CardActivity from '../TravelDashboard/CardActivity';
 
 const Travel = ({
-  travel, fetchOneTravel, loadingTravel, id,
+  travel, fetchOneTravel, id, saveOneTravel, // fetchOneTravel à supprimer car fetch içi
 }) => {
+  const [loading, setLoading] = useState(true);
+  const history = useHistory();
+
+  const fetchTravel = (travelId) => {
+    axios.get(`${baseURL}/travel/${travelId}`, { withCredentials: true })
+      .then((res) => {
+        if (res.status === 200) {
+          saveOneTravel(res.data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        history.push('/');
+      });
+  };
+
   useEffect(() => {
-    fetchOneTravel(id);
+    fetchTravel(id);
   }, []);
 
   return (
     <div className="travel-details-container">
-      {!loadingTravel && (
+      {!loading && (
         <>
           <div className="card-container travel-card travel-details">
             <div className="travel-card card-detail">
@@ -45,9 +63,7 @@ const Travel = ({
               </div>
             </div>
           </div>
-
-          <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id} >
-
+          <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
             <div className="validate--button validate_selection">
               <PlusSquare color="#fff" />
               <p>Ajouter un hébergement, trajet ou activité au voyage (s'affiche que pour organisateur)</p>
@@ -77,6 +93,7 @@ Travel.propTypes = {
   fetchOneTravel: PropTypes.func.isRequired,
   loadingTravel: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
+  saveOneTravel: PropTypes.func.isRequired,
 };
 
 Travel.defaultProps = {

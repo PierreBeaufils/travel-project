@@ -1,11 +1,13 @@
 import { useState } from 'react';
-// fonction permettant de selectionner la modale à afficher en fonction du nom (string) de la modale à afficher
+// fonction permettant de selectionner la modale à afficher
+// en fonction du nom (string) de la modale à afficher
 const useModal = (modalName) => {
   const [isShowingModalDeleteCard, setIsShowingModalDeleteCard] = useState(false);
   const [isShowingModalCardDescription, setIsShowingModalCardDescription] = useState(false);
   const [isShowingModalAddAccomodation, setIsShowingModalAddAccomodation] = useState(false);
   const [isShowingModalAddTransport, setIsShowingModalAddTransport] = useState(false);
   const [isShowingModalAddActivity, setIsShowingModalAddActivity] = useState(false);
+  const [isShowingModalAddMembers, setIsShowingModalAddMembers] = useState(false);
 
   function toggleModalDeleteCard() {
     setIsShowingModalDeleteCard(!isShowingModalDeleteCard);
@@ -21,6 +23,9 @@ const useModal = (modalName) => {
   }
   function toggleModalAddActivity() {
     setIsShowingModalAddActivity(!isShowingModalAddActivity);
+  }
+  function toggleModalAddMembers() {
+    setIsShowingModalAddMembers(!isShowingModalAddMembers);
   }
 
   switch (modalName) {
@@ -53,6 +58,12 @@ const useModal = (modalName) => {
       return {
         isShowingModalAddActivity,
         toggleModalAddActivity,
+      };
+    case 'ModalAddMembers':
+
+      return {
+        isShowingModalAddMembers,
+        toggleModalAddMembers,
       };
     default:
       return {};

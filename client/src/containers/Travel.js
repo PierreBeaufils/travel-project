@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Travel from 'src/components/Travel';
-import { fetchOneTravel } from 'src/actions/travels';
+import { fetchOneTravel, saveOneTravel } from 'src/actions/travels';
 
 const mapStateToProps = (state, ownProps) => ({
   travel: state.travels.currentTravel,
@@ -12,6 +12,9 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchOneTravel: (id) => {
     dispatch(fetchOneTravel(id));
+  },
+  saveOneTravel: (travel) => {
+    dispatch(saveOneTravel(travel));
   },
 });
 
