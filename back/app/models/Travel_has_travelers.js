@@ -55,6 +55,8 @@ class travel_has_traveler {
         AND traveler_id = $2
         `, [this.travel_id, this.traveler_id]);
     }
+
+    
 }
 
 module.exports = travel_has_traveler;

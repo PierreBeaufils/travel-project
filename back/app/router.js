@@ -16,12 +16,20 @@ router.delete('/traveler/:id', travelerController.deleteTraveler); // Suppressio
 // VOYAGES LIES A UN VOYAGEUR : Voyages à venir auxquels un voyageur est inscrit
 router.get('/user-travels/:id', mainController.showUserTravels); // Liste des voyages où le voyageur est inscrit
 
+
+// LANCER UNE INVITATION A UN VOYAGEUR AVANT D'ASSOCIER LE VOYAGEUR AU VOYAGE.
+router.post('/associate/travel/:id', mainController.sendTravelInvitation); //Send an invitation by mail to the traveler.
+
+
+
 // INFOS DES VOYAGES : affichage globale et individuel, insertion, modification et suppression
 router.get('/travels', mainController.showTravels); // Afficher tous les voyages en BDD
 router.get('/travel/:id', mainController.showAllInfos); // Afficher 1 voyage 
 router.post('/create-travel', mainController.createTravel); // Créer 1 nouveau voyage 
 router.patch('/travel/:id', mainController.editTravel); // Modifier 1 voyage existant
 router.delete('/travel/:id', mainController.deleteTravel); // Supprimer 1 voyage existant
+
+
 
 // INFOS VOYAGEURS LIES A UN VOYAGE : affichage des voyageurs inscrits dans un voyage, inscrire un nouveau voyageur dans un voyage, et supprimer un voyageur d'un voyage
 router.get('/travel/:id/travelers', mainController.showTravelers); // Afficher les voyageurs faisant partie d'un voyage
@@ -48,5 +56,7 @@ router.get('/mail', loginController.verifyToken); // MW de validation de l'email
 //cette route sera protégée par le middleware adminMW
 //Seuls les utilisateurs avec un rôle admin pourront y avoir accès
 // router.get('/admin', adminMW, adminController.admin);
+
+
 
 module.exports = router;
