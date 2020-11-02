@@ -50,7 +50,7 @@ export const fetchOneTravel = (id) => ({
   id,
 });
 
-export const SaveOneTravel = (travel) => ({
+export const saveOneTravel = (travel) => ({
   type: SAVE_ONE_TRAVEL,
   travel,
 });
