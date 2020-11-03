@@ -23,8 +23,8 @@ const TravelForm = ({
         owner: ownerId,
         title: travel.title,
         destination: travel.destination,
-        departure_date: travel.departure_date,
-        return_date: travel.return_date,
+        departure_date: new Date(travel.departure_date).toISOString().substring(0, 10),
+        return_date: new Date(travel.return_date).toISOString().substring(0, 10),
       };
     }
     return {

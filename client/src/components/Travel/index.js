@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { baseURL } from 'src/config';
 
 import './travel.scss';
 import {
@@ -13,17 +15,36 @@ import Documents from '../UserProfile/Documents';
 import CardAccommodation from '../TravelDashboard/CardAccommodation';
 import CardTransport from '../TravelDashboard/CardTransport';
 import CardActivity from '../TravelDashboard/CardActivity';
+import Price from './Prices';
+import DocumentsTravel from './DocumentsTravel';
 
 const Travel = ({
-  travel, fetchOneTravel, loadingTravel, id,
+  travel, fetchOneTravel, id, saveOneTravel, // fetchOneTravel à supprimer car fetch içi
 }) => {
+  const [loading, setLoading] = useState(true);
+  const history = useHistory();
+
+  const fetchTravel = (travelId) => {
+    axios.get(`${baseURL}/travel/${travelId}`, { withCredentials: true })
+      .then((res) => {
+        if (res.status === 200) {
+          saveOneTravel(res.data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        history.push('/');
+      });
+  };
+
   useEffect(() => {
-    fetchOneTravel(id);
+    fetchTravel(id);
   }, []);
 
+  const isEditingAllowed = true;
   return (
     <div className="travel-details-container">
-      {!loadingTravel && (
+      {!loading && (
         <>
           <div className="card-container travel-card travel-details">
             <div className="travel-card card-detail">
@@ -38,32 +59,35 @@ const Travel = ({
                   <Calendar color="grey" size={15} />
                   {travel.departure_date} au {travel.return_date}
                 </div>
-                <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
                 <Link to={`/voyage/${travel.id}/modifier`} className="travel-card-content-more card-details">
                   Modifier les détails
                 </Link>
               </div>
             </div>
           </div>
-
-          <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id} >
-
-            <div className="validate--button validate_selection">
+          <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
+            <div className="validate--button validate_or_cancel_selection">
               <PlusSquare color="#fff" />
-              <p>Ajouter un hébergement, trajet ou activité au voyage (s'affiche que pour organisateur)</p>
+              <p>Ajouter un hébergement, trajet ou activité au voyage</p>
             </div>
           </Link>
+          <div className="travel-details-container-details">
 
-          <div className="travel-container">
-            <div className="cards__container travel__view">
+            <div className="travel-container">
+              <div className="cards__container travel__view">
 
-              {/* Timestamp is sent to order by date in CSS rendering */}
-              {/* {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
+                {/* Timestamp is sent to order by date in CSS rendering */}
+                {/* {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
 
-              {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)}
-              {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={false} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} />)}
-              {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={false} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} />)}
+                {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
+                {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
+                {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
 
+              </div>
+            </div>
+            <div className="travel-details-container-right-side">
+              <Price prices={travel.prices[0]} />
+              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={id} />
             </div>
           </div>
         </>
@@ -77,6 +101,7 @@ Travel.propTypes = {
   fetchOneTravel: PropTypes.func.isRequired,
   loadingTravel: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
+  saveOneTravel: PropTypes.func.isRequired,
 };
 
 Travel.defaultProps = {
