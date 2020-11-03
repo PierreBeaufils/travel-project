@@ -19,8 +19,8 @@ const travelController = {
         if (travelinfos) {
             const travelersInTravel = await travel_has_traveler.findTravelersByTravel(travelId);
             for (traveler of travelersInTravel) {
-                console.log(req.session.user.id);
-                console.log(traveler.traveler_id);
+                // console.log(req.session.user.id);
+                // console.log(traveler.traveler_id);
                 if (req.session.user.id === traveler.traveler_id) {
                     travelinfos.prices = await Travel.findPrice(travelId);
                     travelinfos.traveler = await travel_has_traveler.findTravelersByTravel(travelId);
@@ -28,17 +28,17 @@ const travelController = {
                     travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
                     travelinfos.activity = await Activity.findAllTravelComponent(travelId);
                     travelinfos.task = await Task.findAllTravelComponent(travelId);
-                    travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);                  
+                    travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+                    
+                   return res.json(travelinfos);
                 } else {
-                    res.status(404).json('Vous n\'avez pas accès à ce voyage');
-                    // console.log('Vous n\'avez pas accès à ce voyage');
+                   return res.json('Vous n\'avez pas accès à ce voyage');
                 }
             }
         } else {
-            res.status(404).json('ce voyage n\'existe pas');
+            return res.status(404).json('ce voyage n\'existe pas');
         };
     },
-
     showTravels: async (req, res) =>{
         let travelInfos = {};
         travelInfos = await Travel.findAllTravelComponent();
@@ -146,7 +146,6 @@ const travelController = {
         // console.log(documents.Contents);
        if (documents.Contents === undefined) {
            travelinfos.documents = "Pas de document pour ce voyage";
-           res.json(travelinfos);
        } 
        else {
         const documentsToShow = [];
@@ -162,7 +161,6 @@ const travelController = {
         }
         travelinfos.documents = documentsToShow;
         // res.json(documentsToShow);
-        res.json(travelinfos);
     }
     },
     createEntity: async (req,res) => {
