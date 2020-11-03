@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { baseURL } from 'src/config';
 
 import './travel.scss';
 import {
@@ -17,17 +19,33 @@ import Price from './Prices';
 import DocumentsTravel from './DocumentsTravel';
 
 const Travel = ({
-  travel, fetchOneTravel, travelLoaded, id,
+  travel, fetchOneTravel, id, saveOneTravel, // fetchOneTravel à supprimer car fetch içi
 }) => {
+  const [loading, setLoading] = useState(true);
+  const history = useHistory();
+
+  const fetchTravel = (travelId) => {
+    axios.get(`${baseURL}/travel/${travelId}`, { withCredentials: true })
+      .then((res) => {
+        if (res.status === 200) {
+          saveOneTravel(res.data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        history.push('/');
+      });
+  };
+
   useEffect(() => {
-    fetchOneTravel(id);
+    fetchTravel(id);
   }, []);
   
 
   const isEditingAllowed = true;
   return (
     <div className="travel-details-container">
-      {!travelLoaded && (
+      {!loading && (
         <>
 
           <div className="card-container travel-card travel-details">
@@ -64,9 +82,11 @@ const Travel = ({
                 {/* Timestamp is sent to order by date in CSS rendering */}
                 {/* {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
 
+
                 {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
                 {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
                 {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
+
 
               </div>
             </div>
@@ -84,8 +104,9 @@ const Travel = ({
 Travel.propTypes = {
   travel: PropTypes.object,
   fetchOneTravel: PropTypes.func.isRequired,
-  travelLoaded: PropTypes.bool.isRequired,
+  loadingTravel: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
+  saveOneTravel: PropTypes.func.isRequired,
 };
 
 Travel.defaultProps = {

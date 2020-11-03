@@ -11,8 +11,9 @@ import { appId, apiKey, baseURL } from 'src/config';
 import '../styles.scss';
 
 const ModalAddTransport = ({
-  isShowing, hide, transport, travelID, typeOfSubmit, fetchOneTravel,
+  isShowing, hide, transport, travelID, editOrCreate, fetchOneTravel,
 }) => {
+
   // const setTitle = () => {
   //   if (editOrCreate === 'edit') {
   //     return 'Modifier un transport';
@@ -42,6 +43,7 @@ const ModalAddTransport = ({
   const {
     register, handleSubmit, errors,
   } = useForm();
+
 
   const [startPlace, setStartPlace] = useState('');
   const [arrivalPlace, setArrivalPlace] = useState('');
@@ -73,7 +75,7 @@ const ModalAddTransport = ({
           </div>
           <div className="modal_content">
             <div>
-              <h3 className="modal-title">Ajouter un transport</h3>
+              {setTitle()}
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop"> {/* Changer le nom de la classe ! */}
 
                 <label htmlFor="from">
