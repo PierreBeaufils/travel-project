@@ -13,35 +13,34 @@ import '../styles.scss';
 const ModalAddTransport = ({
   isShowing, hide, transport, travelID, editOrCreate, fetchOneTravel,
 }) => {
-  // const setTitle = () => {
-  //   if (editOrCreate === 'edit') {
-  //     return 'Modifier un transport';
-  //   } else {
-  //   return 'Ajouter un transport';
-  // }
-  // };
+  const setTitle = () => {
+    if (editOrCreate === 'edit') {
+      return 'Modifier un transport';
+    }
+    return 'Ajouter un transport';
+  };
 
-  // const initialValues = () => {
-  //   if (editOrCreate === 'edit') {
-  //     return {
-  //       // from: transport.from,
-  //       // to: transport.to,
-  //       type: transport.type,
-  //       company: transport.company,
-  //       departure_date: transport.departure_date,
-  //       arrival_date: transport.arrival_date,
-  //       reservation_ref: transport.reservation_ref,
-  //       unit_price: transport.unit_price,
-  //       quantity: transport.quantity,
-  //       memo: transport.memo,
-  //     };
-  //   }
-  //   return {};
-  // };
+  const initialValues = () => {
+    if (editOrCreate === 'edit') {
+      return {
+        from: transport.from,
+        to: transport.to,
+        type: transport.type,
+        company: transport.company,
+        departure_date: transport.departure_date,
+        arrival_date: transport.arrival_date,
+        reservation_ref: transport.reservation_ref,
+        unit_price: transport.unit_price,
+        quantity: transport.quantity,
+        memo: transport.memo,
+      };
+    }
+    return {};
+  };
 
-  // const {
-  //   register, handleSubmit, errors,
-  // } = useForm({ defaultValues: initialValues() });
+  const {
+    register, handleSubmit, errors,
+  } = useForm({ defaultValues: initialValues() });
 
   const [startPlace, setStartPlace] = useState('');
   const [arrivalPlace, setArrivalPlace] = useState('');
@@ -73,7 +72,7 @@ const ModalAddTransport = ({
           </div>
           <div className="modal_content">
             <div>
-              <h3 className="modal-title">Ajouter un transport</h3>
+              {setTitle()}
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop"> {/* Changer le nom de la classe ! */}
 
                 <label htmlFor="from">

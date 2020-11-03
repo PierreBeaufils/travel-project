@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit,
+  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit, Activity,
 } from 'react-feather';
 import ModalDelete from './Modals/ModalDelete';
 import ModalCardDescription from './Modals/ModalCardDescription';
@@ -28,22 +28,24 @@ const CardActivity = (activity) => {
       activity.setcheckedActivities([...activity.checkedActivities, activity.id]);
     }
   };
-  const handleDeleteCardCLick = (clickedCardId) => { // gere le click sur bouton supprimer d'une carte du stock
-    toggleModalDeleteCard(clickedCardId);
+  const handleDeleteCardCLick = () => { // gere le click sur bouton supprimer d'une carte du stock
+    toggleModalDeleteCard();
   };
 
   return (
     // Timestamp is used to order by date in CSS rendering
     <div className="card__container" style={{ order: `${activity.timestamp}` }}>
-      {(activity.EditAllowed) ? (
-        <ModalDelete
-          isShowing={isShowingModalDeleteCard}
-          hide={toggleModalDeleteCard}
-          oneThingName={activity.name}
-          categoryName="Activité"
-          cardID={activity.id}
-        />
-      ) : null}
+      {/* {(activity.EditAllowed) ? ( */}
+      <ModalDelete
+        isShowing={isShowingModalDeleteCard}
+        hide={toggleModalDeleteCard}
+        elementName={activity.name}
+        category="activity"
+        elementId={activity.id}
+        travelId={activity.travel_id}
+        fetchOneTravel={activity.fetchOneTravel}
+      />
+      {/* ) : null} */}
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
         hide={toggleModalCardDescription}
@@ -55,7 +57,7 @@ const CardActivity = (activity) => {
           className="card__text"
           onClick={() => handleTextCardCLick('1')}
         >
-          <h3>Activité: {activity.name}</h3>
+          <h3><Activity size={32} className="travel-menu-logo" />Activité: {activity.name}</h3>
           <h4><MapPin color="#2B7AFD" size={15} /> {activity.place}</h4>
           <h4><Calendar color="#2B7AFD" size={15} /> {transformDateISOtoString(activity.date)}</h4>
           <h4><Clock color="#2B7AFD" size={15} /> durée: {activity.duration.minutes} minutes</h4>
@@ -69,11 +71,23 @@ const CardActivity = (activity) => {
                 color="#80CC24"
               />
             ) : (
-              <CheckSquare
-                onClick={() => handleAddCardCLick(activity.id)}
-                color="#F5F5F5"
-              />
-            )}
+                <CheckSquare
+                  onClick={() => handleAddCardCLick(activity.id)}
+                  color="#F5F5F5"
+                />
+              )}
+            <Edit
+              onClick={() => activity.handleAddThing(activity)}
+              color="#80CC24"
+            />
+            <Trash2
+              color="#FF7A32"
+              onClick={() => handleDeleteCardCLick(activity.id)}
+            />
+          </div>
+        ) : null}
+        {(activity.isEditingAllowed) ? (
+          <div className="card__footer">
             <Edit
               onClick={() => activity.handleAddThing(activity)}
               color="#80CC24"
@@ -87,9 +101,6 @@ const CardActivity = (activity) => {
       </div>
     </div>
   );
-};
-CardActivity.propTypes = {
-  activity: PropTypes.object.isRequired,
 };
 
 export default CardActivity;
