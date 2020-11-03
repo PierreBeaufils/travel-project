@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit, Activity
+  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit, Activity,
 } from 'react-feather';
 import ModalDelete from './Modals/ModalDelete';
 import ModalCardDescription from './Modals/ModalCardDescription';
@@ -71,11 +71,11 @@ const CardActivity = (activity) => {
                 color="#80CC24"
               />
             ) : (
-              <CheckSquare
-                onClick={() => handleAddCardCLick(activity.id)}
-                color="#F5F5F5"
-              />
-            )}
+                <CheckSquare
+                  onClick={() => handleAddCardCLick(activity.id)}
+                  color="#F5F5F5"
+                />
+              )}
             <Edit
               onClick={() => activity.handleAddThing(activity)}
               color="#80CC24"
@@ -101,9 +101,6 @@ const CardActivity = (activity) => {
       </div>
     </div>
   );
-};
-CardActivity.propTypes = {
-  activity: PropTypes.object.isRequired,
 };
 
 export default CardActivity;

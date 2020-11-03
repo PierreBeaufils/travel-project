@@ -43,8 +43,6 @@ const TravelDashboard = ({
   };
 
   const handleValidateSelection = () => { // gere le click sur le texte d'une carte
-    console.log('cliqueeeeeeuuuuu');
-
     checkedAccommodations.map((idToSelect) => {
       console.log(idToSelect);
       const options = {
@@ -90,6 +88,11 @@ const TravelDashboard = ({
       <button type="button" className="create--button" onClick={handleAddModal} value="members">
         Ajouter des voyageurs
       </button>
+      <ModalAddMember
+        travelID={travel.id}
+        isShowing={isShowingModalAddMembers}
+        hide={toggleModalAddMembers}
+      />
 
       <ModalAddAccomodation
         isShowing={isShowingModalAddAccomodation}

@@ -7,7 +7,7 @@ import Navbar from 'src/containers/Navbar';
 import Footer from 'src/components/Footer';
 import Homepage from 'src/components/Homepage';
 import Mentions from 'src/components/Mentions';
-import Contact from 'src/components/Contact';
+import Contact from 'src/containers/Contact';
 import About from 'src/components/About';
 import LoginForm from 'src/containers/LoginForm';
 import RegisterForm from 'src/containers/RegisterForm';
@@ -19,6 +19,7 @@ import Travel from 'src/containers/Travel';
 import TravelDashboard from 'src/containers/TravelDashboard';
 import RegisterValidation from 'src/components/RegisterForm/RegisterValidation';
 import TokenValidation from 'src/containers/TokenValidation';
+import InviteTraveler from 'src/containers/InviteTraveler';
 
 // == Component
 const App = ({ loggedIn, loginCheck, loading }) => {
@@ -58,6 +59,7 @@ const App = ({ loggedIn, loginCheck, loading }) => {
             <Route exact path="/voyage/:id/dashboard" component={TravelDashboard} />
             <Route path="/validation" component={RegisterValidation} />
             <Route path="/verifier" component={TokenValidation} />
+            <Route path="/rejoindre" component={InviteTraveler} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

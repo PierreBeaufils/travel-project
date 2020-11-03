@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -12,17 +12,20 @@ import '../styles.scss';
 const ModalAddMembers = ({
   isShowing, hide, travelID,
 }) => {
+  const [message, setMessage] = useState('');
   const {
     register, handleSubmit, errors,
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    axios.post(`${baseURL}/${travelID}`, data) // route à définir !!
+    axios.post(`${baseURL}/associate/travel/${travelID}`, data)
       .then((res) => {
-        console.log(res.data);
-        hide();
-        // fetchOneTravel(travelID);
+        if (res.status === 200) {
+          setMessage('Invitation envoyée');
+        }
+        else {
+          setMessage('Erreur');
+        }
       });
   };
 
@@ -50,7 +53,9 @@ const ModalAddMembers = ({
                   <span className="fieldName">Email </span>
                   <input name="email" ref={register({ required: true })} type="email" />
                 </label>
-
+                {message && (
+                  <div style={{ color: 'blue' }}>{message}</div>
+                )}
                 <input
                   type="submit"
                   value="Envoyer l'invitation"
