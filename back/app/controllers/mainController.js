@@ -138,7 +138,7 @@ const travelController = {
             traveler_id: foundTraveler.id
         });
         const addedTraveler = await newTraveler.saveTravelerIntoTravel();
-        res.json("Vous avez bien été ajouté à ce voyage);
+        res.json("Vous avez bien été ajouté à ce voyage");
     } else {
        res.status(404).json("Il semble que vous ne soyez pas encore inscrit sur Globe Trotter, veuillez vous inscrire sur notre plateforme en suivant ce lien : http://localhost:8080/inscription")
     }
