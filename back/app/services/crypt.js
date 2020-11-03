@@ -12,6 +12,14 @@ const crypt = {
         return encryptedString;
 
     },
+    getTokenTravel: (user_id,travel_id,) => {
+
+        let stringToCrypt = user_id + "-" + travel_id ;
+        let encryptedString = crypt.encryptText(stringToCrypt);
+        // console.log(stringToCrypt);
+        return encryptedString;
+
+    },
     encryptText: (string) => {
         const cipher = crypto.createCipher(algorithm,password);
 

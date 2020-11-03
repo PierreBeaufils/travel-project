@@ -6,11 +6,14 @@ const Task = require ("../models/Task");
 const Traveler = require("../models/Traveler");
 const Document = require("../models/Document");
 const travel_has_traveler = require("../models/Travel_has_travelers");
+const mailApp = require("../services/nodemailer");
+const crypt = require("../services/crypt");
 
 const objectModel = [Accommodation,Activity,Transport,Travel, Task, Traveler, travel_has_traveler];
 
 const travelController = {
     showAllInfos: async (req,res) => {
+        
         const travelId = req.params.id;
 
         let  travelinfos = {};
@@ -101,12 +104,58 @@ const travelController = {
             res.status(404).json ('Ce voyage ne comporte pas encore de voyageurs');
         };
     },
+    sendTravelInvitation: async (req,res) => {
+        const travelersToAssoc = req.body ;
+        
+        
+
+        for (let travelerMail in travelersToAssoc) {
+        let token = crypt.getTokenTravel(req.params.id,travelersToAssoc[travelerMail]);
+        console.log(token);
+
+        let text = `Bonjour, 
+        Un membre de "Globe Trotter" à décidé d'organiser un voyage et souhaite vous inviter à en faire parti,
+        pour accepter son invitation cliquer simplement ici : http://localhost:8080/rejoindre/?token=${token}
+        `;
+        let html = `<h1> Bonjour,</h1>
+        <p> Un membre de "Globe Trotter" à décidé d'organiser un voyage et souhaite vous inviter à en faire parti,
+        pour accepter son invitation cliquer simplement ici : <a href="http://localhost:8080/rejoindre/?token=${token}">Rejoindre un voyage</a>
+        `;
+            let message = mailApp.messageConstructor(travelersToAssoc[travelerMail],token);
+            message.text = text ;
+            message.html = html ;
+           mailApp.transporter.sendMail(message);
+        }
+        res.status(200).json("Ces voyageurs ont bien été invités");
+    },
     addTravelers: async (req, res) => {
-        const newTraveler = new travel_has_traveler(req.body);
-        // console.log("newTraveler : ", newTraveler);
-        newTraveler.travel_id = req.params.id;
+        
+        let decryptedToken = crypt.decryptText(req.query.token);
+        decryptedToken = decryptedToken.split("-");
+        console.log(decryptedToken);
+        // On vérifie si l'user est en BDD :
+        const foundTraveler = await Traveler.findByEmail(decryptedToken[1]);
+        if (foundTraveler) {
+            // Que doit il se passer si l'utilisateur est déja un traveler ?
+            new travel_has_traveler(foundTraveler);
+        
+    
+        
+        
+       
+        const newTraveler = new travel_has_traveler({
+            travel_id: decryptedToken[0],
+            traveler_id: foundTraveler.id
+        });
         const addedTraveler = await newTraveler.saveTravelerIntoTravel();
-        res.json("ajout effectué");
+        res.json("Vous avez bien été ajouté à ce voyage");
+    } else {
+       res.status(404).json("Il semble que vous ne soyez pas encore inscrit sur Globe Trotter, veuillez vous inscrire sur notre plateforme en suivant ce lien : http://localhost:8080/inscription")
+    }
+        
+        
+        
+        
     },
     deleteTravelerFromTravel : async (req, res) => {
         const travelerToFind = await travel_has_traveler.findOneTravelerByTravel(req.params.id, req.params.travelerId);
