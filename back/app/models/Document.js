@@ -7,7 +7,7 @@ const s3 = new S3();
 
 class Document {
     
-    static Bucket = "globe-trotter-travel";
+    static Bucket = "globe-trotter-travel2";
     constructor (data) {
         this.travel_id = data.travel_id;
         this.Bucket = Document.Bucket ;

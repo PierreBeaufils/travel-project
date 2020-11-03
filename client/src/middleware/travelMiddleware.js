@@ -16,6 +16,7 @@ import axios from 'axios';
 
 const travelMiddleware = (store) => (next) => (action) => {
   const { id } = store.getState().user.session;
+  // console.log('id: ', id);
   switch (action.type) {
     case SUBMIT_TRAVEL_FORM: // REDIRECTION ET ERREUR A LA SOUMISSION DU FORMULAIRE A AJOUTER
       axios.post(`${baseURL}/create-travel`, action.data)

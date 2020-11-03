@@ -9,31 +9,40 @@ const travel_has_traveler = require("../models/Travel_has_travelers");
 
 const objectModel = [Accommodation,Activity,Transport,Travel, Task, Traveler, travel_has_traveler];
 
-
 const travelController = {
     showAllInfos: async (req,res) => {
         const travelId = req.params.id;
+
         let  travelinfos = {};
         travelinfos = await Travel.findOneTravelComponent(null,travelId);
-        if (travelinfos) {
-            travelinfos.prices = await Travel.findPrice(travelId);
-            travelinfos.traveler = await travel_has_traveler.findTravelersByTravel(travelId);
-            travelinfos.transport = await Transport.findAllTravelComponent(travelId);
-            travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
-            travelinfos.activity = await Activity.findAllTravelComponent(travelId);
-            travelinfos.task = await Task.findAllTravelComponent(travelId);
-            travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
 
-            res.json(travelinfos);
+        if (travelinfos) {
+            const travelersInTravel = await travel_has_traveler.findTravelersByTravel(travelId);
+            for (traveler of travelersInTravel) {
+                // console.log(req.session.user.id);
+                // console.log(traveler.traveler_id);
+                if (req.session.user.id === traveler.traveler_id) {
+                    travelinfos.prices = await Travel.findPrice(travelId);
+                    travelinfos.traveler = await travel_has_traveler.findTravelersByTravel(travelId);
+                    travelinfos.transport = await Transport.findAllTravelComponent(travelId);
+                    travelinfos.accommodation = await Accommodation.findAllTravelComponent(travelId);
+                    travelinfos.activity = await Activity.findAllTravelComponent(travelId);
+                    travelinfos.task = await Task.findAllTravelComponent(travelId);
+                    travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
+                    
+                   res.json(travelinfos);
+                } else {
+                   return res.json('Vous n\'avez pas accès à ce voyage');
+                }
+            }
         } else {
             res.status(404).json('ce voyage n\'existe pas');
-        }
+        };
     },
-
     showTravels: async (req, res) =>{
         let travelInfos = {};
         travelInfos = await Travel.findAllTravelComponent();
-        
+
         if (travelInfos) { 
             res.json(travelInfos);
         } else {
@@ -70,10 +79,11 @@ const travelController = {
             res.status(404).json('cette entité n\'existe pas')
         }
     },
-
     showUserTravels : async (req,res) =>{
         const travelerId = req.params.id;
+
         const userTravels = await Travel.findAllTravels(travelerId);
+        
         if (userTravels) {
             res.json(userTravels);
         } else {
@@ -110,7 +120,6 @@ const travelController = {
             res.status(404).json('ce voyageur n\'est pas inscrit sur ce voyage')
         }
     },
-
     showEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse;
@@ -132,10 +141,9 @@ const travelController = {
         // Je recupere l'id du voyage
         const prefix = req.params.id + "/public/";
         const documents = await Document.getAllPublic(prefix);
-        console.log(documents.Contents);
+        // console.log(documents.Contents);
        if (documents.Contents === undefined) {
            travelinfos.documents = "Pas de document pour ce voyage";
-           res.json(travelinfos);
        } 
        else {
         const documentsToShow = [];
@@ -151,7 +159,6 @@ const travelController = {
         }
         travelinfos.documents = documentsToShow;
         // res.json(documentsToShow);
-        res.json(travelinfos);
     }
     },
     createEntity: async (req,res) => {
@@ -159,10 +166,10 @@ const travelController = {
         let entityToUse;
 
         if (entity === "document") {
-            console.log(req.files);
-            console.log(req.body.Key);
+            // console.log(req.files);
+            // console.log(req.body.Key);
             const nameOfFile = req.files[0].originalname || req.body.name;
-            console.log(nameOfFile);
+            // console.log(nameOfFile);
             const uploadParams = {
                 Body: req.files[0].buffer,
                 Key: `${req.params.id}/public/${nameOfFile}`,
@@ -174,19 +181,20 @@ const travelController = {
             res.json("le document a bien été ajouté !");
         }
 
-        for (let i = 0 ; i < objectModel.length ; i++) {
-            if (entity === objectModel[i].tableName) {
-                entityToUse = objectModel[i];
-            }
-        };
+        else {
+            for (let i = 0 ; i < objectModel.length ; i++) {
+                if (entity === objectModel[i].tableName) {
+                    entityToUse = objectModel[i];
+                }
+            };
 
-        const newEntity = new entityToUse(req.body);
-        newEntity.travel_id = req.params.id;
+            const newEntity = new entityToUse(req.body);
+            newEntity.travel_id = req.params.id;
 
-        await newEntity.saveAllTravelComponent();
-        res.json('Ajout effectué');
-    },
-   
+            await newEntity.saveAllTravelComponent();
+            res.json('Ajout effectué');
+        }        
+    },   
     editEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
@@ -195,25 +203,25 @@ const travelController = {
             res.json("Un document ne peux être édité, veuillez le supprimer et ajouter votre nouveau document")
         }
         else {
-        for (let i = 0 ; i < objectModel.length ; i++) {
-            // console.log('objectModel[i].tableName', objectModel[i].tableName);
-            if (entity === objectModel[i].tableName) {
-                entityToUse = objectModel[i];
+            for (let i = 0 ; i < objectModel.length ; i++) {
+                // console.log('objectModel[i].tableName', objectModel[i].tableName);
+                if (entity === objectModel[i].tableName) {
+                    entityToUse = objectModel[i];
+                }
+            };
+
+            const entityToEdit = await entityToUse.findOneTravelComponent(req.params.id,req.params.entityId);
+
+            if (entityToEdit) {
+                const editedEntity = await new entityToUse(entityToEdit);
+                editedEntity.update(req.body);
+                editedEntity.saveAllTravelComponent();
+                res.json(`${entityToUse.tableName} mise à jour`)
+            } else {
+                res.status(404).json('mise à jour impossible')
             }
-        };
-
-        const entityToEdit = await entityToUse.findOneTravelComponent(req.params.id,req.params.entityId);
-
-        if (entityToEdit) {
-            const editedEntity = await new entityToUse(entityToEdit);
-            editedEntity.update(req.body);
-            editedEntity.saveAllTravelComponent();
-            res.json(`${entityToUse.tableName} mise à jour`)
-        } else {
-            res.status(404).json('mise à jour impossible')
         }
-    }},
-
+    },
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
@@ -238,10 +246,8 @@ const travelController = {
             res.json("suppresion effectuée");
         } else {
             res.status(404).json("cette entité n'existe pas dans ce voyage");
-        }}
-    ,
-
-    
+        }
+    }    
 };
 
 module.exports = travelController ;
