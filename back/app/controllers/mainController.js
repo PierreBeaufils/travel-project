@@ -30,13 +30,13 @@ const travelController = {
                     travelinfos.task = await Task.findAllTravelComponent(travelId);
                     travelinfos.documents =  travelController.showDocuments(req,res,travelinfos);
                     
-                   return res.json(travelinfos);
+                   res.json(travelinfos);
                 } else {
                    return res.json('Vous n\'avez pas accès à ce voyage');
                 }
             }
         } else {
-            return res.status(404).json('ce voyage n\'existe pas');
+            res.status(404).json('ce voyage n\'existe pas');
         };
     },
     showTravels: async (req, res) =>{
@@ -79,7 +79,6 @@ const travelController = {
             res.status(404).json('cette entité n\'existe pas')
         }
     },
-
     showUserTravels : async (req,res) =>{
         const travelerId = req.params.id;
 
@@ -121,7 +120,6 @@ const travelController = {
             res.status(404).json('ce voyageur n\'est pas inscrit sur ce voyage')
         }
     },
-
     showEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse;
@@ -184,22 +182,19 @@ const travelController = {
         }
 
         else {
+            for (let i = 0 ; i < objectModel.length ; i++) {
+                if (entity === objectModel[i].tableName) {
+                    entityToUse = objectModel[i];
+                }
+            };
 
-        for (let i = 0 ; i < objectModel.length ; i++) {
-            if (entity === objectModel[i].tableName) {
-                entityToUse = objectModel[i];
-            }
-        };
+            const newEntity = new entityToUse(req.body);
+            newEntity.travel_id = req.params.id;
 
-        const newEntity = new entityToUse(req.body);
-        newEntity.travel_id = req.params.id;
-
-        await newEntity.saveAllTravelComponent();
-        res.json('Ajout effectué');
-    }
-        
-    },
-   
+            await newEntity.saveAllTravelComponent();
+            res.json('Ajout effectué');
+        }        
+    },   
     editEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
@@ -208,25 +203,25 @@ const travelController = {
             res.json("Un document ne peux être édité, veuillez le supprimer et ajouter votre nouveau document")
         }
         else {
-        for (let i = 0 ; i < objectModel.length ; i++) {
-            // console.log('objectModel[i].tableName', objectModel[i].tableName);
-            if (entity === objectModel[i].tableName) {
-                entityToUse = objectModel[i];
+            for (let i = 0 ; i < objectModel.length ; i++) {
+                // console.log('objectModel[i].tableName', objectModel[i].tableName);
+                if (entity === objectModel[i].tableName) {
+                    entityToUse = objectModel[i];
+                }
+            };
+
+            const entityToEdit = await entityToUse.findOneTravelComponent(req.params.id,req.params.entityId);
+
+            if (entityToEdit) {
+                const editedEntity = await new entityToUse(entityToEdit);
+                editedEntity.update(req.body);
+                editedEntity.saveAllTravelComponent();
+                res.json(`${entityToUse.tableName} mise à jour`)
+            } else {
+                res.status(404).json('mise à jour impossible')
             }
-        };
-
-        const entityToEdit = await entityToUse.findOneTravelComponent(req.params.id,req.params.entityId);
-
-        if (entityToEdit) {
-            const editedEntity = await new entityToUse(entityToEdit);
-            editedEntity.update(req.body);
-            editedEntity.saveAllTravelComponent();
-            res.json(`${entityToUse.tableName} mise à jour`)
-        } else {
-            res.status(404).json('mise à jour impossible')
         }
-    }},
-
+    },
     deleteEntity: async (req,res) => {
         let entity = req.params.entity;
         let entityToUse ;
@@ -251,10 +246,8 @@ const travelController = {
             res.json("suppresion effectuée");
         } else {
             res.status(404).json("cette entité n'existe pas dans ce voyage");
-        }}
-    ,
-
-    
+        }
+    }    
 };
 
 module.exports = travelController ;
