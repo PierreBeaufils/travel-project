@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import timestampToDate from 'src/selectors/dates';
 
 import './userdashboard.scss';
 import { MapPin } from 'react-feather';
@@ -15,7 +16,7 @@ const TravelCard = ({ travel }) => (
         <MapPin color="grey" size={15} />
         {travel.destination}
       </div>
-      <div className="travel-card-content-date">Du {travel.departure_date} au {travel.return_date}</div>
+      <div className="travel-card-content-date">Du {timestampToDate(travel.departure_date)} au {timestampToDate(travel.return_date)}</div>
       <Link to={`/voyage/${travel.travel_id}`} className="travel-card-content-more">
         Voir ce voyage
       </Link>
