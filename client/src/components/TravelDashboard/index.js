@@ -27,9 +27,6 @@ const TravelDashboard = ({
 
   const history = useHistory();
 
-
-
-
   const handleAddModal = (event) => { // gere le click sur l'ajout d'un hebergement
     if (event.currentTarget.value === 'Hébergements') {
       toggleModalAddAccomodation();
@@ -128,39 +125,39 @@ const TravelDashboard = ({
           <p>Valider</p>
         </div>
       </div>
-      {!travelLoaded && (
-      <>
-        <CategoryFrame
-          category="Hébergements"
-          textButton="Ajouter un hébergement"
-          handleAddElement={handleAddModal}
-          data={travel.accommodation}
-          EditAllowed={EditAllowed}
-          setcheckedAccommodations={setcheckedAccommodations}
-          checkedAccommodations={checkedAccommodations}
-          fetchOneTravel={fetchOneTravel}
-        />
-        <CategoryFrame
-          category="Transports"
-          textButton="Ajouter un Transport"
-          handleAddElement={handleAddModal}
-          data={travel.transport}
-          EditAllowed={EditAllowed}
-          setcheckedTransports={setcheckedTransports}
-          checkedTransports={checkedTransports}
-          fetchOneTravel={fetchOneTravel}
-        />
-        <CategoryFrame
-          category="Activités"
-          textButton="Ajouter une Activité"
-          handleAddElement={handleAddModal}
-          data={travel.activity}
-          EditAllowed={EditAllowed}
-          setcheckedActivities={setcheckedActivities}
-          checkedActivities={checkedActivities}
-          fetchOneTravel={fetchOneTravel}
-        />
-      </>
+      {travelLoaded && (
+        <>
+          <CategoryFrame
+            category="Hébergements"
+            textButton="Ajouter un hébergement"
+            handleAddElement={handleAddModal}
+            data={travel.accommodation}
+            EditAllowed={EditAllowed}
+            setcheckedAccommodations={setcheckedAccommodations}
+            checkedAccommodations={checkedAccommodations}
+            fetchOneTravel={fetchOneTravel}
+          />
+          <CategoryFrame
+            category="Transports"
+            textButton="Ajouter un Transport"
+            handleAddElement={handleAddModal}
+            data={travel.transport}
+            EditAllowed={EditAllowed}
+            setcheckedTransports={setcheckedTransports}
+            checkedTransports={checkedTransports}
+            fetchOneTravel={fetchOneTravel}
+          />
+          <CategoryFrame
+            category="Activités"
+            textButton="Ajouter une Activité"
+            handleAddElement={handleAddModal}
+            data={travel.activity}
+            EditAllowed={EditAllowed}
+            setcheckedActivities={setcheckedActivities}
+            checkedActivities={checkedActivities}
+            fetchOneTravel={fetchOneTravel}
+          />
+        </>
 
       )}
     </div>
@@ -169,6 +166,7 @@ const TravelDashboard = ({
 };
 TravelDashboard.propTypes = {
   travel: PropTypes.object.isRequired,
+  travelLoaded: PropTypes.bool.isRequired,
 };
 
 export default TravelDashboard;

@@ -26,10 +26,6 @@ const ModalAddMembers = ({
       });
   };
 
-  const addField = () => {
-
-  }
-
   return (isShowing ? ReactDOM.createPortal(
     <>
       <div className="modal-overlay" />
@@ -46,7 +42,7 @@ const ModalAddMembers = ({
           </div>
           <div className="modal_content">
             <div>
-              <h3 style={{ textAlign: 'center' }}>Ajouter des voyageurs</h3>
+              <h3 style={{ textAlign: 'center' }}>Ajouter un voyageur</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop"> {/* Changer le nom de la classe ! */}
 
                 <label htmlFor="memo">

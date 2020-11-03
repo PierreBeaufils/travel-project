@@ -5,7 +5,7 @@ import { baseURL } from 'src/config';
 import {
   PlusSquare,
 } from 'react-feather';
-import DocumentItem from './DocumentsItemTravel.js';
+import DocumentItem from './DocumentsItemTravel';
 
 import './travel.scss';
 
@@ -56,8 +56,8 @@ const Documents = ({ documents, isEditingAllowed, travelID }) => {
             Choisir un fichier
             <input name="file" type="file" className="input-file" onChange={onChange} />
           </label>
-          {(fileToUpload.file.name !== "") ? (<button type="submit" className="validate--button">Upload {fileToUpload.file.name}</button>): null}
-          
+          {(fileToUpload.file.name !== "") ? (<button type="submit" className="validate--button">Upload {fileToUpload.file.name}</button>) : null}
+
         </form>
       ) : null}
 
@@ -74,7 +74,7 @@ const Documents = ({ documents, isEditingAllowed, travelID }) => {
 };
 
 Documents.propTypes = {
-  documents: PropTypes.object.isRequired,
+  documents: PropTypes.array.isRequired,
 };
 
 export default Documents;

@@ -23,7 +23,6 @@ const CategoryFrame = ({
           <p>{textButton}</p>
         </button>
       </div>
-      
 
       <div className="cards__container">
         {(category === 'Hébergements') ? data.filter((item) => !item.selected).map((accomodation) => <CardAccommodation key={accomodation.id} {...accomodation} EditAllowed={EditAllowed} setcheckedAccommodations={setcheckedAccommodations} checkedAccommodations={checkedAccommodations} fetchOneTravel={fetchOneTravel} />) : null}

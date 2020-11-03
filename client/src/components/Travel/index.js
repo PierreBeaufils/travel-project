@@ -40,14 +40,12 @@ const Travel = ({
   useEffect(() => {
     fetchTravel(id);
   }, []);
-  
 
   const isEditingAllowed = true;
   return (
     <div className="travel-details-container">
       {!loading && (
         <>
-
           <div className="card-container travel-card travel-details">
             <div className="travel-card card-detail">
               <img src={thumbnail} className="travel-card-image card-detail-image" alt="thumbnail" />
@@ -61,7 +59,6 @@ const Travel = ({
                   <Calendar color="grey" size={15} />
                   {travel.departure_date} au {travel.return_date}
                 </div>
-                <div className="travel-card-content-description">Voyage de 2 semaines à Rome et ses alentours avec tous les amis, barbecue et compagnie</div>
                 <Link to={`/voyage/${travel.id}/modifier`} className="travel-card-content-more card-details">
                   Modifier les détails
                 </Link>
@@ -82,17 +79,15 @@ const Travel = ({
                 {/* Timestamp is sent to order by date in CSS rendering */}
                 {/* {travel.accommodation.map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={false} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} />)} */}
 
-
                 {travel.accommodation.filter((item) => item.selected).map((oneAccomodation) => <CardAccommodation key={oneAccomodation.id} {...oneAccomodation} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneAccomodation.arrival_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
                 {travel.activity.filter((item) => item.selected).map((oneActivity) => <CardActivity key={oneActivity.id} {...oneActivity} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneActivity.date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
                 {travel.transport.filter((item) => item.selected).map((oneTransport) => <CardTransport key={oneTransport.id} {...oneTransport} isEditingAllowed={isEditingAllowed} timestamp={new Date(`${oneTransport.departure_date}`).getTime() / 1000} fetchOneTravel={fetchOneTravel} />)}
-
 
               </div>
             </div>
             <div className="travel-details-container-right-side">
               <Price prices={travel.prices[0]} />
-              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={id}/>
+              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={id} />
             </div>
           </div>
         </>
