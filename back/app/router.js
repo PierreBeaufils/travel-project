@@ -33,7 +33,7 @@ router.delete('/travel/:id', mainController.deleteTravel); // Supprimer 1 voyage
 
 // INFOS VOYAGEURS LIES A UN VOYAGE : affichage des voyageurs inscrits dans un voyage, inscrire un nouveau voyageur dans un voyage, et supprimer un voyageur d'un voyage
 router.get('/travel/:id/travelers', mainController.showTravelers); // Afficher les voyageurs faisant partie d'un voyage
-router.post('/travel/:id/traveler', mainController.addTravelers); // Ajouter un voyageur dans un voyage
+router.post('/travel/add/traveler', mainController.addTravelers); // Ajouter un voyageur dans un voyage
 router.delete('/travel/:id/traveler/:travelerId', mainController.deleteTravelerFromTravel); // Supprimer 1 voyageur d'un voyage
 
 // ROUTES FACTORISEES: INFOS D'UN VOYAGE EN TERMES DE TRANSPORT, ACCOMMODATION, ACTIVITY et TASK  : affichage globale, insertion, modification et suppression

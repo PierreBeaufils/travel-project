@@ -114,11 +114,13 @@ const travelController = {
             let message = mailApp.messageConstructor(travelersToAssoc[travelerMail],token);
             message.text = text ;
             message.html = html ;
-           console.log(message);
+           mailApp.transporter.sendMail(message);
         }
+        res.status(200).json("Ces voyageurs ont bien été invités");
     },
     addTravelers: async (req, res) => {
-        let decryptedToken = crypt.decryptText(req.body.token);
+        
+        let decryptedToken = crypt.decryptText(req.query.token);
         decryptedToken = decryptedToken.split("-");
         console.log(decryptedToken);
         // On vérifie si l'user est en BDD :
@@ -136,14 +138,14 @@ const travelController = {
             traveler_id: foundTraveler.id
         });
         const addedTraveler = await newTraveler.saveTravelerIntoTravel();
+        res.json("Vous avez bien été ajouté à ce voyage);
     } else {
-        console.log("nothing");
-        // Et si il n'est pas un traveler ?
+       res.status(404).json("Il semble que vous ne soyez pas encore inscrit sur Globe Trotter, veuillez vous inscrire sur notre plateforme en suivant ce lien : http://localhost:8080/inscription")
     }
         
         
         
-        res.json("ajout effectué");
+        
     },
     deleteTravelerFromTravel : async (req, res) => {
         const travelerToFind = await travel_has_traveler.findOneTravelerByTravel(req.params.id, req.params.travelerId);
