@@ -24,11 +24,19 @@
   padding: 2rem;
 }
 li {
-  padding-top: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
 }
 .profil {
   min-width: 65%;
 }
-.document__item_updateDate {
-  font-size: 0.7rem;
+.document_item {
+  background-color: vars.$light_blue_background;
+  border-radius: 8px;
+  box-shadow: 0 1px 1px 0 rgba(43, 123, 253,.1);
+}
+.document__item_details {
+  font-size: 0.8rem;
+  font-weight: 100;
+  margin-top: 0.5rem;
 }
