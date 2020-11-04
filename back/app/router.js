@@ -2,6 +2,8 @@ const mainController = require('./controllers/mainController');
 const travelerController = require('./controllers/travelerController');
 const loginController = require('./controllers/loginController');
 
+const { cache, flush } = require('./cache');
+
 const { Router } = require('express');
 
 const router = Router();
@@ -23,11 +25,11 @@ router.post('/associate/travel/:id', mainController.sendTravelInvitation); //Sen
 
 
 // INFOS DES VOYAGES : affichage globale et individuel, insertion, modification et suppression
-router.get('/travels', mainController.showTravels); // Afficher tous les voyages en BDD
-router.get('/travel/:id', mainController.showAllInfos); // Afficher 1 voyage 
-router.post('/create-travel', mainController.createTravel); // Créer 1 nouveau voyage 
-router.patch('/travel/:id', mainController.editTravel); // Modifier 1 voyage existant
-router.delete('/travel/:id', mainController.deleteTravel); // Supprimer 1 voyage existant
+router.get('/travels',cache,  mainController.showTravels); // Afficher tous les voyages en BDD
+router.get('/travel/:id', cache, mainController.showAllInfos); // Afficher 1 voyage 
+router.post('/create-travel',flush, mainController.createTravel); // Créer 1 nouveau voyage 
+router.patch('/travel/:id',flush, mainController.editTravel); // Modifier 1 voyage existant
+router.delete('/travel/:id',flush, mainController.deleteTravel); // Supprimer 1 voyage existant
 
 
 
