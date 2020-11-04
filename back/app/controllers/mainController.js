@@ -268,10 +268,12 @@ const travelController = {
     },
     deleteEntity: async (req, res) => {
         let entity = req.params.entity;
+        console.log('req.params.entity', req.params.entity);
         let entityToUse;
 
         if (entity === 'document') {
             const documentToDelete = req.body;
+            console.log('req.body', req.body);
             const deletedDocument = new Document(documentToDelete);
             const deleteConfirmation = await deletedDocument.deleteFile();
             res.json(deleteConfirmation);

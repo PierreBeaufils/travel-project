@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios, { post } from 'axios';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { baseURL } from 'src/config';
 import {
@@ -11,33 +11,32 @@ import './travel.scss';
 
 const Documents = ({ documents, isEditingAllowed, travelID }) => {
   const [showFileUpload, setShowFileUpload] = useState(false);
-  const [fileToUpload, setFileToUpload] = useState({ file: { name: '' } });
+  const [fileToUpload, setFileToUpload] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  const fileUpload = (file) => {
-    const url = `${baseURL}/travel/${travelID}/document`;
+  const uploadFile = (file) => {
     const formData = new FormData();
     formData.append('file', file);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    return post(url, formData, config);
+    axios.post(`${baseURL}/travel/${travelID}/document`, formData)
+      .then(() => {
+        setMessage('fichié uploadé !');
+      });
   };
-  const onFormSubmit = (e) => {
-    e.preventDefault(); // Stop form submit
-    console.log(fileToUpload);
-    fileUpload(fileToUpload).then((response) => {
-      console.log(response.data);
-    });
+
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    uploadFile(fileToUpload);
   };
-  const onChange = (e) => {
-    setFileToUpload({ file: e.target.files[0] });
+  const onChange = (event) => {
+    setFileToUpload(event.target.files[0]);
   };
 
   return (
     <div className="documents frame card__container prices_card">
       <h2>Documents du voyage</h2>
+      {message && (
+        <div className="upload-message">{message}</div>
+      )}
       {(isEditingAllowed && !showFileUpload) ? (
         <div
           className="validate--button"
@@ -56,7 +55,7 @@ const Documents = ({ documents, isEditingAllowed, travelID }) => {
             Choisir un fichier
             <input name="file" type="file" className="input-file" onChange={onChange} />
           </label>
-          {(fileToUpload.file.name !== "") ? (<button type="submit" className="validate--button">Upload {fileToUpload.file.name}</button>) : null}
+          {fileToUpload ? (<button type="submit" className="validate--button">Upload {fileToUpload.name}</button>) : null}
 
         </form>
       ) : null}
@@ -64,7 +63,7 @@ const Documents = ({ documents, isEditingAllowed, travelID }) => {
       <ul>
         {documents.map((document) => ( // voir pour gestion de message si 0 document
           <DocumentItem
-            key={document.id}
+            key={document.Key}
             {...document}
           />
         ))}
@@ -75,6 +74,8 @@ const Documents = ({ documents, isEditingAllowed, travelID }) => {
 
 Documents.propTypes = {
   documents: PropTypes.array.isRequired,
+  isEditingAllowed: PropTypes.bool.isRequired,
+  travelID: PropTypes.number.isRequired,
 };
 
 export default Documents;

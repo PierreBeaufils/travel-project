@@ -4,7 +4,7 @@ import TravelDashboard from 'src/components/TravelDashboard';
 import { fetchOneTravel } from 'src/actions/travels';
 const mapStateToProps = (state, ownProps) => ({
   travel: state.travels.currentTravel,
-  travelLoaded: state.travels.loadingTravel,
+  loadingTravel: state.travels.loadingTravel,
   id: ownProps.match.params.id,
 });
 

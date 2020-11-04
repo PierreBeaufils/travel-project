@@ -100,7 +100,6 @@ const Travel = ({
 Travel.propTypes = {
   travel: PropTypes.object,
   fetchOneTravel: PropTypes.func.isRequired,
-  loadingTravel: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
   saveOneTravel: PropTypes.func.isRequired,
 };
