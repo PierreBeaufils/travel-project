@@ -14,7 +14,7 @@ import ModalAddMember from './Modals/ModalAddMember';
 import './styles.scss';
 
 const TravelDashboard = ({
-  travel, fetchOneTravel, id, travelLoaded,
+  travel, fetchOneTravel, id, loadingTravel,
 }) => {
   const { isShowingModalAddAccomodation, toggleModalAddAccomodation } = useModal('ModalAddAccomodation');
   const { isShowingModalAddTransport, toggleModalAddTransport } = useModal('ModalAddTransport');
@@ -52,8 +52,7 @@ const TravelDashboard = ({
         .then((res) => {
           console.log(res.data);
 
-          history.push(`/voyage/${travel.id}`)
-
+          history.push(`/voyage/${travel.id}`);
         });
     });
 
@@ -128,7 +127,7 @@ const TravelDashboard = ({
           <p>Valider</p>
         </div>
       </div>
-      {travelLoaded && (
+      {!loadingTravel && (
         <>
           <CategoryFrame
             category="Hébergements"
@@ -169,7 +168,7 @@ const TravelDashboard = ({
 };
 TravelDashboard.propTypes = {
   travel: PropTypes.object.isRequired,
-  travelLoaded: PropTypes.bool.isRequired,
+  loadingTravel: PropTypes.bool.isRequired,
 };
 
 export default TravelDashboard;
