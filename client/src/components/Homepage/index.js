@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './homepage.scss';
 
 // import images ressources
@@ -8,7 +10,7 @@ import mapIcon from 'src/assets/images/schedule.png';
 import gpsIcon from 'src/assets/images/gps.png';
 import luggageIcon from 'src/assets/images/luggage.png';
 
-const Homepage = () => {
+const Homepage = ({ user }) => {
   const animations = () => {
     const title = document.querySelector('.title');
     const mountainThmb = document.querySelector('.mountain');
@@ -41,7 +43,7 @@ const Homepage = () => {
         </div>
 
         <div className="title">GlobeTrotter.</div>
-        <button type="button" className="create">Planifier un voyage</button>
+        <Link to={user.id ? '/creer-un-voyage' : '/inscription'}><button type="button" className="create">Planifier un voyage</button></Link>
 
       </div>
 
@@ -95,8 +97,15 @@ const Homepage = () => {
           </div>
         </section>
       </div>
-    </div>
+    </div >
   );
+};
+
+Homepage.propTypes = {
+  user: PropTypes.object,
+};
+Homepage.defaultProps = {
+  user: null,
 };
 
 export default Homepage;

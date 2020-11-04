@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from 'src/config';
+import timestampToDate from 'src/selectors/dates';
 
 import './travel.scss';
 import {
@@ -57,7 +58,7 @@ const Travel = ({
                 </div>
                 <div className="travel-card-content-date">
                   <Calendar color="grey" size={15} />
-                  {travel.departure_date} au {travel.return_date}
+                  {timestampToDate(travel.departure_date)} au {timestampToDate(travel.return_date)}
                 </div>
                 <Link to={`/voyage/${travel.id}/modifier`} className="travel-card-content-more card-details">
                   Modifier les détails
