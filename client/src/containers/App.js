@@ -5,6 +5,7 @@ import { loginCheck } from 'src/actions/user';
 const mapStateToProps = (state) => ({
   loggedIn: state.user.loggedIn,
   loading: state.user.loading,
+  user: state.user.session,
 });
 
 const mapDispatchToProps = (dispatch) => ({

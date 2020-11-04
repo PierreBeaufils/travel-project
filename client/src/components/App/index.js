@@ -22,7 +22,9 @@ import TokenValidation from 'src/containers/TokenValidation';
 import InviteTraveler from 'src/containers/InviteTraveler';
 
 // == Component
-const App = ({ loggedIn, loginCheck, loading }) => {
+const App = ({
+  loggedIn, loginCheck, loading, user,
+}) => {
   // Check if the user is connected
   useEffect(() => {
     loginCheck();
@@ -34,7 +36,9 @@ const App = ({ loggedIn, loginCheck, loading }) => {
         <>
           <Navbar />
           <Switch>
-            <Route path="/" exact component={Homepage} />
+            <Route path="/" exact>
+              <Homepage user={user} />
+            </Route>
             <Route exact path="/connexion">
               {loggedIn ? <Redirect to="/tableau-de-bord" /> : <LoginForm />}
             </Route>
@@ -73,6 +77,7 @@ App.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   loginCheck: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default App;
