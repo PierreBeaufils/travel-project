@@ -43,6 +43,7 @@
 .card__container {
   max-width: fit-content;
 }
+
 }
 .headerWithAddThingMenu {
   display: flex;
@@ -66,6 +67,11 @@
   height: fit-content;
   width: 100%;
   background-color: #fff;
+  
+}
+.card__container:hover {
+  cursor: pointer;
+  background-color: vars.$light_blue_background;
 }
 
 .card__text > *{
@@ -167,7 +173,9 @@
   }
 }
 .validate_or_cancel_selection {
-  position: fixed;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
   bottom: 10vh;
   z-index: 1;
   right: 10vh;
@@ -175,6 +183,12 @@
   flex-direction: row;
   * {
     margin: 1rem;
+  }
+}
+.modal_content-main {
+  
+  h4 {
+    padding: 0.5rem;
   }
 }
 @media (max-width: 500px) {
@@ -234,4 +248,8 @@
 .travel-dashboard-container {
   max-width: 1200px;
   margin: auto;
+}
+.display__pointer :hover{
+cursor: pointer;
+color: red;
 }
