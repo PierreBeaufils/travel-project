@@ -12,33 +12,25 @@ import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
-const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetchOneTravel }) => {
+const ModalAddAccomodation = ({
+  isShowing, hide, oneAccomodation, travelID, fetchOneTravel,
+}) => {
   const {
     register, handleSubmit, watch, errors,
   } = useForm();
   const history = useHistory();
 
-
   const onSubmit = (data) => {
-    console.log(data);
-    // data.selected = false;
     axios.post(`${baseURL}/travel/${travelID}/accommodation`, data)
-      .then((res) => {
-        console.log(`voyage envoyé vers back : ${res.data}`);
-        console.log(data);
+      .then(() => {
         hide();
         fetchOneTravel(travelID);
-        //history.push(`/voyage/${travelID}`);
       })
       .catch((e) => {
-        // store.dispatch(errorMessage(e));
         console.log(`erreur : ${e}`);
       });
-    console.log(data);
   };
   const todayDateISOString = new Date().toISOString().split('T')[0]; // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
-
-  console.log(watch('example')); // watch input value by passing the name of it
 
   const [startDate, setStartDate] = useState(todayDateISOString);
   const [endDate, setEndDate] = useState(addOneDay(startDate));
@@ -79,10 +71,10 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetc
             <div>
               <h3>Ajouter un hébergement</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop">
-                <label htmlFor="name">Nom de l'établissement
-                  <input name="name" ref={register()} type="text" />
+                <label htmlFor="name">Nom de l'établissement<span className="required-asterisk">*</span>
+                  <input name="name" ref={register({ required: true })} type="text" />
                 </label>
-                <label htmlFor="address"><MapPin color="#2B7AFD" size={15} />Adresse de l'établissement
+                <label htmlFor="address"><MapPin color="#2B7AFD" size={15} />Adresse de l'établissement<span className="required-asterisk">*</span>
                   {/* <input name="address" ref={register()} type="text" à effacer car utilisation l'input d'Algolia*/}
                   <AlgoLeaflet
                     isMapRequired={false}
@@ -90,16 +82,16 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetc
                     setLocationData={setLocationData}
                   />
                 </label>
-                <label htmlFor="city"><MapPin color="#2B7AFD" size={15} />Ville
+                <label htmlFor="city"><MapPin color="#2B7AFD" size={15} />Ville<span className="required-asterisk">*</span>
                   <input name="city" ref={register({ required: true })} type="text" value={locationData.city} />
                   <input name="address" ref={register()} type="hidden" value={locationData.address} />
                   <input name="coordinate" ref={register()} type="hidden" value={`${locationData.latLong.lat}, ${locationData.latLong.lng}`} />
                   {errors.city && <span className="warning-text">Veuillez saisir une ville</span>}
                 </label>
-                <label htmlFor="availability">Nombre de places disponibles
-                  <input name="availability" ref={register()} type="number" />
+                <label htmlFor="availability">Nombre de places disponibles<span className="required-asterisk">*</span>
+                  <input name="availability" ref={register({ required: true })} type="number" />
                 </label>
-                <label htmlFor="arrival_date"><LogIn color="#2B7AFD" size={15} />Date d'arrivée
+                <label htmlFor="arrival_date"><LogIn color="#2B7AFD" size={15} />Date d'arrivée<span className="required-asterisk">*</span>
                   <input
                     name="arrival_date"
                     ref={register({ required: true })}
@@ -110,7 +102,7 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetc
                   />
                   {errors.startDate && <span className="warning-text">Veuillez selectionner une date de d'arrivée</span>}
                 </label>
-                <label htmlFor="departure_date"><LogOut color="#2B7AFD" size={15} />Date de départ
+                <label htmlFor="departure_date"><LogOut color="#2B7AFD" size={15} />Date de départ<span className="required-asterisk">*</span>
                   <input
                     name="departure_date"
                     ref={register({ required: true })}
@@ -122,11 +114,11 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetc
                   {errors.finishDate && <span className="warning-text">Veuillez selectionner une date de départ</span>}
                 </label>
 
-                <label htmlFor="unit_price"><DollarSign color="#2B7AFD" size={15} />Prix unitaire (€)
-                  <input name="unit_price" ref={register()} type="number" />
+                <label htmlFor="unit_price"><DollarSign color="#2B7AFD" size={15} />Tarif par personne (€)<span className="required-asterisk">*</span>
+                  <input name="unit_price" ref={register({ required: true })} type="number" />
                 </label>
-                <label htmlFor="quantity"><Users color="#2B7AFD" size={15} />Nombre prévu de voyageurs
-                  <input name="quantity" ref={register()} type="number" />
+                <label htmlFor="quantity"><Users color="#2B7AFD" size={15} />Nombre prévu de voyageurs<span className="required-asterisk">*</span>
+                  <input name="quantity" ref={register({ required: true })} type="number" />
                 </label>
                 <label htmlFor="information"><Info color="#2B7AFD" size={15} />Informations
                   <input name="information" ref={register()} type="text" />

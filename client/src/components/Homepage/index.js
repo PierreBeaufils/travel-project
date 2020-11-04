@@ -42,7 +42,7 @@ const Homepage = ({ user }) => {
           <img src={lake} alt="lake" className="lake bg" />
         </div>
 
-        <div className="title">GlobeTrotter.</div>
+        <div className="title">GlobeTrotter</div>
         <Link to={user.id ? '/creer-un-voyage' : '/inscription'}><button type="button" className="create">Planifier un voyage</button></Link>
 
       </div>
