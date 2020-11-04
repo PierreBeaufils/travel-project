@@ -44,9 +44,9 @@ const ModalCardDescription = ({
                 ) : null}
                 <h4><LogIn color="#2B7AFD" size={15} /> Date d'arrivée: {transformDateISOtoString(oneThingData.arrival_date)}</h4>
                 <h4><LogOut color="#2B7AFD" size={15} /> Date de départ: {transformDateISOtoString(oneThingData.departure_date)}</h4>
-                <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} USD</h4>
-                {(oneThingData.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneThingData.information}</p> : null}
-                {(oneThingData.availability != null) ? <p>Disponibilité: {oneThingData.availability} places</p> : null}
+                <h4><DollarSign color="#2B7AFD" size={15} /> Prix unitaire: {oneThingData.unit_price} EUR</h4>
+                {(oneThingData.information != null) ? <h4><Info color="#2B7AFD" size={15} /> {oneThingData.information}</h4> : null}
+                {(oneThingData.availability != null) ? <h4>Disponibilité: {oneThingData.availability} places</h4> : null}
                 <h4><Users color="#2B7AFD" size={15} /> Nombre prévu voyageurs: {oneThingData.quantity}</h4>
               </div>
             ) : null}

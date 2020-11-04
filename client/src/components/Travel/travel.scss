@@ -7,7 +7,7 @@
 }
 .travel-details-container-details {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
 }
 
 .travel-category-container {
@@ -69,6 +69,10 @@
 
 
 @media screen and (min-width: 512px) {
+  .travel-details-container-details {
+    display: flex;
+    flex-direction: row;
+  }
   .card {
     min-width: 100%;
   }
@@ -122,7 +126,7 @@
   color: #fff;
   font-weight: bold;
   align-self: center;
-  background-color: v.$primary-color;
+  background-color: v.$light_blue_background__hover;
   margin-bottom: 1rem;
 }
 

@@ -70,20 +70,24 @@ const CardTransport = (transport) => {
               <CheckSquare
                 onClick={() => handleAddCardCLick(transport.id)}
                 color="#80CC24"
+                className="display__pointer"
               />
             ) : (
               <CheckSquare
                 onClick={() => handleAddCardCLick(transport.id)}
                 color="#F5F5F5"
+                className="display__pointer"
               />
             )}
             <Edit
               onClick={() => transport.handleAddThing(transport)}
               color="#80CC24"
+              className="display__pointer"
             />
             <Trash2
               color="#FF7A32"
               onClick={() => handleDeleteCardCLick(transport.id)}
+              className="display__pointer"
             />
           </div>
         ) : null}
@@ -92,10 +96,12 @@ const CardTransport = (transport) => {
             <Edit
               onClick={() => transport.handleAddThing(transport)}
               color="#80CC24"
+              className="display__pointer"
             />
             <Trash2
               color="#FF7A32"
               onClick={() => handleDeleteCardCLick(transport.id)}
+              className="display__pointer"
             />
           </div>
         ) : null}

@@ -57,7 +57,7 @@ const CardAccommodation = (oneAccomodation) => {
           className="card__text"
           onClick={() => handleTextCardCLick('ceci est ma target 1')}
         >
-          <h3><Home size={32} className="travel-menu-logo" />Séjour à l'établisement {oneAccomodation.name}</h3>
+          <h3><Home size={32} className="travel-menu-logo" />Séjour à l'établissement {oneAccomodation.name}</h3>
           <h4><MapPin color="#2B7AFD" size={15} /> {oneAccomodation.address} {oneAccomodation.city}</h4>
           <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneAccomodation.arrival_date)} au {transformDateISOtoString(oneAccomodation.departure_date)}</h4>
           {(oneAccomodation.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null}
@@ -69,21 +69,26 @@ const CardAccommodation = (oneAccomodation) => {
               <CheckSquare
                 onClick={() => handleAddCardCLick(oneAccomodation.id)}
                 color="#80CC24"
+                className="display__pointer"
               />
             ) : (
               <CheckSquare
                 onClick={() => handleAddCardCLick(oneAccomodation.id)}
-                color="#F5F5F5"
+                color="#7a7a7a"
+                cursor="pointer"
+                className="display__pointer"
 
               />
             )}
             <Edit
               onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
               color="#80CC24"
+              className="display__pointer"
             />
             <Trash2
               color="#FF7A32"
               onClick={() => handleDeleteCardCLick(oneAccomodation.id)}
+              className="display__pointer"
             />
           </div>
         ) : null}
@@ -92,10 +97,13 @@ const CardAccommodation = (oneAccomodation) => {
             <Edit
               onClick={() => oneAccomodation.handleAddThing(oneAccomodation)}
               color="#80CC24"
+              className="display__pointer"
+              
             />
             <Trash2
               color="#FF7A32"
               onClick={() => handleDeleteCardCLick(oneAccomodation.id)}
+              className="display__pointer"
             />
           </div>
         ) : null}

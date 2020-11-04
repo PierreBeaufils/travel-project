@@ -69,20 +69,24 @@ const CardActivity = (activity) => {
               <CheckSquare
                 onClick={() => handleAddCardCLick(activity.id)}
                 color="#80CC24"
+                className="display__pointer"
               />
             ) : (
                 <CheckSquare
                   onClick={() => handleAddCardCLick(activity.id)}
                   color="#F5F5F5"
+                  className="display__pointer"
                 />
               )}
             <Edit
               onClick={() => activity.handleAddThing(activity)}
               color="#80CC24"
+              className="display__pointer"
             />
             <Trash2
               color="#FF7A32"
               onClick={() => handleDeleteCardCLick(activity.id)}
+              className="display__pointer"
             />
           </div>
         ) : null}
@@ -91,10 +95,12 @@ const CardActivity = (activity) => {
             <Edit
               onClick={() => activity.handleAddThing(activity)}
               color="#80CC24"
+              className="display__pointer"
             />
             <Trash2
               color="#FF7A32"
               onClick={() => handleDeleteCardCLick(activity.id)}
+              className="display__pointer"
             />
           </div>
         ) : null}

@@ -123,6 +123,7 @@ const TravelDashboard = ({
         <div onClick={() => handleValidateSelection()} className="validate--button">
           <CheckSquare
             color="#fff"
+            className="display__pointer"
           />
           <p>Valider</p>
         </div>
