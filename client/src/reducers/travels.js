@@ -6,9 +6,8 @@ const initialState = {
   errorMessage: null,
   travels: [],
   loadingTravels: true,
-  loadingTravel: true,
+  loadingTravel: false,
   currentTravel: {},
-  travelLoaded: false,
 };
 
 const travels = (state = initialState, action = {}) => {
