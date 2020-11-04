@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
 import {
-  Users, XSquare, Info, MapPin, DollarSign, LogIn, LogOut, Map, Send, FileText, Home, Calendar, Clock,
+  Users, XSquare, Info, MapPin, DollarSign, Calendar, Clock,
 } from 'react-feather';
 
 import { baseURL } from 'src/config';
@@ -12,34 +12,26 @@ import AlgoLeaflet from '../../AlgoLeaflet';
 // import PropTypes from 'prop-types';
 import '../styles.scss';
 
-const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
+const ModalAddActivity = ({
+  isShowing, hide, travelID, fetchOneTravel,
+}) => {
   const {
-    register, handleSubmit, watch, errors,
+    register, handleSubmit, errors,
   } = useForm();
-  
-
-
 
   const onSubmit = (data) => {
-    console.log(data);
-     data.selected = false;
+    data.selected = false;
     axios.post(`${baseURL}/travel/${travelID}/activity`, data)
-      .then((res) => {
-        console.log(`voyage envoyé vers back : ${res.data}`);
-        console.log(data);
+      .then(() => {
         fetchOneTravel(travelID);
         hide();
       })
       .catch((e) => {
-        // store.dispatch(errorMessage(e));
-        console.log(`erreur : ${e}`);
+        console.log(e);
       });
-    console.log(data);
   };
 
   const todayDateISOString = new Date().toISOString().slice(0, -8); // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
-
-  console.log(watch('example')); // watch input value by passing the name of it
 
   const [startDate, setStartDate] = useState(todayDateISOString);
   const [locationData, setLocationData] = useState({
@@ -80,15 +72,17 @@ const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
               <h3>Ajouter une activité</h3>
               <form onSubmit={handleSubmit(onSubmit)} className="main-form addThingDesktop">
                 <label htmlFor="name">Nom de l'activité
-                  <input name="name" ref={register()} type="text" />
+                  <span className="required-asterisk">*</span>
+                  <input name="name" ref={register({ required: true })} type="text" />
                 </label>
                 <label htmlFor="topic">Type d'activité
                   <input name="topic" ref={register()} type="text" />
                 </label>
                 <label htmlFor="date"><Calendar color="#2B7AFD" size={15} />Date
+                  <span className="required-asterisk">*</span>
                   <input
                     name="date"
-                    ref={register()}
+                    ref={register({ required: true })}
                     type="datetime-local"
                     value={startDate}
                     min={todayDateISOString}
@@ -96,9 +90,11 @@ const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
                   />
                 </label>
                 <label htmlFor="duration"><Clock color="#2B7AFD" size={15} />Durée prévisionnelle
-                  <input name="duration" ref={register()} type="time" />
+                  <span className="required-asterisk">*</span>
+                  <input name="duration" ref={register({ required: true })} type="time" />
                 </label>
                 <label htmlFor="place"><MapPin color="#2B7AFD" size={15} />Lieu
+                  <span className="required-asterisk">*</span>
                   <AlgoLeaflet
                     isMapRequired={false}
                     isAdressInputRequired
@@ -110,15 +106,17 @@ const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
                 <label htmlFor="description"><Info color="#2B7AFD" size={15} />Description
                   <input name="description" ref={register()} type="text" />
                 </label>
-                <label htmlFor="unit_price"><DollarSign color="#2B7AFD" size={15} />Prix unitaire (€)
+                <label htmlFor="unit_price"><DollarSign color="#2B7AFD" size={15} />Prix par personne (€)
+                  <span className="required-asterisk">*</span>
                   <input
                     name="unit_price"
-                    ref={register()}
+                    ref={register({ required: true })}
                     type="number"
                     min="0"
                   />
                 </label>
                 <label htmlFor="quantity"><Users color="#2B7AFD" size={15} />Nombre prévu de participants
+                  <span className="required-asterisk">*</span>
                   <input
                     name="quantity"
                     ref={register({ required: true })}
@@ -132,9 +130,6 @@ const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
                   value="Ajouter l'activité"
                 />
               </form>
-            </div>
-            <div className="modal_buttons_container">
-              <p>ici eventuellement boutons</p>
             </div>
           </div>
         </div>

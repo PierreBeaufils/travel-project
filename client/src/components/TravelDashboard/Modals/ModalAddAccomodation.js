@@ -5,7 +5,6 @@ import {
   XSquare, MapPin, LogIn, LogOut, DollarSign, Info, Users,
 } from 'react-feather';
 import { baseURL } from 'src/config';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AlgoLeaflet from '../../AlgoLeaflet';
 
@@ -16,9 +15,8 @@ const ModalAddAccomodation = ({
   isShowing, hide, oneAccomodation, travelID, fetchOneTravel,
 }) => {
   const {
-    register, handleSubmit, watch, errors,
+    register, handleSubmit, errors,
   } = useForm();
-  const history = useHistory();
 
   const onSubmit = (data) => {
     axios.post(`${baseURL}/travel/${travelID}/accommodation`, data)
@@ -32,6 +30,13 @@ const ModalAddAccomodation = ({
   };
   const todayDateISOString = new Date().toISOString().split('T')[0]; // variable qui contient la date sauvegardée en string ISO (format géré par le formulaire HTML)
 
+  // fonction permettant d'ajouter un jour (en sortie) à une date en entrée
+  function addOneDay(dateString) {
+    const result = new Date(dateString);
+    result.setDate(result.getDate() + 1);
+    return result.toISOString().split('T')[0];
+  }
+
   const [startDate, setStartDate] = useState(todayDateISOString);
   const [endDate, setEndDate] = useState(addOneDay(startDate));
   const [locationData, setLocationData] = useState({
@@ -44,13 +49,6 @@ const ModalAddAccomodation = ({
     setStartDate(e.target.value);
     setEndDate(addOneDay(startDate));
   };
-
-  // fonction permettant d'ajouter un jour (en sortie) à une date en entrée
-  function addOneDay(dateString) {
-    const result = new Date(dateString);
-    result.setDate(result.getDate() + 1);
-    return result.toISOString().split('T')[0];
-  }
 
   return (isShowing ? ReactDOM.createPortal(
     <>
@@ -128,9 +126,6 @@ const ModalAddAccomodation = ({
                   value="Ajouter l'hébergement"
                 />
               </form>
-            </div>
-            <div className="modal_buttons_container">
-              <p>ici eventuellement boutons</p>
             </div>
           </div>
         </div>
