@@ -13,7 +13,7 @@ ORDER BY travel.id;
 
 CREATE VIEW accommodation_price AS 
 SELECT travel.id,
-    sum(accommodation.unit_price * accommodation.quantity::numeric) AS acco_total_price
+    sum(accommodation.unit_price * accommodation.quantity::numeric * (accommodation.departure_date::date - accommodation.arrival_date::date)) AS acco_total_price
 FROM travel
 LEFT JOIN accommodation ON accommodation.travel_id = travel.id
 WHERE accommodation.selected = true
