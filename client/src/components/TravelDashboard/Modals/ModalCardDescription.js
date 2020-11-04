@@ -84,7 +84,6 @@ const ModalCardDescription = ({
               </div>
             ) : null}
             <div className="modal_buttons_container">
-              <p>ici boutons eventuels</p>
             </div>
           </div>
 

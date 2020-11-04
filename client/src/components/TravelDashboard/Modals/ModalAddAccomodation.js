@@ -138,7 +138,6 @@ const ModalAddAccomodation = ({ isShowing, hide, oneAccomodation, travelID, fetc
               </form>
             </div>
             <div className="modal_buttons_container">
-              <p>ici eventuellement boutons</p>
             </div>
           </div>
         </div>

@@ -134,7 +134,6 @@ const ModalAddActivity = ({ isShowing, hide, travelID, fetchOneTravel}) => {
               </form>
             </div>
             <div className="modal_buttons_container">
-              <p>ici eventuellement boutons</p>
             </div>
           </div>
         </div>
