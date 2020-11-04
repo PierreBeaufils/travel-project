@@ -16,7 +16,7 @@ const travelerController = {
         const travelerToEdit = new Traveler(traveler);
         travelerToEdit.update(req.body);
         travelerToEdit.saveAllTravelComponent();
-        res.status(404).json('voyageur mis à jour')
+        res.status(200).json('voyageur mis à jour')
     },
     deleteTraveler: async (req, res) => {
         const traveler = await Traveler.findOneTravelComponent(null, req.params.id);
