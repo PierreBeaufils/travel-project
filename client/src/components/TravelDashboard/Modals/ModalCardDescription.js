@@ -83,9 +83,6 @@ const ModalCardDescription = ({
                 <h4><Info color="#2B7AFD" size={15} /> {oneThingData.description}</h4>
               </div>
             ) : null}
-            <div className="modal_buttons_container">
-              <p>ici boutons eventuels</p>
-            </div>
           </div>
 
         </div>
