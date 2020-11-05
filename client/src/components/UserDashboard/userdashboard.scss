@@ -4,7 +4,6 @@
   margin: 0 auto;
   max-width: 1200px;
   background-color: v.$background-color;
-  background-color: v.$background-third;
   display: flex;
   flex-flow: column wrap;
 
@@ -137,4 +136,9 @@
       width: 100%;
     }
   }
+}
+.creator-icon {
+  height: 5rem;
+  max-width: fit-content;
+  float: right;
 }
