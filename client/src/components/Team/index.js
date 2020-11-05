@@ -2,7 +2,7 @@ import React from 'react';
 import './about.scss';
 import { User, Linkedin } from 'react-feather';
 
-const About = () => (
+const Team = () => (
   <div className="about">
     <h2>Notre équipe</h2>
     <div className="team-container">
@@ -44,4 +44,4 @@ const About = () => (
   </div>
 );
 
-export default About;
+export default Team;
