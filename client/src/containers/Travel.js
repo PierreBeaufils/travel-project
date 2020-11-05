@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => ({
   travel: state.travels.currentTravel,
   loadingTravel: state.travels.loadingTravel,
   id: ownProps.match.params.id,
+  userID: state.user.session.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -20,8 +20,10 @@ import Price from './Prices';
 import DocumentsTravel from './DocumentsTravel';
 
 const Travel = ({
-  travel, fetchOneTravel, id, saveOneTravel, // fetchOneTravel à supprimer car fetch içi
+  travel, fetchOneTravel, id, saveOneTravel, userID, // fetchOneTravel à supprimer car fetch içi
 }) => {
+  const isEditingAllowed = userID === travel.owner ? true : false;
+
   const [loading, setLoading] = useState(true);
   const history = useHistory();
 
@@ -42,7 +44,11 @@ const Travel = ({
     fetchTravel(id);
   }, []);
 
-  const isEditingAllowed = true;
+  
+  console.log(userID);
+  console.log('owner');
+  console.log(travel.owner);
+  console.log('owner');
   return (
     <div className="travel-details-container">
       {!loading && (
@@ -60,18 +66,22 @@ const Travel = ({
                   <Calendar color="grey" size={15} />
                   {timestampToDate(travel.departure_date)} au {timestampToDate(travel.return_date)}
                 </div>
-                <Link to={`/voyage/${travel.id}/modifier`} className="travel-card-content-more card-details">
-                  Modifier les détails
-                </Link>
+                {(isEditingAllowed) ? (
+                  <Link to={`/voyage/${travel.id}/modifier`} className="travel-card-content-more card-details">
+                    Modifier les détails
+                  </Link>
+                ) : null}
               </div>
             </div>
           </div>
-          <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
-            <div className="validate--button validate_or_cancel_selection">
-              <PlusSquare color="#fff" />
-              <p>Ajouter un hébergement, trajet ou activité au voyage</p>
-            </div>
-          </Link>
+          {(isEditingAllowed) ? (
+            <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
+              <div className="validate--button validate_or_cancel_selection">
+                <PlusSquare color="#fff" />
+                <p>Ajouter un hébergement, trajet ou activité au voyage</p>
+              </div>
+            </Link>
+          ) : null}
           <div className="travel-details-container-details">
 
             <div className="travel-container">
