@@ -67,7 +67,7 @@ const Travel = ({
             </div>
           </div>
           <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
-            <div className="validate--button validate_or_cancel_selection">
+            <div className="validate--button validate_or_cancel_selection travel-addelements-button">
               <PlusSquare color="#fff" />
               <p>Ajouter un hébergement, trajet ou activité au voyage</p>
             </div>

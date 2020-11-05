@@ -84,9 +84,6 @@ const TravelDashboard = ({
   return (
 
     <div className="travel-dashboard-container">
-      <button type="button" className="create--button" onClick={handleAddModal} value="members">
-        Ajouter des voyageurs
-      </button>
       <ModalAddMember
         travelID={travel.id}
         isShowing={isShowingModalAddMembers}
@@ -112,58 +109,71 @@ const TravelDashboard = ({
         travelID={travel.id}
         fetchOneTravel={fetchOneTravel}
       />
-
-      <div className="validate_or_cancel_selection">
-        <div onClick={() => history.push(`/voyage/${travel.id}`)} className="validate--button cancel-button">
-          <XSquare
-            color="#fff"
-          />
-          <p>Annuler</p>
+      <h1>Tableau de bord organisateur</h1>
+      <div className="dashboard-header">
+        <div className="validate_or_cancel_selection">
+          <div onClick={() => history.push(`/voyage/${travel.id}`)} className="big-buttons cancel-button">
+            <XSquare
+              color="#fff"
+            />
+            <p>Annuler</p>
+          </div>
+          <div onClick={() => handleValidateSelection()} className="big-buttons">
+            <CheckSquare
+              color="#fff"
+              className="display__pointer"
+            />
+            <p>Valider</p>
+          </div>
         </div>
-        <div onClick={() => handleValidateSelection()} className="validate--button">
-          <CheckSquare
-            color="#fff"
-            className="display__pointer"
-          />
-          <p>Valider</p>
+        <div>
+          <button type="button" className="create--button add-traveler" onClick={handleAddModal} value="members">
+            Ajouter des voyageurs
+          </button>
         </div>
       </div>
-      {!loadingTravel && (
-        <>
-          <CategoryFrame
-            category="Hébergements"
-            textButton="Ajouter un hébergement"
-            handleAddElement={handleAddModal}
-            data={travel.accommodation}
-            EditAllowed={EditAllowed}
-            setcheckedAccommodations={setcheckedAccommodations}
-            checkedAccommodations={checkedAccommodations}
-            fetchOneTravel={fetchOneTravel}
-          />
-          <CategoryFrame
-            category="Transports"
-            textButton="Ajouter un Transport"
-            handleAddElement={handleAddModal}
-            data={travel.transport}
-            EditAllowed={EditAllowed}
-            setcheckedTransports={setcheckedTransports}
-            checkedTransports={checkedTransports}
-            fetchOneTravel={fetchOneTravel}
-          />
-          <CategoryFrame
-            category="Activités"
-            textButton="Ajouter une Activité"
-            handleAddElement={handleAddModal}
-            data={travel.activity}
-            EditAllowed={EditAllowed}
-            setcheckedActivities={setcheckedActivities}
-            checkedActivities={checkedActivities}
-            fetchOneTravel={fetchOneTravel}
-          />
-        </>
+      <div className="info-validate">
+        Séléctionnez des éléments puis validez pour les ajouter au voyage
+      </div>
 
-      )}
-    </div>
+      {
+        !loadingTravel && (
+          <>
+            <CategoryFrame
+              category="Hébergements"
+              textButton="Ajouter un hébergement"
+              handleAddElement={handleAddModal}
+              data={travel.accommodation}
+              EditAllowed={EditAllowed}
+              setcheckedAccommodations={setcheckedAccommodations}
+              checkedAccommodations={checkedAccommodations}
+              fetchOneTravel={fetchOneTravel}
+            />
+            <CategoryFrame
+              category="Transports"
+              textButton="Ajouter un Transport"
+              handleAddElement={handleAddModal}
+              data={travel.transport}
+              EditAllowed={EditAllowed}
+              setcheckedTransports={setcheckedTransports}
+              checkedTransports={checkedTransports}
+              fetchOneTravel={fetchOneTravel}
+            />
+            <CategoryFrame
+              category="Activités"
+              textButton="Ajouter une Activité"
+              handleAddElement={handleAddModal}
+              data={travel.activity}
+              EditAllowed={EditAllowed}
+              setcheckedActivities={setcheckedActivities}
+              checkedActivities={checkedActivities}
+              fetchOneTravel={fetchOneTravel}
+            />
+          </>
+
+        )
+      }
+    </div >
 
   );
 };
