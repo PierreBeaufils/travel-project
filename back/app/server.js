@@ -28,7 +28,7 @@ const port = process.env.PORT || 5555;
 const router = require('./router');
 
 app.use(cors({
-    origin: ['http://138.197.235.123:80', 'http://localhost:8080'],
+    origin: '*',
     credentials: true,
     methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, x-auth-token',
