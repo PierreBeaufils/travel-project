@@ -88,7 +88,7 @@ const Travel = ({
             </div>
             <div className="travel-details-container-right-side">
               <Price prices={travel.prices[0]} />
-              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={id} />
+              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={travel.id} />
             </div>
           </div>
         </>

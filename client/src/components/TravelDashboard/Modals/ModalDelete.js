@@ -45,8 +45,11 @@ const ModalDelete = ({
           </div>
 
           <div className="modal_content">
-            <AlertTriangle color="#FF7A32" width="48"
-  height="48"/>
+            <AlertTriangle
+              color="#FF7A32"
+              width="48"
+              height="48"
+            />
             <div className="modal_content-main">
               <h3>{displayMessage()} {elementName} ?</h3>
             </div>

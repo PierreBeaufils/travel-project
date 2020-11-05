@@ -9,7 +9,6 @@ import useModal from './useModal';
 import './styles.scss';
 
 const CardAccommodation = (oneAccomodation) => {
-  
   const { isShowingModalDeleteCard, toggleModalDeleteCard } = useModal('ModalDeleteCard');
   const { isShowingModalCardDescription, toggleModalCardDescription } = useModal('ModalCardDescription');
 
@@ -44,7 +43,6 @@ const CardAccommodation = (oneAccomodation) => {
         travelId={oneAccomodation.travel_id}
         fetchOneTravel={oneAccomodation.fetchOneTravel}
       />
-      {/* ) : null} */}
 
       <ModalCardDescription
         isShowing={isShowingModalCardDescription}
@@ -60,7 +58,7 @@ const CardAccommodation = (oneAccomodation) => {
           <h3><Home size={32} className="travel-menu-logo" />Séjour à l'établissement {oneAccomodation.name}</h3>
           <h4><MapPin color="#2B7AFD" size={15} /> {oneAccomodation.address} {oneAccomodation.city}</h4>
           <h4><Calendar color="#2B7AFD" size={15} /> Du {transformDateISOtoString(oneAccomodation.arrival_date)} au {transformDateISOtoString(oneAccomodation.departure_date)}</h4>
-          {(oneAccomodation.information != null) ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null}
+          {(oneAccomodation.information !== '') ? <p><Info color="#2B7AFD" size={15} /> {oneAccomodation.information}</p> : null}
         </div>
         {(oneAccomodation.EditAllowed) ? (
           <div className="card__footer">
@@ -112,12 +110,5 @@ const CardAccommodation = (oneAccomodation) => {
     </div>
   );
 };
-// CardAccommodation.propTypes = {
-
-// };
-
-// CardAccommodation.defaultProps = {
-
-// };
 
 export default CardAccommodation;
