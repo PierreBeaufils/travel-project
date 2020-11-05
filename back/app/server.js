@@ -4,7 +4,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const session = require('express-session');
-const cors = require('cors');
+// const cors = require('cors');
 const multer = require('multer');
 const app = express();
 const bodyParser = multer();
@@ -27,14 +27,6 @@ const port = process.env.PORT || 5555;
 
 const router = require('./router');
 
-app.use(cors({
-    origin: '*',
-    credentials: true,
-    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, x-auth-token',
-    preflightContinue: false,
-}))
-/*
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.header('Access-Control-Allow-Credentials', true);
@@ -42,7 +34,6 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PATCH, DELETE');
     next();
 });
-*/
 
 app.use(express.json());
 app.use(bodyParser.any());
