@@ -43,12 +43,6 @@ const Travel = ({
   useEffect(() => {
     fetchTravel(id);
   }, []);
-
-  
-  console.log(userID);
-  console.log('owner');
-  console.log(travel.owner);
-  console.log('owner');
   return (
     <div className="travel-details-container">
       {!loading && (
@@ -75,6 +69,7 @@ const Travel = ({
             </div>
           </div>
           {(isEditingAllowed) ? (
+            
             <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
               <div className="validate--button validate_or_cancel_selection">
                 <PlusSquare color="#fff" />

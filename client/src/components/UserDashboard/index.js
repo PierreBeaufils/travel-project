@@ -14,6 +14,7 @@ const UserDashboard = ({
   loadingUser,
   fetchTravels,
   fetchUserData,
+  userID,
 }) => {
   useEffect(() => {
     fetchUserData();
@@ -38,7 +39,7 @@ const UserDashboard = ({
               </Link>
 
             </div>
-            {travels.map((travel) => <TravelCard key={travel.travel_id} travel={travel} />)}
+            {travels.map((travel) => <TravelCard key={travel.travel_id} travel={travel} userID={userID} />)}
           </div>
         </>
       )}
