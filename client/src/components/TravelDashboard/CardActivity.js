@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit, Activity,
+  MapPin, CheckSquare, Trash2, Calendar, Clock, Info, Edit, Compass,
 } from 'react-feather';
 import ModalDelete from './Modals/ModalDelete';
 import ModalCardDescription from './Modals/ModalCardDescription';
@@ -57,7 +57,7 @@ const CardActivity = (activity) => {
           className="card__text"
           onClick={() => handleTextCardCLick('1')}
         >
-          <h3><Activity size={32} className="travel-menu-logo" />Activité: {activity.name}</h3>
+          <h3><Compass size={32} className="travel-menu-logo" />Activité: {activity.name}</h3>
           <h4><MapPin color="#2B7AFD" size={15} /> {activity.place}</h4>
           <h4><Calendar color="#2B7AFD" size={15} /> {transformDateISOtoString(activity.date)}</h4>
           <h4><Clock color="#2B7AFD" size={15} /> durée: {activity.duration.minutes} minutes</h4>

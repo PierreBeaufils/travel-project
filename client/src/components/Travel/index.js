@@ -22,7 +22,7 @@ import DocumentsTravel from './DocumentsTravel';
 const Travel = ({
   travel, fetchOneTravel, id, saveOneTravel, userID, // fetchOneTravel à supprimer car fetch içi
 }) => {
-  const isEditingAllowed = userID === travel.owner ? true : false;
+  const isEditingAllowed = userID === travel.owner;
 
   const [loading, setLoading] = useState(true);
   const history = useHistory();
@@ -71,7 +71,7 @@ const Travel = ({
           {(isEditingAllowed) ? (
             
             <Link to={`/voyage/${id}/dashboard`} {...fetchOneTravel} id={id}>
-              <div className="validate--button validate_or_cancel_selection">
+              <div className="validate--button validate_or_cancel_selection travel-addelements-button">
                 <PlusSquare color="#fff" />
                 <p>Ajouter un hébergement, trajet ou activité au voyage</p>
               </div>
@@ -93,7 +93,7 @@ const Travel = ({
             </div>
             <div className="travel-details-container-right-side">
               <Price prices={travel.prices[0]} />
-              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={id} />
+              <DocumentsTravel documents={travel.documents} isEditingAllowed={isEditingAllowed} travelID={travel.id} />
             </div>
           </div>
         </>

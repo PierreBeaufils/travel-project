@@ -1,4 +1,6 @@
 @use '../../styles/vars';
+
+
 .validate--button {
   width: fit-content;
   margin-left: 1rem;
@@ -22,6 +24,23 @@
     margin-left: 5px;
   }
 }
+
+.big-buttons {
+  width: fit-content;
+  margin-left: 1rem;
+  height: fit-content;
+  margin-left: auto;
+  padding: 0;
+  background-color: rgba(64, 192, 156, 1);
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .category-container {
   display: flex;
   flex-direction: column;
@@ -173,8 +192,6 @@
   }
 }
 .validate_or_cancel_selection {
-  margin-right: auto;
-  margin-left: auto;
   padding: 0;
   bottom: 10vh;
   z-index: 1;
@@ -191,6 +208,18 @@
     padding: 0.5rem;
   }
 }
+
+.dashboard-header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  & .add-traveler {
+    margin-right: 50px;
+  }
+}
+
 @media (max-width: 500px) {
   .category-container {
     margin: 1rem auto;
@@ -229,10 +258,20 @@
       
     }
   }
-  .validate_or_cancel_selection {
-    bottom: 1vh;
-    right: 1vh;
+
+  .dashboard-header {
+    flex-flow: column wrap;
+
+    .validate_or_cancel_selection {
+      bottom: 1vh;
+      right: 1vh;
+    }
+
+    .add-traveler {
+      margin-right: 0;
+    }
   }
+  
 }
 
 .fieldName {
@@ -244,12 +283,26 @@
 }
 .cancel-button {
   background-color: vars.$danger-color;
+
+  &:hover {
+    background-color: darken(vars.$danger-color, 10%);
+  }
 }
 .travel-dashboard-container {
   max-width: 1200px;
   margin: auto;
+
+  & h1 {
+    text-align: center;
+  }
 }
 .display__pointer :hover{
 cursor: pointer;
 color: red;
+}
+
+.info-validate {
+  font-weight: 300;
+  margin-left: 16px;
+  font-style: italic;
 }

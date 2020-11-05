@@ -8,7 +8,7 @@ import Footer from 'src/components/Footer';
 import Homepage from 'src/components/Homepage';
 import Mentions from 'src/components/Mentions';
 import Contact from 'src/containers/Contact';
-import About from 'src/components/About';
+import Team from 'src/components/Team';
 import LoginForm from 'src/containers/LoginForm';
 import RegisterForm from 'src/containers/RegisterForm';
 import NotFound from 'src/components/NotFound';
@@ -48,7 +48,8 @@ const App = ({
             <Route exact path="/inscription/validation" component={RegisterValidation} />
             <Route path="/mentions-legales" component={Mentions} />
             <Route path="/contact" component={Contact} />
-            <Route path="/a-propos" component={About} />
+            <Route path="/equipe" component={Team} />
+            {/* <Route path="/a-propos" component={Team} /> */}
             <Route path="/profil" component={UserProfile} />
             <Route path="/creer-un-voyage" component={TravelForm} />
             <Route path="/tableau-de-bord" component={UserDashboard} />

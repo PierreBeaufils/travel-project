@@ -155,6 +155,7 @@ const ModalAddTransport = ({
                 <label htmlFor="unit_price">
                   <DollarSign color="#2B7AFD" size={15} />
                   <span className="fieldName">Tarif par personne</span>
+                  <span className="required-asterisk">*</span>
                   <input
                     name="unit_price"
                     ref={register({ required: false })}
@@ -165,7 +166,8 @@ const ModalAddTransport = ({
 
                 <label htmlFor="quantity">
                   <Users color="#2B7AFD" size={15} />
-                  <span className="fieldName">Nombre de voyageurs</span>
+                  <span className="fieldName">Nombre de voyageurs prévus</span>
+                  <span className="required-asterisk">*</span>
                   <input
                     name="quantity"
                     ref={register({ required: false })}
